@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/page.xsd">
+	<import>
+		<page identifier="de.xxschrandxx.wsc.MinecraftIDListPage">
+			<pageType>system</pageType>
+			<controller>wcf\page\MinecraftIDListPage</controller>
+			<name language="de">Minecraft-Identitäten</name>
+			<name language="en">Minecraft Identities</name>
+			<permissions>user.minecraftSynchronisation.canManage</permissions>
+			<options>MINECRAFT_ENABLED,MINECRAFT_SYNC_IDENTITY</options>
+			
+			<content language="en">
+				<title>Minecraft Identities</title>
+			</content>
+			<content language="de">
+				<title>Minecraft-Identitäten</title>
+			</content>
+		</page>
+		<page identifier="de.xxschrandxx.wsc.MinecraftIDAddForm">
+			<pageType>system</pageType>
+			<controller>wcf\form\MinecraftIDAddForm</controller>
+			<name language="de">Minecraft-Identität hinzufügen</name>
+			<name language="en">Add Minecraft Identity</name>
+			<permissions>user.minecraftSynchronisation.canManage</permissions>
+			<options>MINECRAFT_ENABLED,MINECRAFT_SYNC_IDENTITY</options>
+			
+			<content language="en">
+				<title>Add Minecraft Identity</title>
+			</content>
+			<content language="de">
+				<title>Minecraft-Identität hinzufügen</title>
+			</content>
+		</page>
+		<page identifier="de.xxschrandxx.wsc.MinecraftIDCheckForm">
+			<pageType>system</pageType>
+			<controller>wcf\form\MinecraftIDCheckForm</controller>
+			<name language="de">Minecraft-Identität bestätigen</name>
+			<name language="en">Confirm Minecraft Identity</name>
+			<permissions>user.minecraftSynchronisation.canManage</permissions>
+			<options>MINECRAFT_ENABLED,MINECRAFT_SYNC_IDENTITY</options>
+			
+			<content language="en">
+				<title>Confirm Minecraft Identity</title>
+			</content>
+			<content language="de">
+				<title>Minecraft-Identität bestätigen</title>
+			</content>
+		</page>
+	</import>
+</data>

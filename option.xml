@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/option.xsd">
+    <import>
+        <categories>
+            <category name="minecraft_sync">
+                <parent>minecraft</parent>
+            </category>
+            <category name="minecraft_sync_general">
+                <parent>minecraft_sync</parent>
+            </category>
+        </categories>
+        <options>
+            <option name="minecraft_enabled">
+                <categoryname>minecraft_sync_general</categoryname>
+                <optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+				<enableoptions>minecraft_sync_identity,minecraft_max_identities,minecraft_enable_active_user,minecraft_sync_connect_channel,minecraft_enable_background_job</enableoptions>
+            </option>
+            <option name="minecraft_sync_identity">
+                <categoryname>minecraft_sync_general</categoryname>
+                <optiontype>MinecraftConnectionMultiSelect</optiontype>
+            </option>
+            <option name="minecraft_max_identities">
+                <categoryname>minecraft_sync_general</categoryname>
+                <optiontype>integer</optiontype>
+				<defaultvalue>0</defaultvalue>
+                <suffix>mc_identities</suffix>
+            </option>
+			<option name="minecraft_enable_active_user">
+				<categoryname>minecraft_sync_general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<option name="minecraft_sync_connect_channel">
+				<categoryname>minecraft_sync_general</categoryname>
+				<optiontype>MinecraftSyncChannelMultipleSelect</optiontype>
+			</option>
+			<option name="minecraft_enable_background_job">
+				<categoryname>minecraft_sync_general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
+        </options>
+    </import>
+	<delete>
+		<option name="teamspeak_sync_mandatory" />
+	</delete>
+</data>
