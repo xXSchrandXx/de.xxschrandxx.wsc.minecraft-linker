@@ -3,8 +3,8 @@
     <packageinformation>
         <packagename><![CDATA[Minecraft Sync]]></packagename>
         <packagename language="de"><![CDATA[Minecraft-Sync]]></packagename>
-        <packagedescription><![CDATA[X]]></packagedescription>
-        <packagedescription language="de"><![CDATA[X]]></packagedescription>
+        <packagedescription><![CDATA[Synchronizes user groups between WSC and Minecraft.]]></packagedescription>
+        <packagedescription language="de"><![CDATA[Synchronisiert Benutzergruppenzuweisungen zwischen WSC und Minecraft.]]></packagedescription>
         <version>1.0.0</version>
         <date>2021-11-08</date>
     </packageinformation>
