@@ -10,7 +10,7 @@ class MinecraftSyncHandler extends AbstractMultipleMinecraftHandler
      * @return array
      * @throws MinecraftException
      */
-    public function getMinecraftUsers() {
+    public function getOnlineMinecraftUsers() {
         /**
          * ['minecraftID' => ['uuid' => 'name']]
          *  @var array
@@ -40,7 +40,7 @@ class MinecraftSyncHandler extends AbstractMultipleMinecraftHandler
      * @throws MinecraftException
      */
     public function getUnknownMinecraftUsers() {
-        $allUsers = $this->getMinecraftUsers();
+        $allUsers = $this->getOnlineMinecraftUsers();
         $savedUsers = new \wcf\data\user\minecraft\MinecrarftList();
         $knownUsers = [];
         foreach($savedUsers as &$savedUser) {
@@ -66,7 +66,7 @@ class MinecraftSyncHandler extends AbstractMultipleMinecraftHandler
      * @throws MinecraftException
      */
     public function getKnownMinecraftUsers() {
-        $allUsers = $this->getMinecraftUsers();
+        $allUsers = $this->getOnlineMinecraftUsers();
         $savedUsers = new \wcf\data\user\minecraft\MinecrarftList();
         $knownUsers = [];
         foreach($savedUsers as &$savedUser) {
