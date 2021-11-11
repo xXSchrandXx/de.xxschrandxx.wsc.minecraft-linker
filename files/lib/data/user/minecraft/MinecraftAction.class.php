@@ -26,7 +26,8 @@ class MinecraftAction extends AbstractDatabaseObjectAction
      * @inheritDoc
      * @todo
      */
-    public function create() {
+    public function create()
+    {
         parent::create();
     }
 
@@ -34,7 +35,8 @@ class MinecraftAction extends AbstractDatabaseObjectAction
      * @inheritDoc
      * @todo
      */
-    public function delete() {
+    public function delete()
+    {
         parent::delete();
     }
 }
