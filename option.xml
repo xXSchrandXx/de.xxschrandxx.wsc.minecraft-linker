@@ -14,7 +14,7 @@
                 <categoryname>minecraft_sync_general</categoryname>
                 <optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<enableoptions>minecraft_sync_identity,minecraft_max_identities,minecraft_enable_active_user,minecraft_sync_connect_channel,minecraft_enable_background_job</enableoptions>
+				<enableoptions>minecraft_sync_identity,minecraft_max_identities,minecraft_enable_active_user</enableoptions>
             </option>
             <option name="minecraft_sync_identity">
                 <categoryname>minecraft_sync_general</categoryname>
@@ -31,18 +31,9 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<option name="minecraft_sync_connect_channel">
-				<categoryname>minecraft_sync_general</categoryname>
-				<optiontype>MinecraftSyncChannelMultipleSelect</optiontype>
-			</option>
-			<option name="minecraft_enable_background_job">
-				<categoryname>minecraft_sync_general</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
         </options>
     </import>
 	<delete>
-		<option name="teamspeak_sync_mandatory" />
+		<option name="minecraft_sync_mandatory" />
 	</delete>
 </data>

@@ -1,6 +1,6 @@
 #!/bin/bash
-PACKAGE_NAME=eu.hanashi.wsc.minecraft-api
-PACKAGE_TYPES=(acptemplates files)
+PACKAGE_NAME=eu.hanashi.wsc.minecraft-sync
+PACKAGE_TYPES=(acptemplates files templates)
 
 rm -rf files/js/*
 tsc --build

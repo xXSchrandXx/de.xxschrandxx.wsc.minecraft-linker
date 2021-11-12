@@ -1,6 +1,6 @@
 <?php
 
-namespace wcf\data\minecraft;
+namespace wcf\data\user\minecraft;
 
 use wcf\data\DatabaseObjectList;
 

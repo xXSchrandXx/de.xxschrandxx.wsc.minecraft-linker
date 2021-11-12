@@ -23,19 +23,21 @@
     </excludedpackages>
 
     <instructions type="install">
-		<!-- files -->
-        <instruction type="file" />
-		
-		<!-- templates -->
-		<instruction type="acpTemplate" />
-		
-		<!-- language -->
+		<instruction type="acpTemplate"/>
+        <instruction type="file"/>
         <instruction type="language"/>
-		
-		<!-- config -->
-        <instruction type="acpMenu" />
-        <instruction type="userGroupOption" />
-        <instruction type="option" />
+		<instruction type="template"/>
+        <!-- TODO
+        <instruction type="eventListener"/>
+        -->
+        <instruction type="objectType"/>
+        <instruction type="option"/>
+        <instruction type="page"/>
+        <!-- TODO
+        <instruction type="templateListener"/>
+        -->
+        <instruction type="userGroupOption"/>
         <instruction type="script">acp/install_de.xxschrandxx.wsc.minecraft-sync_1.0.0.php</instruction>
+        <instruction type="userMenu"/>
     </instructions>
 </package>

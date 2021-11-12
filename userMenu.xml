@@ -8,7 +8,7 @@
 			<options>minecraft_enabled,minecraft_sync_identity</options>
 		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.minecraftSection.minecraftIDList">
-			<controller><![CDATA[wcf\page\MinecraftIDListPage]]></controller>
+			<controller><![CDATA[wcf\page\MinecraftIDList]]></controller>
 			<parent>wcf.user.menu.minecraftSection</parent>
 			<showorder>1</showorder>
 			<permissions>user.minecraftSynchronisation.canManage</permissions>
