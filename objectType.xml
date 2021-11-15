@@ -2,41 +2,41 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/objectType.xsd">
 	<import>
         <type>
-			<name>dev.hanashi.wsc.minecraftSync.connected</name>
+			<name>de.xxschrandxx.wsc.minecraftSync.connected</name>
 			<definitionname>com.woltlab.wcf.condition.userGroupAssignment</definitionname>
 			<classname>wcf\system\condition\MinecraftConnectedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
 		<type>
-			<name>dev.hanashi.wsc.minecraftSync.connected</name>
+			<name>de.xxschrandxx.wsc.minecraftSync.connected</name>
 			<definitionname>com.woltlab.wcf.condition.trophy</definitionname>
 			<classname>wcf\system\condition\MinecraftConnectedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
         <type>
-			<name>dev.hanashi.wsc.minecraftSync.connected</name>
+			<name>de.xxschrandxx.wsc.minecraftSync.connected</name>
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
 			<classname>wcf\system\condition\MinecraftConnectedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
         <type>
-			<name>dev.hanashi.wsc.minecraftSync.uid</name>
+			<name>de.xxschrandxx.wsc.minecraftSync.uuid</name>
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
-			<classname>wcf\system\condition\MinecraftUidCondition</classname>
+			<classname>wcf\system\condition\MinecraftUUIDCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
     </import>
 	<delete>
-		<type name="dev.hanashi.wsc.minecraft-sync.connected">
+		<type name="de.xxschrandxx.wsc.minecraft-sync.connected">
 			<definitionname>com.woltlab.wcf.condition.userGroupAssignment</definitionname>
 		</type>
-		<type name="dev.hanashi.wsc.minecraft-sync.connected">
+		<type name="de.xxschrandxx.wsc.minecraft-sync.connected">
 			<definitionname>com.woltlab.wcf.condition.trophy</definitionname>
 		</type>
-        <type name="dev.hanashi.wsc.minecraft-sync.connected">
+        <type name="de.xxschrandxx.wsc.minecraft-sync.connected">
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
 		</type>
-        <type name="dev.hanashi.wsc.minecraft-sync.uid">
+        <type name="de.xxschrandxx.wsc.minecraft-sync.uid">
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
 		</type>
 	</delete>

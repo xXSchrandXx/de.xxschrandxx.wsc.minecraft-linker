@@ -1,5 +1,5 @@
 #!/bin/bash
-PACKAGE_NAME=eu.hanashi.wsc.minecraft-sync
+PACKAGE_NAME=de.xxschrandxx.wsc.minecraft-sync
 PACKAGE_TYPES=(acptemplates files templates)
 
 rm -rf files/js/*

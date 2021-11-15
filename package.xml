@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.xxschrarndxx.wsc.minecraft-sync" xmlns="https://www.woltlab.com" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/vortex/package.xsd">
+<package name="de.xxschrandxx.wsc.minecraft-linker" xmlns="https://www.woltlab.com" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/vortex/package.xsd">
     <packageinformation>
-        <packagename><![CDATA[Minecraft Sync]]></packagename>
-        <packagename language="de"><![CDATA[Minecraft-Sync]]></packagename>
-        <packagedescription><![CDATA[Synchronizes user groups between WSC and Minecraft.]]></packagedescription>
-        <packagedescription language="de"><![CDATA[Synchronisiert Benutzergruppenzuweisungen zwischen WSC und Minecraft.]]></packagedescription>
+        <packagename><![CDATA[Minecraft Linker]]></packagename>
+        <packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
+        <packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
+        <packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
         <version>1.0.0</version>
         <date>2021-11-08</date>
     </packageinformation>
@@ -15,7 +15,7 @@
 
     <requiredpackages>
         <requiredpackage minversion="5.3.0">com.woltlab.wcf</requiredpackage>
-        <requiredpackage minversion="1.0.0" file="requirements/de.xxschrandxx.wsc.minecraft-api.tar.gz">de.xxschrandxx.wsc.minecraft-api</requiredpackage>
+        <requiredpackage minversion="1.0.0" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
     </requiredpackages>
 
     <excludedpackages>
@@ -27,9 +27,6 @@
         <instruction type="file"/>
         <instruction type="language"/>
 		<instruction type="template"/>
-        <!-- TODO
-        <instruction type="eventListener"/>
-        -->
         <instruction type="objectType"/>
         <instruction type="option"/>
         <instruction type="page"/>
@@ -37,7 +34,7 @@
         <instruction type="templateListener"/>
         -->
         <instruction type="userGroupOption"/>
-        <instruction type="script">acp/install_de.xxschrandxx.wsc.minecraft-sync_1.0.0.php</instruction>
+        <instruction type="script">acp/install_de.xxschrandxx.wsc.minecraft-linker_1.0.0.php</instruction>
         <instruction type="userMenu"/>
     </instructions>
 </package>
