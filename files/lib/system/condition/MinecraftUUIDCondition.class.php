@@ -40,7 +40,7 @@ class MinecraftUUIDCondition extends AbstractCondition implements IUserCondition
     {
         return <<<HTML
 <dl>
-	<dt>{$this->getLanguage('wcf.user.condition.minecraftSync.uuid')}</dt>
+	<dt>{$this->getLanguage('wcf.user.condition.minecraftLinker.uuid')}</dt>
 	<dd>
         <label>
             <input type="text" name="minecraftUUID" value="{$this->minecraftUUID}">

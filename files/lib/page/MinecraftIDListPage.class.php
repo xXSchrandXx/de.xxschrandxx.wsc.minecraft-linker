@@ -12,12 +12,12 @@ class MinecraftIDListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    public $neededModules = ['MINECRAFT_ENABLED','MINECRAFT_SYNC_IDENTITY'];
+    public $neededModules = ['MINECRAFT_LINKER_ENABLED','MINECRAFT_LINKER_IDENTITY'];
 
     /**
      * @inheritDoc
      */
-    public $neededPermissions = ['user.minecraftSynchronisation.canManage'];
+    public $neededPermissions = ['user.minecraftLinker.canManage'];
 
     /**
      * @inheritDoc
@@ -46,7 +46,7 @@ class MinecraftIDListPage extends MultipleLinkPage
     {
         parent::checkModules();
 
-        if (!(MINECRAFT_ENABLED && MINECRAFT_SYNC_IDENTITY)) {
+        if (!(MINECRAFT_LINKER_ENABLED && MINECRAFT_LINKER_IDENTITY)) {
             throw new IllegalLinkException();
         }
     }

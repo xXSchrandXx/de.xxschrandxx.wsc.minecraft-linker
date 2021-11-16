@@ -39,11 +39,11 @@ class MinecraftConnectedCondition extends AbstractCondition implements IUserCond
     {
         return <<<HTML
 <dl>
-	<dt>{$this->getLanguage('wcf.user.condition.minecraftSync.connection')}</dt>
+	<dt>{$this->getLanguage('wcf.user.condition.minecraftLinker.connection')}</dt>
 	<dd>
         <label>
             <input type="checkbox" name="minecraftConnected" value="1"{$this->checkValue()}>
-            {$this->getLanguage('wcf.user.condition.minecraftSync.connected')}
+            {$this->getLanguage('wcf.user.condition.minecraftLinker.connected')}
         </label>
 	</dd>
 </dl>

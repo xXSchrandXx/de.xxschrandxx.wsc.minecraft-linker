@@ -15,12 +15,12 @@ class MinecraftAction extends AbstractDatabaseObjectAction
     /**
      * @inheritDoc
      */
-    protected $permissionsCreate = ['admin.minecraftSynchronisation.canManage'];
+    protected $permissionsCreate = ['admin.minecraftLinker.canManage'];
 
     /**
      * @inheritDoc
      */
-    protected $permissionsDelete = ['admin.minecraftSynchronisation.canManage'];
+    protected $permissionsDelete = ['admin.minecraftLinker.canManage'];
 
     /**
      * @inheritDoc

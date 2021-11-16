@@ -18,12 +18,12 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
-    public $neededModules = ['MINECRAFT_ENABLED','MINECRAFT_SYNC_IDENTITY'];
+    public $neededModules = ['MINECRAFT_LINKER_ENABLED','MINECRAFT_LINKER_IDENTITY'];
 
     /**
      * @inheritDoc
      */
-    public $neededPermissions = ['user.minecraftSynchronisation.canManage'];
+    public $neededPermissions = ['user.minecraftLinker.canManage'];
 
     /**
      * @inheritDoc
@@ -55,7 +55,7 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
     {
         parent::checkModules();
 
-        if (!(MINECRAFT_ENABLED && MINECRAFT_SYNC_IDENTITY)) {
+        if (!(MINECRAFT_LINKER_ENABLED && MINECRAFT_LINKER_IDENTITY)) {
             throw new IllegalLinkException();
         }
     }
@@ -67,10 +67,14 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
     {
         parent::readParameters();
 
-        if (!isset($_POST['uuid']) && !isset($_POST['code'])) {
+        if (!isset($_REQUEST['uuid']) && !isset($_REQUEST['code'])) {
             HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDAdd'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDCheck.error.wrongLink'));
             exit;
         }
+
+        $this->title = $_REQUEST['title'];
+        $this->minecraftUUID = $_REQUEST['uuid'];
+        $this->code = $_REQUEST['code'];
     }
 
     /**
@@ -131,7 +135,7 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
             $objectAction = new UserAction([WCF::getUser()], 'enable', ['skipNotification' => true]);
             $objectAction->executeAction();
         }
-        MinecraftSyncHandler::getInstance()->syncUser(WCF::getUser());
+        MinecraftLinkerHandler::getInstance()->linkUser(WCF::getUser());
 
         WCF::getSession()->unregister('__mcCode');
         WCF::getSession()->unregister('__mcTitle');

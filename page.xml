@@ -6,8 +6,8 @@
 			<controller>wcf\page\MinecraftIDListPage</controller>
 			<name language="de">Minecraft-Identitäten</name>
 			<name language="en">Minecraft Identities</name>
-			<permissions>user.minecraftSynchronisation.canManage</permissions>
-			<options>MINECRAFT_ENABLED,MINECRAFT_SYNC_IDENTITY</options>
+			<permissions>user.minecraftLinker.canManage</permissions>
+			<options>MINECRAFT_LINKER_ENABLED,MINECRAFT_LINKER_IDENTITY</options>
 			
 			<content language="en">
 				<title>Minecraft Identities</title>
@@ -21,8 +21,8 @@
 			<controller>wcf\form\MinecraftIDAddForm</controller>
 			<name language="de">Minecraft-Identität hinzufügen</name>
 			<name language="en">Add Minecraft Identity</name>
-			<permissions>user.minecraftSynchronisation.canManage</permissions>
-			<options>MINECRAFT_ENABLED,MINECRAFT_SYNC_IDENTITY</options>
+			<permissions>user.minecraftLinker.canManage</permissions>
+			<options>MINECRAFT_LINKER_ENABLED,MINECRAFT_LINKER_IDENTITY</options>
 			
 			<content language="en">
 				<title>Add Minecraft Identity</title>
@@ -36,8 +36,8 @@
 			<controller>wcf\form\MinecraftIDCheckForm</controller>
 			<name language="de">Minecraft-Identität bestätigen</name>
 			<name language="en">Confirm Minecraft Identity</name>
-			<permissions>user.minecraftSynchronisation.canManage</permissions>
-			<options>MINECRAFT_ENABLED,MINECRAFT_SYNC_IDENTITY</options>
+			<permissions>user.minecraftLinker.canManage</permissions>
+			<options>MINECRAFT_LINKER_ENABLED,MINECRAFT_LINKER_IDENTITY</options>
 			
 			<content language="en">
 				<title>Confirm Minecraft Identity</title>

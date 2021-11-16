@@ -4,15 +4,15 @@
 		<usermenuitem name="wcf.user.menu.minecraftSection">
 			<showorder>2</showorder>
 			<iconclassname>fa-address-book</iconclassname>
-			<permissions>user.minecraftSynchronisation.canManage</permissions>
-			<options>minecraft_enabled,minecraft_sync_identity</options>
+			<permissions>user.minecraftLinker.canManage</permissions>
+			<options>minecraft_linker_enabled,minecraft_linker_identity</options>
 		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.minecraftSection.minecraftIDList">
 			<controller><![CDATA[wcf\page\MinecraftIDList]]></controller>
 			<parent>wcf.user.menu.minecraftSection</parent>
 			<showorder>1</showorder>
-			<permissions>user.minecraftSynchronisation.canManage</permissions>
-			<options>minecraft_enabled,minecraft_sync_identity</options>
+			<permissions>user.minecraftLinker.canManage</permissions>
+			<options>minecraft_linker_enabled,minecraft_linker_identity</options>
 		</usermenuitem>	
 	</import>
 </data>

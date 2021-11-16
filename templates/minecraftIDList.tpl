@@ -1,7 +1,7 @@
 {include file='userMenuSidebar'}
 
 {capture assign='contentHeaderNavigation'}
-	{if MINECRAFT_MAX_IDENTITIES == 0 || $objects|count < MINECRAFT_MAX_IDENTITIES}
+	{if MINECRAFT_MAX_UUIDS == 0 || $objects|count < MINECRAFT_MAX_UUIDS}
 		<li><a href="{link controller='MinecraftIDAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.minecraftList.add{/lang}</span></a></li>
 	{/if}		
 {/capture}

@@ -2,9 +2,12 @@
 
 namespace wcf\form;
 
+use wcf\data\user\minecraft\MinecraftAction;
 use wcf\system\exception\MinecraftException;
+use wcf\system\form\builder\field\TextFormField;
+use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\menu\user\UserMenu;
-use wcf\system\minecraft\MinecraftSyncHandler;
+use wcf\system\minecraft\MinecraftLinkerHandler;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
@@ -16,12 +19,12 @@ class MinecraftIDAddForm extends AbstractForm
     /**
      * @inheritDoc
      */
-    public $neededModules = ['MINECRAFT_ENABLED','MINECRAFT_SYNC_IDENTITY'];
+    public $neededModules = ['MINECRAFT_LINKER_ENABLED','MINECRAFT_LINKER_IDENTITY'];
 
     /**
      * @inheritDoc
      */
-    public $neededPermissions = ['user.minecraftSynchronisation.canManage'];
+    public $neededPermissions = ['user.minecraftLinker.canManage'];
 
     /**
      * @inheritDoc
@@ -34,14 +37,13 @@ class MinecraftIDAddForm extends AbstractForm
     public $loginRequired = true;
 
     /**
-     * MinecraftSyncHandler
-     * @var MinecraftSyncHandler
+     * MinecraftLinkerHandler
+     * @var MinecraftLinkerHandler
      */
     private $mcsh;
 
     /**
      * Liste aller unbekannter User.
-     * ['uuid' => 'name']
      * @var array
      */
     private $mcUsers = [];
@@ -53,42 +55,18 @@ class MinecraftIDAddForm extends AbstractForm
     {
         parent::readParameters();
 
-        $this->mcsh = MinecraftSyncHandler::getInstance();
+        $this->mcsh = MinecraftLinkerHandler::getInstance();
 
         $unknownUsers = $this->mcsh->getUnknownMinecraftUsers();
 
-        if ($unknownUsers == null) {
-            HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDAdd.error.offline'), 'error');
-            exit;
-        }
         if (empty($unknownUsers)) {
-            HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDAdd.error.offline'), 'error');
+            HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDAdd.error.noUnknownUsers'), 5, 'error');
             exit;
         }
 
         foreach ($unknownUsers as $minecraftID => $uuidArray) {
-            foreach ($uuidArray as $uuid => $name) {
-                array_push($mcUsers, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
-            }
+            $this->mcUsers = $this->mcUsers + $uuidArray;
         }
-        $fields = [];
-        if (MINECRAFT_MAX_IDENTITIES > 1) {
-            $fields[] = TextFormField::create('title')
-                            ->label('wcf.page.minecraftIDAdd.title')
-                            ->description('wcf.page.minecraftIDAdd.title.description')
-                            ->maximumLength(30)
-                            ->required();
-        }
-        $fields[] = SingleSelectionFormField::create('minecraftUUID')
-                        ->label('wcf.page.minecraftIDAdd.minecraftUUIDfrontend')
-                        ->description('wcf.page.minecraftIDAdd.minecraftUUIDfrontend.description')
-                        ->options($mcUsers)
-                        ->required();
-
-        $this->form->appendChild(
-            FormContainer::create('data')
-                ->appendChildren($fields)
-        );
     }
 
     /**
@@ -110,28 +88,19 @@ class MinecraftIDAddForm extends AbstractForm
     {
         parent::readFormParameters();
 
-        $code = bin2hex(\random_bytes(16));
+        $code = bin2hex(\random_bytes(4));
 
-        $title = 'Default'; // Default Name
-        if (MINECRAFT_MAX_IDENTITIES > 1 && isset($_POST['title'])) {
+        $title = 'Default';
+        if (MINECRAFT_MAX_UUIDS > 1 && isset($_POST['title'])) {
             $title = $_POST['title'];
         }
-
-        $ID;
-        foreach ($this->mcsh->getUnknownMinecraftUsers() as $minecraftID => $uuidArray) {
-            if (array_key_exists($_POST['uuid'], $uuidArray)) {
-                $ID = $minecraftID;
-                continue;
-            }
+        if ($this->mcsh->sendCode($_POST['uuid'], null, $code)) {
+            HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDCheck', ['title' => $title, 'uuid' => $_POST['uuid'], 'code' => $code]), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDAdd.success'));
+            exit;
         }
-
-        $message = WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDAdd.code.message', ['username' => WCF::getUser()->username, 'code' => $code]);
-        try {
-            $this->mcsh->$minecrafts[$ID]->getConnection()->call('tellraw ' . $formData['data']['minecraftUUID'] . ' ' . $message);
-        } catch (MinecraftException $e) {
-            if (ENABLE_DEBUG_MODE) {
-                throw $e;
-            }
+        else {
+            $this->errorField = 'uuid';
+            $this->errorType = "Couldn't send code.";
         }
     }
 }

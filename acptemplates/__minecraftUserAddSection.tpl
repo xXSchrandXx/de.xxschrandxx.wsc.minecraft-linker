@@ -1,4 +1,4 @@
-{if $action == 'edit' && $__wcf->getSession()->getPermission('admin.minecraftSynchronisation.canManage') && MINECRAFT_ENABLED && MINECRAFT_SYNC_IDENTITY}
+{if $action == 'edit' && $__wcf->getSession()->getPermission('admin.minecraftLinker.canManage') && MINECRAFT_LINKER_ENABLED && MINECRAFT_LINKER_IDENTITY}
 	<script data-relocate="true">
 		$(function() {
 			new WCF.Action.Delete('wcf\\data\\user\\minecraft\\MinecraftAction', $('.jsRow'));
