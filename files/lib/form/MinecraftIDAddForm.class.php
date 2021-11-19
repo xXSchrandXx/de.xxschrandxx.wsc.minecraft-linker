@@ -98,20 +98,22 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
         $fields = [];
 
         if (MINECRAFT_MAX_UUIDS > 1) {
-            array_push($fields, TextFormField::create('title')->required()
+            $titleField = TextFormField::create('title')
+                ->required()
                 ->label('wcf.page.minecraftIDAdd.title')
                 ->description('wcf.page.minecraftIDAdd.title.description')
                 ->maximumLength(30)
-                ->value('Default')
-            );
+                ->value('Default');
+            array_push($fields, $titleField);
         }
 
-        array_push($fields, SingleSelectionFormField::create('minecraftUUID')->required()
+        $minecraftUUIDField = SingleSelectionFormField::create('minecraftUUID')
+            ->required()
             ->label('wcf.page.minecraftIDAdd.uuid')
             ->description('wcf.page.minecraftIDAdd.uuid.description')
             ->options($options, true, false)
-            ->filterable()
-        );
+            ->filterable();
+        array_push($fields, $minecraftUUIDField);
 
         $this->form->appendChild(
             FormContainer::create('data')

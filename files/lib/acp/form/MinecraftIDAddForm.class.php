@@ -90,17 +90,17 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
             }
         }
 
-        $fields = [];
-
-        array_push($fields, TextFormField::create('title')->required()
-            ->label('wcf.acp.page.minecraftIDAdd.title')
-            ->description('wcf.acp.page.minecraftIDAdd.title.description')
-            ->maximumLength(30)
-            ->value('Default')
-        );
+        $fields = [
+            TextFormField::create('title')->required()
+                ->label('wcf.acp.page.minecraftIDAdd.title')
+                ->description('wcf.acp.page.minecraftIDAdd.title.description')
+                ->maximumLength(30)
+                ->value('Default')
+        ];
 
         if (empty($options)) {
-            array_push($fields, TextFormField::create('minecraftUUID')->required()
+            $minecraftUUIDField = TextFormField::create('minecraftUUID')
+                ->required()
                 ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
                 ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
                 ->minimumLength(36)
@@ -114,11 +114,11 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
                             new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftIDAdd.minecraftUUID.error.alreadyUsed')
                         );
                     }
-                }))
-            );
+                }));
         }
         else {
-            array_push($fields, SingleSelectionFormField::create('minecraftUUID')->required()
+            $minecraftUUIDField = SingleSelectionFormField::create('minecraftUUID')
+                ->required()
                 ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
                 ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
                 ->options($options, true, false)
@@ -132,9 +132,10 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
                             new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftIDAdd.minecraftUUID.error.empty')
                         );
                     }
-                }))
-            );
+                }));
         }
+
+        array_push($fields, $minecraftUUIDField);
 
         $this->form->appendChild(
             FormContainer::create('data')
