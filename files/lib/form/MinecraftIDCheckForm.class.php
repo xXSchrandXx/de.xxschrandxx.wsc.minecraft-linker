@@ -102,7 +102,7 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
         $this->form->appendChild(
             FormContainer::create('data')
                 ->appendChildren([
-                    TextFormField::create('code')
+                    TextFormField::create('code')->required()
                         ->label('wcf.page.minecraftIDCheckForm.code')
                         ->description('wcf.page.minecraftIDCheckForm.code.description')
                         ->addValidator(new FormFieldValidator('minecraftUUIDCheck', function (TextFormField $field) {
@@ -120,7 +120,6 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
                                 );
                             }
                         }))
-                        ->required()
                 ])
         );
     }

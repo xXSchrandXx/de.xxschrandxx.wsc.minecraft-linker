@@ -92,16 +92,15 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
 
         $fields = [];
 
-        array_push($fields, TextFormField::create('title')
+        array_push($fields, TextFormField::create('title')->required()
             ->label('wcf.acp.page.minecraftIDAdd.title')
             ->description('wcf.acp.page.minecraftIDAdd.title.description')
             ->maximumLength(30)
             ->value('Default')
-            ->required()
         );
 
         if (empty($options)) {
-            array_push($fields, TextFormField::create('minecraftUUID')
+            array_push($fields, TextFormField::create('minecraftUUID')->required()
                 ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
                 ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
                 ->minimumLength(36)
@@ -119,7 +118,7 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
             );
         }
         else {
-            array_push($fields, SingleSelectionFormField::create('minecraftUUID')
+            array_push($fields, SingleSelectionFormField::create('minecraftUUID')->required()
                 ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
                 ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
                 ->options($options, true, false)
