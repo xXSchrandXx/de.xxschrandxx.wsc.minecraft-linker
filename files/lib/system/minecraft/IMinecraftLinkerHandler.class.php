@@ -4,7 +4,6 @@ namespace wcf\system\minecraft;
 
 interface IMinecraftLinkerHandler
 {
-    
     /**
      * Baut diese Klasse auf und eröffnet die Verbindung.
      * @param $mc Minecraft

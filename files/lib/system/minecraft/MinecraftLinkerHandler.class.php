@@ -71,7 +71,7 @@ class MinecraftLinkerHandler extends SingletonFactory
     /**
      * Gibt den Handler zurück.
      * @param $minecraft
-     * @return 
+     * @return Minecraft
      */
     public function getHandler($minecraft)
     {
@@ -109,7 +109,7 @@ class MinecraftLinkerHandler extends SingletonFactory
      */
     public function getOnlineMinecraftUsers()
     {
-        foreach($this->minecrafts as &$minecraft) {
+        foreach ($this->minecrafts as &$minecraft) {
             $handler = $this->getHandler($minecraft);
             $tmpOnlineUsers = $handler->getOnlineMinecraftUsers();
             if (!empty($tmpOnlineUsers)) {
@@ -127,7 +127,7 @@ class MinecraftLinkerHandler extends SingletonFactory
      */
     public function sendCode($uuid, $name, $code)
     {
-        foreach($this->getOnlineMinecraftUsers() as $minecraftID => $userArray) {
+        foreach ($this->getOnlineMinecraftUsers() as $minecraftID => $userArray) {
             if (array_key_exists($uuid, $userArray)) {
                 if ($name == null) {
                     $name = $userArray[$uuid];

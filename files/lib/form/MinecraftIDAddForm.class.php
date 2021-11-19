@@ -65,9 +65,9 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
             throw new IllegalLinkException();
         }
 
-        $code = WCF::getSession()->getVar('mcCode');;
-        $title = WCF::getSession()->getVar('mcTitle');;
-        $minecraftUUID = WCF::getSession()->getVar('minecraftUUID');;
+        $code = WCF::getSession()->getVar('mcCode');
+        $title = WCF::getSession()->getVar('mcTitle');
+        $minecraftUUID = WCF::getSession()->getVar('minecraftUUID');
 
         if (isset($minecraftUUID) && isset($code) && isset($title)) {
             HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDCheck'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDAdd.alreadySend'), 2, 'error');
@@ -90,7 +90,7 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
 
         $options = [];
         foreach ($unknownUsers as $minecraftID => $uuidArray) {
-            foreach($uuidArray as $uuid => $name) {
+            foreach ($uuidArray as $uuid => $name) {
                 array_push($options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
             }
         }
@@ -98,23 +98,21 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
         $fields = [];
 
         if (MINECRAFT_MAX_UUIDS > 1) {
-            array_push($fields,
-                TextFormField::create('title')
-                    ->label('wcf.page.minecraftIDAdd.title')
-                    ->description('wcf.page.minecraftIDAdd.title.description')
-                    ->maximumLength(30)
-                    ->value('Default')
-                    ->required()
+            array_push($fields, TextFormField::create('title')
+                ->label('wcf.page.minecraftIDAdd.title')
+                ->description('wcf.page.minecraftIDAdd.title.description')
+                ->maximumLength(30)
+                ->value('Default')
+                ->required()
             );
         }
 
-        array_push($fields,
-            SingleSelectionFormField::create('minecraftUUID')
-                ->label('wcf.page.minecraftIDAdd.uuid')
-                ->description('wcf.page.minecraftIDAdd.uuid.description')
-                ->options($options, true, false)
-                ->filterable()
-                ->required()
+        array_push($fields, SingleSelectionFormField::create('minecraftUUID')
+            ->label('wcf.page.minecraftIDAdd.uuid')
+            ->description('wcf.page.minecraftIDAdd.uuid.description')
+            ->options($options, true, false)
+            ->filterable()
+            ->required()
         );
 
         $this->form->appendChild(
@@ -147,8 +145,7 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
             WCF::getSession()->register('mcCode', $code);
             WCF::getSession()->register('mcTitle', $title);
             WCF::getSession()->register('minecraftUUID', $this->form->getData()['data']['minecraftUUID']);
-        }
-        else {
+        } else {
             $this->errorField = 'uuid';
             $this->errorType = "Couldn't send code.";
         }

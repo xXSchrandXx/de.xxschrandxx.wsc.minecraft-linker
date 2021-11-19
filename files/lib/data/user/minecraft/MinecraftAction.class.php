@@ -46,7 +46,7 @@ class MinecraftAction extends AbstractDatabaseObjectAction
         foreach ($this->getObjects() as $object) {
             array_push($userIDs, $object->userID);
         }
-        foreach($userIDs as &$userID) {
+        foreach ($userIDs as &$userID) {
             $this->updateUUIDAmount($userID);
         }
     }

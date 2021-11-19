@@ -79,9 +79,9 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
     {
         parent::readParameters();
 
-        $this->code = WCF::getSession()->getVar('mcCode');;
-        $this->title = WCF::getSession()->getVar('mcTitle');;
-        $this->minecraftUUID = WCF::getSession()->getVar('minecraftUUID');;
+        $this->code = WCF::getSession()->getVar('mcCode');
+        $this->title = WCF::getSession()->getVar('mcTitle');
+        $this->minecraftUUID = WCF::getSession()->getVar('minecraftUUID');
 
         if (!isset($this->minecraftUUID) || !isset($this->code) || !isset($this->title)) {
             throw new IllegalLinkException();

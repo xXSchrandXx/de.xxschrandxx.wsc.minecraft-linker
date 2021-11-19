@@ -84,59 +84,56 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
         $mcUsers = MinecraftLinkerHandler::getInstance()->getUnknownMinecraftUsers();
 
         $options = [];
-        foreach($mcUsers as $minecraftID => $uuidArray) {
-            foreach($uuidArray as $uuid => $name) {
+        foreach ($mcUsers as $minecraftID => $uuidArray) {
+            foreach ($uuidArray as $uuid => $name) {
                 array_push($options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
             }
         }
 
         $fields = [];
 
-        array_push($fields,
-            TextFormField::create('title')
-                ->label('wcf.acp.page.minecraftIDAdd.title')
-                ->description('wcf.acp.page.minecraftIDAdd.title.description')
-                ->maximumLength(30)
-                ->value('Default')
-                ->required()
+        array_push($fields, TextFormField::create('title')
+            ->label('wcf.acp.page.minecraftIDAdd.title')
+            ->description('wcf.acp.page.minecraftIDAdd.title.description')
+            ->maximumLength(30)
+            ->value('Default')
+            ->required()
         );
 
         if (empty($options)) {
-            array_push($fields,
-                TextFormField::create('minecraftUUID')
-                    ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
-                    ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
-                    ->minimumLength(36)
-                    ->maximumLength(36)
-                    ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
-                        $minecraftList = new MinecraftList();
-                        $minecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                        $minecraftList->readObjects();
-                        if (count($minecraftList)) {
-                            $field->addValidationError(
-                                new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftIDAdd.minecraftUUID.error.alreadyUsed')
-                            );
-                        }
-                    }))
+            array_push($fields, TextFormField::create('minecraftUUID')
+                ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
+                ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
+                ->minimumLength(36)
+                ->maximumLength(36)
+                ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
+                    $minecraftList = new MinecraftList();
+                    $minecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
+                    $minecraftList->readObjects();
+                    if (count($minecraftList)) {
+                        $field->addValidationError(
+                            new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftIDAdd.minecraftUUID.error.alreadyUsed')
+                        );
+                    }
+                }))
             );
         }
         else {
-            array_push($fields,
-                SingleSelectionFormField::create('minecraftUUID')
-                    ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
-                    ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
-                    ->options($options, true, false)
-                    ->filterable()
-                    ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
-                        $minecraftList = new MinecraftList();
-                        $minecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                        $minecraftList->readObjects();
-                        if (count($minecraftList)) {
-                            $field->addValidationError(
-                                new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftIDAdd.minecraftUUID.error.empty')
-                            );
-                        }
-                    }))
+            array_push($fields, SingleSelectionFormField::create('minecraftUUID')
+                ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
+                ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
+                ->options($options, true, false)
+                ->filterable()
+                ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
+                    $minecraftList = new MinecraftList();
+                    $minecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
+                    $minecraftList->readObjects();
+                    if (count($minecraftList)) {
+                        $field->addValidationError(
+                            new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftIDAdd.minecraftUUID.error.empty')
+                        );
+                    }
+                }))
             );
         }
 

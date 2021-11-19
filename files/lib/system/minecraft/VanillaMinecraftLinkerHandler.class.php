@@ -26,21 +26,18 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         if ($result == null) {
             return $this->onlineUsers;
-        }
-        if (empty($result)) {
+        } else if (empty($result)) {
             return $this->onlineUsers;
         }
         $response = null;
         if ($result['Response'] != 0) {
             return $this->onlineUsers;
-        }
-        else {
+        } else {
             $response = $result['S1'] . $result['S2'];
         }
         if ($response == null) {
             return $this->onlineUsers;
-        }
-        if (empty($response)) {
+        } else if (empty($response)) {
             return $this->onlineUsers;
         }
         $userStringListString = explode(':', $response, 2)[1];
@@ -100,8 +97,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         if ($result['Response'] == 0) {
             return $result;
-        }
-        else {
+        } else {
             return false;
         }
     }
