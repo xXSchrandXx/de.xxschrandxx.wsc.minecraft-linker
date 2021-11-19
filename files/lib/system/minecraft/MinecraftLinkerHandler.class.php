@@ -2,7 +2,6 @@
 
 namespace wcf\system\minecraft;
 
-use wcf\data\minecraft\MinecraftList;
 use wcf\system\exception\MinecraftException;
 use wcf\system\SingletonFactory;
 use wcf\util\StringUtil;
@@ -36,11 +35,12 @@ class MinecraftLinkerHandler extends SingletonFactory
             return;
         }
 
-        $minecraftList = new MinecraftList();
+        $minecraftList = new \wcf\data\minecraft\MinecraftList();
         $minecraftList->setObjectIDs($this->minecraftIDs);
         $minecraftList->readObjects();
         $this->minecrafts = $minecraftList->getObjects();
     }
+
 
     /**
      * Gibt den geforderten Minecraft zurück.
@@ -69,6 +69,33 @@ class MinecraftLinkerHandler extends SingletonFactory
     }
 
     /**
+     * Gibt den Handler zurück.
+     * @param $minecraft
+     * @return 
+     */
+    public function getHandler($minecraft)
+    {
+        if ($minecraft == null) {
+            throw new MinecraftException('Unknown minecraft.');
+        }
+        $handler = null;
+        switch ($minecraft->type) {
+            case 'vanilla':
+                $handler = new VanillaMinecraftLinkerHandler($minecraft);
+                break;
+            case 'spigot':
+                $handler = new SpigotMinecraftLinkerHandler($minecraft);
+                break;
+            case 'bungee':
+                $handler = new BungeeMinecraftLinkerHandler($minecraft);
+        }
+        if ($handler == null) {
+            throw new MinecraftException('Unknown type.');
+        }
+        return $handler;
+    }
+
+    /**
      * Eine Liste aller Benutzer, die sich gerade auf dem Minecraft-Server befinden.
      * Gruppiert nach den Minecraft-APIs.
      * ['minecraftID' => ['uuid' => 'name']]
@@ -83,19 +110,7 @@ class MinecraftLinkerHandler extends SingletonFactory
     public function getOnlineMinecraftUsers()
     {
         foreach($this->minecrafts as &$minecraft) {
-            $handler = null;
-            if ($minecraft->type == 'vanilla') {
-                $handler = new VanillaMinecraftLinkerHandler($minecraft);
-            }
-            else if ($minecraft->type == 'spigot') {
-                $handler = new SpigotMinecraftLinkerHandler($minecraft);
-            }
-            else if ($minecraft->type == 'bungee') {
-                $handler = new BungeeMinecraftLinkerHandler($minecraft);
-            }
-            if ($handler == null) {
-                throw new MinecraftException('Unknown type.');
-            }
+            $handler = $this->getHandler($minecraft);
             $tmpOnlineUsers = $handler->getOnlineMinecraftUsers();
             if (!empty($tmpOnlineUsers)) {
                 $this->onlineUsers = $this->onlineUsers + [$minecraft->minecraftID => $tmpOnlineUsers];
@@ -118,18 +133,7 @@ class MinecraftLinkerHandler extends SingletonFactory
                     $name = $userArray[$uuid];
                 }
                 $minecraft = $this->getMinecraft($minecraftID);
-                if ($minecraft->type == 'vanilla') {
-                    $handler = new VanillaMinecraftLinkerHandler($minecraft);
-                }
-                else if ($minecraft->type == 'spigot') {
-                    $handler = new SpigotMinecraftLinkerHandler($minecraft);
-                }
-                else if ($minecraft->type == 'bungee') {
-                    $handler = new BungeeMinecraftLinkerHandler($minecraft);
-                }
-                if ($handler == null) {
-                    throw new MinecraftException('Unknown type.');
-                }
+                $handler = $this->getHandler($minecraft);
                 return $handler->sendCode($uuid, $name, $code);
             }
         }
@@ -156,15 +160,22 @@ class MinecraftLinkerHandler extends SingletonFactory
         if (empty($allUsers)) {
             return $this->unknownOnlineMinecraftUsers;
         }
-        $savedUsersList = new MinecraftList();
+        $savedUsersList = new \wcf\data\user\minecraft\MinecraftList();
         $savedUsersList->readObjects();
         $savedUsers = $savedUsersList->getObjects();
         $knownUsers = [];
         foreach ($savedUsers as &$savedUser) {
             array_push($knownUsers, $savedUser->minecraftUUID);
         }
+        if (empty($knownUsers)) {
+            $this->knownOnlineMinecraftUsers = $allUsers;
+            return $this->knownOnlineMinecraftUsers;
+        }
         foreach ($allUsers as $minecraftID => $users) {
-            $newUsers = array_diff_key($users, $knownUsers);
+            $newUsers = array_diff_key($users, array_flip($knownUsers));
+            if (empty($newUsers)) {
+                continue;
+            }
             $this->unknownOnlineMinecraftUsers = $this->unknownOnlineMinecraftUsers + [$minecraftID => $newUsers];
         }
         return $this->unknownOnlineMinecraftUsers;
@@ -186,18 +197,25 @@ class MinecraftLinkerHandler extends SingletonFactory
         if (!empty($this->knownOnlineMinecraftUsers)) {
             return $this->knownOnlineMinecraftUsers;
         }
+        $allUsers = $this->getOnlineMinecraftUsers();
         if (empty($allUsers)) {
-            return $this->unknownOnlineMinecraftUsers;
+            return $this->knownOnlineMinecraftUsers;
         }
-        $savedUsersList = new MinecraftList();
+        $savedUsersList = new \wcf\data\user\minecraft\MinecraftList();
         $savedUsersList->readObjects();
         $savedUsers = $savedUsersList->getObjects();
         $knownUsers = [];
         foreach ($savedUsers as &$savedUser) {
             array_push($knownUsers, $savedUser->minecraftUUID);
         }
+        if (empty($knownUsers)) {
+            return $this->knownOnlineMinecraftUsers;
+        }
         foreach ($allUsers as $minecraftID => $users) {
-            $newUsers = array_intersect_key($users, $knownUsers);
+            $newUsers = array_intersect_key($users, array_flip($knownUsers));
+            if (empty($newUsers)) {
+                continue;
+            }
             $this->knownOnlineMinecraftUsers = $this->knownOnlineMinecraftUsers + [$minecraftID => $newUsers];
         }
         return $this->knownOnlineMinecraftUsers;

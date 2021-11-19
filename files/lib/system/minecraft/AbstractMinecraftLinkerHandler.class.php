@@ -39,4 +39,18 @@ abstract class AbstractMinecraftLinkerHandler implements IMinecraftLinkerHandler
     {
         return $this->onlineUsers;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendCommand($command)
+    {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendCode($uuid, $name, $code)
+    {
+    }
 }

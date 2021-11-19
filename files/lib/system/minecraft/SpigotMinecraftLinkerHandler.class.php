@@ -3,6 +3,8 @@
 namespace wcf\system\minecraft;
 
 use wcf\system\exception\MinecraftException;
+use wcf\system\WCF;
+use wcf\util\JSON;
 
 class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
 {
@@ -14,12 +16,14 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         if (!empty($this->onlineUsers)) {
             return $this->onlineUsers;
         }
+        $args = ['type' => 'list'];
+        $jsonString = JSON::encode($args, JSON_UNESCAPED_UNICODE);
         $result = null;
         try {
-            $result = $this->minecraft->getConnection()->call(MINECRAFT_COMMAND_SPIGOT_LIST);
+            $result = $this->minecraft->getConnection()->call("wsclinker " . $jsonString);
         } catch (MinecraftException $e) {
             if (ENABLE_DEBUG_MODE) {
-                throw $e;
+                \wcf\functions\exception\logThrowable($e);
             }
             return $this->onlineUsers;
         }
@@ -29,28 +33,57 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         if (empty($result)) {
             return $this->onlineUsers;
         }
-        $response = null;
         if ($result['Response'] != 0) {
             return $this->onlineUsers;
         }
-        else {
-            $response = $result['S1'] . $result['S2'];
+        $response = [];
+        if (!empty($result['S1'])) {
+            $response = $response + JSON::decode($result['S1']);
         }
-        if ($response == null) {
-            return $this->onlineUsers;
+        if (!empty($result['S2'])) {
+            $response = $response + JSON::decode($result['S2']);
         }
         if (empty($response)) {
             return $this->onlineUsers;
         }
-        $userStringListString = explode(':', $response, 2)[1];
-        $userStringList = explode(', ', $userStringListString);
-        foreach ($userStringList as &$userString) {
-            $userStringArray = explode(' (', $userString, 2);
-            $uuid = substr(str_replace(['(', ')'], '', $userStringArray[1]), 0, 36);
-            $name = $userStringArray[0];
-            $this->onlineUsers = $this->onlineUsers + [$uuid => $name];
+        if ($response['error']) {
+            return $this->onlineUsers;
         }
+        $this->onlineUsers = $response['message'];
         return $this->onlineUsers;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendCommand($command)
+    {
+        $args = [
+            'type' => 'command',
+            'content' => [
+                'command' => $command
+            ]
+        ];
+        $jsonSting = JSON::encode($args, JSON_UNESCAPED_UNICODE);
+        try {
+            $result = $this->minecraft->getConnection()->call("wsclinker " . $jsonSting);
+        } catch (MinecraftException $e) {
+            if (ENABLE_DEBUG_MODE) {
+                \wcf\functions\exception\logThrowable($e);
+            }
+            return ['error' => true, 'message' => 'Error while sending command.'];
+        }
+        if ($result['Response'] != 0) {
+            return ['error' => true, 'message' => 'Response no command.'];
+        }
+        $response = [];
+        if (!empty($result['S1'])) {
+            $response = $response + JSON::decode($result['S1']);
+        }
+        if (!empty($result['S2'])) {
+            $response = $response + JSON::decode($result['S2']);
+        }
+        return $response;
     }
 
     /**
@@ -58,20 +91,49 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
      */
     public function sendCode($uuid, $name, $code)
     {
-        $command = sprintf(MINECRAFT_COMMAND_SPIGOT_SENDCODE, $name, $code);
+        if ($uuid == null || $code == null) {
+            return false;
+        }
+        if ($name == null) {
+            $name = '';
+        }
+        $variables = ['uuid' => $uuid, 'name' => $name, 'code' => $code];
+        $message = WCF::getLanguage()->getDynamicVariable('wcf.minecraft.message', $variables);
+        $hoverMessage = WCF::getLanguage()->getDynamicVariable('wcf.minecraft.hoverMessage', $variables);
+        $args = [
+            'type' => 'sendCode',
+            'content' => [
+                'message' => $message,
+                'uuid' => $uuid,
+                'hoverMessage' => $hoverMessage,
+                'code' => $code
+            ]
+        ];
+        $jsonSting = JSON::encode($args, JSON_UNESCAPED_UNICODE);
         try {
-            $result = $this->minecraft->getConnection()->call($command);
+            $result = $this->minecraft->getConnection()->call("wsclinker " . $jsonSting);
         } catch (MinecraftException $e) {
             if (ENABLE_DEBUG_MODE) {
-                throw $e;
+                \wcf\functions\exception\logThrowable($e);
             }
             return false;
         }
-        if ($result['Response'] == 0) {
-            return true;
-        }
-        else {
+        if ($result['Response'] != 0) {
             return false;
         }
+        $response = [];
+        if (!empty($result['S1'])) {
+            $response = $response + JSON::decode($result['S1']);
+        }
+        if (!empty($result['S2'])) {
+            $response = $response + JSON::decode($result['S2']);
+        }
+        if (empty($response)) {
+            return false;
+        }
+        if ($response['error']) {
+            return false;
+        }
+        return true;
     }
 }

@@ -34,35 +34,15 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
-            <option name="minecraft_command_vanilla_list">
+            <option name="minecraft_command_list">
                 <categoryname>minecraft_linker_commands</categoryname>
                 <optiontype>text</optiontype>
                 <defaultvalue>list uuids</defaultvalue>
             </option>
-            <option name="minecraft_command_spigot_list">
+            <option name="minecraft_command_sendcode">
                 <categoryname>minecraft_linker_commands</categoryname>
                 <optiontype>text</optiontype>
-                <defaultvalue>minecraft:list uuids</defaultvalue>
-            </option>
-            <option name="minecraft_command_bungee_list">
-                <categoryname>minecraft_linker_commands</categoryname>
-                <optiontype>text</optiontype>
-                <defaultvalue>glist uuids</defaultvalue>
-            </option>
-            <option name="minecraft_command_vanilla_sendcode">
-                <categoryname>minecraft_linker_commands</categoryname>
-                <optiontype>text</optiontype>
-                <defaultvalue>tellraw %1$s ["Your verification code: ",{"text":"%2$s","clickEvent":{"action":"copy_to_clipboard","value":"%2$s"},"hoverEvent":{"action":"show_text","contents":["Copy to Clipboard."]}}]</defaultvalue>
-            </option>
-            <option name="minecraft_command_spigot_sendcode">
-                <categoryname>minecraft_linker_commands</categoryname>
-                <optiontype>text</optiontype>
-                <defaultvalue>minecraft:tellraw %1$s ["Your verification code: ",{"text":"%2$s","clickEvent":{"action":"copy_to_clipboard","value":"%2$s"},"hoverEvent":{"action":"show_text","contents":["Copy to Clipboard."]}}]</defaultvalue>
-            </option>
-            <option name="minecraft_command_bungee_sendcode">
-                <categoryname>minecraft_linker_commands</categoryname>
-                <optiontype>text</optiontype>
-                <defaultvalue>tellraw %1$s ["Your verification code: ",{"text":"%2$s","clickEvent":{"action":"copy_to_clipboard","value":"%2$s"},"hoverEvent":{"action":"show_text","contents":["Copy to Clipboard."]}}]</defaultvalue>
+                <defaultvalue>tellraw {$name} [{"text":"{lang}wcf.minecraft.message{/lang}","clickEvent":{"action":"copy_to_clipboard","value":"{$code}"},"hoverEvent":{"action":"show_text","contents":["{lang}wcf.minecraft.hoverMessage{/lang}"]}}]</defaultvalue>
             </option>
         </options>
     </import>

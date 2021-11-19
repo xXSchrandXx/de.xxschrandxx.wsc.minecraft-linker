@@ -13,7 +13,7 @@ $tables = [
     // wcf1_user
     DatabaseTable::create('wcf1_user')
         ->columns([
-            NotNullInt10DatabaseTableColumn::create('minecraftUUIDS')
+            NotNullInt10DatabaseTableColumn::create('minecraftUUIDs')
                 ->defaultValue(0),
         ]),
 

@@ -110,7 +110,7 @@ HTML;
     /**
      * @inheritDoc
      */
-    protected function getLanguage($var)
+    public function getLanguage($var)
     {
         return WCF::getLanguage()->getDynamicVariable($var);
     }

@@ -94,7 +94,7 @@ HTML;
         }
 
         if (isset($conditionData['minecraftConnected']) && $conditionData['minecraftConnected']) {
-            $objectList->getConditionBuilder()->add('user_table.minecraftIdentities > 0');
+            $objectList->getConditionBuilder()->add('user_table.minecraftUUIDs > 0');
         }
         $objectList->readObjects();
     }
@@ -110,7 +110,7 @@ HTML;
     /**
      * @inheritDoc
      */
-    protected function getLanguage($var)
+    public function getLanguage($var)
     {
         return WCF::getLanguage()->getDynamicVariable($var);
     }
@@ -118,7 +118,7 @@ HTML;
     /**
      * @inheritDoc
      */
-    protected function checkValue()
+    public function checkValue()
     {
         if ($this->minecraftConnected) {
             return ' checked';

@@ -22,12 +22,17 @@ class MinecraftIDListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    public $objectListClassName = MinecraftList::class;
+    public $loginRequired = true;
 
     /**
      * @inheritDoc
      */
-    public $loginRequired = true;
+    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftIDList';
+
+    /**
+     * @inheritDoc
+     */
+    public $objectListClassName = MinecraftList::class;
 
     /**
      * @inheritDoc
@@ -54,7 +59,7 @@ class MinecraftIDListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    protected function initObjectList()
+    public function initObjectList()
     {
         parent::initObjectList();
 
@@ -66,13 +71,7 @@ class MinecraftIDListPage extends MultipleLinkPage
      */
     public function show()
     {
-        UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.minecraftSection.minecraftIDList');
-
+        UserMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
         parent::show();
-    }
-
-    public function assignVariables()
-    {
-        parent::assignVariables();
     }
 }

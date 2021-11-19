@@ -3,4 +3,14 @@
     <category name="wcf.acp.option">
         <item name="wcf.acp.option.category.minecraft_linker"><![CDATA[Minecraft-Linker]]></item>
     </category>
+    <category name="wcf.minecraft">
+        <item name="wcf.minecraft.message"><![CDATA[Dein Verifizierungscode: {$code}]]></item>
+        <item name="wcf.minecraft.hoverMessage"><![CDATA[In die Zwischenablage kopieren.]]></item>
+    </category>
+    <category name="wcf.page.minecraftList">
+        <item name="wcf.page.minecraftList.table.minecraftID"><![CDATA[ID]]></item>
+        <item name="wcf.page.minecraftList.table.title"><![CDATA[Titel]]></item>
+        <item name="wcf.page.minecraftList.table.minecraftUUID"><![CDATA[UUID]]></item>
+        <item name="wcf.page.minecraftList.table.createdDate"><![CDATA[Erstelldatum]]></item>
+    </category>
 </language>

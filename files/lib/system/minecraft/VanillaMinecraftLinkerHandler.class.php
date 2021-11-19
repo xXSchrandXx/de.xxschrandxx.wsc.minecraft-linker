@@ -3,6 +3,7 @@
 namespace wcf\system\minecraft;
 
 use wcf\system\exception\MinecraftException;
+use wcf\system\WCF;
 
 class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
 {
@@ -16,10 +17,10 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         $result = null;
         try {
-            $result = $this->minecraft->getConnection()->call(MINECRAFT_COMMAND_VANILLA_LIST);
+            $result = $this->minecraft->getConnection()->call(MINECRAFT_COMMAND_LIST);
         } catch (MinecraftException $e) {
             if (ENABLE_DEBUG_MODE) {
-                throw $e;
+                \wcf\functions\exception\logThrowable($e);
             }
             return $this->onlineUsers;
         }
@@ -46,8 +47,11 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         $userStringList = explode(', ', $userStringListString);
         foreach ($userStringList as &$userString) {
             $userStringArray = explode(' (', $userString, 2);
-            $uuid = substr(str_replace(['(', ')'], '', $userStringArray[1]), 0, 36);
-            $name = $userStringArray[0];
+            if (count($userStringArray) != 2) {
+                continue;
+            }
+            $uuid = str_replace(['(', ')'], '', $userStringArray[1]);
+            $name = str_replace(['(', ')'], '', $userStringArray[0]);
             $this->onlineUsers = $this->onlineUsers + [$uuid => $name];
         }
         return $this->onlineUsers;
@@ -56,19 +60,46 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCode($uuid, $name, $code)
+    public function sendCommand($command)
     {
-        $command = sprintf(MINECRAFT_COMMAND_VANILLA_SENDCODE, $name, $code);
         try {
             $result = $this->minecraft->getConnection()->call($command);
         } catch (MinecraftException $e) {
             if (ENABLE_DEBUG_MODE) {
-                throw $e;
+                \wcf\functions\exception\logThrowable($e);
             }
-            return false;
+            return ['error' => true, 'message' => 'Error while sending command.'];
+        }
+        if ($result['Response'] != 0) {
+            return ['error' => true, 'message' => 'Response no command.'];
+        }
+        $response = "";
+        if (!empty($result['S1'])) {
+            $response = $response . $result['S1'];
+        }
+        if (!empty($result['S2'])) {
+            $response = $response . $result['S2'];
+        }
+        return $response;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function sendCode($uuid, $name, $code)
+    {
+        $option = str_replace(['{lang}wcf.minecraft.message{/lang}', '{lang}wcf.minecraft.hoverMessage{/lang}'], [WCF::getLanguage()->get('wcf.minecraft.message'), WCF::getLanguage()->get('wcf.minecraft.hoverMessage')], MINECRAFT_COMMAND_SENDCODE);
+        $command = str_replace(['{$uuid}', '{$name}', '{$code}'], [$uuid, $name, $code], $option);
+        try {
+            $result = $this->minecraft->getConnection()->call($command);
+        } catch (MinecraftException $e) {
+            if (ENABLE_DEBUG_MODE) {
+                \wcf\functions\exception\logThrowable($e);
+            }
+            return ['error' => true, 'message' => ''];
         }
         if ($result['Response'] == 0) {
-            return true;
+            return $result;
         }
         else {
             return false;
