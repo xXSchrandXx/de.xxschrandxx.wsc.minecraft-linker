@@ -91,7 +91,8 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
         }
 
         $fields = [
-            TextFormField::create('title')->required()
+            TextFormField::create('title')
+                ->required()
                 ->label('wcf.acp.page.minecraftIDAdd.title')
                 ->description('wcf.acp.page.minecraftIDAdd.title.description')
                 ->maximumLength(30)
@@ -115,8 +116,7 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
                         );
                     }
                 }));
-        }
-        else {
+        } else {
             $minecraftUUIDField = SingleSelectionFormField::create('minecraftUUID')
                 ->required()
                 ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
