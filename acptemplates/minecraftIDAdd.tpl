@@ -6,7 +6,7 @@
 	</div>
 	<nav class="contentHeaderNavigation" role="presentation">
 		<ul>
-			<li><a href="{link controller='UserEdit' id=$userID}{/link}" class="button"><span class="icon icon16 fa-arrow-left"></span> <span>{lang}wcf.acp.page.minecraftIDAdd.back{/lang}</span></a></li>
+			<li><a href="{link controller='UserEdit' id=$userID}{/link}" class="button"><span class="icon icon16 fa-arrow-left"></span> <span>{lang}wcf.page.minecraftIDAddACP.back{/lang}</span></a></li>
 		</ul>
 </header>
 
