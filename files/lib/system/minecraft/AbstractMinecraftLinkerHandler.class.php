@@ -50,7 +50,7 @@ abstract class AbstractMinecraftLinkerHandler implements IMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCode(string $uuid, string $name, string $code)
+    public function sendCode($uuid, $name, $code)
     {
     }
 }

@@ -3,6 +3,7 @@
 namespace wcf\system\minecraft;
 
 use wcf\system\exception\MinecraftException;
+use wcf\data\minecraft\Minecraft;
 use wcf\system\SingletonFactory;
 use wcf\util\StringUtil;
 
@@ -122,11 +123,11 @@ class MinecraftLinkerHandler extends SingletonFactory
     /**
      * Sends the code to the user.
      * @param string $uuid minecraftUUID
-     * @param string $name name of the player
+     * @param string|null $name name of the player
      * @param string $code code
      * @return bool Weather the code was sent successfully.
      */
-    public function sendCode(string $uuid, string $name, string $code)
+    public function sendCode($uuid, $name, $code)
     {
         foreach ($this->getOnlineMinecraftUsers() as $minecraftID => $userArray) {
             if (array_key_exists($uuid, $userArray)) {

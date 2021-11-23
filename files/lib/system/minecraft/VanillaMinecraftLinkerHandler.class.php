@@ -83,8 +83,17 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCode(string $uuid, string $name, string $code)
+    public function sendCode($uuid, $name, $code)
     {
+        if ($uuid == null) {
+            return ['error' => true, 'message' => 'No uuid given'];
+        }
+        if ($code == null) {
+            return ['error' => true, 'message' => 'No code given'];
+        }
+        if ($name == null) {
+            return ['error' => true, 'message' => 'No name given'];
+        }
         $option = str_replace(['{lang}wcf.minecraft.message{/lang}', '{lang}wcf.minecraft.hoverMessage{/lang}'], [WCF::getLanguage()->get('wcf.minecraft.message'), WCF::getLanguage()->get('wcf.minecraft.hoverMessage')], MINECRAFT_COMMAND_SENDCODE);
         $command = str_replace(['{$uuid}', '{$name}', '{$code}'], [$uuid, $name, $code], $option);
         try {
@@ -95,7 +104,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             }
             return ['error' => true, 'message' => $e->getMessage()];
         }
-        if ($result['Response'] == 0) {
+        if ($result['Response'] != 0) {
             return ['error' => true, 'message' => 'Response not for commands.'];
         } else {
             return ['error' => false];

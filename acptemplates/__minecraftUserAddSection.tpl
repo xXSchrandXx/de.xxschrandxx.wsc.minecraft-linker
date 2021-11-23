@@ -1,9 +1,9 @@
 {if $action == 'edit' && $__wcf->getSession()->getPermission('admin.minecraftLinker.canManage') && MINECRAFT_LINKER_ENABLED && MINECRAFT_LINKER_IDENTITY}
 
 	<section class="section">
-		<h2 class="sectionTitle">{lang}wcf.acp.page.userAddSection.minecraft.sectionTitle{/lang}</h2>
+		<h2 class="sectionTitle">{lang}wcf.page.userAddSection.minecraft.sectionTitle{/lang}</h2>
 
-		<a href="{if !$userID|empty}{link controller='MinecraftIDAdd' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
+		<a href="{if !$userID|empty}{link controller='MinecraftIDAdd' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
 
 		{if $minecrafts|count > 0}
 			<div class="tabularBox">
@@ -11,10 +11,10 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.id{/lang}</th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.title{/lang}</th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.uuid{/lang}</th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.connectedSince{/lang}</th>
+							<th>{lang}wcf.page.userAddSection.minecraft.id{/lang}</th>
+							<th>{lang}wcf.page.userAddSection.minecraft.title{/lang}</th>
+							<th>{lang}wcf.page.userAddSection.minecraft.uuid{/lang}</th>
+							<th>{lang}wcf.page.userAddSection.minecraft.connectedSince{/lang}</th>
 						</tr>
 					</thead>
 					<tbody>

@@ -3,11 +3,14 @@
 namespace wcf\form;
 
 use wcf\data\user\minecraft\MinecraftAction;
-use wcf\system\exception\MinecraftException;
 use wcf\system\exception\IllegalLinkException;
+use wcf\system\exception\MinecraftException;
+use wcf\system\exception\UserInputException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\SingleSelectionFormField;
+use wcf\system\form\builder\field\validation\FormFieldValidationError;
+use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\minecraft\MinecraftLinkerHandler;
 use wcf\system\request\LinkHandler;
@@ -41,6 +44,10 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
      * @var MinecraftLinkerHandler
      */
     private $mcsh;
+
+    private $code;
+
+    private $title;
 
     /**
      * @inheritDoc
@@ -112,7 +119,28 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
             ->label('wcf.page.minecraftIDAdd.uuid')
             ->description('wcf.page.minecraftIDAdd.uuid.description')
             ->options($options, true, false)
-            ->filterable();
+            ->filterable()
+            ->addValidator(new FormFieldValidator('sendCode', function (SingleSelectionFormField $field) {
+                $this->title = 'Default';
+                if (MINECRAFT_MAX_UUIDS > 1 && isset($this->form->getData()['data']['title'])) {
+                    $this->title = $field->getDocument()->getNodeById('title');
+                }
+                $this->code = bin2hex(\random_bytes(4));
+
+                $response = $this->mcsh->sendCode($this->form->getData()['data']['minecraftUUID'], null, $this->code);
+
+                if ($response['error'] == true) {
+                    if (isset($response['message'])) {
+                        $field->addValidationError(
+                            new FormFieldValidationError('sendCode', 'wcf.page.minecraftIDAdd.error.sendCodeDynamic', ['msg' => $response['message']])
+                        );
+                    } else {
+                        $field->addValidationError(
+                            new FormFieldValidationError('sendCode', 'wcf.page.minecraftIDAdd.error.sendCode')
+                        );
+                    }
+                }
+            }));
         array_push($fields, $minecraftUUIDField);
 
         $this->form->appendChild(
@@ -128,32 +156,10 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
     {
         AbstractForm::save();
 
-        $code = bin2hex(\random_bytes(4));
+        WCF::getSession()->register('mcCode', $this->code);
+        WCF::getSession()->register('mcTitle', $this->title);
+        WCF::getSession()->register('minecraftUUID', $this->form->getData()['data']['minecraftUUID']);
 
-        $title = 'Default';
-        if (MINECRAFT_MAX_UUIDS > 1 && isset($this->form->getData()['data']['title'])) {
-            $title = $this->form->getData()['data']['title'];
-        }
-
-        if (strlen($this->form->getData()['data']['minecraftUUID']) != 36) {
-            $this->errorField = 'uuid';
-            $this->errorType = 'Wrong UUID format.';
-            return;
-        }
-
-        $response = $this->mcsh->sendCode($this->form->getData()['data']['minecraftUUID'], null, $code);
-
-        if (!$response['error']) {
-            WCF::getSession()->register('mcCode', $code);
-            WCF::getSession()->register('mcTitle', $title);
-            WCF::getSession()->register('minecraftUUID', $this->form->getData()['data']['minecraftUUID']);
-        } else {
-            $this->errorField = 'uuid';
-            $this->errorType = "Couldn't send code: ";
-            if (array_key_exists($response, 'message')) {
-                $this->errorType = $this->errorType . $response['message'];
-            }
-        }
         $this->saved();
     }
 
