@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/language.xsd" languagecode="en">
+    <category name="wcf.acp.group">
+        <item name="wcf.acp.group.option.admin.minecraftLinker.canManage"><![CDATA[Can manage Minecraft-Linker]]></item>
+        <item name="wcf.acp.group.option.user.minecraftLinker.canManage"><![CDATA[Can use Minecraft-Linker]]></item>
+        <item name="wcf.acp.group.option.user.minecraftLinker.mandatory"><![CDATA[Minecraft-Linker mandatory]]></item>
+    </category>
     <category name="wcf.acp.option">
         <item name="wcf.acp.option.category.minecraft_linker"><![CDATA[Minecraft-Linker]]></item>
         <item name="wcf.acp.option.category.minecraft_linker_commands"><![CDATA[Commands]]></item>
