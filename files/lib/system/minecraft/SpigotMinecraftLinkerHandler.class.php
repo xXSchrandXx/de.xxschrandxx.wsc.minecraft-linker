@@ -63,7 +63,7 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCommand(String $command)
+    public function sendCommand(string $command)
     {
         $args = [
             'type' => 'command',
@@ -103,7 +103,7 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCode(String $uuid, String $name, String $code)
+    public function sendCode(string $uuid, string $name, string $code)
     {
         if ($uuid == null || $code == null) {
             return false;

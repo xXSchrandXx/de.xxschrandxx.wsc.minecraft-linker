@@ -48,7 +48,7 @@ class MinecraftLinkerHandler extends SingletonFactory
      * @param  int $minecraftID
      * @return Minecraft
      */
-    public function getMinecraft($minecraftID)
+    public function getMinecraft(int $minecraftID)
     {
         if (empty($this->minecrafts[$minecraftID])) {
             if (ENABLE_DEBUG_MODE) {
@@ -70,10 +70,10 @@ class MinecraftLinkerHandler extends SingletonFactory
 
     /**
      * Gibt den Handler zurück.
-     * @param $minecraft
+     * @param Minecraft $minecraft
      * @return Minecraft
      */
-    public function getHandler($minecraft)
+    public function getHandler(minecraft $minecraft)
     {
         if ($minecraft == null) {
             throw new MinecraftException('Unknown minecraft.');
@@ -121,11 +121,12 @@ class MinecraftLinkerHandler extends SingletonFactory
 
     /**
      * Sends the code to the user.
-     * @param $uuid minecraftUUID
-     * @param $code code
+     * @param string $uuid minecraftUUID
+     * @param string $name name of the player
+     * @param string $code code
      * @return bool Weather the code was sent successfully.
      */
-    public function sendCode($uuid, $name, $code)
+    public function sendCode(string $uuid, string $name, string $code)
     {
         foreach ($this->getOnlineMinecraftUsers() as $minecraftID => $userArray) {
             if (array_key_exists($uuid, $userArray)) {

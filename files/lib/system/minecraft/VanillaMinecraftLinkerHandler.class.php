@@ -57,7 +57,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCommand(String $command)
+    public function sendCommand(string $command)
     {
         try {
             $result = $this->minecraft->getConnection()->call($command);
@@ -83,7 +83,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCode(String $uuid, String $name, String $code)
+    public function sendCode(string $uuid, string $name, string $code)
     {
         $option = str_replace(['{lang}wcf.minecraft.message{/lang}', '{lang}wcf.minecraft.hoverMessage{/lang}'], [WCF::getLanguage()->get('wcf.minecraft.message'), WCF::getLanguage()->get('wcf.minecraft.hoverMessage')], MINECRAFT_COMMAND_SENDCODE);
         $command = str_replace(['{$uuid}', '{$name}', '{$code}'], [$uuid, $name, $code], $option);

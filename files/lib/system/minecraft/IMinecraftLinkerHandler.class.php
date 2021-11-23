@@ -23,14 +23,14 @@ interface IMinecraftLinkerHandler
      * @param $command der Befehl der ausgeführt werden soll.
      * @return array|string Die Antwort des Servers. String wenn ServerType Vanilla, sonst Array.
      */
-    public function sendCommand(String $command);
+    public function sendCommand(string $command);
 
     /**
      * Sendet den Code an die UUID
-     * @param $uuid
-     * @param $name
-     * @param $code
+     * @param $uuid minecraft uuid of the player
+     * @param $name minecraft name of the player
+     * @param $code verification code for the player
      * @return array An array with the response.
      */
-    public function sendCode(String $uuid, String $name, String $code);
+    public function sendCode(string $uuid, string $name, string $code);
 }

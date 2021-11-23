@@ -43,14 +43,14 @@ abstract class AbstractMinecraftLinkerHandler implements IMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCommand(String $command)
+    public function sendCommand(string $command)
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function sendCode(String $uuid, String $name, String $code)
+    public function sendCode(string $uuid, string $name, string $code)
     {
     }
 }
