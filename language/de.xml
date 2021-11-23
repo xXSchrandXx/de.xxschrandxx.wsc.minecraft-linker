@@ -7,7 +7,7 @@
         <item name="wcf.acp.option.minecraft_command_list"><![CDATA[List Befehl]]></item>
         <item name="wcf.acp.option.minecraft_command_list.description"><![CDATA[Dieser Befehl wird nur für Vanilla Server benutzt.]]></item>
         <item name="wcf.acp.option.minecraft_command_sendcode"><![CDATA[Bestätigungscode Befehl]]></item>
-        <item name="wcf.acp.option.minecraft_command_sendcode.description"><![CDATA[Dieser Befehl wird nur für Vanilla Server benutzt. Placeholder: {* <code>{$uuid} => UUID des Spielers, {$name} => Name des Spielers, {$code} => Code für den Spieler</code> *}]]></item>
+        <item name="wcf.acp.option.minecraft_command_sendcode.description"><![CDATA[Dieser Befehl wird nur für Vanilla Server benutzt. Placeholder: <code>{literal}{$uuid}{/literal} => UUID des Spielers, {literal}{$name}{/literal} => Name des Spielers, {literal}{$code}{/literal} => Bestätigungscode für den Spieler</code> *}]]></item>
         <item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Benutzer aktivieren]]></item>
         <item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Aktiviert eine Benutzer wenn er eine Minecraft-Verknüpfung hinzugefügt hat.]]></item>
         <item name="wcf.acp.option.minecraft_linker_enabled"><![CDATA[Minecraft-Linker aktivieren]]></item>
@@ -33,7 +33,7 @@
         <item name="wcf.acp.page.userAddSection.minecraft.uuid"><![CDATA[Minecraft-UUID]]></item>
     </category>
     <category name="wcf.minecraft">
-        <item name="wcf.minecraft.message"><![CDATA[Dein Verifizierungscode: {$code}]]></item>
+        <item name="wcf.minecraft.message"><![CDATA[Dein Bestätigungscode: {$code}]]></item>
         <item name="wcf.minecraft.hoverMessage"><![CDATA[In die Zwischenablage kopieren.]]></item>
     </category>
     <category name="wcf.page.minecraftIDAdd">

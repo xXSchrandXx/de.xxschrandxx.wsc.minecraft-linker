@@ -7,7 +7,7 @@
         <item name="wcf.acp.option.minecraft_command_list"><![CDATA[List command]]></item>
         <item name="wcf.acp.option.minecraft_command_list.description"><![CDATA[This command is only used for vanilla servers.]]></item>
         <item name="wcf.acp.option.minecraft_command_sendcode"><![CDATA[Verification code command]]></item>
-        <item name="wcf.acp.option.minecraft_command_sendcode.description"><![CDATA[This command is only used for vanilla servers. Placeholder: {* <code>{$uuid} => UUID des Spielers, {$name} => Name des Spielers, {$code} => Code für den Spieler</code> *}]]></item>
+        <item name="wcf.acp.option.minecraft_command_sendcode.description"><![CDATA[This command is only used for vanilla servers. Placeholder: <code>{literal}{$uuid}{/literal} => UUID of the player, {literal}{$name}{/literal} => Name of the player, {literal}{$code}{/literal} => Confirmation code for the player</code>]]></item>
         <item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Activate user]]></item>
         <item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Activates a user when he has added a Minecraft shortcut.]]></item>
         <item name="wcf.acp.option.minecraft_linker_enabled"><![CDATA[Activate Minecraft Linker]]></item>
@@ -19,52 +19,52 @@
     </category>
     <category name="wcf.acp.page.minecraftIDAdd">
         <item name="wcf.acp.page.minecraftIDAdd.back"><![CDATA[Return]]></item>
-        <item name="wcf.acp.page.minecraftIDAdd.minecraftUUID"><![CDATA[Spieler]]></item>
-        <item name="wcf.acp.page.minecraftIDAdd.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
-        <item name="wcf.acp.page.minecraftIDAdd.title"><![CDATA[Anzeigename]]></item>
-        <item name="wcf.acp.page.minecraftIDAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von Verknüpfungen.]]></item>
+        <item name="wcf.acp.page.minecraftIDAdd.minecraftUUID"><![CDATA[Player]]></item>
+        <item name="wcf.acp.page.minecraftIDAdd.minecraftUUID.description"><![CDATA[The player's UUID.]]></item>
+        <item name="wcf.acp.page.minecraftIDAdd.title"><![CDATA[Display name]]></item>
+        <item name="wcf.acp.page.minecraftIDAdd.title.description"><![CDATA[The title used to distinguish links.]]></item>
     </category>
     <category name="wcf.acp.page.userAddSection">
-        <item name="wcf.acp.page.userAddSection.minecraft.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.connectedSince"><![CDATA[Verknüpft]]></item>
+        <item name="wcf.acp.page.userAddSection.minecraft.add"><![CDATA[Add Minecraft Shortcut]]></item>
+        <item name="wcf.acp.page.userAddSection.minecraft.connectedSince"><![CDATA[Linked]]></item>
         <item name="wcf.acp.page.userAddSection.minecraft.id"><![CDATA[ID]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.sectionTitle"><![CDATA[Minecraft-Verknüpfungen]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.title"><![CDATA[Titel]]></item>
+        <item name="wcf.acp.page.userAddSection.minecraft.sectionTitle"><![CDATA[Minecraft-Links]]></item>
+        <item name="wcf.acp.page.userAddSection.minecraft.title"><![CDATA[Title]]></item>
         <item name="wcf.acp.page.userAddSection.minecraft.uuid"><![CDATA[Minecraft-UUID]]></item>
     </category>
     <category name="wcf.minecraft">
-        <item name="wcf.minecraft.message"><![CDATA[Dein Verifizierungscode: {$code}]]></item>
-        <item name="wcf.minecraft.hoverMessage"><![CDATA[In die Zwischenablage kopieren.]]></item>
+        <item name="wcf.minecraft.message"><![CDATA[Your confirmation code: {$code}]]></item>
+        <item name="wcf.minecraft.hoverMessage"><![CDATA[Copy to the clipboard.]]></item>
     </category>
     <category name="wcf.page.minecraftIDAdd">
-        <item name="wcf.page.minecraftIDAdd.error.noUnknownUsers"><![CDATA[Es sind keine nicht verknüpften Benutzer auf dem Minecraft-Server.]]></item>
-        <item name="wcf.page.minecraftIDAdd.success"><![CDATA[Der Bestätigungscode wurde {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} erfolgreich zugesendet.]]></item>
-        <item name="wcf.page.minecraftIDAdd.title"><![CDATA[Titel]]></item>
-        <item name="wcf.page.minecraftIDAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von {if LANGUAGE_USE_INFORMAL_VARIANT}Ihren{else}deinen{/if} Verknüpfungen.]]></item>
+        <item name="wcf.page.minecraftIDAdd.error.noUnknownUsers"><![CDATA[There are no unlinked users on the Minecraft server.]]></item>
+        <item name="wcf.page.minecraftIDAdd.success"><![CDATA[The verification code has been successfully sent to you.]]></item>
+        <item name="wcf.page.minecraftIDAdd.title"><![CDATA[Title]]></item>
+        <item name="wcf.page.minecraftIDAdd.title.description"><![CDATA[The title used to distinguish your Minecraft-Links.]]></item>
         <item name="wcf.page.minecraftIDAdd.uuid"><![CDATA[Minecraft-UUID]]></item>
-        <item name="wcf.page.minecraftIDAdd.uuid.description"><![CDATA[Damit {if LANGUAGE_USE_INFORMAL_VARIANT}Sie{else}du{/if} in der Liste angezeigt {if LANGUAGE_USE_INFORMAL_VARIANT}werden, müssen Sie{else}wirst, musst du{/if} auf dem Minecraft-Server online sein.]]></item>
+        <item name="wcf.page.minecraftIDAdd.uuid.description"><![CDATA[In order for you to appear in the list, you must be online on the Minecraft server.]]></item>
     </category>
     <category name="wcf.page.minecraftIDCheck">
-        <item name="wcf.page.minecraftIDCheck.success"><![CDATA[Die Minecraft-UUID wurde erfolgreich verknüpft.]]></item>
-        <item name="wcf.page.minecraftIDCheck.code"><![CDATA[Bestätigungscode]]></item>
-        <item name="wcf.page.minecraftIDCheck.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
+        <item name="wcf.page.minecraftIDCheck.success"><![CDATA[The Minecraft-UUID has been linked successfully.]]></item>
+        <item name="wcf.page.minecraftIDCheck.code"><![CDATA[Verification code]]></item>
+        <item name="wcf.page.minecraftIDCheck.code.description"><![CDATA[The verification code that was sent to you on the Minecraft server.]]></item>
     </category>
     <category name="wcf.page.minecraftList">
-        <item name="wcf.page.minecraftList.add"><![CDATA[Minecraft-Verknüpfung hinzufügen]]></item>
+        <item name="wcf.page.minecraftList.add"><![CDATA[Add Minecraft-Link]]></item>
         <item name="wcf.page.minecraftList.table.minecraftID"><![CDATA[ID]]></item>
-        <item name="wcf.page.minecraftList.table.title"><![CDATA[Titel]]></item>
+        <item name="wcf.page.minecraftList.table.title"><![CDATA[Title]]></item>
         <item name="wcf.page.minecraftList.table.minecraftUUID"><![CDATA[UUID]]></item>
-        <item name="wcf.page.minecraftList.table.createdDate"><![CDATA[Verknüpft]]></item>
+        <item name="wcf.page.minecraftList.table.createdDate"><![CDATA[Linked]]></item>
     </category>
     <category name="wcf.user.condition">
         <item name="wcf.user.condition.conditionGroup.minecraft"><![CDATA[Minecraft-Linker]]></item>
-        <item name="wcf.user.condition.minecraftLinker.linked"><![CDATA[Minecraft Verknüpfungen]]></item>
-        <item name="wcf.user.condition.minecraftLinker.isLinked"><![CDATA[Ist verknüft.]]></item>
+        <item name="wcf.user.condition.minecraftLinker.linked"><![CDATA[Minecraft Links]]></item>
+        <item name="wcf.user.condition.minecraftLinker.isLinked"><![CDATA[Is linked.]]></item>
         <item name="wcf.user.condition.minecraftLinker.uuid"><![CDATA[UUID]]></item>
-        <item name="wcf.user.condition.minecraftLinker.uuid.description"><![CDATA[Ist mit der angegebenden UUID verknüpft.]]></item>
+        <item name="wcf.user.condition.minecraftLinker.uuid.description"><![CDATA[Is linked to the specified UUID.]]></item>
     </category>
     <category name="wcf.user.menu">
         <item name="wcf.user.menu.minecraftSection"><![CDATA[Minecraft]]></item>
-        <item name="wcf.user.menu.minecraftSection.minecraftIDList"><![CDATA[Minecraft-Verknüpfungen]]></item>
+        <item name="wcf.user.menu.minecraftSection.minecraftIDList"><![CDATA[Minecraft-Links]]></item>
     </category>
 </language>
