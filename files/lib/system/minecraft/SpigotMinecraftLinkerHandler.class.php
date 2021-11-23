@@ -37,11 +37,18 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             return $this->onlineUsers;
         }
         $response = [];
-        if (!empty($result['S1'])) {
-            $response = $response + JSON::decode($result['S1']);
-        }
-        if (!empty($result['S2'])) {
-            $response = $response + JSON::decode($result['S2']);
+        try {
+            if (!empty($result['S1'])) {
+                $response = $response + JSON::decode($result['S1']);
+            }
+            if (!empty($result['S2'])) {
+                $response = $response + JSON::decode($result['S2']);
+            }
+        } catch (SystemException $e) {
+            if (ENABLE_DEBUG_MODE) {
+                \wcf\functions\exception\logThrowable($e);
+            }
+            return $this->onlineUsers;
         }
         if (empty($response)) {
             return $this->onlineUsers;
@@ -56,7 +63,7 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCommand($command)
+    public function sendCommand(String $command)
     {
         $args = [
             'type' => 'command',
@@ -71,17 +78,24 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             if (ENABLE_DEBUG_MODE) {
                 \wcf\functions\exception\logThrowable($e);
             }
-            return ['error' => true, 'message' => 'Error while sending command.'];
+            return ['error' => true, 'message' => $e->getMessage()];
         }
         if ($result['Response'] != 0) {
-            return ['error' => true, 'message' => 'Response no command.'];
+            return ['error' => true, 'message' => 'Response not for commands.'];
         }
         $response = [];
-        if (!empty($result['S1'])) {
-            $response = $response + JSON::decode($result['S1']);
-        }
-        if (!empty($result['S2'])) {
-            $response = $response + JSON::decode($result['S2']);
+        try {
+            if (!empty($result['S1'])) {
+                $response = $response + JSON::decode($result['S1']);
+            }
+            if (!empty($result['S2'])) {
+                $response = $response + JSON::decode($result['S2']);
+            }
+        } catch (SystemException $e) {
+            if (ENABLE_DEBUG_MODE) {
+                \wcf\functions\exception\logThrowable($e);
+            }
+            return ['error' => true, 'message' => $e->getMessage()];
         }
         return $response;
     }
@@ -89,7 +103,7 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCode($uuid, $name, $code)
+    public function sendCode(String $uuid, String $name, String $code)
     {
         if ($uuid == null || $code == null) {
             return false;
@@ -116,24 +130,28 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             if (ENABLE_DEBUG_MODE) {
                 \wcf\functions\exception\logThrowable($e);
             }
-            return false;
+            return ['error' => true, 'message' => $e->getMessage()];
         }
         if ($result['Response'] != 0) {
-            return false;
+            return ['error' => true, 'message' => 'Response not for commands.'];
         }
         $response = [];
-        if (!empty($result['S1'])) {
-            $response = $response + JSON::decode($result['S1']);
-        }
-        if (!empty($result['S2'])) {
-            $response = $response + JSON::decode($result['S2']);
+        try {
+            if (!empty($result['S1'])) {
+                $response = $response + JSON::decode($result['S1']);
+            }
+            if (!empty($result['S2'])) {
+                $response = $response + JSON::decode($result['S2']);
+            }
+        } catch (SystemException $e) {
+            if (ENABLE_DEBUG_MODE) {
+                \wcf\functions\exception\logThrowable($e);
+            }
+            return ['error' => true, 'message' => $e->getMessage()];
         }
         if (empty($response)) {
-            return false;
+            return ['error' => true, 'message' => 'Resonse empty'];
         }
-        if ($response['error']) {
-            return false;
-        }
-        return true;
+        return $response;
     }
 }

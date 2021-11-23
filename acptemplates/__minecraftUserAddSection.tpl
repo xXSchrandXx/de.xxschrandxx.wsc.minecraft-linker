@@ -1,7 +1,7 @@
 {if $action == 'edit' && $__wcf->getSession()->getPermission('admin.minecraftLinker.canManage') && MINECRAFT_LINKER_ENABLED && MINECRAFT_LINKER_IDENTITY}
 
 	<section class="section">
-		<h2 class="sectionTitle">{lang}wcf.acp.page.userAddSection.minecraft.title{/lang}</h2>
+		<h2 class="sectionTitle">{lang}wcf.acp.page.userAddSection.minecraft.sectionTitle{/lang}</h2>
 
 		<a href="{if !$userID|empty}{link controller='MinecraftIDAdd' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.acp.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
 

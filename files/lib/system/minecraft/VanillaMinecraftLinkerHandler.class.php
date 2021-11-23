@@ -57,7 +57,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCommand($command)
+    public function sendCommand(String $command)
     {
         try {
             $result = $this->minecraft->getConnection()->call($command);
@@ -68,7 +68,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             return ['error' => true, 'message' => 'Error while sending command.'];
         }
         if ($result['Response'] != 0) {
-            return ['error' => true, 'message' => 'Response no command.'];
+            return ['error' => true, 'message' => 'Response not for commands.'];
         }
         $response = "";
         if (!empty($result['S1'])) {
@@ -83,7 +83,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCode($uuid, $name, $code)
+    public function sendCode(String $uuid, String $name, String $code)
     {
         $option = str_replace(['{lang}wcf.minecraft.message{/lang}', '{lang}wcf.minecraft.hoverMessage{/lang}'], [WCF::getLanguage()->get('wcf.minecraft.message'), WCF::getLanguage()->get('wcf.minecraft.hoverMessage')], MINECRAFT_COMMAND_SENDCODE);
         $command = str_replace(['{$uuid}', '{$name}', '{$code}'], [$uuid, $name, $code], $option);
@@ -93,12 +93,12 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             if (ENABLE_DEBUG_MODE) {
                 \wcf\functions\exception\logThrowable($e);
             }
-            return ['error' => true, 'message' => ''];
+            return ['error' => true, 'message' => $e->getMessage()];
         }
         if ($result['Response'] == 0) {
-            return $result;
+            return ['error' => true, 'message' => 'Response not for commands.'];
         } else {
-            return false;
+            return ['error' => false];
         }
     }
 }

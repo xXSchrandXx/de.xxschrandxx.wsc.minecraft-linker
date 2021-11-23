@@ -103,12 +103,12 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
             FormContainer::create('data')
                 ->appendChildren([
                     TextFormField::create('code')->required()
-                        ->label('wcf.page.minecraftIDCheckForm.code')
-                        ->description('wcf.page.minecraftIDCheckForm.code.description')
+                        ->label('wcf.page.minecraftIDCheck.code')
+                        ->description('wcf.page.minecraftIDCheck.code.description')
                         ->addValidator(new FormFieldValidator('minecraftUUIDCheck', function (TextFormField $field) {
                             if (!\hash_equals($this->code, $field->getValue())) {
                                 $field->addValidationError(
-                                    new FormFieldValidationError('wrongCode', 'wcf.page.minecraftIDCheckForm.code.error.wrongSecurityCode')
+                                    new FormFieldValidationError('wrongCode', 'wcf.page.minecraftIDCheck.code.error.wrongSecurityCode')
                                 );
                             }
                             $minecraftList = new MinecraftList();
@@ -116,7 +116,7 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
                             $minecraftList->readObjects();
                             if (count($minecraftList) > 0) {
                                 $field->addValidationError(
-                                    new FormFieldValidationError('used', 'wcf.page.minecraftIDCheckForm.code.error.alreadyUsed')
+                                    new FormFieldValidationError('used', 'wcf.page.minecraftIDCheck.code.error.alreadyUsed')
                                 );
                             }
                         }))

@@ -15,7 +15,7 @@ abstract class AbstractMinecraftLinkerHandler implements IMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function __construct($mc)
+    public function __construct(Minecraft $mc)
     {
         $this->minecraft = $mc;
 
@@ -43,14 +43,14 @@ abstract class AbstractMinecraftLinkerHandler implements IMinecraftLinkerHandler
     /**
      * @inheritDoc
      */
-    public function sendCommand($command)
+    public function sendCommand(String $command)
     {
     }
 
     /**
      * @inheritDoc
      */
-    public function sendCode($uuid, $name, $code)
+    public function sendCode(String $uuid, String $name, String $code)
     {
     }
 }

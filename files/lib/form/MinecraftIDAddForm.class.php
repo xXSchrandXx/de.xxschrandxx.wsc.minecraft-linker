@@ -141,13 +141,18 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
             return;
         }
 
-        if ($this->mcsh->sendCode($this->form->getData()['data']['minecraftUUID'], null, $code)) {
+        $response = $this->mcsh->sendCode($this->form->getData()['data']['minecraftUUID'], null, $code);
+
+        if (!$response['error']) {
             WCF::getSession()->register('mcCode', $code);
             WCF::getSession()->register('mcTitle', $title);
             WCF::getSession()->register('minecraftUUID', $this->form->getData()['data']['minecraftUUID']);
         } else {
             $this->errorField = 'uuid';
-            $this->errorType = "Couldn't send code.";
+            $this->errorType = "Couldn't send code: ";
+            if (array_key_exists($response, 'message')) {
+                $this->errorType = $this->errorType . $response['message'];
+            }
         }
         $this->saved();
     }

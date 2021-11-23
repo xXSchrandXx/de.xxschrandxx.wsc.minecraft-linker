@@ -8,11 +8,11 @@ use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
 use wcf\system\WCF;
 
-class MinecraftConnectedCondition extends AbstractCondition implements IUserCondition, IObjectListCondition
+class MinecraftLinkedCondition extends AbstractCondition implements IUserCondition, IObjectListCondition
 {
     use TObjectListUserCondition;
 
-    protected $minecraftConnected;
+    protected $minecraftLinked;
 
     /**
      * @inheritDoc
@@ -21,8 +21,8 @@ class MinecraftConnectedCondition extends AbstractCondition implements IUserCond
     {
         $data = [];
 
-        if ($this->minecraftConnected !== null) {
-            $data['minecraftConnected'] = $this->minecraftConnected;
+        if ($this->minecraftLinked !== null) {
+            $data['minecraftLinked'] = $this->minecraftLinked;
         }
 
         if (!empty($data)) {
@@ -39,11 +39,11 @@ class MinecraftConnectedCondition extends AbstractCondition implements IUserCond
     {
         return <<<HTML
 <dl>
-	<dt>{$this->getLanguage('wcf.user.condition.minecraftLinker.connection')}</dt>
+	<dt>{$this->getLanguage('wcf.user.condition.minecraftLinker.minecraftLinked')}</dt>
 	<dd>
         <label>
-            <input type="checkbox" name="minecraftConnected" value="1"{$this->checkValue()}>
-            {$this->getLanguage('wcf.user.condition.minecraftLinker.connected')}
+            <input type="checkbox" name="minecraftLinked" value="1"{$this->checkValue()}>
+            {$this->getLanguage('wcf.user.condition.minecraftLinker.isLinked')}
         </label>
 	</dd>
 </dl>
@@ -55,8 +55,8 @@ HTML;
      */
     public function readFormParameters()
     {
-        if (isset($_POST['minecraftConnected']) && $_POST['minecraftConnected']) {
-            $this->minecraftConnected = 1;
+        if (isset($_POST['minecraftLinked']) && $_POST['minecraftLinked']) {
+            $this->minecraftLinked = 1;
         }
     }
 
@@ -65,7 +65,7 @@ HTML;
      */
     public function reset()
     {
-        $this->minecraftConnected = null;
+        $this->minecraftLinked = null;
     }
 
     /**
@@ -73,7 +73,7 @@ HTML;
      */
     public function setData(Condition $condition)
     {
-        $this->minecraftConnected = $condition->minecraftConnected;
+        $this->minecraftLinked = $condition->minecraftLinked;
     }
 
     /**
@@ -93,7 +93,7 @@ HTML;
             throw new \InvalidArgumentException("Object list is no instance of '" . UserList::class . "', instance of '" . get_class($objectList) . "' given.");
         }
 
-        if (isset($conditionData['minecraftConnected']) && $conditionData['minecraftConnected']) {
+        if (isset($conditionData['minecraftLinked']) && $conditionData['minecraftLinked']) {
             $objectList->getConditionBuilder()->add('user_table.minecraftUUIDs > 0');
         }
         $objectList->readObjects();
@@ -120,7 +120,7 @@ HTML;
      */
     public function checkValue()
     {
-        if ($this->minecraftConnected) {
+        if ($this->minecraftLinked) {
             return ' checked';
         }
 

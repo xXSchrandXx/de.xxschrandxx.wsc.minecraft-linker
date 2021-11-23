@@ -120,7 +120,6 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
             $minecraftUUIDField = SingleSelectionFormField::create('minecraftUUID')
                 ->required()
                 ->label('wcf.acp.page.minecraftIDAdd.minecraftUUID')
-                ->description('wcf.acp.page.minecraftIDAdd.minecraftUUID.description')
                 ->options($options, true, false)
                 ->filterable()
                 ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
