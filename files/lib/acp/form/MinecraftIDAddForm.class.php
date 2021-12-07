@@ -128,7 +128,7 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
                     $minecraftList->readObjects();
                     if (count($minecraftList)) {
                         $field->addValidationError(
-                            new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftIDAddACP.minecraftUUID.error.empty')
+                            new FormFieldValidationError('empty')
                         );
                     }
                 }));

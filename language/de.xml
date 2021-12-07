@@ -29,6 +29,7 @@
         <item name="wcf.page.minecraftIDAddACP.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
         <item name="wcf.page.minecraftIDAddACP.title"><![CDATA[Anzeigename]]></item>
         <item name="wcf.page.minecraftIDAddACP.title.description"><![CDATA[Der Titel zur Unterscheidung von Verknüpfungen.]]></item>
+        <item name="wcf.page.minecraftIDAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
     </category>
     <category name="wcf.page.userAddSection">
         <item name="wcf.page.userAddSection.minecraft.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
@@ -58,6 +59,7 @@
         <item name="wcf.page.minecraftIDCheck.code"><![CDATA[Bestätigungscode]]></item>
         <item name="wcf.page.minecraftIDCheck.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
         <item name="wcf.page.minecraftIDCheck.code.error.wrongSecurityCode"><![CDATA[Falscher Bestätigungscode.]]></item>
+        <item name="wcf.page.minecraftIDCheck.code.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
         <item name="wcf.page.minecraftIDCheck.resend"><![CDATA[Bestätigungscode erneut Anfordern]]></item>
         <item name="wcf.page.minecraftIDCheck.resend.success"><![CDATA[Leite weiter zur Spielerauswahl.]]></item>
     </category>

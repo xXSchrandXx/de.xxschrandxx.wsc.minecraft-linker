@@ -29,6 +29,7 @@
         <item name="wcf.page.minecraftIDAddACP.minecraftUUID.description"><![CDATA[The player's UUID.]]></item>
         <item name="wcf.page.minecraftIDAddACP.title"><![CDATA[Display name]]></item>
         <item name="wcf.page.minecraftIDAddACP.title.description"><![CDATA[The title used to distinguish links.]]></item>
+        <item name="wcf.page.minecraftIDAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
     </category>
     <category name="wcf.acp.page.userAddSection">
         <item name="wcf.acp.page.userAddSection.minecraft.add"><![CDATA[Add Minecraft-Link]]></item>
@@ -58,6 +59,7 @@
         <item name="wcf.page.minecraftIDCheck.code"><![CDATA[Verification code]]></item>
         <item name="wcf.page.minecraftIDCheck.code.description"><![CDATA[The verification code that was sent to you on the Minecraft server.]]></item>
         <item name="wcf.page.minecraftIDCheck.code.error.wrongSecurityCode"><![CDATA[Wrong verification code.]]></item>
+        <item name="wcf.page.minecraftIDCheck.code.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
         <item name="wcf.page.minecraftIDCheck.resend"><![CDATA[Request confirmation code again]]></item>
         <item name="wcf.page.minecraftIDCheck.resend.success"><![CDATA[Forward to player selection.]]></item>
     </category>
