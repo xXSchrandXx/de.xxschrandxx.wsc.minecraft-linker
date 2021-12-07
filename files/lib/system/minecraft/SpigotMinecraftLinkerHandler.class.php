@@ -38,11 +38,11 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         $response = [];
         try {
-            if (!empty($result['S1'])) {
-                $response = $response + JSON::decode($result['S1']);
-            }
-            if (!empty($result['S2'])) {
-                $response = $response + JSON::decode($result['S2']);
+            foreach ($result as $key => $value) {
+                if ($key == 'Response' || $key == 'Length') {
+                    continue;
+                }
+                $response += JSON::decode($value);
             }
         } catch (SystemException $e) {
             if (ENABLE_DEBUG_MODE) {
@@ -85,11 +85,11 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         $response = [];
         try {
-            if (!empty($result['S1'])) {
-                $response = $response + JSON::decode($result['S1']);
-            }
-            if (!empty($result['S2'])) {
-                $response = $response + JSON::decode($result['S2']);
+            foreach ($result as $key => $value) {
+                if ($key == 'Response' || $key == 'Length') {
+                    continue;
+                }
+                $response += JSON::decode($value);
             }
         } catch (SystemException $e) {
             if (ENABLE_DEBUG_MODE) {
@@ -140,11 +140,11 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         $response = [];
         try {
-            if (!empty($result['S1'])) {
-                $response = $response + JSON::decode($result['S1']);
-            }
-            if (!empty($result['S2'])) {
-                $response = $response + JSON::decode($result['S2']);
+            foreach ($result as $key => $value) {
+                if ($key == 'Response' || $key == 'Length') {
+                    continue;
+                }
+                $response += JSON::decode($value);
             }
         } catch (SystemException $e) {
             if (ENABLE_DEBUG_MODE) {

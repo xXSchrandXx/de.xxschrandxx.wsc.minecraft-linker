@@ -57,6 +57,9 @@
         <item name="wcf.page.minecraftIDCheck.success"><![CDATA[Die Minecraft-UUID wurde erfolgreich verknüpft.]]></item>
         <item name="wcf.page.minecraftIDCheck.code"><![CDATA[Bestätigungscode]]></item>
         <item name="wcf.page.minecraftIDCheck.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
+        <item name="wcf.page.minecraftIDCheck.code.error.wrongSecurityCode"><![CDATA[Falscher Bestätigungscode.]]></item>
+        <item name="wcf.page.minecraftIDCheck.resend"><![CDATA[Bestätigungscode erneut Anfordern]]></item>
+        <item name="wcf.page.minecraftIDCheck.resend.success"><![CDATA[Leite weiter zur Spielerauswahl.]]></item>
     </category>
     <category name="wcf.page.minecraftList">
         <item name="wcf.page.minecraftList.add"><![CDATA[Minecraft-Verknüpfung hinzufügen]]></item>

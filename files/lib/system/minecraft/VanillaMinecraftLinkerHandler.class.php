@@ -33,7 +33,12 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         if ($result['Response'] != 0) {
             return $this->onlineUsers;
         } else {
-            $response = $result['S1'] . $result['S2'];
+            foreach ($result as $key => $value) {
+                if ($key == 'Response' || $key == 'Length') {
+                    continue;
+                }
+                $response .= $value;
+            }
         }
         if ($response == null) {
             return $this->onlineUsers;
@@ -71,11 +76,11 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             return ['error' => true, 'message' => 'Response not for commands.'];
         }
         $response = "";
-        if (!empty($result['S1'])) {
-            $response = $response . $result['S1'];
-        }
-        if (!empty($result['S2'])) {
-            $response = $response . $result['S2'];
+        foreach ($result as $key => $value) {
+            if ($key == 'Response' || $key == 'Length') {
+                continue;
+            }
+            $response .= $value;
         }
         return $response;
     }

@@ -170,4 +170,13 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
         HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDCheck'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDAdd.success'), 2);
         exit;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function show()
+    {
+        UserMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
+        parent::show();
+    }
 }

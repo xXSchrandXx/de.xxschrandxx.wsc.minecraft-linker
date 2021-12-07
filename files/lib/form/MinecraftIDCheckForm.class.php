@@ -79,6 +79,17 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
     {
         parent::readParameters();
 
+        if (isset($_REQUEST['resend'])) {
+            if ($_REQUEST['resend']) {
+                WCF::getSession()->unregister('mcCode');
+                WCF::getSession()->unregister('mcTitle');
+                WCF::getSession()->unregister('minecraftUUID');
+
+                HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDAdd'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDCheck.resend.success'), 2, 'info');
+                exit;
+            }
+        }
+
         $this->code = WCF::getSession()->getVar('mcCode');
         $this->title = WCF::getSession()->getVar('mcTitle');
         $this->minecraftUUID = WCF::getSession()->getVar('minecraftUUID');
@@ -157,5 +168,14 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
 
         HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDCheck.success'));
         exit;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function show()
+    {
+        UserMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
+        parent::show();
     }
 }
