@@ -38,12 +38,7 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         $response = [];
         try {
-            foreach ($result as $key => $value) {
-                if ($key == 'Response' || $key == 'Length') {
-                    continue;
-                }
-                $response += JSON::decode($value);
-            }
+            $response = JSON::decode($result['CMD']);
         } catch (SystemException $e) {
             if (ENABLE_DEBUG_MODE) {
                 \wcf\functions\exception\logThrowable($e);
@@ -85,12 +80,7 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         $response = [];
         try {
-            foreach ($result as $key => $value) {
-                if ($key == 'Response' || $key == 'Length') {
-                    continue;
-                }
-                $response += JSON::decode($value);
-            }
+            $response = JSON::decode($result['CMD']);
         } catch (SystemException $e) {
             if (ENABLE_DEBUG_MODE) {
                 \wcf\functions\exception\logThrowable($e);
@@ -140,12 +130,7 @@ class SpigotMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         }
         $response = [];
         try {
-            foreach ($result as $key => $value) {
-                if ($key == 'Response' || $key == 'Length') {
-                    continue;
-                }
-                $response += JSON::decode($value);
-            }
+            $response = JSON::decode($result['CMD']);
         } catch (SystemException $e) {
             if (ENABLE_DEBUG_MODE) {
                 \wcf\functions\exception\logThrowable($e);
