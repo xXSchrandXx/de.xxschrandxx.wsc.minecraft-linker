@@ -3,8 +3,8 @@
 namespace wcf\acp\form;
 
 use wcf\data\user\User;
-use wcf\data\user\minecraft\MinecraftAction;
-use wcf\data\user\minecraft\MinecraftList;
+use wcf\data\user\minecraft\MinecraftUserAction;
+use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
@@ -16,7 +16,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\minecraft\MinecraftLinkerHandler;
 use wcf\system\WCF;
 
-class MinecraftIDAddForm extends AbstractFormBuilderForm
+class MinecraftUserAddForm extends AbstractFormBuilderForm
 {
     /**
      * @inheritDoc
@@ -36,7 +36,7 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
-    public $objectActionClass = MinecraftAction::class;
+    public $objectActionClass = MinecraftUserAction::class;
 
     /**
      * Benutzer-Objekt
@@ -93,8 +93,8 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
         $fields = [
             TextFormField::create('title')
                 ->required()
-                ->label('wcf.page.minecraftIDAddACP.title')
-                ->description('wcf.page.minecraftIDAddACP.title.description')
+                ->label('wcf.page.minecraftUserAddACP.title')
+                ->description('wcf.page.minecraftUserAddACP.title.description')
                 ->maximumLength(30)
                 ->value('Default')
         ];
@@ -102,31 +102,31 @@ class MinecraftIDAddForm extends AbstractFormBuilderForm
         if (empty($options)) {
             $minecraftUUIDField = TextFormField::create('minecraftUUID')
                 ->required()
-                ->label('wcf.page.minecraftIDAddACP.minecraftUUID')
-                ->description('wcf.page.minecraftIDAddACP.minecraftUUID.description')
+                ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
+                ->description('wcf.page.minecraftUserAddACP.minecraftUUID.description')
                 ->minimumLength(36)
                 ->maximumLength(36)
                 ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
-                    $minecraftList = new MinecraftList();
-                    $minecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                    $minecraftList->readObjects();
-                    if (count($minecraftList)) {
+                    $minecraftUserList = new MinecraftUserList();
+                    $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
+                    $minecraftUserList->readObjects();
+                    if (count($minecraftUserList)) {
                         $field->addValidationError(
-                            new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftIDAddACP.minecraftUUID.error.alreadyUsed')
+                            new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed')
                         );
                     }
                 }));
         } else {
             $minecraftUUIDField = SingleSelectionFormField::create('minecraftUUID')
                 ->required()
-                ->label('wcf.page.minecraftIDAddACP.minecraftUUID')
+                ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
                 ->options($options, true, false)
                 ->filterable()
                 ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
-                    $minecraftList = new MinecraftList();
-                    $minecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                    $minecraftList->readObjects();
-                    if (count($minecraftList)) {
+                    $minecraftUserList = new MinecraftUserList();
+                    $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
+                    $minecraftUserList->readObjects();
+                    if (count($minecraftUserList)) {
                         $field->addValidationError(
                             new FormFieldValidationError('empty')
                         );

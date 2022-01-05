@@ -3,8 +3,8 @@
 namespace wcf\form;
 
 use wcf\data\user\UserAction;
-use wcf\data\user\minecraft\MinecraftAction;
-use wcf\data\user\minecraft\MinecraftList;
+use wcf\data\user\minecraft\MinecraftUserAction;
+use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\TextFormField;
@@ -15,7 +15,7 @@ use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 
-class MinecraftIDCheckForm extends AbstractFormBuilderForm
+class MinecraftUserCheckForm extends AbstractFormBuilderForm
 {
     /**
      * @inheritDoc
@@ -30,12 +30,12 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
-    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftIDList';
+    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftUserList';
 
      /**
      * @inheritDoc
      */
-    public $objectActionClass = MinecraftAction::class;
+    public $objectActionClass = MinecraftUserAction::class;
 
     /**
      * @inheritDoc
@@ -85,7 +85,7 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
                 WCF::getSession()->unregister('mcTitle');
                 WCF::getSession()->unregister('minecraftUUID');
 
-                HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDAdd'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDCheck.resend.success'), 2, 'info');
+                HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserAdd'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserCheck.resend.success'), 2, 'info');
                 exit;
             }
         }
@@ -114,20 +114,20 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
             FormContainer::create('data')
                 ->appendChildren([
                     TextFormField::create('code')->required()
-                        ->label('wcf.page.minecraftIDCheck.code')
-                        ->description('wcf.page.minecraftIDCheck.code.description')
+                        ->label('wcf.page.minecraftUserCheck.code')
+                        ->description('wcf.page.minecraftUserCheck.code.description')
                         ->addValidator(new FormFieldValidator('minecraftUUIDCheck', function (TextFormField $field) {
                             if (!\hash_equals($this->code, $field->getValue())) {
                                 $field->addValidationError(
-                                    new FormFieldValidationError('wrongCode', 'wcf.page.minecraftIDCheck.code.error.wrongSecurityCode')
+                                    new FormFieldValidationError('wrongCode', 'wcf.page.minecraftUserCheck.code.error.wrongSecurityCode')
                                 );
                             }
-                            $minecraftList = new MinecraftList();
-                            $minecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$this->minecraftUUID]);
-                            $minecraftList->readObjects();
-                            if (count($minecraftList) > 0) {
+                            $minecraftUserList = new MinecraftUserList();
+                            $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$this->minecraftUUID]);
+                            $minecraftUserList->readObjects();
+                            if (count($minecraftUserList) > 0) {
                                 $field->addValidationError(
-                                    new FormFieldValidationError('used', 'wcf.page.minecraftIDCheck.code.error.alreadyUsed')
+                                    new FormFieldValidationError('used', 'wcf.page.minecraftUserCheck.code.error.alreadyUsed')
                                 );
                             }
                         }))
@@ -166,7 +166,7 @@ class MinecraftIDCheckForm extends AbstractFormBuilderForm
         $this->form->cleanup();
         $this->form->showSuccessMessage(true);
 
-        HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftIDList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftIDCheck.success'));
+        HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserCheck.success'));
         exit;
     }
 

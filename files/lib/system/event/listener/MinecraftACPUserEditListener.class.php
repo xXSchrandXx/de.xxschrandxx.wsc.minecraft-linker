@@ -2,7 +2,7 @@
 
 namespace wcf\system\event\listener;
 
-use wcf\data\user\minecraft\MinecraftList;
+use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\system\WCF;
 
 class MinecraftACPUserEditListener implements IParameterizedEventListener
@@ -27,13 +27,13 @@ class MinecraftACPUserEditListener implements IParameterizedEventListener
             return;
         }
 
-        $minecraftList = new MinecraftList();
-        $minecraftList->getConditionBuilder()->add('userID = ?', [$eventObj->userID]);
-        $minecraftList->readObjects();
-        $minecrafts = $minecraftList->getObjects();
+        $minecraftUserList = new MinecraftUserList();
+        $minecraftUserList->getConditionBuilder()->add('userID = ?', [$eventObj->userID]);
+        $minecraftUserList->readObjects();
+        $minecraftUsers = $minecraftUserList->getObjects();
 
         WCF::getTPL()->assign([
-            'minecrafts' => $minecrafts
+            'minecraftUsers' => $minecraftUsers
         ]);
     }
 }

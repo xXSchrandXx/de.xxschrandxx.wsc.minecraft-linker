@@ -33,10 +33,7 @@
         <instruction type="page"/>
         <instruction type="templateListener"/>
         <instruction type="userGroupOption"/>
-        <instruction type="script">acp/install_de.xxschrandxx.wsc.minecraft-linker_1.0.0.php</instruction>
+        <instruction type="script">acp/install_de.xxschrandxx.wsc.minecraft-linker.php</instruction>
         <instruction type="userMenu"/>
-    </instructions>
-    <instructions type="update" fromversion="1.0.0">
-        <instruction type="file" />
     </instructions>
 </package>

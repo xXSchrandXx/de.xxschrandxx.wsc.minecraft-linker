@@ -4,6 +4,8 @@ namespace wcf\system\minecraft;
 
 use wcf\system\exception\MinecraftException;
 use wcf\data\minecraft\Minecraft;
+use wcf\data\minecraft\MinecraftList;
+use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\system\SingletonFactory;
 use wcf\util\StringUtil;
 
@@ -36,7 +38,7 @@ class MinecraftLinkerHandler extends SingletonFactory
             return;
         }
 
-        $minecraftList = new \wcf\data\minecraft\MinecraftList();
+        $minecraftList = new MinecraftList();
         $minecraftList->setObjectIDs($this->minecraftIDs);
         $minecraftList->readObjects();
         $this->minecrafts = $minecraftList->getObjects();
@@ -162,7 +164,7 @@ class MinecraftLinkerHandler extends SingletonFactory
         if (empty($allUsers)) {
             return $this->unknownOnlineMinecraftUsers;
         }
-        $savedUsersList = new \wcf\data\user\minecraft\MinecraftList();
+        $savedUsersList = new MinecraftUserList();
         $savedUsersList->readObjects();
         $savedUsers = $savedUsersList->getObjects();
         $knownUsers = [];
@@ -203,7 +205,7 @@ class MinecraftLinkerHandler extends SingletonFactory
         if (empty($allUsers)) {
             return $this->knownOnlineMinecraftUsers;
         }
-        $savedUsersList = new \wcf\data\user\minecraft\MinecraftList();
+        $savedUsersList = new MinecraftUserList();
         $savedUsersList->readObjects();
         $savedUsers = $savedUsersList->getObjects();
         $knownUsers = [];

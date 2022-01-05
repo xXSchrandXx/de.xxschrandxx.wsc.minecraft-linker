@@ -3,11 +3,11 @@
 	<section class="section">
 		<h2 class="sectionTitle">{lang}wcf.page.userAddSection.minecraft.sectionTitle{/lang}</h2>
 
-		<a href="{if !$userID|empty}{link controller='MinecraftIDAdd' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
+		<a href="{if !$userID|empty}{link controller='MinecraftUserAdd' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
 
-		{if $minecrafts|count > 0}
+		{if $minecraftUsers|count > 0}
 			<div class="tabularBox">
-				<table class="table jsObjectActionContainer" data-object-action-class-name="wcf\data\user\minecraft\MinecraftAction">
+				<table class="table jsObjectActionContainer" data-object-action-class-name="wcf\data\user\minecraft\MinecraftUserAction">
 					<thead>
 						<tr>
 							<th></th>
@@ -18,15 +18,15 @@
 						</tr>
 					</thead>
 					<tbody>
-							{foreach from=$minecrafts item=minecraft}
-								<tr class="jsObjectActionObject" data-object-id="{@$minecraft->minecraftID}">
+							{foreach from=$minecraftUsers item=minecraftUser}
+								<tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->minecraftUserID}">
 									<td>
-										{objectAction action="delete" objectTitle=$minecraft->title}
+										{objectAction action="delete" objectTitle=$minecraftUser->title}
 									</td>
-									<td>{@$minecraft->minecraftID}</td>
-									<td>{$minecraft->title}</td>
-									<td>{@$minecraft->minecraftUUID}</td>
-									<td>{@$minecraft->createdDate|time}</td>
+									<td>{@$minecraftUser->minecraftUserID}</td>
+									<td>{$minecraftUser->title}</td>
+									<td>{@$minecraftUser->minecraftUUID}</td>
+									<td>{@$minecraftUser->createdDate|time}</td>
 								</tr>
 							{/foreach}
 					</tbody>

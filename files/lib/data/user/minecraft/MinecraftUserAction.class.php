@@ -5,17 +5,16 @@ namespace wcf\data\user\minecraft;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\data\user\minecraft\MinecraftList;
 use wcf\system\event\EventHandler;
 use wcf\system\WCF;
 
 /**
- * Minecraft Action class
+ * MinecraftUser Action class
  *
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class MinecraftAction extends AbstractDatabaseObjectAction
+class MinecraftUserAction extends AbstractDatabaseObjectAction
 {
     /**
      * @inheritDoc
@@ -56,11 +55,11 @@ class MinecraftAction extends AbstractDatabaseObjectAction
      */
     public function updateUUIDAmount($userID)
     {
-        $minecraftList = new MinecraftList();
-        $minecraftList->getConditionBuilder()->add('userID = ?', [$userID]);
-        $minecraftList->readObjects();
+        $minecraftUserList = new MinecraftUserList();
+        $minecraftUserList->getConditionBuilder()->add('userID = ?', [$userID]);
+        $minecraftUserList->readObjects();
 
         $editor = new UserEditor(new User($userID));
-        $editor->update(['minecraftUUIDs' => count($minecraftList)]);
+        $editor->update(['minecraftUUIDs' => count($minecraftUserList)]);
     }
 }

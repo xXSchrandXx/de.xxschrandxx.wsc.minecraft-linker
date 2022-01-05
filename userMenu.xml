@@ -7,8 +7,8 @@
 			<permissions>user.minecraftLinker.canManage</permissions>
 			<options>minecraft_linker_enabled,minecraft_linker_identity</options>
 		</usermenuitem>
-		<usermenuitem name="wcf.user.menu.minecraftSection.minecraftIDList">
-			<controller><![CDATA[wcf\page\MinecraftIDList]]></controller>
+		<usermenuitem name="wcf.user.menu.minecraftSection.minecraftUserList">
+			<controller><![CDATA[wcf\page\MinecraftUserList]]></controller>
 			<parent>wcf.user.menu.minecraftSection</parent>
 			<showorder>1</showorder>
 			<permissions>user.minecraftLinker.canManage</permissions>

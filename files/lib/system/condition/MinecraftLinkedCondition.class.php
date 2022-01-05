@@ -79,14 +79,6 @@ HTML;
     /**
      * @inheritDoc
      */
-    public function validate()
-    {
-        // nothing to validate
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function addObjectListCondition(DatabaseObjectList $objectList, array $conditionData)
     {
         if (!($objectList instanceof UserList)) {

@@ -8,12 +8,12 @@ use wcf\system\minecraft\IMinecraftHandler;
 use wcf\system\minecraft\MinecraftConnectionHandler;
 
 /**
- * Minecraft Data class
+ * MinecraftUser Data class
  *
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class Minecraft extends DatabaseObject
+class MinecraftUser extends DatabaseObject
 {
     /**
      * @inheritDoc
@@ -23,5 +23,5 @@ class Minecraft extends DatabaseObject
     /**
      * @inheritDoc
      */
-    protected static $databaseTableIndexName = 'minecraftID';
+    protected static $databaseTableIndexName = 'minecraftUserID';
 }

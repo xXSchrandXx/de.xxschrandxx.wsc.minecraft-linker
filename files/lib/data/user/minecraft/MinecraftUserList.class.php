@@ -5,12 +5,12 @@ namespace wcf\data\user\minecraft;
 use wcf\data\DatabaseObjectList;
 
 /**
- * Minecraft List class
+ * MinecraftUser List class
  *
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class MinecraftList extends DatabaseObjectList
+class MinecraftUserList extends DatabaseObjectList
 {
 
 }

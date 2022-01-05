@@ -22,14 +22,14 @@
         <item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximum number of Minecraft-Links per user]]></item>
         <item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Connections]]></item>
     </category>
-    <category name="wcf.page.minecraftIDAddACP">
-        <item name="wcf.page.minecraftIDAddACP.pageTitle"><![CDATA[Add Minecraft-Link]]></item>
-        <item name="wcf.page.minecraftIDAddACP.back"><![CDATA[Return]]></item>
-        <item name="wcf.page.minecraftIDAddACP.minecraftUUID"><![CDATA[Player]]></item>
-        <item name="wcf.page.minecraftIDAddACP.minecraftUUID.description"><![CDATA[The player's UUID.]]></item>
-        <item name="wcf.page.minecraftIDAddACP.title"><![CDATA[Display name]]></item>
-        <item name="wcf.page.minecraftIDAddACP.title.description"><![CDATA[The title used to distinguish links.]]></item>
-        <item name="wcf.page.minecraftIDAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
+    <category name="wcf.page.minecraftUserAddACP">
+        <item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Add Minecraft-Link]]></item>
+        <item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Return]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[Player]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftUUID.description"><![CDATA[The player's UUID.]]></item>
+        <item name="wcf.page.minecraftUserAddACP.title"><![CDATA[Display name]]></item>
+        <item name="wcf.page.minecraftUserAddACP.title.description"><![CDATA[The title used to distinguish Minecraft-Links.]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
     </category>
     <category name="wcf.acp.page.userAddSection">
         <item name="wcf.acp.page.userAddSection.minecraft.add"><![CDATA[Add Minecraft-Link]]></item>
@@ -43,32 +43,33 @@
         <item name="wcf.minecraft.message"><![CDATA[Your confirmation code: {$code}]]></item>
         <item name="wcf.minecraft.hoverMessage"><![CDATA[Copy to the clipboard.]]></item>
     </category>
-    <category name="wcf.page.minecraftIDAdd">
-        <item name="wcf.page.minecraftIDAdd.alreadySend"><![CDATA[A verification code has already been sent to you.]]></item>
-        <item name="wcf.page.minecraftIDAdd.error.noUnknownUsers"><![CDATA[There are no unlinked users on the Minecraft server.]]></item>
-        <item name="wcf.page.minecraftIDAdd.error.sendCode"><![CDATA[The verification code could not be sent.]]></item>
-        <item name="wcf.page.minecraftIDAdd.error.sendCodeDynamic"><![CDATA[The verification code could not be sent: {$msg}]]></item>
-        <item name="wcf.page.minecraftIDAdd.success"><![CDATA[The verification code has been successfully sent to you.]]></item>
-        <item name="wcf.page.minecraftIDAdd.title"><![CDATA[Title]]></item>
-        <item name="wcf.page.minecraftIDAdd.title.description"><![CDATA[The title used to distinguish your Minecraft-Links.]]></item>
-        <item name="wcf.page.minecraftIDAdd.uuid"><![CDATA[Minecraft-UUID]]></item>
-        <item name="wcf.page.minecraftIDAdd.uuid.description"><![CDATA[In order for you to appear in the list, you must be online on the Minecraft server.]]></item>
+    <category name="wcf.page.minecraftUserAdd">
+        <item name="wcf.page.minecraftUserAdd.error.maxReached"><![CDATA[You have reached the maximum number of Minecraft-Links.]]></item>
+        <item name="wcf.page.minecraftUserAdd.error.alreadySend"><![CDATA[A verification code has already been sent to you.]]></item>
+        <item name="wcf.page.minecraftUserAdd.error.noUnknownUsers"><![CDATA[There are no unlinked users on the Minecraft server.]]></item>
+        <item name="wcf.page.minecraftUserAdd.error.sendCode"><![CDATA[The verification code could not be sent.]]></item>
+        <item name="wcf.page.minecraftUserAdd.error.sendCodeDynamic"><![CDATA[The verification code could not be sent: {$msg}]]></item>
+        <item name="wcf.page.minecraftUserAdd.success"><![CDATA[The verification code has been successfully sent to you.]]></item>
+        <item name="wcf.page.minecraftUserAdd.title"><![CDATA[Title]]></item>
+        <item name="wcf.page.minecraftUserAdd.title.description"><![CDATA[The title used to distinguish your Minecraft-Links.]]></item>
+        <item name="wcf.page.minecraftUserAdd.uuid"><![CDATA[Minecraft-UUID]]></item>
+        <item name="wcf.page.minecraftUserAdd.uuid.description"><![CDATA[In order for you to appear in the list, you must be online on the Minecraft server.]]></item>
     </category>
-    <category name="wcf.page.minecraftIDCheck">
-        <item name="wcf.page.minecraftIDCheck.success"><![CDATA[The Minecraft-UUID has been linked successfully.]]></item>
-        <item name="wcf.page.minecraftIDCheck.code"><![CDATA[Verification code]]></item>
-        <item name="wcf.page.minecraftIDCheck.code.description"><![CDATA[The verification code that was sent to you on the Minecraft server.]]></item>
-        <item name="wcf.page.minecraftIDCheck.code.error.wrongSecurityCode"><![CDATA[Wrong verification code.]]></item>
-        <item name="wcf.page.minecraftIDCheck.code.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
-        <item name="wcf.page.minecraftIDCheck.resend"><![CDATA[Request confirmation code again]]></item>
-        <item name="wcf.page.minecraftIDCheck.resend.success"><![CDATA[Forward to player selection.]]></item>
+    <category name="wcf.page.minecraftUserCheck">
+        <item name="wcf.page.minecraftUserCheck.success"><![CDATA[The Minecraft-UUID has been linked successfully.]]></item>
+        <item name="wcf.page.minecraftUserCheck.code"><![CDATA[Verification code]]></item>
+        <item name="wcf.page.minecraftUserCheck.code.description"><![CDATA[The verification code that was sent to you on the Minecraft server.]]></item>
+        <item name="wcf.page.minecraftUserCheck.code.error.wrongSecurityCode"><![CDATA[Wrong verification code.]]></item>
+        <item name="wcf.page.minecraftUserCheck.code.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
+        <item name="wcf.page.minecraftUserCheck.resend"><![CDATA[Request confirmation code again]]></item>
+        <item name="wcf.page.minecraftUserCheck.resend.success"><![CDATA[Forward to player selection.]]></item>
     </category>
-    <category name="wcf.page.minecraftList">
-        <item name="wcf.page.minecraftList.add"><![CDATA[Add Minecraft-Link]]></item>
-        <item name="wcf.page.minecraftList.table.minecraftID"><![CDATA[ID]]></item>
-        <item name="wcf.page.minecraftList.table.title"><![CDATA[Title]]></item>
-        <item name="wcf.page.minecraftList.table.minecraftUUID"><![CDATA[UUID]]></item>
-        <item name="wcf.page.minecraftList.table.createdDate"><![CDATA[Linked]]></item>
+    <category name="wcf.page.minecraftUserList">
+        <item name="wcf.page.minecraftUserList.add"><![CDATA[Add Minecraft-Link]]></item>
+        <item name="wcf.page.minecraftUserList.table.minecraftUserID"><![CDATA[ID]]></item>
+        <item name="wcf.page.minecraftUserList.table.title"><![CDATA[Title]]></item>
+        <item name="wcf.page.minecraftUserList.table.minecraftUUID"><![CDATA[UUID]]></item>
+        <item name="wcf.page.minecraftUserList.table.createdDate"><![CDATA[Linked]]></item>
     </category>
     <category name="wcf.user.condition">
         <item name="wcf.user.condition.conditionGroup.minecraft"><![CDATA[Minecraft-Linker]]></item>
@@ -79,6 +80,6 @@
     </category>
     <category name="wcf.user.menu">
         <item name="wcf.user.menu.minecraftSection"><![CDATA[Minecraft]]></item>
-        <item name="wcf.user.menu.minecraftSection.minecraftIDList"><![CDATA[Minecraft-Links]]></item>
+        <item name="wcf.user.menu.minecraftSection.minecraftUserList"><![CDATA[Minecraft-Links]]></item>
     </category>
 </language>

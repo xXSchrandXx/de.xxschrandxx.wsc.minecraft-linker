@@ -2,12 +2,12 @@
 
 namespace wcf\page;
 
-use wcf\data\user\minecraft\MinecraftList;
+use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
-class MinecraftIDListPage extends MultipleLinkPage
+class MinecraftUserListPage extends MultipleLinkPage
 {
     /**
      * @inheritDoc
@@ -27,17 +27,17 @@ class MinecraftIDListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftIDList';
+    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftUserList';
 
     /**
      * @inheritDoc
      */
-    public $objectListClassName = MinecraftList::class;
+    public $objectListClassName = MinecraftUserList::class;
 
     /**
      * @inheritDoc
      */
-    public $sortField = 'minecraftID';
+    public $sortField = 'minecraftUserID';
 
     /**
      * @inheritDoc

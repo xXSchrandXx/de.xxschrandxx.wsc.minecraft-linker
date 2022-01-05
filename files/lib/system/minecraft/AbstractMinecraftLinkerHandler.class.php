@@ -3,7 +3,6 @@
 namespace wcf\system\minecraft;
 
 use wcf\data\minecraft\Minecraft;
-use wcf\data\user\minecraft\MinecraftList;
 
 abstract class AbstractMinecraftLinkerHandler implements IMinecraftLinkerHandler
 {

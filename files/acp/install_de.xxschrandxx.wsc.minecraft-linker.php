@@ -6,19 +6,21 @@ use wcf\system\database\table\column\NotNullInt10DatabaseTableColumn;
 use wcf\system\database\table\column\VarcharDatabaseTableColumn;
 use wcf\system\database\table\DatabaseTable;
 use wcf\system\database\table\DatabaseTableChangeProcessor;
+use wcf\system\database\table\PartialDatabaseTable;
 use wcf\system\database\table\index\DatabaseTableForeignKey;
+use wcf\system\database\table\index\DatabaseTablePrimaryIndex;
 use wcf\system\WCF;
 
 $tables = [
     // wcf1_user
-    DatabaseTable::create('wcf1_user')
+    PartialDatabaseTable::create('wcf1_user')
         ->columns([
             NotNullInt10DatabaseTableColumn::create('minecraftUUIDs')
                 ->defaultValue(0),
         ]),
 
     // wcf1_user_group
-    DatabaseTable::create('wcf1_user_group')
+    PartialDatabaseTable::create('wcf1_user_group')
         ->columns([
             BlobDatabaseTableColumn::create('minecraftGroupNames'),
         ]),
@@ -26,7 +28,7 @@ $tables = [
     // wcf1_user_minecraft
     DatabaseTable::create('wcf1_user_minecraft')
         ->columns([
-            NotNullInt10DatabaseTableColumn::create('minecraftID')
+            NotNullInt10DatabaseTableColumn::create('minecraftUserID')
                 ->autoIncrement(),
             NotNullInt10DatabaseTableColumn::create('userID'),
             VarcharDatabaseTableColumn::create('minecraftUUID')
@@ -42,6 +44,10 @@ $tables = [
                 ->onDelete('CASCADE')
                 ->referencedColumns(['userID'])
                 ->referencedTable('wcf1_user'),
+        ])
+        ->indices([
+            DatabaseTablePrimaryIndex::create()
+                ->columns(['minecraftUserID']),
         ]),
 ];
 
