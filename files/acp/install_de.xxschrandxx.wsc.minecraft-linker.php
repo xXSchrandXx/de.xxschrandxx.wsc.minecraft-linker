@@ -2,6 +2,7 @@
 
 use wcf\system\database\table\column\BlobDatabaseTableColumn;
 use wcf\system\database\table\column\IntDatabaseTableColumn;
+use wcf\system\database\table\column\ObjectIdDatabaseTableColumn;
 use wcf\system\database\table\column\NotNullInt10DatabaseTableColumn;
 use wcf\system\database\table\column\VarcharDatabaseTableColumn;
 use wcf\system\database\table\DatabaseTable;
@@ -28,8 +29,7 @@ $tables = [
     // wcf1_user_minecraft
     DatabaseTable::create('wcf1_user_minecraft')
         ->columns([
-            NotNullInt10DatabaseTableColumn::create('minecraftUserID')
-                ->autoIncrement(),
+            ObjectIdDatabaseTableColumn::create('minecraftUserID'),
             NotNullInt10DatabaseTableColumn::create('userID'),
             VarcharDatabaseTableColumn::create('minecraftUUID')
                 ->length(36)
