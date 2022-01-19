@@ -25,6 +25,8 @@
     <category name="wcf.page.minecraftUserAddACP">
         <item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
         <item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Zurück]]></item>
+        <item name="wcf.page.minecraftUserAddACP.change"><![CDATA[Methode ändern]]></item>
+        <item name="wcf.page.minecraftUserAddACP.emptyList"><![CDATA[Da derzeit keine Spieler auf dem Minecraft-Server / den Minecraft-Servern sind, kann die eingabe via Liste nicht genutzt werden.]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[Spieler]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
         <item name="wcf.page.minecraftUserAddACP.title"><![CDATA[Anzeigename]]></item>

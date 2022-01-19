@@ -40,10 +40,21 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
     /**
      * Benutzer-Objekt
-     *
      * @var User|null
      */
     protected $user;
+
+    /**
+     * Ob die Liste angezeigt werden soll, oder nicht.
+     * @var boolean
+     */
+    protected $viaList = true;
+
+    /**
+     * Liste der Spieler auf den Server(n)
+     * @var array
+     */
+    protected $options = [];
 
     /**
      * @inheritDoc
@@ -68,6 +79,9 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
         if (isset($_REQUEST['id'])) {
             $userID = (int)$_REQUEST['id'];
         }
+        if (isset($_REQUEST['viaList'])) {
+            $this->viaList = \filter_var($_REQUEST['viaList'], FILTER_VALIDATE_BOOLEAN);
+        }
         $this->user = new User($userID);
         if (!$this->user->userID) {
             throw new IllegalLinkException();
@@ -83,10 +97,9 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         $mcUsers = MinecraftLinkerHandler::getInstance()->getUnknownMinecraftUsers();
 
-        $options = [];
         foreach ($mcUsers as $minecraftID => $uuidArray) {
             foreach ($uuidArray as $uuid => $name) {
-                array_push($options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
+                array_push($this->options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
             }
         }
 
@@ -99,7 +112,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                 ->value('Default')
         ];
 
-        if (empty($options)) {
+        if (empty($this->options) || !$this->viaList) {
             $minecraftUUIDField = TextFormField::create('minecraftUUID')
                 ->required()
                 ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
@@ -120,7 +133,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
             $minecraftUUIDField = SingleSelectionFormField::create('minecraftUUID')
                 ->required()
                 ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
-                ->options($options, true, false)
+                ->options($this->options, true, false)
                 ->filterable()
                 ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
                     $minecraftUserList = new MinecraftUserList();
@@ -170,8 +183,15 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     {
         parent::assignVariables();
 
+        $nextViaList = !$this->viaList;
+        if ($this->viaList && empty($this->options)) {
+            $nextViaList = true;
+        }
+
         WCF::getTPL()->assign([
-            'userID' => $this->user->userID
+            'userID' => $this->user->userID,
+            'nextViaList' => $nextViaList,
+            'emptyList' => empty($this->options)
         ]);
     }
 }

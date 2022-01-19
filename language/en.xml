@@ -24,7 +24,9 @@
     </category>
     <category name="wcf.page.minecraftUserAddACP">
         <item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Add Minecraft-Link]]></item>
-        <item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Return]]></item>
+        <item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Back]]></item>
+        <item name="wcf.page.minecraftUserAddACP.change"><![CDATA[Change method]]></item>
+        <item name="wcf.page.minecraftUserAddACP.emptyList"><![CDATA[Since there are currently no players on the Minecraft server(s), the entry via list cannot be used.]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[Player]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID.description"><![CDATA[The player's UUID.]]></item>
         <item name="wcf.page.minecraftUserAddACP.title"><![CDATA[Display name]]></item>
