@@ -18,7 +18,7 @@
         <item name="wcf.acp.option.minecraft_linker_enabled"><![CDATA[Minecraft-Linker aktivieren]]></item>
         <item name="wcf.acp.option.minecraft_linker_enabled.description"><![CDATA[Aktiviert / Deaktiviert den Minecraft-Linker.]]></item>
         <item name="wcf.acp.option.minecraft_linker_identity"><![CDATA[Server]]></item>
-        <item name="wcf.acp.option.minecraft_linker_identity.description"><![CDATA[Aktiviert Minecraft-Linler für ausgewählte Server.]]></item>
+        <item name="wcf.acp.option.minecraft_linker_identity.description"><![CDATA[Aktiviert Minecraft-Linker für ausgewählte Server.]]></item>
         <item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximale Anzahl an Minecraft-Verknüpfungen pro Benutzer]]></item>
         <item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Verknüpfungen]]></item>
     </category>
