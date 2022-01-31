@@ -33,13 +33,14 @@
         <item name="wcf.page.minecraftUserAddACP.title.description"><![CDATA[The title used to distinguish Minecraft-Links.]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
     </category>
-    <category name="wcf.acp.page.userAddSection">
-        <item name="wcf.acp.page.userAddSection.minecraft.add"><![CDATA[Add Minecraft-Link]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.connectedSince"><![CDATA[Linked]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.id"><![CDATA[ID]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.sectionTitle"><![CDATA[Minecraft-Links]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.title"><![CDATA[Title]]></item>
-        <item name="wcf.acp.page.userAddSection.minecraft.uuid"><![CDATA[Minecraft-UUID]]></item>
+    <category name="wcf.page.userAddSection">
+        <item name="wcf.page.userAddSection.minecraft.add"><![CDATA[Add Minecraft-Link via list]]></item>
+        <item name="wcf.page.userAddSection.minecraft.addText"><![CDATA[Add Minecraft-Link via text]]></item>
+        <item name="wcf.page.userAddSection.minecraft.connectedSince"><![CDATA[Linked]]></item>
+        <item name="wcf.page.userAddSection.minecraft.id"><![CDATA[ID]]></item>
+        <item name="wcf.page.userAddSection.minecraft.sectionTitle"><![CDATA[Minecraft-Links]]></item>
+        <item name="wcf.page.userAddSection.minecraft.title"><![CDATA[Title]]></item>
+        <item name="wcf.page.userAddSection.minecraft.uuid"><![CDATA[Minecraft-UUID]]></item>
     </category>
     <category name="wcf.minecraft">
         <item name="wcf.minecraft.message"><![CDATA[Your confirmation code: {$code}]]></item>

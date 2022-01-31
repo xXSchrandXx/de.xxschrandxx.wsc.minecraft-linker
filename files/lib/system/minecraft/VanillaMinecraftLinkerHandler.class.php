@@ -49,7 +49,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
             }
             $uuid = str_replace(['(', ')'], '', $userStringArray[1]);
             $name = str_replace(['(', ')'], '', $userStringArray[0]);
-            $this->onlineUsers = $this->onlineUsers + [$uuid => $name];
+            $this->onlineUsers += [$uuid => $name];
         }
         return $this->onlineUsers;
     }

@@ -9,14 +9,14 @@ use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\SingleSelectionFormField;
-use wcf\system\form\builder\field\TextFormField;
+use wcf\system\form\builder\field\TitleFormField;
 use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\system\request\LinkHandler;
 use wcf\system\minecraft\MinecraftLinkerHandler;
 use wcf\system\WCF;
 
-class MinecraftUserAddForm extends AbstractFormBuilderForm
+class MinecraftUserAddListForm extends AbstractFormBuilderForm
 {
     /**
      * @inheritDoc
@@ -43,12 +43,6 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
      * @var User|null
      */
     protected $user;
-
-    /**
-     * Ob die Liste angezeigt werden soll, oder nicht.
-     * @var boolean
-     */
-    protected $viaList = true;
 
     /**
      * Liste der Spieler auf den Server(n)
@@ -79,9 +73,6 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
         if (isset($_REQUEST['id'])) {
             $userID = (int)$_REQUEST['id'];
         }
-        if (isset($_REQUEST['viaList'])) {
-            $this->viaList = \filter_var($_REQUEST['viaList'], FILTER_VALIDATE_BOOLEAN);
-        }
         $this->user = new User($userID);
         if (!$this->user->userID) {
             throw new IllegalLinkException();
@@ -97,61 +88,41 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         $mcUsers = MinecraftLinkerHandler::getInstance()->getUnknownMinecraftUsers();
 
+        if (empty($mcUsers)) {
+            return;
+        }
+
         foreach ($mcUsers as $minecraftID => $uuidArray) {
             foreach ($uuidArray as $uuid => $name) {
                 array_push($this->options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
             }
         }
 
-        $fields = [
-            TextFormField::create('title')
-                ->required()
-                ->label('wcf.page.minecraftUserAddACP.title')
-                ->description('wcf.page.minecraftUserAddACP.title.description')
-                ->maximumLength(30)
-                ->value('Default')
-        ];
-
-        if (empty($this->options) || !$this->viaList) {
-            $minecraftUUIDField = TextFormField::create('minecraftUUID')
-                ->required()
-                ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
-                ->description('wcf.page.minecraftUserAddACP.minecraftUUID.description')
-                ->minimumLength(36)
-                ->maximumLength(36)
-                ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
-                    $minecraftUserList = new MinecraftUserList();
-                    $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                    $minecraftUserList->readObjects();
-                    if (count($minecraftUserList)) {
-                        $field->addValidationError(
-                            new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed')
-                        );
-                    }
-                }));
-        } else {
-            $minecraftUUIDField = SingleSelectionFormField::create('minecraftUUID')
-                ->required()
-                ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
-                ->options($this->options, true, false)
-                ->filterable()
-                ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
-                    $minecraftUserList = new MinecraftUserList();
-                    $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                    $minecraftUserList->readObjects();
-                    if (count($minecraftUserList)) {
-                        $field->addValidationError(
-                            new FormFieldValidationError('empty')
-                        );
-                    }
-                }));
-        }
-
-        array_push($fields, $minecraftUUIDField);
-
         $this->form->appendChild(
             FormContainer::create('data')
-                ->appendChildren($fields)
+                ->appendChildren([
+                    TitleFormField::create('title')
+                        ->required()
+                        ->label('wcf.page.minecraftUserAddACP.title')
+                        ->description('wcf.page.minecraftUserAddACP.title.description')
+                        ->maximumLength(30)
+                        ->value('Default'),
+                    SingleSelectionFormField::create('minecraftUUID')
+                        ->required()
+                        ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
+                        ->options($this->options, true, false)
+                        ->filterable()
+                        ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
+                            $minecraftUserList = new MinecraftUserList();
+                            $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
+                            $minecraftUserList->readObjects();
+                            if (count($minecraftUserList)) {
+                                $field->addValidationError(
+                                    new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed')
+                                );
+                            }
+                        }))
+                ])
         );
     }
 
@@ -183,14 +154,8 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     {
         parent::assignVariables();
 
-        $nextViaList = !$this->viaList;
-        if ($this->viaList && empty($this->options)) {
-            $nextViaList = true;
-        }
-
         WCF::getTPL()->assign([
             'userID' => $this->user->userID,
-            'nextViaList' => $nextViaList,
             'emptyList' => empty($this->options)
         ]);
     }

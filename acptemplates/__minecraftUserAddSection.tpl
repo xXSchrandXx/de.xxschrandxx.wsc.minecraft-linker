@@ -3,7 +3,8 @@
 	<section class="section">
 		<h2 class="sectionTitle">{lang}wcf.page.userAddSection.minecraft.sectionTitle{/lang}</h2>
 
-		<a href="{if !$userID|empty}{link controller='MinecraftUserAdd' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
+		<a href="{if !$userID|empty}{link controller='MinecraftUserAddList' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
+		<a href="{if !$userID|empty}{link controller='MinecraftUserAddText' id=$userID}{/link}{/if}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.userAddSection.minecraft.addText{/lang}</span></a><br><br>
 
 		{if $minecraftUsers|count > 0}
 			<div class="tabularBox">

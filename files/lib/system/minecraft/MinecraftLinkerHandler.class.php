@@ -116,7 +116,7 @@ class MinecraftLinkerHandler extends SingletonFactory
             $handler = $this->getHandler($minecraft);
             $tmpOnlineUsers = $handler->getOnlineMinecraftUsers();
             if (!empty($tmpOnlineUsers)) {
-                $this->onlineUsers = $this->onlineUsers + [$minecraft->minecraftID => $tmpOnlineUsers];
+                $this->onlineUsers += [$minecraft->minecraftID => $tmpOnlineUsers];
             }
         }
         return $this->onlineUsers;
@@ -180,7 +180,7 @@ class MinecraftLinkerHandler extends SingletonFactory
             if (empty($newUsers)) {
                 continue;
             }
-            $this->unknownOnlineMinecraftUsers = $this->unknownOnlineMinecraftUsers + [$minecraftID => $newUsers];
+            $this->unknownOnlineMinecraftUsers += [$minecraftID => $newUsers];
         }
         return $this->unknownOnlineMinecraftUsers;
     }
@@ -220,7 +220,7 @@ class MinecraftLinkerHandler extends SingletonFactory
             if (empty($newUsers)) {
                 continue;
             }
-            $this->knownOnlineMinecraftUsers = $this->knownOnlineMinecraftUsers + [$minecraftID => $newUsers];
+            $this->knownOnlineMinecraftUsers += [$minecraftID => $newUsers];
         }
         return $this->knownOnlineMinecraftUsers;
     }

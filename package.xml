@@ -5,7 +5,7 @@
         <packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
         <packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
         <packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
         <date>2021-11-08</date>
     </packageinformation>
 
@@ -35,5 +35,10 @@
         <instruction type="userGroupOption"/>
         <instruction type="script">acp/install_de.xxschrandxx.wsc.minecraft-linker.php</instruction>
         <instruction type="userMenu"/>
+    </instructions>
+    <instructions type="update">
+        <instruction type="acpTemplate"/>
+        <instruction type="file"/>
+        <instruction type="language"/>
     </instructions>
 </package>
