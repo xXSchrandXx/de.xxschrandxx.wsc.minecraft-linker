@@ -104,6 +104,8 @@ class MinecraftUserAddTextForm extends AbstractFormBuilderForm
                         ->description('wcf.page.minecraftUserAddACP.minecraftUUID.description')
                         ->minimumLength(36)
                         ->maximumLength(36)
+                        ->pattern('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i')
+                        ->placeholder('XXXXXXXX-XXXX-4XXX-XXXX-XXXXXXXXXXXX')
                         ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
                             $minecraftUserList = new MinecraftUserList();
                             $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);

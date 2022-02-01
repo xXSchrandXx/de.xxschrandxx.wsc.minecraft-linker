@@ -32,6 +32,7 @@
         <item name="wcf.page.minecraftUserAddACP.title"><![CDATA[Display name]]></item>
         <item name="wcf.page.minecraftUserAddACP.title.description"><![CDATA[The title used to distinguish Minecraft-Links.]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID is already in use.]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.notUUID"><![CDATA[{$uuid} is not a valid UUID v4.]]></item>
     </category>
     <category name="wcf.page.userAddSection">
         <item name="wcf.page.userAddSection.minecraft.add"><![CDATA[Add Minecraft-Link via list]]></item>

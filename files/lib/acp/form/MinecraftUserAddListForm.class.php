@@ -113,6 +113,11 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
                         ->options($this->options, true, false)
                         ->filterable()
                         ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
+                            if (!preg_match('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $field->getValue())) {
+                                $field->addValidationError(
+                                    new FormFieldValidationError('notUUID', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.notUUID', ['uuid' => $field->getValue()])
+                                );
+                            }
                             $minecraftUserList = new MinecraftUserList();
                             $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
                             $minecraftUserList->readObjects();
