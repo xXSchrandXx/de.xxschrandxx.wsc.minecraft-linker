@@ -5,7 +5,7 @@
         <packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
         <packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
         <packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <date>2021-11-08</date>
     </packageinformation>
 
