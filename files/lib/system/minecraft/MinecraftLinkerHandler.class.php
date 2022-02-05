@@ -74,7 +74,7 @@ class MinecraftLinkerHandler extends SingletonFactory
     /**
      * Gibt den Handler zurück.
      * @param Minecraft $minecraft
-     * @return Minecraft
+     * @return IMinecraftLinkerHandler
      */
     public function getHandler(minecraft $minecraft)
     {
