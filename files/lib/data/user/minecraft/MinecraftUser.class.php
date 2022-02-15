@@ -24,4 +24,12 @@ class MinecraftUser extends DatabaseObject
      * @inheritDoc
      */
     protected static $databaseTableIndexName = 'minecraftUserID';
+
+    /**
+     * ObjectId $minecraftUserID
+     * NotNullInt10 $userID
+     * Varchar 36 $minecraftUUID
+     * Varchar 30 $title
+     * NotNullInt10 createdDate
+     */
 }
