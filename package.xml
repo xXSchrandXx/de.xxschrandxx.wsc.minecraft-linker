@@ -41,5 +41,6 @@
     <instructions type="update">
 		<instruction type="cronjob"/>
         <instruction type="file"/>
+        <!-- TODO Add option for cronjob -->
     </instructions>
 </package>

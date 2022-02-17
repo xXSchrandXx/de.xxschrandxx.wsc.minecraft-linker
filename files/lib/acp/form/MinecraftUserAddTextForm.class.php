@@ -102,7 +102,8 @@ class MinecraftUserAddTextForm extends AbstractFormBuilderForm
                         ->label('wcf.page.minecraftUserAddACP.minecraftName')
                         ->description('wcf.page.minecraftUserAddACP.minecraftName.description')
                         ->minimumLength(3)
-                        ->maximumLength(16),
+                        ->maximumLength(16)
+                        ->pattern('[0-9a-fA-F_]{3,16}'),
                     TextFormField::create('minecraftUUID')
                         ->required()
                         ->label('wcf.page.minecraftUserAddACP.minecraftUUID')

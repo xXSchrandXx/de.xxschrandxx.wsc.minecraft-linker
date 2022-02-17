@@ -40,7 +40,7 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         } else if (empty($response)) {
             return $this->onlineUsers;
         }
-        $userStringListString = explode(':', $response, 2)[1];
+        $userStringListString = explode(': ', $response, 2)[1];
         $userStringList = explode(', ', $userStringListString);
         foreach ($userStringList as &$userString) {
             $userStringArray = explode(' (', $userString, 2);

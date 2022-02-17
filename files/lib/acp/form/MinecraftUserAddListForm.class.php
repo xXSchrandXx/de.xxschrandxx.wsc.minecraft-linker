@@ -154,7 +154,6 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
                     break;
                 }
             }
-            $this->additionalFields['minecraftName'];
             $this->additionalFields['createdDate'] = \TIME_NOW;
         }
 
