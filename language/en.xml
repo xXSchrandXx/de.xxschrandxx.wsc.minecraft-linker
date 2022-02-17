@@ -75,6 +75,7 @@
         <item name="wcf.page.minecraftUserList.table.minecraftUserID"><![CDATA[ID]]></item>
         <item name="wcf.page.minecraftUserList.table.title"><![CDATA[Title]]></item>
         <item name="wcf.page.minecraftUserList.table.minecraftUUID"><![CDATA[UUID]]></item>
+        <item name="wcf.page.minecraftUserList.table.minecraftName"><![CDATA[Name]]></item>
         <item name="wcf.page.minecraftUserList.table.createdDate"><![CDATA[Linked]]></item>
     </category>
     <category name="wcf.user.condition">

@@ -25,6 +25,7 @@
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUserID{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.title{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUUID{/lang}</th>
+					<th>{lang}wcf.page.minecraftUserList.table.minecraftName{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.createdDate{/lang}</th>
 				</tr>
 			</thead>
@@ -37,6 +38,7 @@
 						<td class="columnID">{#$object->minecraftUserID}</td>
 						<td class="columnText">{$object->title}</td>
 						<td class="columnText">{$object->minecraftUUID}</td>
+						<td class="columnText">{$object->minecraftName}</td>
 						<td class="columnDate">{@$object->createdDate|time}</td>
 					</tr>
 				{/foreach}

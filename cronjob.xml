@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/cronjob.xsd">
+	<import>
+		<cronjob name="de.xxschrandxx.wsc.minecraft-linker.minecraftname-updater">
+			<classname>wcf\system\cronjob\MinecraftNameUpdateCronjob</classname>
+			<description><![CDATA[Updates Minecraft Names.]]></description>
+			<description language="de"><![CDATA[Aktuallisiert Minecraft Namen.]]></description>
+			<startminute>0</startminute>
+			<starthour>*</starthour>
+			<startdom>*</startdom>
+			<startmonth>*</startmonth>
+			<startdow>*</startdow>
+			<active>1</active>
+			<canbeedited>1</canbeedited>
+			<canbedisabled>1</canbedisabled>
+		</cronjob>
+	</import>
+</data>

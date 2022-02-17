@@ -24,6 +24,7 @@
 
     <instructions type="install">
 		<instruction type="acpTemplate"/>
+		<instruction type="cronjob"/>
         <instruction type="eventListener"/>
         <instruction type="file"/>
         <instruction type="language"/>
@@ -38,7 +39,7 @@
     </instructions>
 
     <instructions type="update">
+		<instruction type="cronjob"/>
         <instruction type="file"/>
-        <!-- TODO Add Cronjob for name check -->
     </instructions>
 </package>

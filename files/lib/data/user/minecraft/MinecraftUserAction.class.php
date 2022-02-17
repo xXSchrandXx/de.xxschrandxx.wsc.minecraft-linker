@@ -28,7 +28,7 @@ class MinecraftUserAction extends AbstractDatabaseObjectAction
     /**
      * @inheritDoc
      */
-    protected $requireACP = ['update'];
+//    protected $requireACP = ['update'];
 
     /**
      * @inheritDoc
