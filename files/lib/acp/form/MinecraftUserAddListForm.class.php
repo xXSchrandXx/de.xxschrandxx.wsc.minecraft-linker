@@ -86,15 +86,25 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
     {
         parent::createForm();
 
-        $mcUsers = MinecraftLinkerHandler::getInstance()->getUnknownMinecraftUsers();
+        $unknownUsers = MinecraftLinkerHandler::getInstance()->getUnknownMinecraftUsers();
 
-        if (empty($mcUsers)) {
+        if (empty($unknownUsers)) {
             return;
         }
 
-        foreach ($mcUsers as $minecraftID => $uuidArray) {
+        foreach ($unknownUsers as $minecraftID => $uuidArray) {
             foreach ($uuidArray as $uuid => $name) {
-                array_push($this->options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
+                $doppelt = false;
+                foreach ($this->options as $id => $values) {
+                    if ($values['value'] == $uuid) {
+                        $doppelt = true;
+                        break;
+                    }
+                }
+                if ($doppelt) {
+                    continue;
+                }
+                \array_push($this->options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
             }
         }
 
@@ -138,6 +148,13 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
     {
         if ($this->formAction == 'create') {
             $this->additionalFields['userID'] = $this->user->userID;
+            foreach ($this->options as $id => $values) {
+                if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
+                    $this->additionalFields['minecraftName'] = $values['label'];
+                    break;
+                }
+            }
+            $this->additionalFields['minecraftName'];
             $this->additionalFields['createdDate'] = \TIME_NOW;
         }
 

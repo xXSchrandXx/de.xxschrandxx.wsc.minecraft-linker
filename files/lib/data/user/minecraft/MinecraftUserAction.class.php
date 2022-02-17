@@ -5,8 +5,7 @@ namespace wcf\data\user\minecraft;
 use wcf\data\user\User;
 use wcf\data\user\UserEditor;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\system\event\EventHandler;
-use wcf\system\WCF;
+use wcf\data\user\UserAction;
 
 /**
  * MinecraftUser Action class
@@ -25,6 +24,11 @@ class MinecraftUserAction extends AbstractDatabaseObjectAction
      * @inheritDoc
      */
     protected $permissionsDelete = ['user.minecraftLinker.canManage'];
+
+    /**
+     * @inheritDoc
+     */
+    protected $requireACP = ['update'];
 
     /**
      * @inheritDoc
@@ -58,8 +62,26 @@ class MinecraftUserAction extends AbstractDatabaseObjectAction
         $minecraftUserList = new MinecraftUserList();
         $minecraftUserList->getConditionBuilder()->add('userID = ?', [$userID]);
         $minecraftUserList->readObjects();
+        $amount = \count($minecraftUserList);
 
-        $editor = new UserEditor(new User($userID));
-        $editor->update(['minecraftUUIDs' => count($minecraftUserList)]);
+        $user = new User($userID);
+        $editor = new UserEditor($user);
+        $editor->update(['minecraftUUIDs' => $amount]);
+
+        if (MINECRAFT_ENABLE_ACTIVE_USER) {
+            if ($user->pendingActivation()) {
+                if ($amount != 0) {
+                    //enable
+                    $action = new UserAction([$user], 'enable');
+                    $action->executeAction();
+                }
+            } else {
+                if ($amount == 0) {
+                    //disable
+                    $action = new UserAction([$user], 'disable');
+                    $action->executeAction();
+                }
+            }
+        }
     }
 }

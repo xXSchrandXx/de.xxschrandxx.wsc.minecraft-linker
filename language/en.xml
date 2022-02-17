@@ -27,7 +27,9 @@
         <item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Back]]></item>
         <item name="wcf.page.minecraftUserAddACP.change"><![CDATA[Change method]]></item>
         <item name="wcf.page.minecraftUserAddACP.emptyList"><![CDATA[Since there are currently no players on the Minecraft server(s), the entry via list cannot be used.]]></item>
-        <item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[Player]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftName"><![CDATA[Name]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftName.description"><![CDATA[The player's name.]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[UUID]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID.description"><![CDATA[The player's UUID.]]></item>
         <item name="wcf.page.minecraftUserAddACP.title"><![CDATA[Display name]]></item>
         <item name="wcf.page.minecraftUserAddACP.title.description"><![CDATA[The title used to distinguish Minecraft-Links.]]></item>

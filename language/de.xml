@@ -14,7 +14,7 @@
         <item name="wcf.acp.option.minecraft_command_sendcode"><![CDATA[Bestätigungscode Befehl]]></item>
         <item name="wcf.acp.option.minecraft_command_sendcode.description"><![CDATA[Dieser Befehl wird nur für Vanilla Server benutzt. Placeholder: <code>{literal}{$uuid}{/literal} => UUID des Spielers, {literal}{$name}{/literal} => Name des Spielers, {literal}{$code}{/literal} => Bestätigungscode für den Spieler</code> *}]]></item>
         <item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Benutzer aktivieren]]></item>
-        <item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Aktiviert eine Benutzer wenn er eine Minecraft-Verknüpfung hinzugefügt hat.]]></item>
+        <item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Aktiviert einen Benutzer wenn er eine Minecraft-Verknüpfung hinzugefügt hat.]]></item>
         <item name="wcf.acp.option.minecraft_linker_enabled"><![CDATA[Minecraft-Linker aktivieren]]></item>
         <item name="wcf.acp.option.minecraft_linker_enabled.description"><![CDATA[Aktiviert / Deaktiviert den Minecraft-Linker.]]></item>
         <item name="wcf.acp.option.minecraft_linker_identity"><![CDATA[Server]]></item>
@@ -27,7 +27,9 @@
         <item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Zurück]]></item>
         <item name="wcf.page.minecraftUserAddACP.change"><![CDATA[Methode ändern]]></item>
         <item name="wcf.page.minecraftUserAddACP.emptyList"><![CDATA[Da derzeit keine Spieler auf dem Minecraft-Server / den Minecraft-Servern sind, kann die Eingabe via Liste nicht genutzt werden.]]></item>
-        <item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[Spieler]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftName"><![CDATA[Name]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftName.description"><![CDATA[Der Name des Spielers.]]></item>
+        <item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[UUID]]></item>
         <item name="wcf.page.minecraftUserAddACP.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
         <item name="wcf.page.minecraftUserAddACP.title"><![CDATA[Anzeigename]]></item>
         <item name="wcf.page.minecraftUserAddACP.title.description"><![CDATA[Der Titel zur Unterscheidung von Verknüpfungen.]]></item>

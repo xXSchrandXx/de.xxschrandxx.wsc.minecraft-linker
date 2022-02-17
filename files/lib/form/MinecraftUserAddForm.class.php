@@ -44,6 +44,12 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
      */
     private $mcsh;
 
+    /**
+     * Liste der Spieler auf den Server(n)
+     * @var array
+     */
+    protected $options = [];
+
     private $code;
 
     private $title;
@@ -95,10 +101,19 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
             exit;
         }
 
-        $options = [];
         foreach ($unknownUsers as $minecraftID => $uuidArray) {
             foreach ($uuidArray as $uuid => $name) {
-                array_push($options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
+                $doppelt = false;
+                foreach ($this->options as $id => $values) {
+                    if ($values['value'] == $uuid) {
+                        $doppelt = true;
+                        break;
+                    }
+                }
+                if ($doppelt) {
+                    continue;
+                }
+                \array_push($this->options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
             }
         }
 
@@ -118,7 +133,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
             ->required()
             ->label('wcf.page.minecraftUserAdd.uuid')
             ->description('wcf.page.minecraftUserAdd.uuid.description')
-            ->options($options, true, false)
+            ->options($this->options, true, false)
             ->filterable()
             ->addValidator(new FormFieldValidator('sendCode', function (SingleSelectionFormField $field) {
                 $this->title = 'Default';
@@ -158,6 +173,12 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         WCF::getSession()->register('mcCode', $this->code);
         WCF::getSession()->register('mcTitle', $this->title);
+        foreach ($this->options as $id => $values) {
+            if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
+                WCF::getSession()->register('minecraftName', $values['label']);
+                break;
+            }
+        }
         WCF::getSession()->register('minecraftUUID', $this->form->getData()['data']['minecraftUUID']);
 
         $this->saved();

@@ -84,6 +84,7 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
                 WCF::getSession()->unregister('mcCode');
                 WCF::getSession()->unregister('mcTitle');
                 WCF::getSession()->unregister('minecraftUUID');
+                WCF::getSession()->unregister('minecraftName');
 
                 HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserAdd'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserCheck.resend.success'), 2, 'info');
                 exit;
@@ -93,6 +94,7 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
         $this->code = WCF::getSession()->getVar('mcCode');
         $this->title = WCF::getSession()->getVar('mcTitle');
         $this->minecraftUUID = WCF::getSession()->getVar('minecraftUUID');
+        $this->minecraftName = WCF::getSession()->getVar('minecraftName');
 
         if (!isset($this->minecraftUUID) || !isset($this->code) || !isset($this->title)) {
             throw new IllegalLinkException();
@@ -135,6 +137,9 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
         );
     }
 
+    /**
+     * @inheritDoc
+     */
     public function save()
     {
         /** @var AbstractDatabaseObjectAction objectAction */
@@ -145,6 +150,7 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
                 'userID' => WCF::getUser()->userID,
                 'title' => $this->title,
                 'minecraftUUID' => $this->minecraftUUID,
+                'minecraftName' => $this->minecraftName,
                 'createdDate' => \TIME_NOW
             ]]
         );
@@ -162,6 +168,7 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
         WCF::getSession()->unregister('mcCode');
         WCF::getSession()->unregister('mcTitle');
         WCF::getSession()->unregister('minecraftUUID');
+        WCF::getSession()->unregister('minecraftName');
 
         $this->form->cleanup();
         $this->form->showSuccessMessage(true);
