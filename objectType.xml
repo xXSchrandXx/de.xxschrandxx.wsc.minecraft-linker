@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/2019/objectType.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/objectType.xsd">
 	<import>
         <type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.linked</name>
@@ -26,18 +26,4 @@
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
     </import>
-	<delete>
-		<type name="de.xxschrandxx.wsc.minecraft-linker.linked">
-			<definitionname>com.woltlab.wcf.condition.userGroupAssignment</definitionname>
-		</type>
-		<type name="de.xxschrandxx.wsc.minecraft-linker.linked">
-			<definitionname>com.woltlab.wcf.condition.trophy</definitionname>
-		</type>
-        <type name="de.xxschrandxx.wsc.minecraft-linker.linked">
-			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
-		</type>
-        <type name="de.xxschrandxx.wsc.minecraft-linker.uuid">
-			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
-		</type>
-	</delete>
 </data>
