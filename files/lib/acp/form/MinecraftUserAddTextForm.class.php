@@ -89,40 +89,46 @@ class MinecraftUserAddTextForm extends AbstractFormBuilderForm
     {
         parent::createForm();
 
+        $fields = [
+            TitleFormField::create('title')
+                ->required()
+                ->label('wcf.page.minecraftUserAddACP.title')
+                ->description('wcf.page.minecraftUserAddACP.title.description')
+                ->maximumLength(30)
+                ->value('Default'),
+            TextFormField::create('minecraftUUID')
+                ->required()
+                ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
+                ->description('wcf.page.minecraftUserAddACP.minecraftUUID.description')
+                ->minimumLength(36)
+                ->maximumLength(36)
+                ->pattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$')
+                ->placeholder('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX')
+                ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
+                    $minecraftUserList = new MinecraftUserList();
+                    $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
+                    $minecraftUserList->readObjects();
+                    if (count($minecraftUserList)) {
+                        $field->addValidationError(
+                            new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed')
+                        );
+                    }
+                }))
+        ];
+        if (MINECRAFT_NAME_ENABLED) {
+            \array_push($fields, 
+                TextFormField::create('minecraftName')
+                    ->label('wcf.page.minecraftUserAddACP.minecraftName')
+                    ->description('wcf.page.minecraftUserAddACP.minecraftName.description')
+                    ->minimumLength(3)
+                    ->maximumLength(16)
+                    ->pattern('[0-9a-fA-F_]{3,16}')
+            );
+        }
+
         $this->form->appendChild(
             FormContainer::create('data')
-                ->appendChildren([
-                    TitleFormField::create('title')
-                        ->required()
-                        ->label('wcf.page.minecraftUserAddACP.title')
-                        ->description('wcf.page.minecraftUserAddACP.title.description')
-                        ->maximumLength(30)
-                        ->value('Default'),
-                    TextFormField::create('minecraftName')
-                        ->label('wcf.page.minecraftUserAddACP.minecraftName')
-                        ->description('wcf.page.minecraftUserAddACP.minecraftName.description')
-                        ->minimumLength(3)
-                        ->maximumLength(16)
-                        ->pattern('[0-9a-fA-F_]{3,16}'),
-                    TextFormField::create('minecraftUUID')
-                        ->required()
-                        ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
-                        ->description('wcf.page.minecraftUserAddACP.minecraftUUID.description')
-                        ->minimumLength(36)
-                        ->maximumLength(36)
-                        ->pattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$')
-                        ->placeholder('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX')
-                        ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
-                            $minecraftUserList = new MinecraftUserList();
-                            $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                            $minecraftUserList->readObjects();
-                            if (count($minecraftUserList)) {
-                                $field->addValidationError(
-                                    new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed')
-                                );
-                            }
-                        }))
-                ])
+                ->appendChildren($fields)
         );
     }
 

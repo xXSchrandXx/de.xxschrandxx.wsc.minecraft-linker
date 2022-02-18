@@ -15,6 +15,9 @@
 							<th>{lang}wcf.page.userAddSection.minecraft.id{/lang}</th>
 							<th>{lang}wcf.page.userAddSection.minecraft.title{/lang}</th>
 							<th>{lang}wcf.page.userAddSection.minecraft.uuid{/lang}</th>
+							{if MINECRAFT_NAME_ENABLED}
+							<th>{lang}wcf.page.userAddSection.minecraft.name{/lang}</th>
+							{/if}
 							<th>{lang}wcf.page.userAddSection.minecraft.connectedSince{/lang}</th>
 						</tr>
 					</thead>
@@ -27,6 +30,9 @@
 									<td>{@$minecraftUser->minecraftUserID}</td>
 									<td>{$minecraftUser->title}</td>
 									<td>{@$minecraftUser->minecraftUUID}</td>
+									{if MINECRAFT_NAME_ENABLED}
+										<td>{@$minecraftUser->minecraftName}</td>
+									{/if}
 									<td>{@$minecraftUser->createdDate|time}</td>
 								</tr>
 							{/foreach}

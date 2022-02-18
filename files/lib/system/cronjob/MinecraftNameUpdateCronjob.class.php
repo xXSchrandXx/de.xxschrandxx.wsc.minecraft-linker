@@ -14,6 +14,11 @@ class MinecraftNameUpdateCronjob extends AbstractCronjob
      */
     public function execute(Cronjob $cronjob)
     {
+
+        if (!MINECRAFT_NAME_ENABLED) {
+            return;
+        }
+
         parent::execute($cronjob);
 
         $savedUsersList = new MinecraftUserList();

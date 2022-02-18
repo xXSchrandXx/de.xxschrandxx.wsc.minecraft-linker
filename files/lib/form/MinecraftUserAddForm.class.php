@@ -173,10 +173,12 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         WCF::getSession()->register('mcCode', $this->code);
         WCF::getSession()->register('mcTitle', $this->title);
-        foreach ($this->options as $id => $values) {
-            if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
-                WCF::getSession()->register('minecraftName', $values['label']);
-                break;
+        if (MINECRAFT_NAME_ENABLED) {
+            foreach ($this->options as $id => $values) {
+                if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
+                    WCF::getSession()->register('minecraftName', $values['label']);
+                    break;
+                }
             }
         }
         WCF::getSession()->register('minecraftUUID', $this->form->getData()['data']['minecraftUUID']);

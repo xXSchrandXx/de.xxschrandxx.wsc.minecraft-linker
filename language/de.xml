@@ -21,6 +21,8 @@
         <item name="wcf.acp.option.minecraft_linker_identity.description"><![CDATA[Aktiviert Minecraft-Linker für ausgewählte Server.]]></item>
         <item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximale Anzahl an Minecraft-Verknüpfungen pro Benutzer]]></item>
         <item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Verknüpfungen]]></item>
+        <item name="wcf.acp.option.minecraft_name_enabled"><![CDATA[Aktiviere Namen]]></item>
+        <item name="wcf.acp.option.minecraft_name_enabled.description"><![CDATA[Aktiviert die speicherung und aktuallisierung von Namen zusätzlich zu den UUIDs.]]></item>
     </category>
     <category name="wcf.page.minecraftUserAddACP">
         <item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
@@ -44,6 +46,7 @@
         <item name="wcf.page.userAddSection.minecraft.sectionTitle"><![CDATA[Minecraft-Verknüpfungen]]></item>
         <item name="wcf.page.userAddSection.minecraft.title"><![CDATA[Titel]]></item>
         <item name="wcf.page.userAddSection.minecraft.uuid"><![CDATA[Minecraft-UUID]]></item>
+        <item name="wcf.page.userAddSection.minecraft.name"><![CDATA[Minecraft-Name]]></item>
     </category>
     <category name="wcf.minecraft">
         <item name="wcf.minecraft.message"><![CDATA[Dein Bestätigungscode: {$code}]]></item>

@@ -40,15 +40,15 @@ class VanillaMinecraftLinkerHandler extends AbstractMinecraftLinkerHandler
         } else if (empty($response)) {
             return $this->onlineUsers;
         }
-        $userStringListString = explode(': ', $response, 2)[1];
+        $userStringListString = explode(':', $response, 2)[1];
         $userStringList = explode(', ', $userStringListString);
         foreach ($userStringList as &$userString) {
             $userStringArray = explode(' (', $userString, 2);
             if (count($userStringArray) != 2) {
                 continue;
             }
-            $uuid = str_replace(['(', ')'], '', $userStringArray[1]);
-            $name = str_replace(['(', ')'], '', $userStringArray[0]);
+            $name = trim($userStringArray[0], "() \n\r\t\v\x00");
+            $uuid = trim($userStringArray[1], "() \n\r\t\v\x00");
             $this->onlineUsers += [$uuid => $name];
         }
         return $this->onlineUsers;

@@ -148,10 +148,12 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
     {
         if ($this->formAction == 'create') {
             $this->additionalFields['userID'] = $this->user->userID;
-            foreach ($this->options as $id => $values) {
-                if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
-                    $this->additionalFields['minecraftName'] = $values['label'];
-                    break;
+            if (MINECRAFT_NAME_ENABLED) {
+                foreach ($this->options as $id => $values) {
+                    if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
+                        $this->additionalFields['minecraftName'] = $values['label'];
+                        break;
+                    }
                 }
             }
             $this->additionalFields['createdDate'] = \TIME_NOW;
