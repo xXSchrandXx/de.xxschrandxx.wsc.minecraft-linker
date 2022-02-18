@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/userMenu.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/userMenu.xsd">
 	<import>
 		<usermenuitem name="wcf.user.menu.minecraftSection">
 			<showorder>2</showorder>
@@ -13,6 +14,6 @@
 			<showorder>1</showorder>
 			<permissions>user.minecraftLinker.canManage</permissions>
 			<options>minecraft_linker_enabled,minecraft_linker_identity</options>
-		</usermenuitem>	
+		</usermenuitem>
 	</import>
 </data>

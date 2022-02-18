@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/option.xsd">
-    <import>
-        <categories>
-            <category name="minecraft_linker">
-                <parent>minecraft</parent>
-            </category>
-            <category name="minecraft_linker_general">
-                <parent>minecraft_linker</parent>
-            </category>
-            <category name="minecraft_linker_commands">
-                <parent>minecraft_linker</parent>
-            </category>
-        </categories>
-        <options>
-            <option name="minecraft_linker_enabled">
-                <categoryname>minecraft_linker_general</categoryname>
-                <optiontype>boolean</optiontype>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/option.xsd">
+	<import>
+		<categories>
+			<category name="minecraft_linker">
+				<parent>minecraft</parent>
+			</category>
+			<category name="minecraft_linker_general">
+				<parent>minecraft_linker</parent>
+			</category>
+			<category name="minecraft_linker_commands">
+				<parent>minecraft_linker</parent>
+			</category>
+		</categories>
+		<options>
+			<option name="minecraft_linker_enabled">
+				<categoryname>minecraft_linker_general</categoryname>
+				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 				<enableoptions>minecraft_linker_identity,minecraft_max_uuids,minecraft_enable_active_user</enableoptions>
-            </option>
-            <option name="minecraft_linker_identity">
-                <categoryname>minecraft_linker_general</categoryname>
-                <optiontype>MinecraftConnectionMultiSelect</optiontype>
-            </option>
-            <option name="minecraft_max_uuids">
-                <categoryname>minecraft_linker_general</categoryname>
-                <optiontype>integer</optiontype>
+			</option>
+			<option name="minecraft_linker_identity">
+				<categoryname>minecraft_linker_general</categoryname>
+				<optiontype>MinecraftConnectionMultiSelect</optiontype>
+			</option>
+			<option name="minecraft_max_uuids">
+				<categoryname>minecraft_linker_general</categoryname>
+				<optiontype>integer</optiontype>
 				<defaultvalue>0</defaultvalue>
-                <suffix>mc_uuids</suffix>
-            </option>
-            <option name="minecraft_name_enabled">
-                <categoryname>minecraft_linker_general</categoryname>
-                <optiontype>boolean</optiontype>
-                <defaultvalue>1</defaultvalue>
-            </option>
+				<suffix>mc_uuids</suffix>
+			</option>
+			<option name="minecraft_name_enabled">
+				<categoryname>minecraft_linker_general</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>1</defaultvalue>
+			</option>
 			<option name="minecraft_enable_active_user">
 				<categoryname>minecraft_linker_general</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
-            <option name="minecraft_command_list">
-                <categoryname>minecraft_linker_commands</categoryname>
-                <optiontype>text</optiontype>
-                <defaultvalue>list uuids</defaultvalue>
-            </option>
-            <option name="minecraft_command_sendcode">
-                <categoryname>minecraft_linker_commands</categoryname>
-                <optiontype>text</optiontype>
-                <defaultvalue>tellraw {$name} [{"text":"{lang}wcf.minecraft.message{/lang}","clickEvent":{"action":"copy_to_clipboard","value":"{$code}"},"hoverEvent":{"action":"show_text","contents":["{lang}wcf.minecraft.hoverMessage{/lang}"]}}]</defaultvalue>
-            </option>
-        </options>
-    </import>
+			<option name="minecraft_command_list">
+				<categoryname>minecraft_linker_commands</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue>list uuids</defaultvalue>
+			</option>
+			<option name="minecraft_command_sendcode">
+				<categoryname>minecraft_linker_commands</categoryname>
+				<optiontype>text</optiontype>
+				<defaultvalue>tellraw {$name} [{"text":"{lang}wcf.minecraft.message{/lang}","clickEvent":{"action":"copy_to_clipboard","value":"{$code}"},"hoverEvent":{"action":"show_text","contents":["{lang}wcf.minecraft.hoverMessage{/lang}"]}}]</defaultvalue>
+			</option>
+		</options>
+	</import>
 </data>

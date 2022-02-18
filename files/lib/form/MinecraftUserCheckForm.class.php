@@ -2,9 +2,10 @@
 
 namespace wcf\form;
 
-use wcf\data\user\UserAction;
+use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\user\minecraft\MinecraftUserAction;
 use wcf\data\user\minecraft\MinecraftUserList;
+use wcf\page\MinecraftUserListPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\TextFormField;
@@ -88,7 +89,12 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
                     WCF::getSession()->unregister('minecraftName');
                 }
 
-                HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserAdd'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserCheck.resend.success'), 2, 'info');
+                HeaderUtil::delayedRedirect(
+                    LinkHandler::getInstance()->getControllerLink(MinecraftUserAddForm::class),
+                    WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserCheck.resend.success'),
+                    2,
+                    'info'
+                );
                 exit;
             }
         }
@@ -182,7 +188,10 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
         $this->form->cleanup();
         $this->form->showSuccessMessage(true);
 
-        HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserCheck.success'));
+        HeaderUtil::delayedRedirect(
+            LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
+            WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserCheck.success')
+        );
         exit;
     }
 
