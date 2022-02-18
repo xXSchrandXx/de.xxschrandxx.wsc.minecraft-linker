@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/objectType.xsd">
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/5.4/objectType.xsd">
 	<import>
-        <type>
+		<type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.linked</name>
 			<definitionname>com.woltlab.wcf.condition.userGroupAssignment</definitionname>
 			<classname>wcf\system\condition\MinecraftLinkedCondition</classname>
@@ -13,17 +14,17 @@
 			<classname>wcf\system\condition\MinecraftLinkedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
-        <type>
+		<type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.linked</name>
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
 			<classname>wcf\system\condition\MinecraftLinkedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
-        <type>
+		<type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.uuid</name>
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
 			<classname>wcf\system\condition\MinecraftUUIDCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
-    </import>
+	</import>
 </data>

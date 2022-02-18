@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.xxschrandxx.wsc.minecraft-linker" xmlns="https://www.woltlab.com" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/vortex/package.xsd">
-    <packageinformation>
-        <packagename><![CDATA[Minecraft Linker]]></packagename>
-        <packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
-        <packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
-        <packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
-        <version>1.0.5 dev 1</version>
-        <date>2021-11-08</date>
-    </packageinformation>
-
-    <authorinformation>
-        <author><![CDATA[xXSchrandXx]]></author>
-    </authorinformation>
-
-    <requiredpackages>
-        <requiredpackage minversion="5.4.8">com.woltlab.wcf</requiredpackage>
-        <requiredpackage minversion="1.0.6" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
-    </requiredpackages>
-
-    <excludedpackages>
-        <excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
-    </excludedpackages>
-
-    <instructions type="install">
+<package name="de.xxschrandxx.wsc.minecraft-linker" xmlns="https://www.woltlab.com"
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/vortex/package.xsd">
+	<packageinformation>
+		<packagename><![CDATA[Minecraft Linker]]></packagename>
+		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
+		<packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
+		<packagedescription
+			language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
+		<version>1.0.5 dev 1</version>
+		<date>2021-11-08</date>
+	</packageinformation>
+	
+	<authorinformation>
+		<author><![CDATA[xXSchrandXx]]></author>
+	</authorinformation>
+	
+	<requiredpackages>
+		<requiredpackage minversion="5.4.8">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="1.0.6"
+			file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar">de.xxschrarndxx.wsc.minecraft-api
+		</requiredpackage>
+	</requiredpackages>
+	
+	<excludedpackages>
+		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+	</excludedpackages>
+	
+	<instructions type="install">
 		<instruction type="acpTemplate"/>
 		<instruction type="cronjob"/>
-        <instruction type="eventListener"/>
-        <instruction type="file"/>
-        <instruction type="language"/>
+		<instruction type="eventListener"/>
+		<instruction type="file"/>
+		<instruction type="language"/>
 		<instruction type="template"/>
-        <instruction type="objectType"/>
-        <instruction type="option"/>
-        <instruction type="page"/>
-        <instruction type="templateListener"/>
-        <instruction type="userGroupOption"/>
-        <instruction type="database">acp/database/install_de.xxschrandxx.wsc.minecraft-linker.php</instruction>
-        <instruction type="userMenu"/>
-    </instructions>
-
-    <instructions type="update">
+		<instruction type="objectType"/>
+		<instruction type="option"/>
+		<instruction type="page"/>
+		<instruction type="templateListener"/>
+		<instruction type="userGroupOption"/>
+		<instruction type="database">acp/database/install_de.xxschrandxx.wsc.minecraft-linker.php</instruction>
+		<instruction type="userMenu"/>
+	</instructions>
+	
+	<instructions type="update">
 		<instruction type="cronjob"/>
-        <instruction type="file"/>
-        <!-- TODO Add option for cronjob -->
-    </instructions>
+		<instruction type="file"/>
+		<!-- TODO Add option for cronjob -->
+	</instructions>
 </package>
