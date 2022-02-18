@@ -74,7 +74,12 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
         parent::readParameters();
 
         if (MINECRAFT_MAX_UUIDS == 0 || MINECRAFT_MAX_UUIDS <= WCF::getUser()->minecraftUUIDs) {
-            HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserList'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.maxReached'), 2, 'error');
+            HeaderUtil::delayedRedirect(
+                LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
+                WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.maxReached'),
+                2,
+                'error'
+            );
             exit;
         }
 
@@ -83,7 +88,12 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
         $minecraftUUID = WCF::getSession()->getVar('minecraftUUID');
 
         if (isset($minecraftUUID) && isset($code) && isset($title)) {
-            HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserCheck'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.alreadySend'), 2, 'error');
+            HeaderUtil::delayedRedirect(
+                LinkHandler::getInstance()->getControllerLink(MinecraftUserCheckForm::class),
+                WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.alreadySend'),
+                2,
+                'error'
+            );
             exit;
         }
     }
@@ -190,7 +200,11 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     {
         parent::saved();
 
-        HeaderUtil::delayedRedirect(LinkHandler::getInstance()->getLink('MinecraftUserCheck'), WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.success'), 2);
+        HeaderUtil::delayedRedirect(
+            LinkHandler::getInstance()->getControllerLink(MinecraftUserCheckForm::class),
+            WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.success'),
+            2
+        );
         exit;
     }
 
