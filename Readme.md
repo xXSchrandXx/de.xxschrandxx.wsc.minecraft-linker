@@ -1,4 +1,5 @@
 Languages: [German](#----german) | [English](#----english)
+"Minecraft"™ is a trademark of Mojang Synergies AB. This Resource ist not affiliate with Mojang.
 <h1>
     English
 </h1>
