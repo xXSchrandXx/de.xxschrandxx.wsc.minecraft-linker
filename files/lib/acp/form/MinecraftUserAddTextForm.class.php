@@ -116,7 +116,8 @@ class MinecraftUserAddTextForm extends AbstractFormBuilderForm
                 }))
         ];
         if (MINECRAFT_NAME_ENABLED) {
-            \array_push($fields, 
+            \array_push(
+                $fields,
                 TextFormField::create('minecraftName')
                     ->label('wcf.page.minecraftUserAddACP.minecraftName')
                     ->description('wcf.page.minecraftUserAddACP.minecraftName.description')

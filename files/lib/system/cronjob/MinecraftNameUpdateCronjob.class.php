@@ -46,6 +46,5 @@ class MinecraftNameUpdateCronjob extends AbstractCronjob
                 }
             }
         }
-
     }
 }
