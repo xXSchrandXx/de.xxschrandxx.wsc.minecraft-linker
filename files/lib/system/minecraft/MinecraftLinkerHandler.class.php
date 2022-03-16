@@ -2,29 +2,16 @@
 
 namespace wcf\system\minecraft;
 
+use GuzzleHttp\Exception\GuzzleException;
 use wcf\system\exception\MinecraftException;
-use wcf\data\minecraft\Minecraft;
-use wcf\data\minecraft\MinecraftList;
 use wcf\data\user\minecraft\MinecraftUserList;
-use wcf\system\SingletonFactory;
+use wcf\system\exception\SystemException;
+use wcf\system\WCF;
+use wcf\util\JSON;
 use wcf\util\StringUtil;
 
-class MinecraftLinkerHandler extends SingletonFactory
+class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler
 {
-    /**
-     * Liste der minecraftIDs
-     *
-     * @var array
-     */
-    protected $minecraftIDs = [];
-
-    /**
-     * Liste der Minecrafts
-     *
-     * @var array
-     */
-    protected $minecrafts = [];
-
     /**
      * Baut die Klasse auf
      */
@@ -33,69 +20,42 @@ class MinecraftLinkerHandler extends SingletonFactory
         if (MINECRAFT_LINKER_IDENTITY) {
             $this->minecraftIDs = explode('\n', StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
         }
-
-        if (empty($this->minecraftIDs)) {
-            return;
-        }
-
-        $minecraftList = new MinecraftList();
-        $minecraftList->setObjectIDs($this->minecraftIDs);
-        $minecraftList->readObjects();
-        $this->minecrafts = $minecraftList->getObjects();
-    }
-
-
-    /**
-     * Gibt den geforderten Minecraft zurück.
-     *
-     * @param  int $minecraftID
-     * @return Minecraft
-     */
-    public function getMinecraft(int $minecraftID)
-    {
-        if (empty($this->minecrafts[$minecraftID])) {
-            if (ENABLE_DEBUG_MODE) {
-                throw new MinecraftException('found no minecraft with this id');
-            }
-            return null;
-        }
-        return $this->minecrafts[$minecraftID];
+        parent::init();
     }
 
     /**
-     * Gibt alle Minecrafts zurück.
+     * Sends the code to the user.
+     * @param string $uuid minecraftUUID
+     * @param string $code code
      * @return array
      */
-    public function getMinecrafts()
+    public function sendCode($uuid, $code)
     {
-        return $this->minecrafts;
-    }
-
-    /**
-     * Gibt den Handler zurück.
-     * @param Minecraft $minecraft
-     * @return IMinecraftLinkerHandler
-     */
-    public function getHandler(minecraft $minecraft)
-    {
-        if ($minecraft == null) {
-            throw new MinecraftException('Unknown minecraft.');
+        foreach ($this->getOnlineMinecraftUsers() as $minecraftID => $userArray) {
+            if (array_key_exists($uuid, $userArray)) {
+                try {
+                    $response = $this->call($minecraftID, 'POST', 'sendCode', [
+                        'uuid' => $uuid,
+                        'code' => $code,
+                        'message' => WCF::getLanguage()->getDynamicVariable('wcf.minecraft.message', ['code' => $code]),
+                        'hover' => WCF::getLanguage()->get('wcf.minecraft.hoverMessage')
+                    ]);
+                    return JSON::decode($response->getBody());
+                } catch (GuzzleException | SystemException $e) {
+                    if (ENABLE_DEBUG_MODE) {
+                        \wcf\functions\exception\logThrowable($e);
+                    }
+                    return [
+                        'statusCode' => $e->getCode(),
+                        'status' => $e->getMessage()
+                    ];
+                }
+            }
         }
-        $handler = null;
-        switch ($minecraft->type) {
-            case 'vanilla':
-                $handler = new VanillaMinecraftLinkerHandler($minecraft);
-                break;
-            case 'spigot':
-                $handler = new SpigotMinecraftLinkerHandler($minecraft);
-                break;
-            case 'bungee':
-                $handler = new BungeeMinecraftLinkerHandler($minecraft);
-        }
-        if ($handler == null) {
-            throw new MinecraftException('Unknown type.');
-        }
-        return $handler;
+        return [
+            'statusCode' => 400,
+            'status' => 'User Disconnected.'
+        ];
     }
 
     /**
@@ -112,36 +72,22 @@ class MinecraftLinkerHandler extends SingletonFactory
      */
     public function getOnlineMinecraftUsers()
     {
-        foreach ($this->minecrafts as &$minecraft) {
-            $handler = $this->getHandler($minecraft);
-            $tmpOnlineUsers = $handler->getOnlineMinecraftUsers();
-            if (!empty($tmpOnlineUsers)) {
-                $this->onlineUsers += [$minecraft->minecraftID => $tmpOnlineUsers];
+        if (!empty($this->onlineUsers)) {
+            return $this->onlineUsers;
+        }
+        foreach ($this->minecraftIDs as $minecraftID) {
+            try {
+                /** @var \Psr\Http\Message\ResponseInterface */
+                $response = $this->call($minecraftID, 'GET', 'list');
+                $user = JSON::decode($response->getBody());
+                $this->onlineUsers[$minecraftID] = $user['user'];
+            } catch (GuzzleException | SystemException $e) {
+                if (ENABLE_DEBUG_MODE) {
+                    \wcf\functions\exception\logThrowable($e);
+                }
             }
         }
         return $this->onlineUsers;
-    }
-
-    /**
-     * Sends the code to the user.
-     * @param string $uuid minecraftUUID
-     * @param string|null $name name of the player
-     * @param string $code code
-     * @return bool Weather the code was sent successfully.
-     */
-    public function sendCode($uuid, $name, $code)
-    {
-        foreach ($this->getOnlineMinecraftUsers() as $minecraftID => $userArray) {
-            if (array_key_exists($uuid, $userArray)) {
-                if ($name == null) {
-                    $name = $userArray[$uuid];
-                }
-                $minecraft = $this->getMinecraft($minecraftID);
-                $handler = $this->getHandler($minecraft);
-                return $handler->sendCode($uuid, $name, $code);
-            }
-        }
-        return false;
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace wcf\form;
 
+use GuzzleHttp\Exception\GuzzleException;
 use wcf\page\MinecraftUserListPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
@@ -106,6 +107,16 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         $this->readOptions();
 
+        if (empty($this->options)) {
+            HeaderUtil::delayedRedirect(
+                LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
+                WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.noUnknownUsers'),
+                5,
+                'error'
+            );
+            exit;
+        }
+
         $this->form->appendChild(
             FormContainer::create('data')
                 ->appendChildren([
@@ -129,29 +140,24 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                             }
                             $this->code = bin2hex(\random_bytes(4));
 
+                            /** @var array */
                             $response = $this->mcsh->sendCode(
                                 $this->form->getData()['data']['minecraftUUID'],
-                                null,
                                 $this->code
                             );
-
-                            if (\is_array($response) && isset($response['error']) && $response['error'] == true) {
-                                if (isset($response['message'])) {
-                                    $field->addValidationError(
-                                        new FormFieldValidationError(
-                                            'sendCode',
-                                            'wcf.page.minecraftUserAdd.error.sendCodeDynamic',
-                                            ['msg' => $response['message']]
-                                        )
-                                    );
-                                } else {
-                                    $field->addValidationError(
-                                        new FormFieldValidationError(
-                                            'sendCode',
-                                            'wcf.page.minecraftUserAdd.error.sendCode'
-                                        )
-                                    );
-                                }
+                            if ($response['statusCode'] == 400) {
+                                new FormFieldValidationError(
+                                    'sendCode',
+                                    'wcf.page.minecraftUserAdd.error.sendCodeDynamic',
+                                    ['msg' => $response['status']]
+                                );
+                            } else if ($response['statusCode'] == 500) {
+                                $field->addValidationError(
+                                    new FormFieldValidationError(
+                                        'sendCode',
+                                        'wcf.page.minecraftUserAdd.error.sendCode'
+                                    )
+                                );
                             }
                         }))
                 ])
@@ -206,16 +212,6 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     protected function readOptions()
     {
         $unknownUsers = $this->mcsh->getUnknownMinecraftUsers();
-
-        if (empty($unknownUsers)) {
-            HeaderUtil::delayedRedirect(
-                LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
-                WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.noUnknownUsers'),
-                5,
-                'error'
-            );
-            exit;
-        }
 
         foreach ($unknownUsers as $minecraftID => $uuidArray) {
             foreach ($uuidArray as $uuid => $name) {

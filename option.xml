@@ -9,9 +9,6 @@
 			<category name="minecraft_linker_general">
 				<parent>minecraft_linker</parent>
 			</category>
-			<category name="minecraft_linker_commands">
-				<parent>minecraft_linker</parent>
-			</category>
 		</categories>
 		<options>
 			<option name="minecraft_linker_enabled">
@@ -40,16 +37,11 @@
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
-			<option name="minecraft_command_list">
-				<categoryname>minecraft_linker_commands</categoryname>
-				<optiontype>text</optiontype>
-				<defaultvalue>list uuids</defaultvalue>
-			</option>
-			<option name="minecraft_command_sendcode">
-				<categoryname>minecraft_linker_commands</categoryname>
-				<optiontype>text</optiontype>
-				<defaultvalue>tellraw {$name} [{"text":"{lang}wcf.minecraft.message{/lang}","clickEvent":{"action":"copy_to_clipboard","value":"{$code}"},"hoverEvent":{"action":"show_text","contents":["{lang}wcf.minecraft.hoverMessage{/lang}"]}}]</defaultvalue>
-			</option>
 		</options>
 	</import>
+	<delete>
+		<option name="minecraft_command_list" />
+		<option name="minecraft_command_sendcode" />
+		<optioncategory name="minecraft_linker_commands" />
+	</delete>
 </data>

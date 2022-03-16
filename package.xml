@@ -18,13 +18,12 @@
 	
 	<requiredpackages>
 		<requiredpackage minversion="5.4.8">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="1.0.6"
-			file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar">de.xxschrarndxx.wsc.minecraft-api
-		</requiredpackage>
+		<requiredpackage minversion="1.0.0" file="requirements/de.xxschrandxx.wsc.minecraft-api.tar">de.xxschrandxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
-	
+
 	<excludedpackages>
 		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage>de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
 	
 	<instructions type="install">
@@ -46,6 +45,7 @@
 	<instructions type="update">
 		<instruction type="cronjob"/>
 		<instruction type="file"/>
-		<!-- TODO Add option for cronjob -->
+		<instruction type="option"/>
+		<instruction type="database">acp/database/update_de.xxschrandxx.wsc.minecraft-linker_1.0.5.php</instruction>
 	</instructions>
 </package>
