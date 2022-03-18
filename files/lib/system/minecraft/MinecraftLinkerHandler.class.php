@@ -3,14 +3,13 @@
 namespace wcf\system\minecraft;
 
 use GuzzleHttp\Exception\GuzzleException;
-use wcf\system\exception\MinecraftException;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\JSON;
 use wcf\util\StringUtil;
 
-class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler
+class MinecraftLinkerHandlere extends AbstractMultipleMinecraftHandler implements IMinecraftHandler
 {
     /**
      * Baut die Klasse auf
