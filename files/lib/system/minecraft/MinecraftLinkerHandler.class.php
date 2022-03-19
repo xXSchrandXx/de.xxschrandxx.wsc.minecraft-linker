@@ -9,7 +9,7 @@ use wcf\system\WCF;
 use wcf\util\JSON;
 use wcf\util\StringUtil;
 
-class MinecraftLinkerHandlere extends AbstractMultipleMinecraftHandler implements IMinecraftHandler
+class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements IMinecraftLinkerHandler
 {
     /**
      * Baut die Klasse auf
@@ -17,7 +17,7 @@ class MinecraftLinkerHandlere extends AbstractMultipleMinecraftHandler implement
     public function init()
     {
         if (MINECRAFT_LINKER_IDENTITY) {
-            $this->minecraftIDs = explode('\n', StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
+            $this->minecraftIDs = explode("\n", StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
         }
         parent::init();
     }
@@ -78,8 +78,8 @@ class MinecraftLinkerHandlere extends AbstractMultipleMinecraftHandler implement
             try {
                 /** @var \Psr\Http\Message\ResponseInterface */
                 $response = $this->call($minecraftID, 'GET', 'list');
-                $user = JSON::decode($response->getBody());
-                $this->onlineUsers[$minecraftID] = $user['user'];
+                $responseBody = JSON::decode($response->getBody());
+                $this->onlineUsers[$minecraftID] = $responseBody['user'];
             } catch (GuzzleException | SystemException $e) {
                 if (ENABLE_DEBUG_MODE) {
                     \wcf\functions\exception\logThrowable($e);
