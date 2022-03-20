@@ -15,6 +15,12 @@ use wcf\data\user\UserAction;
  */
 class MinecraftUserAction extends AbstractDatabaseObjectAction
 {
+
+    /**
+     * @inheritDoc
+     */
+    protected $className = MinecraftUserEditor::class;
+
     /**
      * @inheritDoc
      */

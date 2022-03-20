@@ -31,6 +31,8 @@
                             <tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->minecraftUserID}">
                                 <td>
                                     {objectAction action="delete" objectTitle=$minecraftUser->title}
+									{event name='addMinecraftButtons'}
+									{event name='rowButtons'}
                                 </td>
                                 <td>{@$minecraftUser->minecraftUserID}</td>
                                 <td>{$minecraftUser->title}</td>
