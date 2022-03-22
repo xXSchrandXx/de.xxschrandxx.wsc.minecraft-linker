@@ -4,6 +4,7 @@ namespace wcf\system\minecraft;
 
 use GuzzleHttp\Exception\GuzzleException;
 use wcf\data\user\minecraft\MinecraftUserList;
+use wcf\system\exception\MinecraftException;
 use wcf\system\exception\SystemException;
 use wcf\system\WCF;
 use wcf\util\JSON;
@@ -48,6 +49,14 @@ class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements
                         'statusCode' => $e->getCode(),
                         'status' => $e->getMessage()
                     ];
+                } catch (MinecraftException $e) {
+                    if (ENABLE_DEBUG_MODE) {
+                        \wcf\functions\exception\logThrowable($e);
+                    }
+                    return [
+                        'statusCode' => $e->getCode(),
+                        'status' => $e->getMessage()
+                    ];
                 }
             }
         }
@@ -80,7 +89,7 @@ class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements
                 $response = $this->call($minecraftID, 'GET', 'list');
                 $responseBody = JSON::decode($response->getBody());
                 $this->onlineUsers[$minecraftID] = $responseBody['user'];
-            } catch (GuzzleException | SystemException $e) {
+            } catch (GuzzleException | SystemException | MinecraftException $e) {
                 if (ENABLE_DEBUG_MODE) {
                     \wcf\functions\exception\logThrowable($e);
                 }

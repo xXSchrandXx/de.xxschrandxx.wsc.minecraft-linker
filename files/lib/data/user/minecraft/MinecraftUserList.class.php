@@ -12,5 +12,4 @@ use wcf\data\DatabaseObjectList;
  */
 class MinecraftUserList extends DatabaseObjectList
 {
-
 }

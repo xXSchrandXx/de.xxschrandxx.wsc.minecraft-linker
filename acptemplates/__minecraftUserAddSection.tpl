@@ -30,7 +30,6 @@
 						{foreach from=$minecraftUsers item=minecraftUser}
 							<tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->minecraftUserID}">
 								<td>
-									{event name='addMinecraftButtons'}
 									{objectAction action="delete" objectTitle=$minecraftUser->title}
 									{event name='rowButtons'}
 								</td>
