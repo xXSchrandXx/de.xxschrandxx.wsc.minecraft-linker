@@ -15,7 +15,7 @@ class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements
     /**
      * Baut die Klasse auf
      */
-    public function init()
+    public function init(): void
     {
         if (MINECRAFT_LINKER_IDENTITY) {
             $this->minecraftIDs = explode("\n", StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
