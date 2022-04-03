@@ -9,13 +9,22 @@
 			<category name="minecraft_linker_general">
 				<parent>minecraft_linker</parent>
 			</category>
+			<category name="minecraft_linker_password">
+				<parent>minecraft_linker</parent>
+			</category>
 		</categories>
 		<options>
 			<option name="minecraft_linker_enabled">
 				<categoryname>minecraft_linker_general</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<enableoptions>minecraft_linker_identity,minecraft_max_uuids,minecraft_enable_active_user</enableoptions>
+				<enableoptions>
+					minecraft_linker_identity,
+					minecraft_max_uuids,
+					minecraft_name_enabled,
+					minecraft_enable_active_user,
+					minecraft_password_page
+				</enableoptions>
 			</option>
 			<option name="minecraft_linker_identity">
 				<categoryname>minecraft_linker_general</categoryname>
@@ -36,6 +45,15 @@
 				<categoryname>minecraft_linker_general</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>0</defaultvalue>
+			</option>
+			<option name="minecraft_linker_password_enabled">
+				<categoryname>minecraft_linker_password</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<option name="minecraft_linker_password_key">
+				<categoryname>minecraft_linker_password</categoryname>
+				<optiontype>text</optiontype>
 			</option>
 		</options>
 	</import>
