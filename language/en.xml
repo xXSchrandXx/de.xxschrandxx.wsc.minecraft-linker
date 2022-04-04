@@ -10,6 +10,7 @@
 		<item name="wcf.acp.option.category.minecraft_linker"><![CDATA[Minecraft-Linker]]></item>
 		<item name="wcf.acp.option.category.minecraft_linker_commands"><![CDATA[Commands]]></item>
 		<item name="wcf.acp.option.category.minecraft_linker_general"><![CDATA[General Settings]]></item>
+		<item name="wcf.acp.option.category.minecraft_linker_password"><![CDATA[Minecraft-Authenticator]]></item>
 		<item name="wcf.acp.option.minecraft_command_list"><![CDATA[List command]]></item>
 		<item name="wcf.acp.option.minecraft_command_list.description"><![CDATA[This command is only used for vanilla servers.]]></item>
 		<item name="wcf.acp.option.minecraft_command_sendcode"><![CDATA[Verification code command]]></item>
@@ -24,6 +25,10 @@
 		<item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Connections]]></item>
 		<item name="wcf.acp.option.minecraft_name_enabled"><![CDATA[Activate names]]></item>
 		<item name="wcf.acp.option.minecraft_name_enabled.description"><![CDATA[Enables saving and updating of names in addition to UUIDs.]]></item>
+		<item name="wcf.acp.option.minecraft_linker_password_enabled"><![CDATA[Enables Minecraft-Authentificator]]></item>
+		<item name="wcf.acp.option.minecraft_linker_password_enabled.description"><![CDATA[Enables the action for <a href="https://www.spigotmc.org/resources/wsc-minecraft-authenticator.101169/">WSC-Minecraft-Authenticator</a>.]]></item>
+		<item name="wcf.acp.option.minecraft_linker_password_key"><![CDATA[Key]]></item>
+		<item name="wcf.acp.option.minecraft_linker_password_key.description"><![CDATA[Key out of WSC-Minecraft-Authenticator Configuration.]]></item>
 	</category>
 	<category name="wcf.page.minecraftUserAddACP">
 		<item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Add Minecraft-Link]]></item>
