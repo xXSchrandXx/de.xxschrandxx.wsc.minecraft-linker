@@ -1,4 +1,4 @@
-#!/bin/bash
+#/bin/bash
 PACKAGE_NAME=de.xxschrandxx.wsc.minecraft-linker
 PACKAGE_TYPES=(acptemplates files templates)
 
