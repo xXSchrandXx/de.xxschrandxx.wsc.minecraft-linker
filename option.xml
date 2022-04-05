@@ -55,6 +55,17 @@
 				<categoryname>minecraft_linker_password</categoryname>
 				<optiontype>text</optiontype>
 			</option>
+			<option name="minecraft_linker_floodgate_resettime">
+				<categoryname>minecraft_linker_password</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>10</defaultvalue>
+				<suffix>minutes</suffix>
+			</option>
+			<option name="minecraft_linker_floodgate_maxrequests">
+				<categoryname>minecraft_linker_password</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>600</defaultvalue>
+			</option>
 		</options>
 	</import>
 	<delete>

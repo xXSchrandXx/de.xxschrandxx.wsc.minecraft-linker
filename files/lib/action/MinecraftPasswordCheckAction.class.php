@@ -4,7 +4,9 @@ namespace wcf\action;
 
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\User;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
+use wcf\system\flood\FloodControl;
 use wcf\util\JSON;
 
 class MinecraftPasswordCheckAction extends AbstractAction
@@ -14,16 +16,35 @@ class MinecraftPasswordCheckAction extends AbstractAction
      */
     public $neededModules = ['MINECRAFT_LINKER_PASSWORD_ENABLED','MINECRAFT_LINKER_PASSWORD_KEY'];
 
-    private function getUser(string $uuid): User
+    private string $d = 'de.xxschrandxx.wsc.minecraft-linker.passwordcheck';
+
+    /**
+     * @inheritDoc
+     */
+    public function __run()
     {
-        $minecraftUserList = new MinecraftUserList();
-        $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$uuid]);
-        $minecraftUserList->readObjects();
-        $minecraftUsers = $minecraftUserList->getObjects();
-        if (empty($minecraftUsers)) {
-            throw new UserInputException();
+        FloodControl::getInstance()->registerContent($this->d);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function checkPermissions()
+    {
+        parent::checkPermissions();
+
+        if (MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS <= 0) {
+            return;
         }
-        return new User(array_values($minecraftUsers)[0]->userID);
+        $data = FloodControl::getInstance()->countContent($this->d, new \DateInterval('PT' . MINECRAFT_LINKER_FLOODGATE_RESETTIME . 'M'));
+        if ($data['count'] > MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS) {
+            echo JSON::encode([
+                'status' => 'Too Many Requests',
+                'statusCode' => 429,
+                'valid' => false
+            ]);
+            exit;
+        }
     }
 
     /**
@@ -91,5 +112,20 @@ class MinecraftPasswordCheckAction extends AbstractAction
                 'valid' => false
             ]);
         }
+    }
+
+    /**
+     * 
+     */
+    private function getUser(string $uuid): User
+    {
+        $minecraftUserList = new MinecraftUserList();
+        $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$uuid]);
+        $minecraftUserList->readObjects();
+        $minecraftUsers = $minecraftUserList->getObjects();
+        if (empty($minecraftUsers)) {
+            throw new UserInputException();
+        }
+        return new User(array_values($minecraftUsers)[0]->userID);
     }
 }

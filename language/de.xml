@@ -29,6 +29,9 @@
 		<item name="wcf.acp.option.minecraft_linker_password_enabled.description"><![CDATA[Aktiviert die Aktion für <a href="https://www.spigotmc.org/resources/wsc-minecraft-authenticator.101169/">WSC-Minecraft-Authenticator</a>.]]></item>
 		<item name="wcf.acp.option.minecraft_linker_password_key"><![CDATA[Key]]></item>
 		<item name="wcf.acp.option.minecraft_linker_password_key.description"><![CDATA[Key aus der WSC-Minecraft-Authenticator Konfiguration.]]></item>
+		<item name="wcf.acp.option.minecraft_linker_floodgate_resettime"><![CDATA[Resetzeit]]></item>
+		<item name="wcf.acp.option.minecraft_linker_floodgate_maxrequests"><![CDATA[Maximale Anfragen]]></item>
+		<item name="wcf.acp.option.minecraft_linker_floodgate_maxrequests.description"><![CDATA[Setze <code>-1</code> zum deaktivieren.]]></item>
 	</category>
 	<category name="wcf.page.minecraftUserAddACP">
 		<item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
