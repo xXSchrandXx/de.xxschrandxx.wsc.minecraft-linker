@@ -4,7 +4,6 @@ namespace wcf\action;
 
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\User;
-use wcf\system\exception\PermissionDeniedException;
 use wcf\system\exception\UserInputException;
 use wcf\system\flood\FloodControl;
 use wcf\util\JSON;
