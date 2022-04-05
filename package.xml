@@ -53,6 +53,7 @@
 		<instruction type="file"/>
 		<instruction type="language"/>
 		<instruction type="template"/>
+		<instruction type="objectType"/>
 		<instruction type="option"/>
 		<instruction type="database">acp/database/update_de.xxschrandxx.wsc.minecraft-linker_1.0.5.php</instruction>
 	</instructions>

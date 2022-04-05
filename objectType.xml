@@ -22,5 +22,10 @@
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
 			<classname>wcf\system\condition\MinecraftUUIDCondition</classname>
 		</type>
+		<type>
+			<name>de.xxschrandxx.wsc.minecraftLinker.passwordcheck</name>
+			<definitionname>com.woltlab.wcf.floodControl</definitionname>
+			<classname>wcf\action\MinecraftPasswordCheckAction</classname>
+		</type>
 	</import>
 </data>
