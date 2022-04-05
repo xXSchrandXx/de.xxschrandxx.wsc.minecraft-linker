@@ -5,7 +5,6 @@ namespace wcf\action;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\User;
 use wcf\system\exception\UserInputException;
-use wcf\system\flood\FloodControl;
 use wcf\util\JSON;
 
 class MinecraftPasswordCheckAction extends AbstractAction
@@ -22,7 +21,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
      */
     public function __run()
     {
-        FloodControl::getInstance()->registerContent($this->d);
+        parent::__run();
     }
 
     /**
@@ -32,18 +31,6 @@ class MinecraftPasswordCheckAction extends AbstractAction
     {
         parent::checkPermissions();
 
-        if (MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS <= 0) {
-            return;
-        }
-        $data = FloodControl::getInstance()->countContent($this->d, new \DateInterval('PT' . MINECRAFT_LINKER_FLOODGATE_RESETTIME . 'M'));
-        if ($data['count'] > MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS) {
-            echo JSON::encode([
-                'status' => 'Too Many Requests',
-                'statusCode' => 429,
-                'valid' => false
-            ]);
-            exit;
-        }
     }
 
     /**
