@@ -14,16 +14,6 @@ class MinecraftPasswordCheckAction extends AbstractAction
      */
     public $neededModules = ['MINECRAFT_LINKER_PASSWORD_ENABLED','MINECRAFT_LINKER_PASSWORD_KEY'];
 
-    private string $d = 'de.xxschrandxx.wsc.minecraft-linker.passwordcheck';
-
-    /**
-     * @inheritDoc
-     */
-    public function __run()
-    {
-        parent::__run();
-    }
-
     /**
      * @inheritDoc
      */
@@ -31,6 +21,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
     {
         parent::checkPermissions();
 
+        // TODO add whitelist and floodgate
     }
 
     /**
