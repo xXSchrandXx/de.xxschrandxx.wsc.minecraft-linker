@@ -54,7 +54,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
         parent::execute();
 
         if (empty($_POST)) {
-             echo JSON::encode([
+            echo JSON::encode([
                 'status' => 'request empty',
                 'statusCode' => 400,
                 'valid' => false
@@ -113,9 +113,6 @@ class MinecraftPasswordCheckAction extends AbstractAction
         }
     }
 
-    /**
-     * 
-     */
     private function getUser(string $uuid): User
     {
         $minecraftUserList = new MinecraftUserList();
