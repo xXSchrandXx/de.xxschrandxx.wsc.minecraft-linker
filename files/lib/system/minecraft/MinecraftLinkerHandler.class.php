@@ -34,12 +34,15 @@ class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements
         foreach ($this->getOnlineMinecraftUsers() as $minecraftID => $userArray) {
             if (array_key_exists($uuid, $userArray)) {
                 try {
-                    $response = $this->call($minecraftID, 'POST', 'sendCode', [
+                    $response = $this->call('POST', 'sendCode', [
                         'uuid' => $uuid,
                         'code' => $code,
                         'message' => WCF::getLanguage()->getDynamicVariable('wcf.minecraft.message', ['code' => $code]),
                         'hover' => WCF::getLanguage()->get('wcf.minecraft.hoverMessage')
-                    ]);
+                    ], $minecraftID);
+                    if ($response === null) {
+                        throw new MinecraftException("Could not get online userss on server with id " . $minecraftID);
+                    }
                     return JSON::decode($response->getBody());
                 } catch (GuzzleException | SystemException $e) {
                     if (ENABLE_DEBUG_MODE) {
@@ -86,7 +89,10 @@ class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements
         foreach ($this->minecraftIDs as $minecraftID) {
             try {
                 /** @var \Psr\Http\Message\ResponseInterface */
-                $response = $this->call($minecraftID, 'GET', 'list');
+                $response = $this->call('GET', 'list', [], $minecraftID);
+                if ($response === null) {
+                    throw new MinecraftException("Could not get online userss on server with id " . $minecraftID);
+                }
                 $responseBody = JSON::decode($response->getBody());
                 $this->onlineUsers[$minecraftID] = $responseBody['user'];
             } catch (GuzzleException | SystemException | MinecraftException $e) {
