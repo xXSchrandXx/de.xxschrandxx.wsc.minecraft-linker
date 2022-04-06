@@ -38,8 +38,8 @@ class MinecraftPasswordCheckAction extends AbstractAction
         if (MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS <= 0) {
             return;
         }
-        $millis = MINECRAFT_LINKER_FLOODGATE_RESETTIME * 60;
-        $time = \ceil(TIME_NOW / $millis) * $millis;
+        $secs = MINECRAFT_LINKER_FLOODGATE_RESETTIME * 60;
+        $time = \ceil(TIME_NOW / $secs) * $secs;
         $data = FloodControl::getInstance()->countContent($this->d, new \DateInterval('PT' . MINECRAFT_LINKER_FLOODGATE_RESETTIME . 'M'), $time);
         if ($data['count'] > MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS) {
             echo JSON::encode([
