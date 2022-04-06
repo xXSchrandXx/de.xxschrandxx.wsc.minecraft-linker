@@ -35,7 +35,6 @@ class MinecraftPasswordCheckAction extends AbstractAction
     {
         parent::checkPermissions();
 
-        // TODO add whitelist and floodgate
         if (MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS <= 0) {
             return;
         }
