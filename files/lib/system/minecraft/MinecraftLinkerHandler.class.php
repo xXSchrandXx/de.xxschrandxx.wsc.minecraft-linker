@@ -41,7 +41,7 @@ class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements
                         'hover' => WCF::getLanguage()->get('wcf.minecraft.hoverMessage')
                     ], $minecraftID);
                     if ($response === null) {
-                        throw new MinecraftException("Could not get online userss on server with id " . $minecraftID);
+                        throw new MinecraftException("Could not get online users on server with id " . $minecraftID);
                     }
                     return JSON::decode($response->getBody());
                 } catch (GuzzleException | SystemException $e) {

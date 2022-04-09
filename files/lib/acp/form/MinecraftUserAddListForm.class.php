@@ -165,6 +165,16 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
+    public function saved()
+    {
+        $this->options = [];
+        parent::saved();
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function setFormAction()
     {
         $this->form->action(LinkHandler::getInstance()->getControllerLink(static::class, ['id' => $this->user->userID]));
