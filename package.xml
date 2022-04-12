@@ -3,7 +3,7 @@
 	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/vortex/package.xsd">
 	<packageinformation>
-		<packagename><![CDATA[Minecraft Linker]]></packagename>
+		<packagename><![CDATA[Minecraft-Linker]]></packagename>
 		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
 		<packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
 		<packagedescription language="de">
@@ -19,7 +19,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="5.4.8">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.0">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="2.0.0" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
