@@ -1,31 +1,17 @@
-Languages: [German](#----german) | [English](#----english)
-"Minecraft"™ is a trademark of Mojang Synergies AB. This Resource ist not affiliate with Mojang.
-<h1>
-    English
-</h1>
-<h2>
-    General
-</h2>
-<h3>
-    Plugin description
-</h3>
-<p>This plugin is an interface between other plugins and the <a href="https://www.woltlab.com/pluginstore/file/7185-minecraft-api/">Minecraft-API</a>.</p>
-<p>Minecraft Linker lets users link their Minecraft UUID (s) to their WSC account.</p>
-<p>It does not matter whether the Minecraft server is online or offline. The user will be sent a confirmation code on the Minecraft server with which they can unlock themselves in the WSC.</p>
-<h3>
-    Requirements
-</h3>
-<p>This plugin requires <a href="https://www.woltlab.com/pluginstore/file/7185-minecraft-api/">Minecraft-API</a> (Included in the package).</p>
-<h3>
-    Links
-</h3>
-<p>Github: <a href="https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-linker">xXSchrandXx/de.xxschrandxx.wsc.minecraft-linker</a></p>
-<p>Minecraft-API: <a href="https://www.woltlab.com/pluginstore/file/7185-minecraft-api/">Minecraft-API</a></p>
-<p>WSC-Minecraft-Bridge: <a href="https://www.spigotmc.org/resources/wsc-minecraft-bridge.100716/">WSC-Minecraft-Bridge</a></p>
-<h2>
-    API-Usage
-</h2>
+Quicklinks: [General](#general) | [API](#api) | [Links](#links) | [License]https://github.com/xXSchrandXx/de.xxschrarndxx.wsc.minecraft-api/blob/main/LICENSE)
 
+"Minecraft"™ is a trademark of Mojang Synergies AB. This Resource ist not affiliate with Mojang.
+
+# General
+## Description
+This plugin is an interface between other plugins and the Minecraft-API.
+Minecraft Linker lets users link their Minecraft UUID (s) to their WSC account.
+It does not matter whether `online-mode` is activated or deactivated. The user will be sent a confirmation code on the Minecraft server with which they can unlock themselves in the WSC.
+## Requirements
+1. [Minecraft-API](#links) installed on WoltLab.
+2. [WSC-Minecraft-Bridge](#links) installed on your Bukkit- / Spigot- / BungeeCord-Server.
+# API
+## Eventlistener
 ```XML
 <eventlistener name="MyEventExample">
     <eventclassname>wcf\data\user\minecraft\MinecraftAction</eventclassname>
@@ -33,18 +19,16 @@ Languages: [German](#----german) | [English](#----english)
     <listenerclassname>wcf\system\event\listener\MyEventListenerExample</listenerclassname>
 </eventlistener>
 ```
-
 ```PHP
-<?php
 namespace wcf\system\event\listener;
 
 class MyEventListenerExample implements IParameterizedEventListener {
     public function execute($eventObj, $className, $eventName, array &$parameters) {
         $action = $eventObj->action;
         if ($action = 'create') {
-            $minecraft = $eventObj->parameters['data'];
+            $minecraft == $eventObj->parameters['data'];
             // Do stuff
-        } else if ($action = 'delete') {
+        } else if ($action == 'delete') {
             foreach ($eventObj->getObjects() as $minecraft) {
                 // Do stuff
             }
@@ -52,55 +36,28 @@ class MyEventListenerExample implements IParameterizedEventListener {
     }
 }
 ```
-<h1>
-    German
-</h1>
-<h2>
-    Allgemeines
-</h2>
-<h3>
-    Plugin-Beschreibung
-</h3>
-<p>Dieses Plugin ist eine Schnittstelle zwischen anderen Plugins und der <a href="https://www.woltlab.com/pluginstore/file/7185-minecraft-api/">Minecraft-API</a>.</p>
-<p>Minecraft-Linker lässt Benutzer Ihre Minecraft-UUID(s) mit Ihrem WSC-Account verknüpfen.</p>
-<p>Dabei ist es egal, ob online oder offline Minecraft-Server. Dem Benutzer wird ein Bestätigungscode auf dem Minecraft-Server zugeschickt mit welchem er sich im WSC freischaltet.</p>
-<h3>
-    Voraussetzungen
-</h3>
-<p>Dieses Plugin benötigt <a href="https://www.woltlab.com/pluginstore/file/7185-minecraft-api/">Minecraft-API</a> (Im Packet mit enthalten).</p>
-<p>Um BungeeCord oder Spigot Features nutzen zu können, benötigt ihr das Spigot-Plugin: Minecraft-Linker.</p>
-<h3>
-    Links
-</h3>
-<p>Minecraft-API: <a href="https://www.woltlab.com/pluginstore/file/7185-minecraft-api/">Minecraft-API</a></p>
-<p>WSC-Minecraft-Bridge: <a href="https://www.spigotmc.org/resources/wsc-minecraft-bridge.100716/">WSC-Minecraft-Bridge</a></p>
-<h2>
-    API-Gebrauch
-</h2>
+# Links
+## GitHub
+* [xXSchrandXx/de.xxschrandxx.wsc.minecraft-api](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-api)
+* [xXSchrandXx/de.xxschrandxx.wsc.minecraft-linker](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-linker)
+* [xXSchrandXx/de.xxschrandxx.wsc.minecraft-sync](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-sync)
+* [xXSchrandXx/de.xxschrandxx.wsc.minecraft-profile](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-profile)
+* [xXSchrandXx/WSC-Minecraft-Bridge](https://github.com/xXSchrandXx/WSC-Minecraft-Bridge)
+* [xXSchrandXx/WSC-Minecraft-Authenticator](https://github.com/xXSchrandXx/WSC-Minecraft-Authenticator)
 
+## WoltLab
+* [Plugin-Store/Minecraft-API](https://www.woltlab.com/pluginstore/file/7077-minecraft-api/)
+* [Plugin-Store/Minecraft-Linker](https://www.woltlab.com/pluginstore/file/7093-minecraft-linker/)
+## Spigot
+* [Resources/WSC-Minecraft-Bridge](https://www.spigotmc.org/resources/wsc-minecraft-bridge.100716/)
+* [Resources/WSC-Minecraft-Authenticator](https://www.spigotmc.org/resources/wsc-minecraft-authenticator.101169/)
+## JavaDocs
+* [Docs/wscbridge](https://maven.gamestrike.de/docs/wscbridge/)
+* [Docs/wscauthenticator](https://maven.gamestrike.de/docs/wscauthenticator/)
+## Maven
 ```XML
-<eventlistener name="MyEventExample">
-    <eventclassname>wcf\data\user\minecraft\MinecraftAction</eventclassname>
-    <eventname>finalizeAction</eventname>
-    <listenerclassname>wcf\system\event\listener\MyEventListenerExample</listenerclassname>
-</eventlistener>
-```
-
-```PHP
-<?php
-namespace wcf\system\event\listener;
-
-class MyEventListenerExample implements IParameterizedEventListener {
-    public function execute($eventObj, $className, $eventName, array &$parameters) {
-        $action = $eventObj->action;
-        if ($action = 'create') {
-            $minecraft = $eventObj->parameters['data'];
-            // Sachen machen
-        } else if ($action = 'delete') {
-            foreach ($eventObj->getObjects() as $minecraft) {
-                // Sachen machen
-            }
-        }
-    }
-}
+<repository>
+	<id>schrand-repo</id>
+	<url>https://maven.gamestrike.de/mvn/</url>
+</repository>
 ```
