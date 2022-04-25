@@ -13,9 +13,15 @@ use wcf\system\form\builder\field\TitleFormField;
 use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\system\request\LinkHandler;
-use wcf\system\minecraft\MinecraftLinkerHandler;
 use wcf\system\WCF;
 
+/**
+ * MinecraftUser add via text acp form class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\Acp\Form
+ */
 class MinecraftUserAddTextForm extends AbstractFormBuilderForm
 {
     /**

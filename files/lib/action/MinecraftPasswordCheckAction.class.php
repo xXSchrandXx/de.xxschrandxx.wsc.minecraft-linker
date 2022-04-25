@@ -8,6 +8,13 @@ use wcf\system\exception\UserInputException;
 use wcf\system\flood\FloodControl;
 use wcf\util\JSON;
 
+/**
+ * MinecraftPasswordCheck action class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\Action
+ */
 class MinecraftPasswordCheckAction extends AbstractAction
 {
     /**

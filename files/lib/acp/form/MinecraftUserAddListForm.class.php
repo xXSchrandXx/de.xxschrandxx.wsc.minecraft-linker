@@ -16,6 +16,13 @@ use wcf\system\request\LinkHandler;
 use wcf\system\minecraft\MinecraftLinkerHandler;
 use wcf\system\WCF;
 
+/**
+ * MinecraftUser add via list acp form class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\Acp\Form
+ */
 class MinecraftUserAddListForm extends AbstractFormBuilderForm
 {
     /**

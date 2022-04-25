@@ -2,7 +2,6 @@
 
 namespace wcf\form;
 
-use GuzzleHttp\Exception\GuzzleException;
 use wcf\page\MinecraftUserListPage;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
@@ -16,6 +15,13 @@ use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 
+/**
+ * MinecraftUser add form class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\Form
+ */
 class MinecraftUserAddForm extends AbstractFormBuilderForm
 {
     /**

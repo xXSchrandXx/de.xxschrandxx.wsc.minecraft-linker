@@ -5,6 +5,13 @@ namespace wcf\system\event\listener;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\system\WCF;
 
+/**
+ * MinecraftUser acp edit listener class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\System\Event\Listener
+ */
 class MinecraftACPUserEditListener implements IParameterizedEventListener
 {
     /**

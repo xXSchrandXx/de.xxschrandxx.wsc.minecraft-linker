@@ -3,9 +3,6 @@
 namespace wcf\data\user\minecraft;
 
 use wcf\data\DatabaseObject;
-use wcf\system\exception\MinecraftException;
-use wcf\system\minecraft\IMinecraftHandler;
-use wcf\system\minecraft\MinecraftConnectionHandler;
 
 /**
  * MinecraftUser Data class

@@ -10,6 +10,13 @@ use wcf\system\WCF;
 use wcf\util\JSON;
 use wcf\util\StringUtil;
 
+/**
+ * MinecraftLinker Handler class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\System\Minecraft
+ */
 class MinecraftLinkerHandler extends AbstractMultipleMinecraftHandler implements IMinecraftLinkerHandler
 {
     /**

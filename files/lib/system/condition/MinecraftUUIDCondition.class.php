@@ -9,6 +9,13 @@ use wcf\data\DatabaseObjectList;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
+/**
+ * MinecraftLinker uuid condition class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\System\Condition
+ */
 class MinecraftUUIDCondition extends AbstractCondition implements IUserCondition, IObjectListCondition
 {
     use TObjectListUserCondition;

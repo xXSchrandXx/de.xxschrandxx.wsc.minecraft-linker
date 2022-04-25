@@ -8,6 +8,13 @@ use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
 use wcf\system\WCF;
 
+/**
+ * MinecraftLinker linked condition class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\System\Condition
+ */
 class MinecraftLinkedCondition extends AbstractCondition implements IUserCondition, IObjectListCondition
 {
     use TObjectListUserCondition;

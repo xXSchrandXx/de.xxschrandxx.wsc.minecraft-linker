@@ -16,6 +16,13 @@ use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
 use wcf\util\HeaderUtil;
 
+/**
+ * MinecraftUser check form class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\Form
+ */
 class MinecraftUserCheckForm extends AbstractFormBuilderForm
 {
     /**

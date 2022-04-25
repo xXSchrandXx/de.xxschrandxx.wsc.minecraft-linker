@@ -7,6 +7,13 @@ use wcf\data\user\minecraft\MinecraftUserEditor;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\system\minecraft\MinecraftLinkerHandler;
 
+/**
+ * MinecraftName update class class
+ *
+ * @author   xXSchrandXx
+ * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+ * @package  WoltLabSuite\Core\System\Cronjob
+ */
 class MinecraftNameUpdateCronjob extends AbstractCronjob
 {
     /**
