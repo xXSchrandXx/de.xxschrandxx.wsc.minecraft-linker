@@ -10,7 +10,7 @@
 			<![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]>
 		</packagedescription>
 		<version>2.0.0</version>
-		<date>2022-04-04</date>
+		<date>2022-04-27</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -19,7 +19,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="5.4.8">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.0" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="2.0.0" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar.gz">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
