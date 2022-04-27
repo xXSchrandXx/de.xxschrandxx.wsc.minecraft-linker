@@ -24,6 +24,7 @@
 
 	<excludedpackages>
 		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+		<excludedpackage version="3.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
 
 	<instructions type="install">
@@ -43,6 +44,36 @@
 	</instructions>
 
 	<instructions type="update">
+		<instruction type="acpTemplate"/>
+		<instruction type="cronjob"/>
+		<instruction type="file"/>
+		<instruction type="language"/>
+		<instruction type="template"/>
+		<instruction type="objectType"/>
+		<instruction type="option"/>
+		<instruction type="database">acp/database/update_de.xxschrandxx.wsc.minecraft-linker_1.0.5.php</instruction>
+	</instructions>
+	<instructions type="update" fromversion="1.0.4 pl 2">
+		<instruction type="acpTemplate"/>
+		<instruction type="cronjob"/>
+		<instruction type="file"/>
+		<instruction type="language"/>
+		<instruction type="template"/>
+		<instruction type="objectType"/>
+		<instruction type="option"/>
+		<instruction type="database">acp/database/update_de.xxschrandxx.wsc.minecraft-linker_1.0.5.php</instruction>
+	</instructions>
+	<instructions type="update" fromversion="1.0.4 pl 1">
+		<instruction type="acpTemplate"/>
+		<instruction type="cronjob"/>
+		<instruction type="file"/>
+		<instruction type="language"/>
+		<instruction type="template"/>
+		<instruction type="objectType"/>
+		<instruction type="option"/>
+		<instruction type="database">acp/database/update_de.xxschrandxx.wsc.minecraft-linker_1.0.5.php</instruction>
+	</instructions>
+	<instructions type="update" fromversion="1.0.4">
 		<instruction type="acpTemplate"/>
 		<instruction type="cronjob"/>
 		<instruction type="file"/>
