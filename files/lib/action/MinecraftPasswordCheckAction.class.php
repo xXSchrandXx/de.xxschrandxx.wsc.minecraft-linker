@@ -94,7 +94,26 @@ class MinecraftPasswordCheckAction extends AbstractAction
         $key = $_POST['key'];
         $password = $_POST['password'];
         $uuid = $_POST['uuid'];
-        // TODO Check weather post elemts are valid
+        if (!is_string($key) || !is_string($password) || !is_string($uuid)) {
+            header('Content-Type: application/json; charset=utf-8');
+            http_response_code(400);
+            echo JSON::encode([
+                'status' => 'Bad Request',
+                'statusCode' => 400,
+                'valid' => false
+            ]);
+            return;
+        }
+        if (!preg_match('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/', $uuid)) {
+            header('Content-Type: application/json; charset=utf-8');
+            http_response_code(400);
+            echo JSON::encode([
+                'status' => 'Unvalid UUID format.',
+                'statusCode' => 400,
+                'valid' => false
+            ]);
+            return;
+        }
         if (hash_equals(MINECRAFT_LINKER_PASSWORD_KEY, $key)) {
             header('Content-Type: application/json; charset=utf-8');
             http_response_code(401);
