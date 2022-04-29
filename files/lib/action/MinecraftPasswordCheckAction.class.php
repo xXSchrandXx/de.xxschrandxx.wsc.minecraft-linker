@@ -95,7 +95,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
         $password = $_POST['password'];
         $uuid = $_POST['uuid'];
         // TODO Check weather post elemts are valid
-        if ($key !== MINECRAFT_LINKER_PASSWORD_KEY) {
+        if (hash_equals(MINECRAFT_LINKER_PASSWORD_KEY, $key)) {
             header('Content-Type: application/json; charset=utf-8');
             http_response_code(401);
             echo JSON::encode([
