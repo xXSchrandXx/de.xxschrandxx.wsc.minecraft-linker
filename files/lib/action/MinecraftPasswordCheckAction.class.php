@@ -50,6 +50,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
         $data = FloodControl::getInstance()->countContent($this->d, new \DateInterval('PT' . MINECRAFT_LINKER_FLOODGATE_RESETTIME . 'M'), $time);
         if ($data['count'] > MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS) {
             header('Content-Type: application/json; charset=utf-8');
+            http_response_code(429);
             echo JSON::encode([
                 'status' => 'Too Many Requests',
                 'statusCode' => 429,
@@ -68,6 +69,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
 
         if (empty($_POST)) {
             header('Content-Type: application/json; charset=utf-8');
+            http_response_code(400);
             echo JSON::encode([
                 'status' => 'request empty',
                 'statusCode' => 400,
@@ -81,6 +83,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
             !array_key_exists('password', $_POST)
         ) {
             header('Content-Type: application/json; charset=utf-8');
+            http_response_code(400);
             echo JSON::encode([
                 'status' => 'request missing keys',
                 'statusCode' => 400,
@@ -94,6 +97,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
         // TODO Check weather post elemts are valid
         if ($key !== MINECRAFT_LINKER_PASSWORD_KEY) {
             header('Content-Type: application/json; charset=utf-8');
+            http_response_code(401);
             echo JSON::encode([
                 'status' => 'Unauthorized',
                 'statusCode' => 401,
@@ -107,6 +111,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
             $user = $this->getUser($uuid);
         } catch (UserInputException $e) {
             header('Content-Type: application/json; charset=utf-8');
+            http_response_code($e->getCode());
             echo JSON::encode([
                 'status' => $e->getMessage(),
                 'statusCode' => $e->getCode(),
@@ -117,6 +122,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
 
         if ($user->checkPassword($password)) {
             header('Content-Type: application/json; charset=utf-8');
+            http_response_code(200);
             echo JSON::encode([
                 'status' => 'OK',
                 'statusCode' => 200,
@@ -124,6 +130,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
             ]);
         } else {
             header('Content-Type: application/json; charset=utf-8');
+            http_response_code(200);
             echo JSON::encode([
                 'status' => 'OK',
                 'statusCode' => 200,
