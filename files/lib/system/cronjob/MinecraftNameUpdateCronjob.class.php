@@ -35,20 +35,15 @@ class MinecraftNameUpdateCronjob extends AbstractCronjob
         $mlh = MinecraftLinkerHandler::getInstance();
         $allUsers = $mlh->getOnlineMinecraftUsers();
 
-        foreach ($savedUsers as &$savedUser) {
-            $alreadyChecked = false;
+        foreach ($savedUsers as $savedUser) {
             foreach ($allUsers as $minecraftID => $uuidArray) {
-                if ($alreadyChecked) {
-                    break;
-                }
                 foreach ($uuidArray as $uuid => $name) {
                     if ($savedUser->minecraftUUID == $uuid) {
                         if ($savedUser->minecraftName != $name) {
                             $editor = new MinecraftUserEditor($savedUser);
                             $editor->update(['minecraftName' => $name]);
                         }
-                        $alreadyChecked = true;
-                        break;
+                        continue 3;
                     }
                 }
             }
