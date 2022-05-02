@@ -54,6 +54,7 @@
 			<option name="minecraft_linker_password_key">
 				<categoryname>minecraft_linker_password</categoryname>
 				<optiontype>text</optiontype>
+				<validationpattern>^.{12,}$</validationpattern>
 			</option>
 			<option name="minecraft_linker_floodgate_resettime">
 				<categoryname>minecraft_linker_password</categoryname>
