@@ -4,6 +4,7 @@ namespace wcf\action;
 
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\User;
+use wcf\system\exception\IllegalLinkException;
 use wcf\system\exception\UserInputException;
 use wcf\system\flood\FloodControl;
 use wcf\util\JSON;
@@ -38,6 +39,18 @@ class MinecraftPasswordCheckAction extends AbstractAction
     /**
      * @inheritDoc
      */
+    public function checkModules()
+    {
+        try {
+            parent::checkModules();
+        } catch (IllegalLinkException $e) {
+            $this->send($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function checkPermissions()
     {
         parent::checkPermissions();
@@ -49,14 +62,7 @@ class MinecraftPasswordCheckAction extends AbstractAction
         $time = \ceil(TIME_NOW / $secs) * $secs;
         $data = FloodControl::getInstance()->countContent($this->d, new \DateInterval('PT' . MINECRAFT_LINKER_FLOODGATE_RESETTIME . 'M'), $time);
         if ($data['count'] > MINECRAFT_LINKER_FLOODGATE_MAXREQUESTS) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(429);
-            echo JSON::encode([
-                'status' => 'Too Many Requests',
-                'statusCode' => 429,
-                'valid' => false
-            ]);
-            exit;
+            $this->send('Too Many Requests.', 429);
         }
     }
 
@@ -65,96 +71,46 @@ class MinecraftPasswordCheckAction extends AbstractAction
      */
     public function execute()
     {
-        parent::execute();
+        try {
+            parent::execute();
+        } catch (IllegalLinkException $e) {
+            $this->send($e->getMessage(), $e->getCode());
+        }
 
         if (empty($_POST)) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(400);
-            echo JSON::encode([
-                'status' => 'request empty',
-                'statusCode' => 400,
-                'valid' => false
-            ]);
-            return;
+            $this->send('Request empty.', 400);
         }
         if (
             !array_key_exists('key', $_POST) ||
             !array_key_exists('uuid', $_POST) ||
             !array_key_exists('password', $_POST)
         ) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(400);
-            echo JSON::encode([
-                'status' => 'request missing keys',
-                'statusCode' => 400,
-                'valid' => false
-            ]);
-            return;
+            $this->send('Request missing keys.', 400);
         }
         $key = $_POST['key'];
         $password = $_POST['password'];
         $uuid = $_POST['uuid'];
         if (!is_string($key) || !is_string($password) || !is_string($uuid)) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(400);
-            echo JSON::encode([
-                'status' => 'Bad Request',
-                'statusCode' => 400,
-                'valid' => false
-            ]);
-            return;
+            $this->send('Bad Request', 400);
         }
         if (!preg_match('/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/', $uuid)) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(400);
-            echo JSON::encode([
-                'status' => 'Unvalid UUID format.',
-                'statusCode' => 400,
-                'valid' => false
-            ]);
-            return;
+            $this->send('Invalid UUID format.', 400);
         }
         if (hash_equals(MINECRAFT_LINKER_PASSWORD_KEY, $key)) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(401);
-            echo JSON::encode([
-                'status' => 'Unauthorized',
-                'statusCode' => 401,
-                'valid' => false
-            ]);
-            return;
+            $this->send('Unauthorized', 401);
         }
         /** @var User */
         $user = null;
         try {
             $user = $this->getUser($uuid);
         } catch (UserInputException $e) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code($e->getCode());
-            echo JSON::encode([
-                'status' => $e->getMessage(),
-                'statusCode' => $e->getCode(),
-                'valid' => false
-            ]);
-            return;
+            $this->send($e->getMessage(), $e->getCode());
         }
 
         if ($user->checkPassword($password)) {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(200);
-            echo JSON::encode([
-                'status' => 'OK',
-                'statusCode' => 200,
-                'valid' => true
-            ]);
+            $this->send('OK', 200, true);
         } else {
-            header('Content-Type: application/json; charset=utf-8');
-            http_response_code(200);
-            echo JSON::encode([
-                'status' => 'OK',
-                'statusCode' => 200,
-                'valid' => false
-            ]);
+            $this->send('OK', 200);
         }
     }
 
@@ -168,5 +124,17 @@ class MinecraftPasswordCheckAction extends AbstractAction
             throw new UserInputException();
         }
         return new User(array_values($minecraftUsers)[0]->userID);
+    }
+
+    private function send($status, $statusCode, $valid = false)
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        http_response_code($statusCode);
+        echo JSON::encode([
+            'status' => $status,
+            'statusCode' => $statusCode,
+            'valid' => $valid
+        ]);
+        exit;
     }
 }
