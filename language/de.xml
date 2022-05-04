@@ -25,13 +25,6 @@
 		<item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Verknüpfungen]]></item>
 		<item name="wcf.acp.option.minecraft_name_enabled"><![CDATA[Aktiviere Namen]]></item>
 		<item name="wcf.acp.option.minecraft_name_enabled.description"><![CDATA[Aktiviert die Speicherung und Aktuallisierung von Namen zusätzlich zu den UUIDs.]]></item>
-		<item name="wcf.acp.option.minecraft_linker_password_enabled"><![CDATA[Aktiviere Minecraft-Authentification]]></item>
-		<item name="wcf.acp.option.minecraft_linker_password_enabled.description"><![CDATA[Aktiviert die Aktion für <a href="https://www.spigotmc.org/resources/wsc-minecraft-authenticator.101169/">WSC-Minecraft-Authenticator</a>.<br>ACHTUNG! Es werden sensible Daten verschickt. Aktiviere diese option NUR wenn du das Spigot-Plugin benutzen möchtest!]]></item>
-		<item name="wcf.acp.option.minecraft_linker_password_key"><![CDATA[Schlüssel]]></item>
-		<item name="wcf.acp.option.minecraft_linker_password_key.description"><![CDATA[Schlüssel aus der WSC-Minecraft-Authenticator Konfiguration. Mindestlänge: 12]]></item>
-		<item name="wcf.acp.option.minecraft_linker_floodgate_resettime"><![CDATA[Resetzeit]]></item>
-		<item name="wcf.acp.option.minecraft_linker_floodgate_maxrequests"><![CDATA[Maximale Anfragen]]></item>
-		<item name="wcf.acp.option.minecraft_linker_floodgate_maxrequests.description"><![CDATA[Setze <code>-1</code> zum deaktivieren.]]></item>
 	</category>
 	<category name="wcf.page.minecraftUserAddACP">
 		<item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
