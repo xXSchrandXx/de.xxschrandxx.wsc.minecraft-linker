@@ -1,5 +1,5 @@
 #/bin/bash
-PACKAGE_NAME=de.xxschrandxx.wsc.minecraft-linker
+PACKAGE_NAME=de.xxschrandxx.wsc.minecraft-authenticator
 PACKAGE_TYPES=(acptemplates files templates)
 
 for i in "${PACKAGE_TYPES[@]}"
