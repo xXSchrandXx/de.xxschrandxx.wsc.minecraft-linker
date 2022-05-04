@@ -33,13 +33,13 @@
 									{objectAction action="delete" objectTitle=$minecraftUser->title}
 									{event name='rowButtons'}
 								</td>
-								<td>{@$minecraftUser->minecraftUserID}</td>
+								<td>{$minecraftUser->minecraftUserID}</td>
 								<td>{$minecraftUser->title}</td>
-								<td>{@$minecraftUser->minecraftUUID}</td>
+								<td>{$minecraftUser->minecraftUUID}</td>
 								{if MINECRAFT_NAME_ENABLED}
-									<td>{@$minecraftUser->minecraftName}</td>
+									<td>{$minecraftUser->minecraftName}</td>
 								{/if}
-								<td>{@$minecraftUser->createdDate|time}</td>
+								<td>{$minecraftUser->createdDate|time}</td>
 							</tr>
 						{/foreach}
 					</tbody>
