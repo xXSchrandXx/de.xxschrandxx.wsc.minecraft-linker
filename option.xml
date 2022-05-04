@@ -18,13 +18,7 @@
 				<categoryname>minecraft_linker_general</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
-				<enableoptions>
-					minecraft_linker_identity,
-					minecraft_max_uuids,
-					minecraft_name_enabled,
-					minecraft_enable_active_user,
-					minecraft_password_page
-				</enableoptions>
+				<enableoptions>minecraft_linker_identity,minecraft_max_uuids,minecraft_name_enabled,minecraft_enable_active_user,minecraft_password_page</enableoptions>
 			</option>
 			<option name="minecraft_linker_identity">
 				<categoryname>minecraft_linker_general</categoryname>
