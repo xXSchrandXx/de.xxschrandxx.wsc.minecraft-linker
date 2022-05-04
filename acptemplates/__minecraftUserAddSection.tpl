@@ -39,7 +39,7 @@
 								{if MINECRAFT_NAME_ENABLED}
 									<td>{$minecraftUser->minecraftName}</td>
 								{/if}
-								<td>{$minecraftUser->createdDate|time}</td>
+								<td>{@$minecraftUser->createdDate|time}</td>
 							</tr>
 						{/foreach}
 					</tbody>
