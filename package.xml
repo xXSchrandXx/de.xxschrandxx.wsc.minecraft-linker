@@ -45,5 +45,6 @@
 
 	<instructions type="update" fromversion="2.0.0">
 		<!-- TODO -->
+		<instruction type="objectType"/>
 	</instructions>
 </package>
