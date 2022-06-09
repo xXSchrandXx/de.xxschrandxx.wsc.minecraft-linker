@@ -10,7 +10,7 @@ use wcf\data\DatabaseObjectEditor;
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class MinecraftUserEditor extends DatabaseObjectEditor implements MinecraftUser
+class MinecraftUserEditor extends DatabaseObjectEditor
 {
     /**
      * @inheritDoc
