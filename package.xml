@@ -9,7 +9,7 @@
 		<packagedescription language="de">
 			<![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]>
 		</packagedescription>
-		<version>2.0.1 dev 1</version>
+		<version>2.0.1</version>
 		<date>2022-05-04</date>
 	</packageinformation>
 
@@ -18,8 +18,7 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="5.5.0">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.1" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar.gz">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="2.1.0" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar.gz">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
