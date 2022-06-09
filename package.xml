@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="de.xxschrandxx.wsc.minecraft-linker" xmlns="https://www.woltlab.com"
-	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/vortex/package.xsd">
+<package name="de.xxschrandxx.wsc.minecraft-linker"
+	xmlns="https://www.woltlab.com"
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/5.5/package.xsd">
 	<packageinformation>
 		<packagename><![CDATA[Minecraft-Linker]]></packagename>
 		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
@@ -18,12 +18,11 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="5.4.8">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.0.0" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar.gz">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="5.5.0">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.0.1" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar.gz">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
-		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 		<excludedpackage version="3.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
 
@@ -44,7 +43,6 @@
 	</instructions>
 
 	<instructions type="update" fromversion="2.0.0">
-		<!-- TODO -->
 		<instruction type="objectType"/>
 	</instructions>
 </package>
