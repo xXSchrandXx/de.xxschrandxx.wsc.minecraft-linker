@@ -19,7 +19,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="5.5.0 RC 1">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.1.0" file="requirements/de.xxschrarndxx.wsc.minecraft-api.tar.gz">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="2.1.0">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
