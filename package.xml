@@ -46,5 +46,9 @@
 	<instructions type="update" fromversion="2.0.0">
 		<instruction type="objectType"/>
 		<instruction type="file"/>
+		<instruction type="language"/>
+		<instruction type="template"/>
+		<instruction type="option"/>
+		<instruction type="templateListener"/>
 	</instructions>
 </package>

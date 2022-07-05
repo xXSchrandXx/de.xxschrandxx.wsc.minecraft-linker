@@ -27,6 +27,9 @@
 		<item name="wcf.acp.option.minecraft_name_enabled"><![CDATA[Aktiviere Namen]]></item>
 		<item name="wcf.acp.option.minecraft_name_enabled.description"><![CDATA[Aktiviert die Speicherung und Aktuallisierung von Namen zusätzlich zu den UUIDs.]]></item>
 	</category>
+	<category name="wcf.copyright">
+		<item name="wcf.copyright.minecraft-linker"><![CDATA[xXSchrandXx's Minecraft-Linker]]></item>
+	</category>
 	<category name="wcf.page.minecraftUserAddACP">
 		<item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
 		<item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Zurück]]></item>

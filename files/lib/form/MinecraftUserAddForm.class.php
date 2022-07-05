@@ -235,4 +235,16 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
             }
         }
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function assignVariables()
+    {
+        parent::assignVariables();
+
+        WCF::getTPL()->assign([
+            'showMinecraftLinkerBranding' => true
+        ]);
+    }
 }

@@ -210,4 +210,16 @@ class MinecraftUserCheckForm extends AbstractFormBuilderForm
         UserMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
         parent::show();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function assignVariables()
+    {
+        parent::assignVariables();
+
+        WCF::getTPL()->assign([
+            'showMinecraftLinkerBranding' => true
+        ]);
+    }
 }
