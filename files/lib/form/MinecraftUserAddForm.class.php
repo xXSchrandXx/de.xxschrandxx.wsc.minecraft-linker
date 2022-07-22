@@ -127,7 +127,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
             $this->mcsh = MinecraftLinkerHandler::getInstance();
 
             $this->readOptions();
-    
+
             if (empty($this->options)) {
                 HeaderUtil::delayedRedirect(
                     LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
@@ -138,7 +138,8 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                 exit;
             }
 
-            \array_push($children,
+            \array_push(
+                $children,
                 SingleSelectionFormField::create('minecraftUUID')
                 ->required()
                 ->label('wcf.page.minecraftUserAdd.uuid')
