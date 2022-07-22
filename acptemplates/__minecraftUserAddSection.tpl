@@ -5,10 +5,12 @@
 
 		<a href="{if !$userID|empty}{link controller='MinecraftUserAddList' id=$userID}{/link}{/if}" class="button"><span
 				class="icon icon16 fa-plus"></span>
-			<span>{lang}wcf.page.userAddSection.minecraft.add{/lang}</span></a><br><br>
+			<span>{lang}wcf.page.userAddSection.minecraft.add{/lang}</span>
+		</a><br><br>
 		<a href="{if !$userID|empty}{link controller='MinecraftUserAddText' id=$userID}{/link}{/if}" class="button"><span
 				class="icon icon16 fa-plus"></span>
-			<span>{lang}wcf.page.userAddSection.minecraft.addText{/lang}</span></a><br><br>
+			<span>{lang}wcf.page.userAddSection.minecraft.addText{/lang}</span>
+		</a><br><br>
 
 		{if $minecraftUsers|count > 0}
 			<div class="tabularBox">
@@ -30,6 +32,10 @@
 						{foreach from=$minecraftUsers item=minecraftUser}
 							<tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->minecraftUserID}">
 								<td>
+									<a href="{link controller='MinecraftUserEditText' id=$minecraftUser->minecraftUserID}{/link}"
+										title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
+										<span class="icon icon16 fa-pencil"></span>
+									</a>
 									{objectAction action="delete" objectTitle=$minecraftUser->title}
 									{event name='rowButtons'}
 								</td>

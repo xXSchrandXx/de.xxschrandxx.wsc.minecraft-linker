@@ -2,7 +2,12 @@
 
 {capture assign='contentHeaderNavigation'}
 	{if MINECRAFT_MAX_UUIDS == 0 || $objects|count < MINECRAFT_MAX_UUIDS}
-		<li><a href="{link controller='MinecraftUserAdd'}{/link}" class="button"><span class="icon icon16 fa-plus"></span> <span>{lang}wcf.page.minecraftUserList.add{/lang}</span></a></li>
+		<li>
+			<a href="{link controller='MinecraftUserAdd'}{/link}" class="button">
+				<span class="icon icon16 fa-plus"></span>
+				<span>{lang}wcf.page.minecraftUserList.add{/lang}</span>
+			</a>
+		</li>
 	{/if}
 {/capture}
 
@@ -35,6 +40,12 @@
 				{foreach from=$objects item=object}
 					<tr class="jsObjectActionObject" data-object-id="{@$object->minecraftUserID}">
 						<td class="columnIcon">
+							{if MINECRAFT_MAX_UUIDS > 1}
+								<a href="{link controller='MinecraftUserEdit' id=$object->minecraftUserID}{/link}"
+									title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
+									<span class="icon icon16 fa-pencil"></span>
+								</a>
+							{/if}
 							{objectAction action="delete" objectTitle=$object->title}
 						</td>
 						<td class="columnID">{#$object->minecraftUserID}</td>

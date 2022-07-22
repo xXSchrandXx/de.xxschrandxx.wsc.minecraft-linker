@@ -44,6 +44,9 @@
 		<item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
 		<item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.notUUID"><![CDATA[{$uuid} ist keine gültige UUID v4.]]></item>
 	</category>
+	<category name="wcf.page.minecraftUserEditACP">
+		<item name="wcf.page.minecraftUserEditACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
+	</category>
 	<category name="wcf.page.userAddSection">
 		<item name="wcf.page.userAddSection.minecraft.add"><![CDATA[Minecraft-Verknüpfung über Liste Hinzufügen]]></item>
 		<item name="wcf.page.userAddSection.minecraft.addText"><![CDATA[Minecraft-Verknüpfung über Text Hinzufügen]]></item>

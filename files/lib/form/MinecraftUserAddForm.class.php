@@ -58,8 +58,6 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
     private $code;
 
-    private $title;
-
     /**
      * @inheritDoc
      */
@@ -79,7 +77,10 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     {
         parent::readParameters();
 
-        /** @noinspection PhpUndefinedFieldInspection */
+        if ($this->formAction == 'edit') {
+            return;
+        }
+
         if (MINECRAFT_MAX_UUIDS == 0 || MINECRAFT_MAX_UUIDS <= WCF::getUser()->minecraftUUIDs) {
             HeaderUtil::delayedRedirect(
                 LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
@@ -105,68 +106,74 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function createForm()
     {
         parent::createForm();
 
-        $this->mcsh = MinecraftLinkerHandler::getInstance();
+        $children = [
+            TextFormField::create('title')
+                ->required()
+                ->label('wcf.page.minecraftUserAdd.title')
+                ->description('wcf.page.minecraftUserAdd.title.description')
+                ->maximumLength(30)
+                ->value('Default')
+                ->available(MINECRAFT_MAX_UUIDS > 1)
+        ];
 
-        $this->readOptions();
+        if ($this->formAction == 'create') {
+            $this->mcsh = MinecraftLinkerHandler::getInstance();
 
-        if (empty($this->options)) {
-            HeaderUtil::delayedRedirect(
-                LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
-                WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.noUnknownUsers'),
-                5,
-                'error'
+            $this->readOptions();
+    
+            if (empty($this->options)) {
+                HeaderUtil::delayedRedirect(
+                    LinkHandler::getInstance()->getControllerLink(MinecraftUserListPage::class),
+                    WCF::getLanguage()->getDynamicVariable('wcf.page.minecraftUserAdd.error.noUnknownUsers'),
+                    5,
+                    'error'
+                );
+                exit;
+            }
+
+            \array_push($children,
+                SingleSelectionFormField::create('minecraftUUID')
+                ->required()
+                ->label('wcf.page.minecraftUserAdd.uuid')
+                ->description('wcf.page.minecraftUserAdd.uuid.description')
+                ->options($this->options, true, false)
+                ->filterable()
+                ->addValidator(new FormFieldValidator('sendCode', function (SingleSelectionFormField $field) {
+                    $this->code = bin2hex(\random_bytes(4));
+
+                    /** @var array */
+                    $response = $this->mcsh->sendCode(
+                        $this->form->getData()['data']['minecraftUUID'],
+                        $this->code
+                    );
+                    if ($response['statusCode'] == 400) {
+                        new FormFieldValidationError(
+                            'sendCode',
+                            'wcf.page.minecraftUserAdd.error.sendCodeDynamic',
+                            ['msg' => $response['status']]
+                        );
+                    } else if ($response['statusCode'] == 500) {
+                        $field->addValidationError(
+                            new FormFieldValidationError(
+                                'sendCode',
+                                'wcf.page.minecraftUserAdd.error.sendCode'
+                            )
+                        );
+                    }
+                }))
             );
-            exit;
         }
 
         $this->form->appendChild(
             FormContainer::create('data')
-                ->appendChildren([
-                    TextFormField::create('title')
-                        ->required()
-                        ->label('wcf.page.minecraftUserAdd.title')
-                        ->description('wcf.page.minecraftUserAdd.title.description')
-                        ->maximumLength(30)
-                        ->value('Default')
-                        ->available(MINECRAFT_MAX_UUIDS > 1),
-                    SingleSelectionFormField::create('minecraftUUID')
-                        ->required()
-                        ->label('wcf.page.minecraftUserAdd.uuid')
-                        ->description('wcf.page.minecraftUserAdd.uuid.description')
-                        ->options($this->options, true, false)
-                        ->filterable()
-                        ->addValidator(new FormFieldValidator('sendCode', function (SingleSelectionFormField $field) {
-                            $this->title = 'Default';
-                            if (MINECRAFT_MAX_UUIDS > 1 && isset($this->form->getData()['data']['title'])) {
-                                $this->title = $field->getDocument()->getNodeById('title');
-                            }
-                            $this->code = bin2hex(\random_bytes(4));
-
-                            /** @var array */
-                            $response = $this->mcsh->sendCode(
-                                $this->form->getData()['data']['minecraftUUID'],
-                                $this->code
-                            );
-                            if ($response['statusCode'] == 400) {
-                                new FormFieldValidationError(
-                                    'sendCode',
-                                    'wcf.page.minecraftUserAdd.error.sendCodeDynamic',
-                                    ['msg' => $response['status']]
-                                );
-                            } else if ($response['statusCode'] == 500) {
-                                $field->addValidationError(
-                                    new FormFieldValidationError(
-                                        'sendCode',
-                                        'wcf.page.minecraftUserAdd.error.sendCode'
-                                    )
-                                );
-                            }
-                        }))
-                ])
+                ->appendChildren($children)
         );
     }
 
@@ -177,8 +184,18 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     {
         AbstractForm::save();
 
+        if ($this->formAction == 'edit') {
+            return;
+        }
+
         WCF::getSession()->register('mcCode', $this->code);
-        WCF::getSession()->register('mcTitle', $this->title);
+
+        $title = 'Default';
+        if (isset($this->form->getData()['data']['title'])) {
+            $title = $this->form->getData()['data']['title'];
+        }
+
+        WCF::getSession()->register('mcTitle', $title);
         if (MINECRAFT_NAME_ENABLED) {
             foreach ($this->options as $id => $values) {
                 if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
@@ -195,6 +212,10 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     public function saved()
     {
         parent::saved();
+
+        if ($this->formAction == 'edit') {
+            return;
+        }
 
         $this->readOptions();
 

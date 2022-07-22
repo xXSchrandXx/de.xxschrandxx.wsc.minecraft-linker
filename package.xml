@@ -10,7 +10,7 @@
 			<![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]>
 		</packagedescription>
 		<version>2.0.2</version>
-		<date>2022-05-04</date>
+		<date>2022-07-22</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -27,6 +27,15 @@
 		<excludedpackage version="3.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
 
+	<instructions type="update" fromversion="2.0.1">
+		<instruction type="objectType"/>
+		<instruction type="file"/>
+		<instruction type="language"/>
+		<instruction type="template"/>
+		<instruction type="option"/>
+		<instruction type="templateListener"/>
+	</instructions>
+
 	<instructions type="install">
 		<instruction type="acpTemplate"/>
 		<instruction type="cronjob"/>
@@ -41,14 +50,5 @@
 		<instruction type="userGroupOption"/>
 		<instruction type="database">acp/database/install_de.xxschrandxx.wsc.minecraft-linker.php</instruction>
 		<instruction type="userMenu"/>
-	</instructions>
-
-	<instructions type="update" fromversion="2.0.1">
-		<instruction type="objectType"/>
-		<instruction type="file"/>
-		<instruction type="language"/>
-		<instruction type="template"/>
-		<instruction type="option"/>
-		<instruction type="templateListener"/>
 	</instructions>
 </package>

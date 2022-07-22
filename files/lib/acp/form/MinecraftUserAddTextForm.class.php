@@ -75,6 +75,10 @@ class MinecraftUserAddTextForm extends AbstractFormBuilderForm
     {
         parent::readParameters();
 
+        if ($this->formAction == 'edit') {
+            return;
+        }
+
         $userID = 0;
         if (isset($_REQUEST['id'])) {
             $userID = (int)$_REQUEST['id'];
@@ -111,6 +115,11 @@ class MinecraftUserAddTextForm extends AbstractFormBuilderForm
                 ->pattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$')
                 ->placeholder('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX')
                 ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
+                    if ($this->formAction == 'edit') {
+                        if ($field->getValue() == $this->formObject->minecraftUUID) {
+                            return;
+                        }
+                    }
                     $minecraftUserList = new MinecraftUserList();
                     $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
                     $minecraftUserList->readObjects();
@@ -166,6 +175,10 @@ class MinecraftUserAddTextForm extends AbstractFormBuilderForm
     public function assignVariables()
     {
         parent::assignVariables();
+
+        if ($this->formAction == 'edit') {
+            return;
+        }
 
         WCF::getTPL()->assign([
             'userID' => $this->user->userID
