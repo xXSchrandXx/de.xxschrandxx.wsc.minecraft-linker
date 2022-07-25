@@ -1,5 +1,3 @@
-{event name='copyright'}
-
 {if !'MINECRAFT_LINKER_BRANDING'|defined || MINECRAFT_LINKER_BRANDING}
 	{if $showMinecraftLinkerBranding|isset && $showMinecraftLinkerBranding}
 		<div class="copyright">
