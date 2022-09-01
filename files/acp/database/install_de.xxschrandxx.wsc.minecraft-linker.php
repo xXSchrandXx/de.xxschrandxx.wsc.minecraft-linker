@@ -36,14 +36,13 @@ return [
                 ->onDelete('CASCADE')
                 ->referencedColumns(['minecraftUserID'])
                 ->referencedTable('wcf1_user_to_user_minecraft')
-
         ]),
 
     // wcf1_user_to_user_minecraft
     DatabaseTable::create('wcf1_user_to_user_minecraft')
         ->columns([
             NotNullInt10DatabaseTableColumn::create('userID'),
-            NotNullInt10DatabaseTableColumn::create('minecraftUserID')
+            ObjectIdDatabaseTableColumn::create('minecraftUserID')
         ])
         ->foreignKeys([
             DatabaseTableForeignKey::create()
