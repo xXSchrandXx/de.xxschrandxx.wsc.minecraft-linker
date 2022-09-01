@@ -47,7 +47,7 @@ return [
             DatabaseTablePrimaryIndex::create()
                 ->columns(['minecraftUserID'])
         ]),
-    
+
     // wcf1_user_to_user_minecraft
     DatabaseTable::create('wcf1_user_to_user_minecraft')
         ->columns([

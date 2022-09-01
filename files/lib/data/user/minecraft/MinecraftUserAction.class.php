@@ -12,7 +12,6 @@ use wcf\data\AbstractDatabaseObjectAction;
  */
 class MinecraftUserAction extends AbstractDatabaseObjectAction
 {
-
     /**
      * @inheritDoc
      */
@@ -27,5 +26,4 @@ class MinecraftUserAction extends AbstractDatabaseObjectAction
      * @inheritDoc
      */
     protected $permissionsDelete = ['user.minecraftLinker.canManage'];
-
 }
