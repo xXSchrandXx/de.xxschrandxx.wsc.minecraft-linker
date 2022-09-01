@@ -8,22 +8,20 @@ use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
-use wcf\system\form\builder\field\SingleSelectionFormField;
+use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\TitleFormField;
 use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\system\request\LinkHandler;
-use wcf\system\minecraft\MinecraftLinkerHandler;
-use wcf\system\WCF;
 
 /**
- * MinecraftUser add via list acp form class
+ * MinecraftUser add via text acp form class
  *
  * @author   xXSchrandXx
  * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
  * @package  WoltLabSuite\Core\Acp\Form
  */
-class MinecraftUserAddListForm extends AbstractFormBuilderForm
+class MinecraftUserAddForm extends AbstractFormBuilderForm
 {
     /**
      * @inheritDoc
@@ -72,48 +70,9 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
-    public function readParameters()
-    {
-        parent::readParameters();
-
-        $userID = 0;
-        if (isset($_REQUEST['id'])) {
-            $userID = (int)$_REQUEST['id'];
-        }
-        $this->user = new User($userID);
-        if (!$this->user->userID) {
-            throw new IllegalLinkException();
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function createForm()
     {
         parent::createForm();
-
-        $unknownUsers = MinecraftLinkerHandler::getInstance()->getUnknownMinecraftUsers();
-
-        if (empty($unknownUsers)) {
-            return;
-        }
-
-        foreach ($unknownUsers as $minecraftID => $uuidArray) {
-            foreach ($uuidArray as $uuid => $name) {
-                $doppelt = false;
-                foreach ($this->options as $id => $values) {
-                    if ($values['value'] == $uuid) {
-                        $doppelt = true;
-                        break;
-                    }
-                }
-                if ($doppelt) {
-                    continue;
-                }
-                \array_push($this->options, ['label' => $name, 'value' => $uuid, 'depth' => 0]);
-            }
-        }
 
         $this->form->appendChild(
             FormContainer::create('data')
@@ -124,16 +83,19 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
                         ->description('wcf.page.minecraftUserAddACP.title.description')
                         ->maximumLength(30)
                         ->value('Default'),
-                    SingleSelectionFormField::create('minecraftUUID')
+                    TextFormField::create('minecraftUUID')
                         ->required()
                         ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
-                        ->options($this->options, true, false)
-                        ->filterable()
-                        ->addValidator(new FormFieldValidator('checkMinecraftUser', function (SingleSelectionFormField $field) {
-                            if (!preg_match('/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i', $field->getValue())) {
-                                $field->addValidationError(
-                                    new FormFieldValidationError('notUUID', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.notUUID', ['uuid' => $field->getValue()])
-                                );
+                        ->description('wcf.page.minecraftUserAddACP.minecraftUUID.description')
+                        ->minimumLength(36)
+                        ->maximumLength(36)
+                        ->pattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$')
+                        ->placeholder('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX')
+                        ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
+                            if ($this->formAction == 'edit') {
+                                if ($field->getValue() == $this->formObject->minecraftUUID) {
+                                    return;
+                                }
                             }
                             $minecraftUserList = new MinecraftUserList();
                             $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
@@ -143,7 +105,13 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
                                     new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed')
                                 );
                             }
-                        }))
+                        })),
+                    TextFormField::create('minecraftName')
+                        ->label('wcf.page.minecraftUserAddACP.minecraftName')
+                        ->description('wcf.page.minecraftUserAddACP.minecraftName.description')
+                        ->minimumLength(3)
+                        ->maximumLength(16)
+                        ->pattern('[0-9a-fA-F_]{3-16}')
                 ])
         );
     }
@@ -155,14 +123,6 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
     {
         if ($this->formAction == 'create') {
             $this->additionalFields['userID'] = $this->user->userID;
-            if (MINECRAFT_NAME_ENABLED) {
-                foreach ($this->options as $id => $values) {
-                    if ($values['value'] == $this->form->getData()['data']['minecraftUUID']) {
-                        $this->additionalFields['minecraftName'] = $values['label'];
-                        break;
-                    }
-                }
-            }
             $this->additionalFields['createdDate'] = \TIME_NOW;
         }
 
@@ -172,31 +132,8 @@ class MinecraftUserAddListForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
-    public function saved()
-    {
-        $this->options = [];
-        parent::saved();
-    }
-
-
-    /**
-     * @inheritDoc
-     */
     public function setFormAction()
     {
         $this->form->action(LinkHandler::getInstance()->getControllerLink(static::class, ['id' => $this->user->userID]));
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function assignVariables()
-    {
-        parent::assignVariables();
-
-        WCF::getTPL()->assign([
-            'userID' => $this->user->userID,
-            'emptyList' => empty($this->options)
-        ]);
     }
 }

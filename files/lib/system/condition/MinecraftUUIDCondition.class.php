@@ -6,6 +6,8 @@ use wcf\data\condition\Condition;
 use wcf\data\user\UserList;
 use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
+use wcf\data\user\minecraft\MinecraftUserList;
+use wcf\data\user\minecraft\UserToUserMinecraftList;
 use wcf\system\WCF;
 use wcf\util\StringUtil;
 
@@ -16,79 +18,33 @@ use wcf\util\StringUtil;
  * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
  * @package  WoltLabSuite\Core\System\Condition
  */
-class MinecraftUUIDCondition extends AbstractCondition implements IUserCondition, IObjectListCondition
+class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondition, IObjectListCondition
 {
     use TObjectListUserCondition;
 
-    protected $minecraftUUID;
+    /**
+     * @inheritDoc
+     */
+    protected $fieldName = 'minecraftUUID';
 
     /**
      * @inheritDoc
      */
-    public function getData()
+    public function checkUser(Condition $condition, User $user)
     {
-        $data = [];
+        $userToUserMinecraftList = new UserToUserMinecraftList();
+        $userToUserMinecraftList->getConditionBuilder()->add('userID = ?', [$user->userID]);
+        $userToUserMinecraftList->readObjectIDs();
 
-        if ($this->minecraftUUID !== null) {
-            $data['minecraftUUID'] = $this->minecraftUUID;
+        $userMinecraftList = new MinecraftUserList();
+        $userMinecraftList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
+        $userMinecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$this->fieldValue]);
+
+        if ($userMinecraftList->countObjects() === 1) {
+            return true;
+        } else {
+            return false;
         }
-
-        if (!empty($data)) {
-            return $data;
-        }
-
-        return null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getHTML()
-    {
-        return <<<HTML
-<dl>
-	<dt>{$this->getLanguage('wcf.user.condition.minecraftLinker.uuid')}</dt>
-	<dd>
-        <label>
-            <input type="text" name="minecraftUUID" value="{$this->minecraftUUID}">
-        </label>
-	</dd>
-</dl>
-HTML;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function readFormParameters()
-    {
-        if (isset($_POST['minecraftUUID']) && $_POST['minecraftUUID']) {
-            $this->minecraftUUID = StringUtil::trim($_POST['minecraftUUID']);
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function reset()
-    {
-        $this->minecraftUUID = null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setData(Condition $condition)
-    {
-        $this->minecraftUUID = $condition->minecraftUUID;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function validate()
-    {
-        // nothing to validate
     }
 
     /**
@@ -100,26 +56,20 @@ HTML;
             throw new \InvalidArgumentException("Object list is no instance of '" . UserList::class . "', instance of '" . get_class($objectList) . "' given.");
         }
 
-        if (isset($conditionData['minecraftUUID'])) {
-            // TODO Use UserToMinecraftUser
-            $objectList->getConditionBuilder()->add('user_table.userID IN (SELECT DISTINCT userID FROM wcf' . WCF_N . '_user_minecraft WHERE minecraftUUID LIKE ?)', ['%' . $conditionData['minecraftUUID'] . '%']);
+        if (isset($conditionData[$this->fieldName]) && $conditionData[$this->fieldName]) {
+            $minecraftUserList = new MinecraftUserList();
+            $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', $conditionData[$this->fieldName]);
+            $minecraftUserList->readObjectIDs();
+
+            $minecraftUserIDs = $minecraftUserList->getObjectIDs();
+            if (empty($minecraftUserIDs)) {
+                $userToUserMinecraftList = new UserToUserMinecraftList();
+                $userToUserMinecraftList->setObjectIDs($minecraftUserIDs);
+                $userToUserMinecraftList->readObjectIDs();
+                $objectList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
+            }
         }
+
         $objectList->readObjects();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function checkUser(Condition $condition, User $user)
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getLanguage($var)
-    {
-        return WCF::getLanguage()->getDynamicVariable($var);
     }
 }

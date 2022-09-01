@@ -30,9 +30,7 @@
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUserID{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.title{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUUID{/lang}</th>
-					{if MINECRAFT_NAME_ENABLED}
-						<th>{lang}wcf.page.minecraftUserList.table.minecraftName{/lang}</th>
-					{/if}
+					<th>{lang}wcf.page.minecraftUserList.table.minecraftName{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.createdDate{/lang}</th>
 				</tr>
 			</thead>
@@ -51,9 +49,7 @@
 						<td class="columnID">{#$object->minecraftUserID}</td>
 						<td class="columnText">{$object->title}</td>
 						<td class="columnText">{$object->minecraftUUID}</td>
-						{if MINECRAFT_NAME_ENABLED}
-							<td class="columnText">{$object->minecraftName}</td>
-						{/if}
+						<td class="columnText">{$object->minecraftName}</td>
 						<td class="columnDate">{@$object->createdDate|time}</td>
 					</tr>
 				{/foreach}

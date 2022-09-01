@@ -25,6 +25,5 @@ class UserToUserMinecraft extends DatabaseObject
     /**
      * NotNullInt10 $userID
      * NotNullInt10 $minecraftUserID
-     * VarChar $title
      */
 }

@@ -3,8 +3,7 @@
 namespace wcf\page;
 
 use wcf\data\user\minecraft\MinecraftUserList;
-use wcf\system\exception\IllegalLinkException;
-use wcf\system\menu\user\UserMenu;
+use wcf\data\user\minecraft\UserToUserMinecraftList;
 use wcf\system\WCF;
 
 /**
@@ -54,32 +53,15 @@ class MinecraftUserListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    public function checkModules()
-    {
-        parent::checkModules();
-
-        if (!(MINECRAFT_LINKER_ENABLED && MINECRAFT_LINKER_IDENTITY)) {
-            throw new IllegalLinkException();
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function initObjectList()
     {
         parent::initObjectList();
 
-        $this->objectList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->userID]);
-    }
+        $userToUserMinecraftList = new UserToUserMinecraftList();
+        $userToUserMinecraftList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->userID]);
+        $userToUserMinecraftList->readObjectIDs();
 
-    /**
-     * @inheritDoc
-     */
-    public function show()
-    {
-        UserMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
-        parent::show();
+        $this->objectList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
     }
 
     /**
