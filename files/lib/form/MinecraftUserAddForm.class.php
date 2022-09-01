@@ -45,12 +45,6 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     public $loginRequired = true;
 
     /**
-     * MinecraftLinkerHandler
-     * @var MinecraftLinkerHandler
-     */
-    private $mcsh;
-
-    /**
      * Liste der Spieler auf den Server(n)
      * @var array
      */

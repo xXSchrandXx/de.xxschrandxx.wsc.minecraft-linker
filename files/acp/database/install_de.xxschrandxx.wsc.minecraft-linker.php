@@ -10,13 +10,6 @@ use wcf\system\database\table\index\DatabaseTableForeignKey;
 use wcf\system\database\table\index\DatabaseTablePrimaryIndex;
 
 return [
-    // wcf1_user
-    PartialDatabaseTable::create('wcf1_user')
-        ->columns([
-            NotNullInt10DatabaseTableColumn::create('minecraftUUIDs')
-                ->defaultValue(0),
-        ]),
-
     // wcf1_user_group
     PartialDatabaseTable::create('wcf1_user_group')
         ->columns([
@@ -27,15 +20,41 @@ return [
     DatabaseTable::create('wcf1_user_minecraft')
         ->columns([
             ObjectIdDatabaseTableColumn::create('minecraftUserID'),
-            NotNullInt10DatabaseTableColumn::create('userID'),
             VarcharDatabaseTableColumn::create('minecraftUUID')
                 ->length(36)
                 ->notNull(),
             VarcharDatabaseTableColumn::create('minecraftName')
-                ->length(16),
-            VarcharDatabaseTableColumn::create('title')
-                ->length(30),
+                ->length(16)
+                ->notNull(),
             NotNullInt10DatabaseTableColumn::create('createdDate'),
+        ])
+        ->foreignKeys([
+            DatabaseTableForeignKey::create()
+                ->columns(['userID'])
+                ->onDelete('CASCADE')
+                ->referencedColumns(['userID'])
+                ->referencedTable('wcf1_user')
+        ])
+        ->foreignKeys([
+            DatabaseTableForeignKey::create()
+                ->columns(['minecraftUserID'])
+                ->onDelete('CASCADE')
+                ->referencedColumns(['minecraftUserID'])
+                ->referencedTable('wcf1_user_to_user_minecraft')
+
+        ])
+        ->indices([
+            DatabaseTablePrimaryIndex::create()
+                ->columns(['minecraftUserID'])
+        ]),
+    
+    // wcf1_user_to_user_minecraft
+    DatabaseTable::create('wcf1_user_to_user_minecraft')
+        ->columns([
+            NotNullInt10DatabaseTableColumn::create('userID'),
+            NotNullInt10DatabaseTableColumn::create('minecraftUserID'),
+            VarcharDatabaseTableColumn::create('title')
+                ->notNull(),
         ])
         ->foreignKeys([
             DatabaseTableForeignKey::create()
@@ -44,8 +63,4 @@ return [
                 ->referencedColumns(['userID'])
                 ->referencedTable('wcf1_user'),
         ])
-        ->indices([
-            DatabaseTablePrimaryIndex::create()
-                ->columns(['minecraftUserID']),
-        ]),
 ];

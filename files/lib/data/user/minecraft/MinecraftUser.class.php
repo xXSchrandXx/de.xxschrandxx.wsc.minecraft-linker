@@ -26,8 +26,8 @@ class MinecraftUser extends DatabaseObject
      * ObjectId $minecraftUserID
      * NotNullInt10 $userID
      * Varchar 36 $minecraftUUID
-     * Varchar|null 16 $minecraftName
-     * Varchar 30 $title
-     * NotNullInt10 createdDate
+     * Varchar 16 $minecraftName
+     * Varchar 16 $code
+     * NotNullInt10 $createdDate
      */
 }

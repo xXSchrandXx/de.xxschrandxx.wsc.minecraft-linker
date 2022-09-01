@@ -25,10 +25,6 @@
 		<excludedpackage version="4.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
 
-	<instructions type="update" fromversion="2.0.2 pl 1">
-		<!-- TODO -->
-	</instructions>
-
 	<instructions type="install">
 		<instruction type="acpTemplate"/>
 		<instruction type="cronjob"/>

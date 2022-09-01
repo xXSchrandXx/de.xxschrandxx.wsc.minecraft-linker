@@ -101,6 +101,7 @@ HTML;
         }
 
         if (isset($conditionData['minecraftUUID'])) {
+            // TODO Use UserToMinecraftUser
             $objectList->getConditionBuilder()->add('user_table.userID IN (SELECT DISTINCT userID FROM wcf' . WCF_N . '_user_minecraft WHERE minecraftUUID LIKE ?)', ['%' . $conditionData['minecraftUUID'] . '%']);
         }
         $objectList->readObjects();

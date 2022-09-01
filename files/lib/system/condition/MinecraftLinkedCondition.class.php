@@ -93,6 +93,7 @@ HTML;
         }
 
         if (isset($conditionData['minecraftLinked']) && $conditionData['minecraftLinked']) {
+            // TODO
             $objectList->getConditionBuilder()->add('user_table.minecraftUUIDs > 0');
         }
         $objectList->readObjects();
