@@ -3,7 +3,7 @@
 namespace wcf\page;
 
 use wcf\data\user\minecraft\MinecraftUserList;
-use wcf\data\user\minecraft\UserToUserMinecraftList;
+use wcf\data\user\minecraft\UserToMinecraftUserList;
 use wcf\system\WCF;
 
 /**
@@ -57,11 +57,11 @@ class MinecraftUserListPage extends MultipleLinkPage
     {
         parent::initObjectList();
 
-        $userToUserMinecraftList = new UserToUserMinecraftList();
-        $userToUserMinecraftList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->userID]);
-        $userToUserMinecraftList->readObjectIDs();
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->userID]);
+        $userToMinecraftUserList->readObjectIDs();
 
-        $this->objectList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
+        $this->objectList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
     }
 
     /**

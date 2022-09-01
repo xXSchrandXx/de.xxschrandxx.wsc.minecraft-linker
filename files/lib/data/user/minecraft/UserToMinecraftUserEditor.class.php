@@ -10,10 +10,10 @@ use wcf\data\DatabaseObjectEditor;
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class UserToUserMinecraftEditor extends DatabaseObjectEditor
+class UserToMinecraftUserEditor extends DatabaseObjectEditor
 {
     /**
      * @inheritDoc
      */
-    protected static $baseClass = UserToUserMinecraft::class;
+    protected static $baseClass = UserToMinecraftUser::class;
 }

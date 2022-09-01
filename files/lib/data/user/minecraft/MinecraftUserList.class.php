@@ -12,4 +12,8 @@ use wcf\data\DatabaseObjectList;
  */
 class MinecraftUserList extends DatabaseObjectList
 {
+    /**
+     * @inheritDoc
+     */
+    public $className = MinecraftUser::class;
 }

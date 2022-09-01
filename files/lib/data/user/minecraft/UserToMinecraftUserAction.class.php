@@ -8,18 +8,18 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\user\UserAction;
 
 /**
- * UserToUserMinecraft Action class
+ * UserToMinecraftUser Action class
  *
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class UserToUserMinecraftAction extends AbstractDatabaseObjectAction
+class UserToMinecraftUserAction extends AbstractDatabaseObjectAction
 {
 
     /**
      * @inheritDoc
      */
-    protected $className = UserToUserMinecraftEditor::class;
+    protected $className = UserToMinecraftUserEditor::class;
 
     /**
      * @inheritDoc

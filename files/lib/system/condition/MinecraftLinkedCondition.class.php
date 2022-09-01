@@ -7,9 +7,7 @@ use wcf\data\user\UserList;
 use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
 use wcf\data\user\minecraft\MinecraftUserList;
-use wcf\data\user\minecraft\UserToUserMinecraft;
-use wcf\data\user\minecraft\UserToUserMinecraftList;
-use wcf\system\WCF;
+use wcf\data\user\minecraft\UserToMinecraftUserList;
 
 /**
  * MinecraftLinker linked condition class
@@ -32,12 +30,12 @@ class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUse
      */
     public function checkUser(Condition $condition, User $user)
     {
-        $userToUserMinecraftList = new UserToUserMinecraftList();
-        $userToUserMinecraftList->getConditionBuilder()->add('userID = ?', [$user->userID]);
-        $userToUserMinecraftList->readObjectIDs();
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->userID]);
+        $userToMinecraftUserList->readObjectIDs();
 
         $userMinecraftList = new MinecraftUserList();
-        $userMinecraftList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
+        $userMinecraftList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
 
         if ($userMinecraftList->countObjects() === 0) {
             return false;
@@ -56,9 +54,9 @@ class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUse
         }
 
         if (isset($conditionData[$this->fieldName]) && $conditionData[$this->fieldName]) {
-            $userToUserMinecraftList = new UserToUserMinecraftList();
-            $userToUserMinecraftList->readObjectIDs();
-            $objectList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
+            $userToMinecraftUserList = new UserToMinecraftUserList();
+            $userToMinecraftUserList->readObjectIDs();
+            $objectList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
         }
 
         $objectList->readObjects();

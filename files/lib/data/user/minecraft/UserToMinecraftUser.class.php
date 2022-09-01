@@ -10,7 +10,7 @@ use wcf\data\DatabaseObject;
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class UserToUserMinecraft extends DatabaseObject
+class UserToMinecraftUser extends DatabaseObject
 {
     /**
      * @inheritDoc

@@ -10,6 +10,10 @@ use wcf\data\DatabaseObjectList;
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class UserToUserMinecraftList extends DatabaseObjectList
+class UserToMinecraftUserList extends DatabaseObjectList
 {
+    /**
+     * @inheritDoc
+     */
+    public $className = UserToMinecraftUser::class;
 }

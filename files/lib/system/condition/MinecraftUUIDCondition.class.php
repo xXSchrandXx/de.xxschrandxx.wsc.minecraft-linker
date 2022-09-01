@@ -7,9 +7,7 @@ use wcf\data\user\UserList;
 use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
 use wcf\data\user\minecraft\MinecraftUserList;
-use wcf\data\user\minecraft\UserToUserMinecraftList;
-use wcf\system\WCF;
-use wcf\util\StringUtil;
+use wcf\data\user\minecraft\UserToMinecraftUserList;
 
 /**
  * MinecraftLinker uuid condition class
@@ -32,12 +30,12 @@ class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondi
      */
     public function checkUser(Condition $condition, User $user)
     {
-        $userToUserMinecraftList = new UserToUserMinecraftList();
-        $userToUserMinecraftList->getConditionBuilder()->add('userID = ?', [$user->userID]);
-        $userToUserMinecraftList->readObjectIDs();
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->userID]);
+        $userToMinecraftUserList->readObjectIDs();
 
         $userMinecraftList = new MinecraftUserList();
-        $userMinecraftList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
+        $userMinecraftList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
         $userMinecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$this->fieldValue]);
 
         if ($userMinecraftList->countObjects() === 1) {
@@ -63,10 +61,10 @@ class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondi
 
             $minecraftUserIDs = $minecraftUserList->getObjectIDs();
             if (empty($minecraftUserIDs)) {
-                $userToUserMinecraftList = new UserToUserMinecraftList();
-                $userToUserMinecraftList->setObjectIDs($minecraftUserIDs);
-                $userToUserMinecraftList->readObjectIDs();
-                $objectList->setObjectIDs($userToUserMinecraftList->getObjectIDs());
+                $userToMinecraftUserList = new UserToMinecraftUserList();
+                $userToMinecraftUserList->setObjectIDs($minecraftUserIDs);
+                $userToMinecraftUserList->readObjectIDs();
+                $objectList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
             }
         }
 

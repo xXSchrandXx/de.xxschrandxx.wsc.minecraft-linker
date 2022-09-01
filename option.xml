@@ -40,8 +40,4 @@
 			</option>
 		</options>
 	</import>
-	<delete>
-		<optioncategory name="minecraft_linker_password"/>
-		<option name="minecraft_name_enabled" />
-	</delete>
 </data>
