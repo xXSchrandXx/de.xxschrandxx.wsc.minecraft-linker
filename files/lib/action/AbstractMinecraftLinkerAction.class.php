@@ -2,7 +2,7 @@
 
 namespace wcf\action;
 
-use wcf\system\util\MojangUtil;
+use wcf\util\MojangUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -29,7 +29,7 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
      * Weather the request requires a name
      * @var bool
      */
-    protected bool $setName = false;
+    protected bool $ignoreName = true;
 
     /**
      * Minecraft name of the request
@@ -38,21 +38,14 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
     protected string $name;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
-    public function execute()
+    public function readParameters()
     {
-        parent::execute();
-
         // check if minecraftLinker for server enabled
-        /** @var string[] */
-        if (!in_array($this->minecraft->minecraftID, explode("\n", StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY)))) {
-            if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. Not \'minecraft\' with given id.', 401);
-            } else {
-                return $this->send('Bad Request.', 401);
-            }
-        }
+        $this->availableMinecraftIDs = explode("\n", StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
+
+        parent::readParameters();
 
         // check uuid
         if (!array_key_exists('uuid', $_POST)) {
@@ -69,7 +62,7 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
                 return $this->send('Bad Request.', 401);
             }
         }
-        if (!preg_match('/' . MojangUtil::UUID_PATTERN . '/', $_POST['uuid'])) {
+        if (!MojangUtil::validUUID($_POST['uuid'])) {
             if (ENABLE_DEBUG_MODE) {
                 return $this->send('Bad Request. \'uuid\' is no valid UUID.', 401);
             } else {
@@ -79,7 +72,7 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
         $this->uuid = $_POST['uuid'];
 
         // check name
-        if ($this->setName) {
+        if ($this->ignoreName) {
             return;
         }
         if (!array_key_exists('name', $_POST)) {
