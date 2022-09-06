@@ -30,6 +30,8 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
      */
     public function readParameters()
     {
+        parent::readParameters();
+
         // check code
         if (!array_key_exists('code', $_POST)) {
             if (ENABLE_DEBUG_MODE) {
@@ -86,6 +88,6 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
         }
 
         // send OK
-        $this->send();
+        return $this->send();
     }
 }

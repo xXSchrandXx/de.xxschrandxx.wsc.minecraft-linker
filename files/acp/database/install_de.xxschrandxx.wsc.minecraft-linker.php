@@ -47,5 +47,10 @@ return [
                 ->onDelete('CASCADE')
                 ->referencedColumns(['userID'])
                 ->referencedTable('wcf1_user'),
+            DatabaseTableForeignKey::create()
+            ->columns(['minecraftUserID'])
+            ->onDelete('CASCADE')
+            ->referencedColumns(['minecraftUserID'])
+            ->referencedTable('wcf1_user_minecraft')
         ])
 ];

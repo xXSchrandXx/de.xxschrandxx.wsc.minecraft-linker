@@ -50,12 +50,6 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     protected $user;
 
     /**
-     * Liste der Spieler auf den Server(n)
-     * @var array
-     */
-    protected $options = [];
-
-    /**
      * @inheritDoc
      */
     public function checkModules()

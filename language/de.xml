@@ -51,11 +51,11 @@ Link für Plugin-Konfiguration: <kbd>{link controller='MinecraftLinkerCode' forc
 	<category name="wcf.page.minecraftUserAdd">
 		<item name="wcf.page.minecraftUserAdd.error.maxReached"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Sie haben{else}Du hast{/if} das maximum an Verknüpfungen erreicht.]]></item>
 		<item name="wcf.page.minecraftUserAdd.error.noUnknownUsers"><![CDATA[Es sind keine Verknüpfungsanfragen vorhanden.
-Benutze auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd>.]]></item>
+Benutze auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd>.</item>
 		<item name="wcf.page.minecraftUserAdd.title"><![CDATA[Titel]]></item>
 		<item name="wcf.page.minecraftUserAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von {if LANGUAGE_USE_INFORMAL_VARIANT}Ihren{else}deinen{/if} Verknüpfungen.]]></item>
-		<item name="wcf.page.minecraftUserAdd.uuid"><![CDATA[Minecraft-UUID]]></item>
-		<item name="wcf.page.minecraftUserAdd.uuid.description"><![CDATA[Damit {if LANGUAGE_USE_INFORMAL_VARIANT}Sie{else}du{/if} in der Liste angezeigt {if LANGUAGE_USE_INFORMAL_VARIANT}werden, müssen Sie{else}wirst, musst du{/if} auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd> verwenden.]]></item>
+		<item name="wcf.page.minecraftUserAdd.minecraftUserID"><![CDATA[Minecraft-UUID]]></item>
+		<item name="wcf.page.minecraftUserAdd.minecraftUserID.description"><![CDATA[Damit {if LANGUAGE_USE_INFORMAL_VARIANT}Sie{else}du{/if} in der Liste angezeigt {if LANGUAGE_USE_INFORMAL_VARIANT}werden, müssen Sie{else}wirst, musst du{/if} auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd> verwenden.]]></item>
 		<item name="wcf.page.minecraftUserAdd.code"><![CDATA[Bestätigungscode]]></item>
 		<item name="wcf.page.minecraftUserAdd.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
 		<item name="wcf.page.minecraftUserAdd.code.error.wrongSecurityCode"><![CDATA[Falscher Bestätigungscode.]]></item>

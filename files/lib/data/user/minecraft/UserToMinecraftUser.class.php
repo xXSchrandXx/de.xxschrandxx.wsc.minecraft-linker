@@ -20,10 +20,10 @@ class UserToMinecraftUser extends DatabaseObject
     /**
      * @inheritDoc
      */
-    protected static $databaseTableIndexIsIdentity = false;
+    protected static $databaseTableIndexName = 'minecraftUserID';
 
     /**
      * NotNullInt10 $userID
-     * NotNullInt10 $minecraftUserID
+     * ObjectId $minecraftUserID
      */
 }

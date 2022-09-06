@@ -28,7 +28,9 @@
 				<tr>
 					<th></th>
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUserID{/lang}</th>
-					<th>{lang}wcf.page.minecraftUserList.table.title{/lang}</th>
+					{if MINECRAFT_MAX_UUIDS == 0 || $objects|count < MINECRAFT_MAX_UUIDS}
+						<th>{lang}wcf.page.minecraftUserList.table.title{/lang}</th>
+					{/if}
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUUID{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftName{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.createdDate{/lang}</th>
@@ -47,7 +49,9 @@
 							{objectAction action="delete" objectTitle=$object->title}
 						</td>
 						<td class="columnID">{#$object->minecraftUserID}</td>
-						<td class="columnText">{$object->title}</td>
+						{if MINECRAFT_MAX_UUIDS > 1}
+							<td class="columnText">{$object->title}</td>
+						{/if}
 						<td class="columnText">{$object->minecraftUUID}</td>
 						<td class="columnText">{$object->minecraftName}</td>
 						<td class="columnDate">{@$object->createdDate|time}</td>
