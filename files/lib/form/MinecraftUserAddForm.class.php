@@ -137,7 +137,8 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         $editor = new MinecraftUserEditor($this->form->getData()['data']['minecraftUserID']);
         $editor->update([
-            'title' => $this->form->getData()['data']['title']
+            'title' => $this->form->getData()['data']['title'],
+            'createdDate' => \TIME_NOW
         ]);
 
         unset($this->form->getData()['data']['code']);
