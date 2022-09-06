@@ -28,14 +28,11 @@ return [
             VarcharDatabaseTableColumn::create('minecraftName')
                 ->length(16)
                 ->notNull(),
-            NotNullInt10DatabaseTableColumn::create('createdDate'),
-        ])
-        ->foreignKeys([
-            DatabaseTableForeignKey::create()
-                ->columns(['minecraftUserID'])
-                ->onDelete('CASCADE')
-                ->referencedColumns(['minecraftUserID'])
-                ->referencedTable('wcf1_user_to_user_minecraft')
+            VarcharDatabaseTableColumn::create('code')
+                ->length(16)
+                ->notNull(),
+            IntDatabaseTableColumn::create('createdDate')
+                ->length(10),
         ]),
 
     // wcf1_user_to_user_minecraft
