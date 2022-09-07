@@ -1,7 +1,3 @@
-{if $success|isset && $success && $objectEditLink|isset && $objectEditLink}
-	<meta http-equiv="refresh" content="3;url={$objectEditLink}" />
-{/if}
-
 {include file='header' pageTitle='wcf.acp.page.minecraftUserAdd.pageTitle.'|concat:$action}
 
 <header class="contentHeader">
