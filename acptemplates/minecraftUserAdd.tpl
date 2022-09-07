@@ -1,16 +1,19 @@
-{include file='header' pageTitle='wcf.acp.menu.link.configuration.minecraft.minecraftUserList.'|concat:$action}
+{if $success|isset && $success && $objectEditLink|isset && $objectEditLink}
+	<meta http-equiv="refresh" content="3;url={$objectEditLink}" />
+{/if}
+
+{include file='header' pageTitle='wcf.acp.page.minecraftUserAdd.pageTitle.'|concat:$action}
 
 <header class="contentHeader">
     <div class="contentHeaderTitle">
-        <h1 class="contentTitle">{lang}wcf.acp.menu.link.configuration.minecraft.minecraftUserList.{$action}{/lang}</h1>
+        <h1 class="contentTitle">{lang}wcf.acp.page.minecraftUserAdd.pageTitle.{$action}{/lang}</h1>
     </div>
 
     <nav class="contentHeaderNavigation">
         <ul>
             <li>
-				<a href="{link controller='MinecraftUserList'}{/link}" class="button">
-					<span class="icon icon16 fa-list"></span>
-                	<span>{lang}wcf.acp.menu.link.configuration.minecraft.minecraftUserList{/lang}</span>
+				<a href="{link controller='UserEdit' id=$userID}{/link}" class="button">
+                	{lang}wcf.global.button.back{/lang}
 				</a>
 			</li>
             {event name='contentHeaderNavigation'}

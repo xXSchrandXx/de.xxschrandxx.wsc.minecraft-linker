@@ -2,9 +2,12 @@
 
 namespace wcf\acp\form;
 
+use wcf\data\user\minecraft\MinecraftUser;
 use wcf\data\user\User;
 use wcf\data\user\minecraft\MinecraftUserAction;
 use wcf\data\user\minecraft\MinecraftUserList;
+use wcf\data\user\minecraft\UserToMinecraftUser;
+use wcf\data\user\minecraft\UserToMinecraftUserEditor;
 use wcf\form\AbstractFormBuilderForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
@@ -12,7 +15,7 @@ use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\TitleFormField;
 use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
-use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 
 /**
  * MinecraftUser add via text acp form class
@@ -44,10 +47,43 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     public $objectActionClass = MinecraftUserAction::class;
 
     /**
+     * @inheritDoc
+     */
+    public $objectEditLinkController = MinecraftUserEditForm::class;
+
+    /**
      * Benutzer-Objekt
      * @var User|null
      */
     protected $user;
+
+    /**
+     * @inheritDoc
+     */
+    public function readParameters()
+    {
+        parent::readParameters();
+
+        if ($this->formAction == 'create') {
+            $userID = 0;
+            if (isset($_REQUEST['id'])) {
+                $userID = (int)$_REQUEST['id'];
+            }
+            $this->user = new User($userID);
+            if (!$this->user->getUserID()) {
+                throw new IllegalLinkException();
+            }
+        } else {
+            $minecraftUserID = 0;
+            if (isset($_REQUEST['id'])) {
+                $minecraftUserID = (int)$_REQUEST['id'];
+            }
+            $this->formObject = new MinecraftUser($minecraftUserID);
+            if (!$this->formObject->minecraftUserID) {
+                throw new IllegalLinkException();
+            }
+        }
+    }
 
     /**
      * @inheritDoc
@@ -73,14 +109,14 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                 ->appendChildren([
                     TitleFormField::create('title')
                         ->required()
-                        ->label('wcf.page.minecraftUserAddACP.title')
-                        ->description('wcf.page.minecraftUserAddACP.title.description')
+                        ->label('wcf.acp.page.minecraftUserAdd.title')
+                        ->description('wcf.acp.page.minecraftUserAdd.title.description')
                         ->maximumLength(30)
                         ->value('Default'),
                     TextFormField::create('minecraftUUID')
                         ->required()
-                        ->label('wcf.page.minecraftUserAddACP.minecraftUUID')
-                        ->description('wcf.page.minecraftUserAddACP.minecraftUUID.description')
+                        ->label('wcf.acp.page.minecraftUserAdd.minecraftUUID')
+                        ->description('wcf.acp.page.minecraftUserAdd.minecraftUUID.description')
                         ->minimumLength(36)
                         ->maximumLength(36)
                         ->pattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$')
@@ -93,16 +129,16 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                             }
                             $minecraftUserList = new MinecraftUserList();
                             $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$field->getValue()]);
-                            $minecraftUserList->readObjects();
+                            $minecraftUserList->readObjectIDs();
                             if (count($minecraftUserList)) {
                                 $field->addValidationError(
-                                    new FormFieldValidationError('alreadyUsed', 'wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed')
+                                    new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftUserAdd.minecraftUUID.error.alreadyUsed')
                                 );
                             }
                         })),
                     TextFormField::create('minecraftName')
-                        ->label('wcf.page.minecraftUserAddACP.minecraftName')
-                        ->description('wcf.page.minecraftUserAddACP.minecraftName.description')
+                        ->label('wcf.acp.page.minecraftUserAdd.minecraftName')
+                        ->description('wcf.acp.page.minecraftUserAdd.minecraftName.description')
                         ->minimumLength(3)
                         ->maximumLength(16)
                         ->pattern('[0-9a-fA-F_]{3-16}')
@@ -116,7 +152,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     public function save()
     {
         if ($this->formAction == 'create') {
-            $this->additionalFields['userID'] = $this->user->userID;
+            $this->additionalFields['code'] = '';
             $this->additionalFields['createdDate'] = \TIME_NOW;
         }
 
@@ -126,8 +162,34 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
-    public function setFormAction()
+    public function saved()
     {
-        $this->form->action(LinkHandler::getInstance()->getControllerLink(static::class, ['id' => $this->user->userID]));
+        if ($this->formAction == 'create') {
+            $userToMinecraftUserEditor = UserToMinecraftUserEditor::create([
+                'userID' => $this->user->getUserID(),
+                'minecraftUserID' => $this->objectAction->getReturnValues()['returnValues']->getObjectID()
+            ]);
+        }
+
+        parent::saved();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function assignVariables()
+    {
+        parent::assignVariables();
+
+        if ($this->formAction == 'create') {
+            WCF::getTPL()->assign([
+               'userID' => $this->user->getUserID() 
+            ]);
+        } else {
+            $userToMinecraftUser = new UserToMinecraftUser($this->formObject->minecraftUserID);
+            WCF::getTPL()->assign([
+                'userID' => $userToMinecraftUser->userID
+            ]);
+        }
     }
 }
