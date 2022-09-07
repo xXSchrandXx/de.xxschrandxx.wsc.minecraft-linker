@@ -190,7 +190,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         if ($this->formAction == 'create') {
             WCF::getTPL()->assign([
-               'userID' => $this->user->getUserID() 
+               'userID' => $this->user->getUserID()
             ]);
         } else {
             $userToMinecraftUser = new UserToMinecraftUser($this->formObject->minecraftUserID);

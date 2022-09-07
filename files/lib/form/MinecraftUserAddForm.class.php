@@ -137,7 +137,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                                     new FormFieldValidationError(
                                         'noValidSelection'
                                     )
-                                );                                
+                                );
                                 return;
                             }
                             $userToMinecraftUser = new UserToMinecraftUser($minecraftUser->minecraftUserID);

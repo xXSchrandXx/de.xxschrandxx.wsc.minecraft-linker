@@ -65,6 +65,7 @@ class MinecraftUserEditForm extends MinecraftUserAddForm
                         ->maximumLength(30)
                         ->value('Default')
                         ->available(MINECRAFT_MAX_UUIDS > 1)
-                ));
+                )
+        );
     }
 }
