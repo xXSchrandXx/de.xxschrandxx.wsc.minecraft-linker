@@ -20,17 +20,17 @@ Link für Plugin-Konfiguration: <kbd>{link controller='MinecraftLinkerCode' forc
 		<item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Benutzer aktivieren]]></item>
 		<item name="wcf.acp.option.minecraft_enable_active_user.description"><![CDATA[Aktiviert einen Benutzer wenn er eine Minecraft-Verknüpfung hinzugefügt hat.]]></item>
 	</category>
-	<category name="wcf.acp.page">
-		<item name="wcf.acp.page.minecraftUserAdd.pageTitle.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.pageTitle.edit"><![CDATA[Minecraft-Verknüpfung Bearbeiten]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.minecraftName"><![CDATA[Name]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.minecraftName.description"><![CDATA[Der Name des Spielers.]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.minecraftUUID"><![CDATA[UUID]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.title"><![CDATA[Anzeigename]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von Verknüpfungen.]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
-		<item name="wcf.acp.page.minecraftUserAdd.minecraftUUID.error.notUUID"><![CDATA[{$uuid} ist keine gültige UUID v4.]]></item>
+	<category name="wcf.acp.form">
+		<item name="wcf.acp.form.minecraftUserAdd.formTitle.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.formTitle.edit"><![CDATA[Minecraft-Verknüpfung Bearbeiten]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftName"><![CDATA[Name]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftName.description"><![CDATA[Der Name des Spielers.]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID"><![CDATA[UUID]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.title"><![CDATA[Anzeigename]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von Verknüpfungen.]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID.error.notUUID"><![CDATA[{$uuid} ist keine gültige UUID v4.]]></item>
 	</category>
 	<category name="wcf.acp.page">
 		<item name="wcf.acp.page.userAddSection.minecraft.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
@@ -44,18 +44,18 @@ Link für Plugin-Konfiguration: <kbd>{link controller='MinecraftLinkerCode' forc
 	<category name="wcf.copyright">
 		<item name="wcf.copyright.minecraft-linker"><![CDATA[xXSchrandXx's Minecraft-Linker]]></item>
 	</category>
-	<category name="wcf.page.minecraftUserAdd">
-		<item name="wcf.page.minecraftUserAdd.error.maxReached"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Sie haben{else}Du hast{/if} das maximum an Verknüpfungen erreicht.]]></item>
-		<item name="wcf.page.minecraftUserAdd.error.noUnknownUsers"><![CDATA[Es sind keine Verknüpfungsanfragen vorhanden.
-Benutze auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd>.</item>
-		<item name="wcf.page.minecraftUserAdd.title"><![CDATA[Titel]]></item>
-		<item name="wcf.page.minecraftUserAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von {if LANGUAGE_USE_INFORMAL_VARIANT}Ihren{else}deinen{/if} Verknüpfungen.]]></item>
-		<item name="wcf.page.minecraftUserAdd.minecraftUserID"><![CDATA[Minecraft-UUID]]></item>
-		<item name="wcf.page.minecraftUserAdd.minecraftUserID.description"><![CDATA[Damit {if LANGUAGE_USE_INFORMAL_VARIANT}Sie{else}du{/if} in der Liste angezeigt {if LANGUAGE_USE_INFORMAL_VARIANT}werden, müssen Sie{else}wirst, musst du{/if} auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd> verwenden.]]></item>
-		<item name="wcf.page.minecraftUserAdd.code"><![CDATA[Bestätigungscode]]></item>
-		<item name="wcf.page.minecraftUserAdd.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
-		<item name="wcf.page.minecraftUserAdd.code.error.wrongSecurityCode"><![CDATA[Falscher Bestätigungscode.]]></item>
-		<item name="wcf.page.minecraftUserAdd.code.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
+	<category name="wcf.form.minecraftUserAdd">
+		<item name="wcf.form.minecraftUserAdd.error.maxReached"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Sie haben{else}Du hast{/if} das maximum an Verknüpfungen erreicht.]]></item>
+		<item name="wcf.form.minecraftUserAdd.error.noUnknownUsers"><![CDATA[Es sind keine Verknüpfungsanfragen vorhanden.
+Benutze auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd>.]]></item>
+		<item name="wcf.form.minecraftUserAdd.title"><![CDATA[Titel]]></item>
+		<item name="wcf.form.minecraftUserAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von {if LANGUAGE_USE_INFORMAL_VARIANT}Ihren{else}deinen{/if} Verknüpfungen.]]></item>
+		<item name="wcf.form.minecraftUserAdd.minecraftUserID"><![CDATA[Minecraft-UUID]]></item>
+		<item name="wcf.form.minecraftUserAdd.minecraftUserID.description"><![CDATA[Damit {if LANGUAGE_USE_INFORMAL_VARIANT}Sie{else}du{/if} in der Liste angezeigt {if LANGUAGE_USE_INFORMAL_VARIANT}werden, müssen Sie{else}wirst, musst du{/if} auf dem Minecraft-Server den Befehl <kbd>/linkwsc</kbd> verwenden.]]></item>
+		<item name="wcf.form.minecraftUserAdd.code"><![CDATA[Bestätigungscode]]></item>
+		<item name="wcf.form.minecraftUserAdd.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
+		<item name="wcf.form.minecraftUserAdd.code.error.wrongSecurityCode"><![CDATA[Falscher Bestätigungscode.]]></item>
+		<item name="wcf.form.minecraftUserAdd.code.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
 	</category>
 	<category name="wcf.page.minecraftUserList">
 		<item name="wcf.page.minecraftUserList.add"><![CDATA[Minecraft-Verknüpfung hinzufügen]]></item>
