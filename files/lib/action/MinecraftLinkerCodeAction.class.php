@@ -2,6 +2,7 @@
 
 namespace wcf\action;
 
+use Laminas\Diactoros\Response\JsonResponse;
 use wcf\data\user\minecraft\MinecraftUserEditor;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
@@ -28,32 +29,34 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
     /**
      * @inheritDoc
      */
-    public function readParameters()
+    public function readParameters(): ?JsonResponse
     {
-        parent::readParameters();
+        $result = parent::readParameters();
 
         // check code
-        if (!array_key_exists('code', $_POST)) {
+        if (!array_key_exists('code', $this->getJSON())) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'code\' not set.', 401);
+                return $this->send('Bad Request. \'code\' not set.', 400);
             } else {
-                return $this->send('Bad Request.', 401);
+                return $this->send('Bad Request.', 400);
             }
         }
-        if (!is_string($_POST['code'])) {
+        if (!is_string($this->getData('code'))) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'code\' no string.', 401);
+                return $this->send('Bad Request. \'code\' no string.', 400);
             } else {
-                return $this->send('Bad Request.', 401);
+                return $this->send('Bad Request.', 400);
             }
         }
-        $this->code = $_POST['code'];
+        $this->code = $this->getData('code');
+
+        return $result;
     }
 
     /**
      * @inheritdoc
      */
-    public function execute()
+    public function execute(): ?JsonResponse
     {
         parent::execute();
 
@@ -62,15 +65,16 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$this->uuid]);
         if ($minecraftUserList->countObjects() !== 0) {
             $minecraftUserList->readObjects();
+            /** @var \wcf\data\user\minecraft\MinecraftUser */
             $minecraftUser = $minecraftUserList->getSingleObject();
             // check linked
             $userToMinecraftUserList = new UserToMinecraftUserList();
-            $userToMinecraftUserList->setObjectIDs([$minecraftUser->minecraftUserID]);
+            $userToMinecraftUserList->setObjectIDs([$minecraftUser->getObjectID()]);
             if ($userToMinecraftUserList->countObjects() !== 0) {
                 if (ENABLE_DEBUG_MODE) {
-                    $this->send('Bad request. UUID already linked.', 401);
+                    return $this->send('Bad request. UUID already linked.', 400);
                 } else {
-                    $this->send('Bad request.', 401);
+                    return $this->send('Bad request.', 400);
                 }
             } else {
                 $editor = new MinecraftUserEditor($minecraftUser);

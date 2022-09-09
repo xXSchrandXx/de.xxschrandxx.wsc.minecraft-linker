@@ -2,7 +2,9 @@
 
 namespace wcf\action;
 
-use wcf\util\MojangUtil;
+use Laminas\Diactoros\Response\JsonResponse;
+use wcf\system\exception\IllegalLinkException;
+use wcf\util\MinecraftLinkerUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -14,11 +16,6 @@ use wcf\util\StringUtil;
  */
 abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
 {
-    /**
-     * @inheritDoc
-     */
-    public $neededModules = ['MINECRAFT_LINKER_ENABLED', 'MINECRAFT_LINKER_IDENTITY'];
-
     /**
      * Minecraft uuid of the request
      * @var string
@@ -40,55 +37,72 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
     /**
      * @inheritDoc
      */
-    public function readParameters()
+    public function readParameters(): ?JsonResponse
     {
         // check if minecraftLinker for server enabled
         $this->availableMinecraftIDs = explode("\n", StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
 
-        parent::readParameters();
+        $result = parent::readParameters();
 
         // check uuid
-        if (!array_key_exists('uuid', $_POST)) {
+        if (!array_key_exists('uuid', $this->getJSON())) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuid\' not set.', 401);
+                return $this->send('Bad Request. \'uuid\' not set.', 400);
             } else {
-                return $this->send('Bad Request.', 401);
+                return $this->send('Bad Request.', 400);
             }
         }
-        if (!is_string($_POST['uuid'])) {
+        if (!is_string($this->getData('uuid'))) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuid\' no string.', 401);
+                return $this->send('Bad Request. \'uuid\' no string.', 400);
             } else {
-                return $this->send('Bad Request.', 401);
+                return $this->send('Bad Request.', 400);
             }
         }
-        if (!MojangUtil::validUUID($_POST['uuid'])) {
+        if (!MinecraftLinkerUtil::validUUID($this->getData('uuid'))) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuid\' is no valid UUID.', 401);
+                return $this->send('Bad Request. \'uuid\' is no valid UUID.', 400);
             } else {
-                return $this->send('Bad Request.', 401);
+                return $this->send('Bad Request.', 400);
             }
         }
-        $this->uuid = $_POST['uuid'];
+        $this->uuid = $this->getJSON()['uuid'];
 
         // check name
         if ($this->ignoreName) {
-            return;
+            return $result;
         }
-        if (!array_key_exists('name', $_POST)) {
+        if (!array_key_exists('name', $this->getJSON())) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'name\' not set.', 401);
+                return $this->send('Bad Request. \'name\' not set.', 400);
             } else {
-                return $this->send('Bad Request.', 401);
+                return $this->send('Bad Request.', 400);
             }
         }
-        if (!is_string($_POST['name'])) {
+        if (!is_string($this->getData('name'))) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'name\' no string.', 401);
+                return $this->send('Bad Request. \'name\' no string.', 400);
             } else {
-                return $this->send('Bad Request.', 401);
+                return $this->send('Bad Request.', 400);
             }
         }
-        $this->name = $_POST['name'];
+        $this->name = $this->getData('name');
+
+        return $result;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function checkModules()
+    {
+        $modules = ['MINECRAFT_LINKER_ENABLED', 'MINECRAFT_LINKER_IDENTITY'];
+        // check modules
+        foreach ($modules as $module) {
+            if (!\defined($module) || !\constant($module)) {
+                throw new IllegalLinkException();
+            }
+        }
+        parent::checkModules();
     }
 }
