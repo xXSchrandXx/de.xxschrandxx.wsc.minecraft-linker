@@ -2,6 +2,7 @@
 
 namespace wcf\util;
 
+use wcf\data\user\minecraft\MinecraftUser;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
 use wcf\data\user\User;
@@ -16,17 +17,43 @@ use wcf\data\user\User;
 class MinecraftLinkerUtil extends MinecraftUtil
 {
     /**
-     * Gets the User from given UUID.
+     * Gets the MinecraftUser from given UUID.
      * @param string $uuid UUID
+     * @return ?MinecraftUser
      */
-    public static function getUser(string $uuid): User
+    public static function getMinecraftUser(string $uuid): ?MinecraftUser
     {
         $minecraftUserList = new MinecraftUserList();
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$uuid]);
+        if ($minecraftUserList->countObjects() !== 1) {
+            return null;
+        }
         $minecraftUserList->readObjects();
-        /** @var \wcf\data\user\minecraft\MinecraftUser */
-        $minecraftUser = $minecraftUserList->getSingleObject();
-        return new User($minecraftUser->getObjectID());
+        return $minecraftUserList->getSingleObject();
+    }
+
+    /**
+     * Gets the User from given UUID.
+     * @param string $uuid UUID
+     * @return ?User
+     */
+    public static function getUser(string $uuid): ?User
+    {
+        $minecraftUserList = new MinecraftUserList();
+        $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$uuid]);
+        if ($minecraftUserList->countObjects() !== 1) {
+            return null;
+        }
+        $minecraftUserList->readObjectIDs();
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$minecraftUserList->getObjectIDs()]);
+        if ($userToMinecraftUserList->countObjects() !== 1) {
+            return null;
+        }
+        $userToMinecraftUserList->readObjects();
+        /** @var \wcf\data\user\minecraft\UserToMinecraftUser */
+        $userToMinecraftUser = $userToMinecraftUserList->getSingleObject();
+        return new User($userToMinecraftUser->getUserID());
     }
 
     /**
