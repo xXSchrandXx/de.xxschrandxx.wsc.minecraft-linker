@@ -1,4 +1,4 @@
-{if ($success|isset && $success) || $showNoUnknownUsers || $showMaxReached}
+{if ($action == 'add' && $success|isset && $success) || $showNoUnknownUsers || $showMaxReached}
 	<meta http-equiv="refresh" content="3;url={link controller='MinecraftUserList'}{/link}" />
 {/if}
 
@@ -6,7 +6,7 @@
 
 {include file='header' __sidebarLeftHasMenu=true}
 
-{if $success|isset && $success}
+{if $action == 'add' && $success|isset && $success}
 	<div class="success">
 		<p>{lang}wcf.global.success.{$action}{/lang}</p>
 		<a href="{link controller='MinecraftUserList'}{/link}">{lang}wcf.page.redirect.url{/lang}</a>
@@ -14,13 +14,13 @@
 {else}
 	{if $showMaxReached}
 		<div class="error">
-			<p>{lang}wcf.page.minecraftUserAdd.error.maxReached{/lang}</p>
+			<p>{lang}wcf.form.minecraftUserAdd.error.maxReached{/lang}</p>
 			<a href="{link controller='MinecraftUserList'}{/link}">{lang}wcf.page.redirect.url{/lang}</a>
 		</div>
 	{/if}
 	{if $showNoUnknownUsers}
 		<div class="error">
-			<p>{lang}wcf.page.minecraftUserAdd.error.noUnknownUsers{/lang}</p>
+			<p>{lang}wcf.form.minecraftUserAdd.error.noUnknownUsers{/lang}</p>
 			<a href="{link controller='MinecraftUserList'}{/link}">{lang}wcf.page.redirect.url{/lang}</a>
 		</div>
 	{/if}

@@ -43,7 +43,7 @@ class MinecraftUserEditForm extends MinecraftUserAddForm
             $minecraftUserID = (int)$_REQUEST['id'];
         }
         $this->formObject = new MinecraftUser($minecraftUserID);
-        if (!$this->formObject->minecraftUserID) {
+        if (!$this->formObject->getObjectID()) {
             throw new IllegalLinkException();
         }
     }
@@ -60,8 +60,8 @@ class MinecraftUserEditForm extends MinecraftUserAddForm
                 ->appendChild(
                     TextFormField::create('title')
                         ->required()
-                        ->label('wcf.page.minecraftUserAdd.title')
-                        ->description('wcf.page.minecraftUserAdd.title.description')
+                        ->label('wcf.form.minecraftUserAdd.title')
+                        ->description('wcf.form.minecraftUserAdd.title.description')
                         ->maximumLength(30)
                         ->value('Default')
                         ->available(MINECRAFT_MAX_UUIDS > 1)

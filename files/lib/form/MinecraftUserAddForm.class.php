@@ -4,7 +4,6 @@ namespace wcf\form;
 
 use wcf\data\user\minecraft\MinecraftUser;
 use wcf\data\user\minecraft\MinecraftUserEditor;
-use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUser;
 use wcf\data\user\minecraft\UserToMinecraftUserAction;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
@@ -14,7 +13,9 @@ use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TextFormField;
 use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
+use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
+use wcf\util\MinecraftLinkerUtil;
 
 /**
  * MinecraftUser add form class
@@ -34,11 +35,6 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
      * @inheritDoc
      */
     public $neededPermissions = ['user.minecraftLinker.canManage'];
-
-    /**
-     * @inheritDoc
-     */
-    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftUserList';
 
     /**
      * @inheritDoc
@@ -80,6 +76,17 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     /**
      * @inheritDoc
      */
+    public function show()
+    {
+        // set active tab
+        UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.minecraftSection.minecraftUserList');
+
+        parent::show();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function createForm()
     {
         parent::createForm();
@@ -102,15 +109,15 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                 ->appendChildren([
                     TextFormField::create('title')
                         ->required()
-                        ->label('wcf.page.minecraftUserAdd.title')
-                        ->description('wcf.page.minecraftUserAdd.title.description')
+                        ->label('wcf.form.minecraftUserAdd.title')
+                        ->description('wcf.form.minecraftUserAdd.title.description')
                         ->maximumLength(30)
                         ->value('Default')
                         ->available(MINECRAFT_MAX_UUIDS > 1),
                     SingleSelectionFormField::create('minecraftUserID')
                         ->required()
-                        ->label('wcf.page.minecraftUserAdd.minecraftUserID')
-                        ->description('wcf.page.minecraftUserAdd.minecraftUserID.description')
+                        ->label('wcf.form.minecraftUserAdd.minecraftUserID')
+                        ->description('wcf.form.minecraftUserAdd.minecraftUserID.description')
                         ->options(
                             $this->options,
                             true,
@@ -119,8 +126,8 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                         ->filterable(),
                     TextFormField::create('code')
                         ->required()
-                        ->label('wcf.page.minecraftUserAdd.code')
-                        ->description('wcf.page.minecraftUserAdd.code.description')
+                        ->label('wcf.form.minecraftUserAdd.code')
+                        ->description('wcf.form.minecraftUserAdd.code.description')
                         ->addValidator(new FormFieldValidator('checkCode', function (TextFormField $field) {
                             $minecraftUserID = $this->form->getData()['data']['minecraftUserID'];
                             if ($minecraftUserID === null) {
@@ -140,21 +147,21 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                                 );
                                 return;
                             }
-                            $userToMinecraftUser = new UserToMinecraftUser($minecraftUser->minecraftUserID);
+                            $userToMinecraftUser = new UserToMinecraftUser($minecraftUser->getObjectID());
                             if ($userToMinecraftUser->getObjectID() !== 0) {
                                 $field->addValidationError(
                                     new FormFieldValidationError(
                                         'alreadyUsed',
-                                        'wcf.page.minecraftUserAdd.code.error.alreadyUsed'
+                                        'wcf.form.minecraftUserAdd.code.error.alreadyUsed'
                                     )
                                 );
                                 return;
                             }
-                            if (!hash_equals($minecraftUser->code, $field->getValue())) {
+                            if (!hash_equals($minecraftUser->getCode(), $field->getValue())) {
                                 $field->addValidationError(
                                     new FormFieldValidationError(
                                         'wrongSecurityCode',
-                                        'wcf.page.minecraftUserAdd.code.error.wrongSecurityCode'
+                                        'wcf.form.minecraftUserAdd.code.error.wrongSecurityCode'
                                     )
                                 );
                             }
@@ -175,7 +182,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
 
         $this->additionalFields['userID'] = WCF::getUser()->getUserID();
 
-        $title = 'default';
+        $title = 'Default';
         if (isset($this->form->getData()['data']['title'])) {
             $title = $this->form->getData()['data']['title'];
         }
@@ -216,19 +223,13 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     {
         $this->options = [];
 
-        $userToMinecraftUserList = new UserToMinecraftUserList();
-        $userToMinecraftUserList->readObjects();
-        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
-
-        $minecraftUserList = new MinecraftUserList();
-        if (!empty($userToMinecraftUserIDs)) {
-            $minecraftUserList->getConditionBuilder()->add('minecraftUserID NOT IN (?)', [$userToMinecraftUserIDs]);
-        }
+        $minecraftUserList = MinecraftLinkerUtil::getUnlinkedMinecraftUser();
         $minecraftUserList->readObjects();
+        /** @var MinecraftUser[] */
         $minecraftUsers = $minecraftUserList->getObjects();
 
         foreach ($minecraftUsers as $minecraftUserID => $minecraftUser) {
-            \array_push($this->options, ['label' => $minecraftUser->minecraftName, 'value' => $minecraftUserID, 'depth' => 0]);
+            \array_push($this->options, ['label' => $minecraftUser->getMinecraftName(), 'value' => $minecraftUserID, 'depth' => 0]);
         }
     }
 

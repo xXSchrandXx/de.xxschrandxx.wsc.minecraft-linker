@@ -28,7 +28,7 @@
 				<tr>
 					<th></th>
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUserID{/lang}</th>
-					{if MINECRAFT_MAX_UUIDS == 0 || $objects|count < MINECRAFT_MAX_UUIDS}
+					{if MINECRAFT_MAX_UUIDS > 1}
 						<th>{lang}wcf.page.minecraftUserList.table.title{/lang}</th>
 					{/if}
 					<th>{lang}wcf.page.minecraftUserList.table.minecraftUUID{/lang}</th>

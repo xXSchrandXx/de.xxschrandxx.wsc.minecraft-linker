@@ -2,9 +2,6 @@
 
 namespace wcf\acp\form;
 
-use wcf\data\user\minecraft\MinecraftUser;
-use wcf\system\exception\IllegalLinkException;
-
 /**
  * MinecraftUser edit via text acp form class
  *

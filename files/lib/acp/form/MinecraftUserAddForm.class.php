@@ -19,6 +19,7 @@ use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
+use wcf\util\MinecraftLinkerUtil;
 
 /**
  * MinecraftUser add via text acp form class
@@ -29,6 +30,11 @@ use wcf\system\WCF;
  */
 class MinecraftUserAddForm extends AbstractFormBuilderForm
 {
+    /**
+     * @var \wcf\data\user\minecraft\MinecraftUser
+     */
+    public $formObject;
+
     /**
      * @inheritDoc
      */
@@ -117,11 +123,11 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                         ->description('wcf.acp.page.minecraftUserAdd.minecraftUUID.description')
                         ->minimumLength(36)
                         ->maximumLength(36)
-                        ->pattern('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$')
+                        ->pattern(MinecraftLinkerUtil::UUID_PATTERN)
                         ->placeholder('XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX')
                         ->addValidator(new FormFieldValidator('checkMinecraftUser', function (TextFormField $field) {
                             if ($this->formAction == 'edit') {
-                                if ($field->getValue() == $this->formObject->minecraftUUID) {
+                                if ($field->getValue() == $this->formObject->getMinecraftUUID()) {
                                     return;
                                 }
                             }
@@ -193,9 +199,9 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                'userID' => $this->user->getUserID()
             ]);
         } else {
-            $userToMinecraftUser = new UserToMinecraftUser($this->formObject->minecraftUserID);
+            $userToMinecraftUser = new UserToMinecraftUser($this->formObject->getObjectID());
             WCF::getTPL()->assign([
-                'userID' => $userToMinecraftUser->userID
+                'userID' => $userToMinecraftUser->getUserID()
             ]);
         }
     }

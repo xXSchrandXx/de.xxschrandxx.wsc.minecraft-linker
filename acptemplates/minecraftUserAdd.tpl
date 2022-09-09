@@ -1,8 +1,8 @@
-{include file='header' pageTitle='wcf.acp.page.minecraftUserAdd.pageTitle.'|concat:$action}
+{include file='header' pageTitle='wcf.acp.form.minecraftUserAdd.formTitle.'|concat:$action}
 
 <header class="contentHeader">
     <div class="contentHeaderTitle">
-        <h1 class="contentTitle">{lang}wcf.acp.page.minecraftUserAdd.pageTitle.{$action}{/lang}</h1>
+        <h1 class="contentTitle">{lang}wcf.acp.form.minecraftUserAdd.formTitle.{$action}{/lang}</h1>
     </div>
 
     <nav class="contentHeaderNavigation">
