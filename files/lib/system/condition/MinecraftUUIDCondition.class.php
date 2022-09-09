@@ -31,11 +31,11 @@ class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondi
     public function checkUser(Condition $condition, User $user)
     {
         $userToMinecraftUserList = new UserToMinecraftUserList();
-        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->userID]);
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->getUserID()]);
         $userToMinecraftUserList->readObjectIDs();
 
         $userMinecraftList = new MinecraftUserList();
-        $userMinecraftList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
+        $userMinecraftList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList]);
         $userMinecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$this->fieldValue]);
 
         if ($userMinecraftList->countObjects() === 1) {
@@ -62,9 +62,9 @@ class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondi
             $minecraftUserIDs = $minecraftUserList->getObjectIDs();
             if (empty($minecraftUserIDs)) {
                 $userToMinecraftUserList = new UserToMinecraftUserList();
-                $userToMinecraftUserList->setObjectIDs($minecraftUserIDs);
+                $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$minecraftUserIDs]);
                 $userToMinecraftUserList->readObjectIDs();
-                $objectList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
+                $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList->getObjectIDs()]);
             }
         }
 

@@ -31,13 +31,12 @@ class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUse
     public function checkUser(Condition $condition, User $user)
     {
         $userToMinecraftUserList = new UserToMinecraftUserList();
-        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->userID]);
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->getUserID()]);
         $userToMinecraftUserList->readObjectIDs();
 
-        $userMinecraftList = new MinecraftUserList();
-        $userMinecraftList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
-
-        if ($userMinecraftList->countObjects() === 0) {
+        $minecraftUserList = new MinecraftUserList();
+        $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList->getObjectIDs()]);
+        if ($minecraftUserList->countObjects() === 0) {
             return false;
         } else {
             return true;
@@ -56,7 +55,7 @@ class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUse
         if (isset($conditionData[$this->fieldName]) && $conditionData[$this->fieldName]) {
             $userToMinecraftUserList = new UserToMinecraftUserList();
             $userToMinecraftUserList->readObjectIDs();
-            $objectList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
+            $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList->getObjectIDs()]);
         }
 
         $objectList->readObjects();
