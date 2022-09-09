@@ -2,10 +2,7 @@
 
 namespace wcf\data\user\minecraft;
 
-use wcf\data\user\User;
-use wcf\data\user\UserEditor;
 use wcf\data\AbstractDatabaseObjectAction;
-use wcf\data\user\UserAction;
 
 /**
  * UserToMinecraftUser Action class
