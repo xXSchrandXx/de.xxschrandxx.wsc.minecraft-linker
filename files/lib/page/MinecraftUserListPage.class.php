@@ -4,6 +4,7 @@ namespace wcf\page;
 
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
+use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
 /**
@@ -33,11 +34,6 @@ class MinecraftUserListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftUserList';
-
-    /**
-     * @inheritDoc
-     */
     public $objectListClassName = MinecraftUserList::class;
 
     /**
@@ -53,12 +49,23 @@ class MinecraftUserListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
+    public function show()
+    {
+        // set active tab
+        UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.minecraftSection.minecraftUserList');
+
+        parent::show();
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function initObjectList()
     {
         parent::initObjectList();
 
         $userToMinecraftUserList = new UserToMinecraftUserList();
-        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->userID]);
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->getUserID()]);
         $userToMinecraftUserList->readObjectIDs();
 
         $this->objectList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
