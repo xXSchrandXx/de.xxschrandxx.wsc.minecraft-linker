@@ -17,4 +17,4 @@ jobs:
         extensions: ctype, dom, exif, gd, gmp, hash, intl, json, libxml, mbstring, opcache, pcre, pdo, pdo_mysql, zlib
         tools: cs2pr, phpcs, php-cs-fixer
     - name: phpcs
-      run: phpcs -n --report=checkstyle
+      run: phpcs -n | cs2pr
