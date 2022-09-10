@@ -12,7 +12,6 @@ use wcf\data\AbstractDatabaseObjectAction;
  */
 class UserToMinecraftUserAction extends AbstractDatabaseObjectAction
 {
-
     /**
      * @inheritDoc
      */

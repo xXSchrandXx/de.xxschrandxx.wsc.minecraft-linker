@@ -22,12 +22,12 @@ class UserToMinecraftUser extends DatabaseObject
      */
     protected static $databaseTableIndexName = 'minecraftUserID';
 
-     /**
-      * Returns userID
-      * @return ?int
-      */
-      public function getUserID()
-      {
+    /**
+     * Returns userID
+     * @return ?int
+     */
+    public function getUserID()
+    {
         return $this->userID;
-      }
+    }
 }
