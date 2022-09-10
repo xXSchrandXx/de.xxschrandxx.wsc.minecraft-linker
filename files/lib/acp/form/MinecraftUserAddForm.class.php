@@ -204,7 +204,7 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                 'userID' => $userToMinecraftUser->getUserID()
             ]);
         }
-    }     
+    }
 
     /**
      * @inheritDoc
