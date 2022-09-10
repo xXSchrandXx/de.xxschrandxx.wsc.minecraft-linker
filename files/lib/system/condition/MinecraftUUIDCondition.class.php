@@ -8,6 +8,7 @@ use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
+use wcf\system\WCF;
 
 /**
  * MinecraftLinker uuid condition class
@@ -24,6 +25,19 @@ class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondi
      * @inheritDoc
      */
     protected $fieldName = 'minecraftUUID';
+
+    /**
+     * @inheritDoc
+     */
+    protected $label = 'wcf.user.condition.minecraftLinker.isLinked';
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLabel()
+    {
+        return WCF::getLanguage()->get($this->label);
+    }
 
     /**
      * @inheritDoc

@@ -8,6 +8,7 @@ use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
+use wcf\system\WCF;
 
 /**
  * MinecraftLinker linked condition class
@@ -24,6 +25,19 @@ class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUse
      * @inheritDoc
      */
     protected $fieldName = 'minecraftLinked';
+
+    /**
+     * @inheritDoc
+     */
+    protected $label = 'wcf.user.condition.minecraftLinker.isLinked';
+
+    /**
+     * @inheritDoc
+     */
+    protected function getLabel()
+    {
+        return WCF::getLanguage()->get($this->label);
+    }
 
     /**
      * @inheritDoc
