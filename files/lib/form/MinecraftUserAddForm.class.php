@@ -11,6 +11,7 @@ use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\data\processor\VoidFormDataProcessor;
 use wcf\system\form\builder\field\SingleSelectionFormField;
 use wcf\system\form\builder\field\TextFormField;
+use wcf\system\form\builder\field\TitleFormField;
 use wcf\system\form\builder\field\validation\FormFieldValidationError;
 use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\system\menu\user\UserMenu;
@@ -107,10 +108,8 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
         $this->form->appendChild(
             FormContainer::create('data')
                 ->appendChildren([
-                    TextFormField::create('title')
+                    TitleFormField::create()
                         ->required()
-                        ->label('wcf.form.minecraftUserAdd.title')
-                        ->description('wcf.form.minecraftUserAdd.title.description')
                         ->maximumLength(30)
                         ->value('Default')
                         ->available(MINECRAFT_MAX_UUIDS > 1),

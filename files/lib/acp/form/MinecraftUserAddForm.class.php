@@ -111,16 +111,14 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
         $this->form->appendChild(
             FormContainer::create('data')
                 ->appendChildren([
-                    TitleFormField::create('title')
+                    TitleFormField::create()
                         ->required()
-                        ->label('wcf.acp.page.minecraftUserAdd.title')
-                        ->description('wcf.acp.page.minecraftUserAdd.title.description')
                         ->maximumLength(30)
                         ->value('Default'),
                     TextFormField::create('minecraftUUID')
                         ->required()
-                        ->label('wcf.acp.page.minecraftUserAdd.minecraftUUID')
-                        ->description('wcf.acp.page.minecraftUserAdd.minecraftUUID.description')
+                        ->label('wcf.acp.form.minecraftUserAdd.minecraftUUID')
+                        ->description('wcf.acp.form.minecraftUserAdd.minecraftUUID.description')
                         ->minimumLength(36)
                         ->maximumLength(36)
                         ->pattern(MinecraftLinkerUtil::UUID_PATTERN)
@@ -146,12 +144,12 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
                                 return;
                             }
                             $field->addValidationError(
-                                new FormFieldValidationError('alreadyUsed', 'wcf.acp.page.minecraftUserAdd.minecraftUUID.error.alreadyUsed')
+                                new FormFieldValidationError('alreadyUsed', 'wcf.acp.form.minecraftUserAdd.minecraftUUID.error.alreadyUsed')
                             );
                         })),
                     TextFormField::create('minecraftName')
-                        ->label('wcf.acp.page.minecraftUserAdd.minecraftName')
-                        ->description('wcf.acp.page.minecraftUserAdd.minecraftName.description')
+                        ->label('wcf.acp.form.minecraftUserAdd.minecraftName')
+                        ->description('wcf.acp.form.minecraftUserAdd.minecraftName.description')
                         ->minimumLength(3)
                         ->maximumLength(16)
                         ->pattern('[0-9a-fA-F_]{3-16}')

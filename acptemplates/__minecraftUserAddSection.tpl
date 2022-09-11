@@ -16,8 +16,8 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.id{/lang}</th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.title{/lang}</th>
+							<th>{lang}wcf.global.objectID{/lang}</th>
+							<th>{lang}wcf.global.title{/lang}</th>
 							<th>{lang}wcf.acp.page.userAddSection.minecraft.uuid{/lang}</th>
 							<th>{lang}wcf.acp.page.userAddSection.minecraft.name{/lang}</th>
 							<th>{lang}wcf.acp.page.userAddSection.minecraft.connectedSince{/lang}</th>
@@ -25,20 +25,20 @@
 					</thead>
 					<tbody>
 						{foreach from=$minecraftUsers item=minecraftUser}
-							<tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->minecraftUserID}">
+							<tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->getObjectID()}">
 								<td>
-									<a href="{link controller='MinecraftUserEdit' id=$minecraftUser->minecraftUserID}{/link}"
+									<a href="{link controller='MinecraftUserEdit' id=$minecraftUser->getObjectID()}{/link}"
 										title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
 										<span class="icon icon16 fa-pencil"></span>
 									</a>
-									{objectAction action="delete" objectTitle=$minecraftUser->title}
+									{objectAction action="delete" objectTitle=$minecraftUser->getTitle()}
 									{event name='rowButtons'}
 								</td>
-								<td>{#$minecraftUser->minecraftUserID}</td>
-								<td>{$minecraftUser->title}</td>
-								<td>{$minecraftUser->minecraftUUID}</td>
-								<td>{$minecraftUser->minecraftName}</td>
-								<td>{@$minecraftUser->createdDate|time}</td>
+								<td class="columnID">{#$minecraftUser->getObjectID()}</td>
+								<td class="columnTitle">{$minecraftUser->getTitle()}</td>
+								<td class="columnText">{$minecraftUser->getMinecraftUUID()}</td>
+								<td class="columnText">{$minecraftUser->getMinecraftName()}</td>
+								<td class="columnDate">{@$minecraftUser->getCreatdDate()|time}</td>
 							</tr>
 						{/foreach}
 					</tbody>

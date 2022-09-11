@@ -7,6 +7,7 @@ use wcf\data\user\minecraft\MinecraftUserAction;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\field\TextFormField;
+use wcf\system\form\builder\field\TitleFormField;
 
 /**
  * MinecraftUser edit form class
@@ -58,7 +59,7 @@ class MinecraftUserEditForm extends MinecraftUserAddForm
         $this->form->appendChild(
             FormContainer::create('data')
                 ->appendChild(
-                    TextFormField::create('title')
+                    TitleFormField::create()
                         ->required()
                         ->label('wcf.form.minecraftUserAdd.title')
                         ->description('wcf.form.minecraftUserAdd.title.description')
