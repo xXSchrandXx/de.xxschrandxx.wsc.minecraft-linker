@@ -19,39 +19,7 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
     /**
      * @inheritDoc
      */
-    protected string $code;
-
-    /**
-     * @inheritDoc
-     */
     protected bool $ignoreName = false;
-
-    /**
-     * @inheritDoc
-     */
-    public function readParameters(): ?JsonResponse
-    {
-        $result = parent::readParameters();
-
-        // check code
-        if (!array_key_exists('code', $this->getJSON())) {
-            if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'code\' not set.', 400);
-            } else {
-                return $this->send('Bad Request.', 400);
-            }
-        }
-        if (!is_string($this->getData('code'))) {
-            if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'code\' no string.', 400);
-            } else {
-                return $this->send('Bad Request.', 400);
-            }
-        }
-        $this->code = $this->getData('code');
-
-        return $result;
-    }
 
     /**
      * @inheritdoc
@@ -72,26 +40,21 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
             $userToMinecraftUserList->setObjectIDs([$minecraftUser->getObjectID()]);
             if ($userToMinecraftUserList->countObjects() !== 0) {
                 if (ENABLE_DEBUG_MODE) {
-                    return $this->send('Bad request. UUID already linked.', 400);
+                    return $this->send('Bad request. UUID already linked.', 400, ['code' => '']);
                 } else {
-                    return $this->send('Bad request.', 400);
+                    return $this->send('Bad request.', 400, ['code' => '']);
                 }
             } else {
-                $editor = new MinecraftUserEditor($minecraftUser);
-                $editor->update([
-                    'code' => $this->code
-                ]);
+                return $this->send('OK', 200, ['code' => $minecraftUser->getCode()]);
             }
-        } else {
-            // create databaseobject
-            MinecraftUserEditor::create([
-                'minecraftUUID' => $this->uuid,
-                'minecraftName' => $this->name,
-                'code' => $this->code
-            ]);
         }
-
-        // send OK
-        return $this->send();
+        $code = bin2hex(\random_bytes(4));
+        // create databaseobject
+        MinecraftUserEditor::create([
+            'minecraftUUID' => $this->uuid,
+            'minecraftName' => $this->name,
+            'code' => $code
+        ]);
+        return $this->send('OK', 200, ['code' => $code]);
     }
 }
