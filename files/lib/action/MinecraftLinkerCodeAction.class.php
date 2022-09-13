@@ -40,9 +40,9 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
             $userToMinecraftUserList->setObjectIDs([$minecraftUser->getObjectID()]);
             if ($userToMinecraftUserList->countObjects() !== 0) {
                 if (ENABLE_DEBUG_MODE) {
-                    return $this->send('Bad request. UUID already linked.', 400, ['code' => '']);
+                    return $this->send('OK UUID already linked.', 200, ['code' => '']);
                 } else {
-                    return $this->send('Bad request.', 400, ['code' => '']);
+                    return $this->send('OK', 200, ['code' => '']);
                 }
             } else {
                 return $this->send('OK', 200, ['code' => $minecraftUser->getCode()]);
