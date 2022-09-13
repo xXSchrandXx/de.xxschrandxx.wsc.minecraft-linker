@@ -47,9 +47,14 @@ class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUse
         $userToMinecraftUserList = new UserToMinecraftUserList();
         $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->getUserID()]);
         $userToMinecraftUserList->readObjectIDs();
+        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
+
+        if (empty($userToMinecraftUserIDs)) {
+            return false;
+        }
 
         $minecraftUserList = new MinecraftUserList();
-        $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList->getObjectIDs()]);
+        $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
         if ($minecraftUserList->countObjects() === 0) {
             return false;
         } else {
@@ -69,7 +74,11 @@ class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUse
         if (isset($conditionData[$this->fieldName]) && $conditionData[$this->fieldName]) {
             $userToMinecraftUserList = new UserToMinecraftUserList();
             $userToMinecraftUserList->readObjectIDs();
-            $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList->getObjectIDs()]);
+            $userToMinecraftUserIDs = $userToMinecraftUserList->readObjectIDs();
+            if (empty($userToMinecraftUserIDs)) {
+                return;
+            }
+            $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
         }
 
         $objectList->readObjects();

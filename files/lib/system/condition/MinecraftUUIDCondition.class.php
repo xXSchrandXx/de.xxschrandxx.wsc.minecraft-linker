@@ -47,10 +47,14 @@ class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondi
         $userToMinecraftUserList = new UserToMinecraftUserList();
         $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->getUserID()]);
         $userToMinecraftUserList->readObjectIDs();
+        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
+
+        if (empty($userToMinecraftUserIDs)) {
+            return false;
+        }
 
         $userMinecraftList = new MinecraftUserList();
-        $userMinecraftList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList]);
-        $userMinecraftList->getConditionBuilder()->add('minecraftUUID = ?', [$this->fieldValue]);
+        $userMinecraftList->getConditionBuilder()->add('minecraftUserID IN (?) AND minecraftUUID = ?', [$userToMinecraftUserIDs, $this->fieldValue]);
 
         if ($userMinecraftList->countObjects() === 1) {
             return true;
@@ -75,11 +79,16 @@ class MinecraftUUIDCondition extends AbstractTextCondition implements IUserCondi
 
             $minecraftUserIDs = $minecraftUserList->getObjectIDs();
             if (empty($minecraftUserIDs)) {
-                $userToMinecraftUserList = new UserToMinecraftUserList();
-                $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$minecraftUserIDs]);
-                $userToMinecraftUserList->readObjectIDs();
-                $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserList->getObjectIDs()]);
+                return;
             }
+            $userToMinecraftUserList = new UserToMinecraftUserList();
+            $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$minecraftUserIDs]);
+            $userToMinecraftUserList->readObjectIDs();
+            $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
+            if (empty($userToMinecraftUserIDs)) {
+                return;
+            }
+            $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
         }
 
         $objectList->readObjects();
