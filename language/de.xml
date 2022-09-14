@@ -12,7 +12,9 @@
 		<item name="wcf.acp.option.category.minecraft_linker_general"><![CDATA[Allgemeine Einstellungen]]></item>
 		<item name="wcf.acp.option.minecraft_linker_enabled"><![CDATA[Minecraft-Linker aktivieren]]></item>
 		<item name="wcf.acp.option.minecraft_linker_enabled.description"><![CDATA[Aktiviert / Deaktiviert den Minecraft-Linker.
-Link für Plugin-Konfiguration: <kbd>{link controller='MinecraftLinkerCode' forceFrontend=true}{/link}</kbd>]]></item>
+Links für Plugin-Konfiguration:
+<kbd>sendCode: {link controller='MinecraftLinkerCode' forceFrontend=true}{/link}</kbd>
+<kbd>updateNames: {link controller='MinecraftLinkerUpdateName' forceFrontend=true}{/link}</kbd>]]></item>
 		<item name="wcf.acp.option.minecraft_linker_identity"><![CDATA[Server]]></item>
 		<item name="wcf.acp.option.minecraft_linker_identity.description"><![CDATA[Aktiviert Minecraft-Linker für ausgewählte Server.]]></item>
 		<item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximale Anzahl an Minecraft-Verknüpfungen pro Benutzer]]></item>
