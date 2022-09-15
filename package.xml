@@ -7,8 +7,8 @@
 		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
 		<packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
-		<version>3.0.0 dev 1</version>
-		<date>2022-07-22</date>
+		<version>3.0.0</version>
+		<date>2022-09-15</date>
 	</packageinformation>
 
 	<authorinformation>

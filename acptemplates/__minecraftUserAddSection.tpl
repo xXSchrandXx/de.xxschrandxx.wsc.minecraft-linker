@@ -18,8 +18,8 @@
 							<th></th>
 							<th>{lang}wcf.global.objectID{/lang}</th>
 							<th>{lang}wcf.global.title{/lang}</th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.uuid{/lang}</th>
-							<th>{lang}wcf.acp.page.userAddSection.minecraft.name{/lang}</th>
+							<th>{lang}wcf.acp.page.userAddSection.minecraft.minecraftUUID{/lang}</th>
+							<th>{lang}wcf.acp.page.userAddSection.minecraft.minecraftName{/lang}</th>
 							<th>{lang}wcf.acp.page.userAddSection.minecraft.connectedSince{/lang}</th>
 						</tr>
 					</thead>
