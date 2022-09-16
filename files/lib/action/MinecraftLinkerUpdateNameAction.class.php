@@ -18,6 +18,11 @@ class MinecraftLinkerUpdateNameAction extends AbstractMultipleMinecraftLinkerAct
     /**
      * @inheritDoc
      */
+    public $neededModules = ['MINECRAFT_LINKER_ENABLED'];
+
+    /**
+     * @inheritDoc
+     */
     protected bool $ignoreName = false;
 
     /**

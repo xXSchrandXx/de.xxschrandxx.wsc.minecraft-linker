@@ -90,19 +90,4 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
 
         return $result;
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function checkModules()
-    {
-        $modules = ['MINECRAFT_LINKER_ENABLED', 'MINECRAFT_LINKER_IDENTITY'];
-        // check modules
-        foreach ($modules as $module) {
-            if (!\defined($module) || !\constant($module)) {
-                throw new IllegalLinkException();
-            }
-        }
-        parent::checkModules();
-    }
 }

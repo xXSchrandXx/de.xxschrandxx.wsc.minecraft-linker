@@ -19,6 +19,11 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
     /**
      * @inheritDoc
      */
+    public $neededModules = ['MINECRAFT_LINKER_ENABLED'];
+
+    /**
+     * @inheritDoc
+     */
     protected bool $ignoreName = false;
 
     /**
