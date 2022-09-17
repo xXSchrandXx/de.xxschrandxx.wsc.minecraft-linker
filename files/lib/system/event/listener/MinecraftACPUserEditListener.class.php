@@ -38,12 +38,20 @@ class MinecraftACPUserEditListener implements IParameterizedEventListener
         $userToMinecraftUserList = new UserToMinecraftUserList();
         $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$_REQUEST['id']]);
         $userToMinecraftUserList->readObjectIDs();
+        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
 
-        $userMinecraftList = new MinecraftUserList();
-        $userMinecraftList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
-        $userMinecraftList->readObjects();
+        if (empty($userToMinecraftUserIDs)) {
+            WCF::getTPL()->assign([
+                'minecraftUsers' => []
+            ]);
+            return;
+        }
+
+        $minecraftUserList = new MinecraftUserList();
+        $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
+        $minecraftUserList->readObjects();
         /** @var \wcf\data\user\minecraft\MinecraftUser[] */
-        $minecraftUsers = $userMinecraftList->getObjects();
+        $minecraftUsers = $minecraftUserList->getObjects();
 
         WCF::getTPL()->assign([
             'minecraftUsers' => $minecraftUsers

@@ -42,7 +42,7 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
             $minecraftUser = $minecraftUserList->getSingleObject();
             // check linked
             $userToMinecraftUserList = new UserToMinecraftUserList();
-            $userToMinecraftUserList->setObjectIDs([$minecraftUser->getObjectID()]);
+            $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID = ?', [$minecraftUser->getObjectID()]);
             if ($userToMinecraftUserList->countObjects() !== 0) {
                 if (ENABLE_DEBUG_MODE) {
                     return $this->send('OK UUID already linked.', 200, ['code' => '']);

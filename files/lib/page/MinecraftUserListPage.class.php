@@ -67,8 +67,12 @@ class MinecraftUserListPage extends MultipleLinkPage
         $userToMinecraftUserList = new UserToMinecraftUserList();
         $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->getUserID()]);
         $userToMinecraftUserList->readObjectIDs();
+        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
+        if (empty($userToMinecraftUserIDs)) {
+            return;
+        }
 
-        $this->objectList->setObjectIDs($userToMinecraftUserList->getObjectIDs());
+        $this->objectList->getConditionBuilder->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
     }
 
     /**
