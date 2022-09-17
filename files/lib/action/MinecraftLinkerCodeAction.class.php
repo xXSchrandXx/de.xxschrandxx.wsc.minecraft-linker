@@ -2,6 +2,7 @@
 
 namespace wcf\action;
 
+use BadMethodCallException;
 use Laminas\Diactoros\Response\JsonResponse;
 use wcf\data\user\minecraft\MinecraftUserEditor;
 use wcf\data\user\minecraft\MinecraftUserList;
@@ -36,22 +37,25 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
         // check edit
         $minecraftUserList = new MinecraftUserList();
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$this->uuid]);
-        if ($minecraftUserList->countObjects() !== 0) {
-            $minecraftUserList->readObjects();
+        $minecraftUserList->readObjects();
+        try {
             /** @var \wcf\data\user\minecraft\MinecraftUser */
             $minecraftUser = $minecraftUserList->getSingleObject();
-            // check linked
-            $userToMinecraftUserList = new UserToMinecraftUserList();
-            $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID = ?', [$minecraftUser->getObjectID()]);
-            if ($userToMinecraftUserList->countObjects() !== 0) {
-                if (ENABLE_DEBUG_MODE) {
-                    return $this->send('OK UUID already linked.', 200, ['code' => '']);
+            if ($minecraftUser !== null) {
+                // check linked
+                $userToMinecraftUserList = new UserToMinecraftUserList();
+                $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID = ?', [$minecraftUser->getObjectID()]);
+                if ($userToMinecraftUserList->countObjects() !== 0) {
+                    if (ENABLE_DEBUG_MODE) {
+                        return $this->send('OK UUID already linked.', 200, ['code' => '']);
+                    } else {
+                        return $this->send('OK', 200, ['code' => '']);
+                    }
                 } else {
-                    return $this->send('OK', 200, ['code' => '']);
+                    return $this->send('OK', 200, ['code' => $minecraftUser->getCode()]);
                 }
-            } else {
-                return $this->send('OK', 200, ['code' => $minecraftUser->getCode()]);
             }
+        } catch (BadMethodCallException $e) {
         }
         $code = bin2hex(\random_bytes(4));
         // create databaseobject
