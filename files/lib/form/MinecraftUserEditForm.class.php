@@ -61,8 +61,6 @@ class MinecraftUserEditForm extends MinecraftUserAddForm
                 ->appendChild(
                     TitleFormField::create()
                         ->required()
-                        ->label('wcf.form.minecraftUserAdd.title')
-                        ->description('wcf.form.minecraftUserAdd.title.description')
                         ->maximumLength(30)
                         ->value('Default')
                         ->available(MINECRAFT_MAX_UUIDS > 1)

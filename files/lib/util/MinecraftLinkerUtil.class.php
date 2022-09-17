@@ -2,6 +2,7 @@
 
 namespace wcf\util;
 
+use Exception;
 use wcf\data\user\minecraft\MinecraftUser;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
@@ -76,17 +77,19 @@ class MinecraftLinkerUtil extends MinecraftUtil
     /**
      * Returns unread MinecraftUserList with linked minecraft users
      * @return MinecraftUserList
+     * @throws Exception when no UnknownMinecraftUsers exist
      */
-    public static function getLinkedMinecraftUser(): MinecraftUserList
+    public static function getLinkedMinecraftUserS(): MinecraftUserList
     {
         $userToMinecraftUserList = new UserToMinecraftUserList();
         $userToMinecraftUserList->readObjects();
         $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
 
         $minecraftUserList = new MinecraftUserList();
-        if (!empty($userToMinecraftUserIDs)) {
-            $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
+        if (empty($userToMinecraftUserIDs)) {
+            throw new Exception('No linked minecraft User.', 400);
         }
+        $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
         return $minecraftUserList;
     }
 }
