@@ -22,12 +22,48 @@ class MinecraftUser extends DatabaseObject
      */
     protected static $databaseTableIndexName = 'minecraftUserID';
 
+     /**
+      * Returns title
+      * @return ?string
+      */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     /**
-     * ObjectId $minecraftUserID
-     * NotNullInt10 $userID
-     * Varchar 36 $minecraftUUID
-     * Varchar|null 16 $minecraftName
-     * Varchar 30 $title
-     * NotNullInt10 createdDate
+     * Returns Minecraft-UUID
+     * @return ?string
      */
+    public function getMinecraftUUID()
+    {
+        return $this->minecraftUUID;
+    }
+
+    /**
+     * Returns Minecraft-Name
+     * @return ?string
+     */
+    public function getMinecraftName()
+    {
+        return $this->minecraftName;
+    }
+
+    /**
+     * Returns code
+     * @return ?string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Returns createdTimestamp
+     * @return ?int
+     */
+    public function getCreatdDate()
+    {
+        return $this->createdDate;
+    }
 }

@@ -6,11 +6,9 @@
 		<packagename><![CDATA[Minecraft-Linker]]></packagename>
 		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
 		<packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
-		<packagedescription language="de">
-			<![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]>
-		</packagedescription>
-		<version>2.0.2 pl 1</version>
-		<date>2022-07-22</date>
+		<packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
+		<version>3.0.0</version>
+		<date>2022-09-15</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -19,21 +17,16 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="5.5.0 RC 1">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="2.1.0">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="3.0.0 dev 1">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
 		<excludedpackage version="6.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
-		<excludedpackage version="3.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
+		<excludedpackage version="4.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
-
-	<instructions type="update" fromversion="2.0.2">
-		<instruction type="template"/>
-	</instructions>
 
 	<instructions type="install">
 		<instruction type="acpTemplate"/>
-		<instruction type="cronjob"/>
 		<instruction type="eventListener"/>
 		<instruction type="file"/>
 		<instruction type="language"/>

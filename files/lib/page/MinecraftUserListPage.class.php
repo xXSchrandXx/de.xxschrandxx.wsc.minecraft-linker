@@ -3,7 +3,7 @@
 namespace wcf\page;
 
 use wcf\data\user\minecraft\MinecraftUserList;
-use wcf\system\exception\IllegalLinkException;
+use wcf\data\user\minecraft\UserToMinecraftUserList;
 use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
@@ -34,11 +34,6 @@ class MinecraftUserListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    public $activeMenuItem = 'wcf.user.menu.minecraftSection.minecraftUserList';
-
-    /**
-     * @inheritDoc
-     */
     public $objectListClassName = MinecraftUserList::class;
 
     /**
@@ -54,13 +49,12 @@ class MinecraftUserListPage extends MultipleLinkPage
     /**
      * @inheritDoc
      */
-    public function checkModules()
+    public function show()
     {
-        parent::checkModules();
+        // set active tab
+        UserMenu::getInstance()->setActiveMenuItem('wcf.user.menu.minecraftSection.minecraftUserList');
 
-        if (!(MINECRAFT_LINKER_ENABLED && MINECRAFT_LINKER_IDENTITY)) {
-            throw new IllegalLinkException();
-        }
+        parent::show();
     }
 
     /**
@@ -70,16 +64,17 @@ class MinecraftUserListPage extends MultipleLinkPage
     {
         parent::initObjectList();
 
-        $this->objectList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->userID]);
-    }
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [WCF::getUser()->getUserID()]);
+        $userToMinecraftUserList->readObjectIDs();
+        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
 
-    /**
-     * @inheritDoc
-     */
-    public function show()
-    {
-        UserMenu::getInstance()->setActiveMenuItem($this->activeMenuItem);
-        parent::show();
+        if (empty($userToMinecraftUserIDs)) {
+            $this->objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [[0]]);
+            return;
+        }
+
+        $this->objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
     }
 
     /**

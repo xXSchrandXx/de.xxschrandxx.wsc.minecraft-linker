@@ -9,83 +9,52 @@
 	</category>
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.minecraft_linker"><![CDATA[Minecraft-Linker]]></item>
-		<item name="wcf.acp.option.category.minecraft_linker_commands"><![CDATA[Befehle]]></item>
 		<item name="wcf.acp.option.category.minecraft_linker_general"><![CDATA[Allgemeine Einstellungen]]></item>
-		<item name="wcf.acp.option.category.minecraft_linker_password"><![CDATA[Minecraft-Authentication]]></item>
-		<item name="wcf.acp.option.minecraft_command_list"><![CDATA[List Befehl]]></item>
-		<item name="wcf.acp.option.minecraft_command_list.description"><![CDATA[Dieser Befehl wird nur für Vanilla Server benutzt.]]></item>
-		<item name="wcf.acp.option.minecraft_command_sendcode"><![CDATA[Bestätigungscode Befehl]]></item>
-		<item name="wcf.acp.option.minecraft_command_sendcode.description"><![CDATA[Dieser Befehl wird nur für Vanilla Server benutzt. Placeholder: <code>{literal}{$uuid}{/literal} => UUID des Spielers, {literal}{$name}{/literal} => Name des Spielers, {literal}{$code}{/literal} => Bestätigungscode für den Spieler</code> *}]]></item>
-		<item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Benutzer aktivieren]]></item>
-		<item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Aktiviert einen Benutzer wenn er eine Minecraft-Verknüpfung hinzugefügt hat.]]></item>
 		<item name="wcf.acp.option.minecraft_linker_enabled"><![CDATA[Minecraft-Linker aktivieren]]></item>
-		<item name="wcf.acp.option.minecraft_linker_enabled.description"><![CDATA[Aktiviert / Deaktiviert den Minecraft-Linker.]]></item>
+		<item name="wcf.acp.option.minecraft_linker_enabled.description"><![CDATA[<p>Aktiviert / Deaktiviert Minecraft-Linker.</p>
+<p>Links für Plugin-Konfiguration:</p>
+<p><kbd>sendCode: {link controller='MinecraftLinkerCode' forceFrontend=true}{/link}</kbd></p>
+<p><kbd>updateNames: {link controller='MinecraftLinkerUpdateName' forceFrontend=true}{/link}</kbd></p>]]></item>
 		<item name="wcf.acp.option.minecraft_linker_identity"><![CDATA[Server]]></item>
 		<item name="wcf.acp.option.minecraft_linker_identity.description"><![CDATA[Aktiviert Minecraft-Linker für ausgewählte Server.]]></item>
 		<item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximale Anzahl an Minecraft-Verknüpfungen pro Benutzer]]></item>
 		<item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Verknüpfungen]]></item>
-		<item name="wcf.acp.option.minecraft_name_enabled"><![CDATA[Aktiviere Namen]]></item>
-		<item name="wcf.acp.option.minecraft_name_enabled.description"><![CDATA[Aktiviert die Speicherung und Aktuallisierung von Namen zusätzlich zu den UUIDs.]]></item>
+		<item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Benutzer aktivieren]]></item>
+		<item name="wcf.acp.option.minecraft_enable_active_user.description"><![CDATA[Aktiviert einen Benutzer wenn er eine Minecraft-Verknüpfung hinzugefügt hat.]]></item>
+	</category>
+	<category name="wcf.acp.form">
+		<item name="wcf.acp.form.minecraftUserAdd.formTitle.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.formTitle.edit"><![CDATA[Minecraft-Verknüpfung Bearbeiten]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftName"><![CDATA[Name]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftName.description"><![CDATA[Der Name des Spielers.]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID"><![CDATA[UUID]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
+		<item name="wcf.acp.form.minecraftUserAdd.minecraftUUID.error.notUUID"><![CDATA[{$uuid} ist keine gültige UUID v4.]]></item>
+	</category>
+	<category name="wcf.acp.page">
+		<item name="wcf.acp.page.userAddSection.minecraft.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
+		<item name="wcf.acp.page.userAddSection.minecraft.connectedSince"><![CDATA[Verknüpft]]></item>
+		<item name="wcf.acp.page.userAddSection.minecraft.sectionTitle"><![CDATA[Minecraft-Verknüpfungen]]></item>
+		<item name="wcf.acp.page.userAddSection.minecraft.minecraftUUID"><![CDATA[Minecraft-UUID]]></item>
+		<item name="wcf.acp.page.userAddSection.minecraft.minecraftName"><![CDATA[Minecraft-Name]]></item>
 	</category>
 	<category name="wcf.copyright">
 		<item name="wcf.copyright.minecraft-linker"><![CDATA[xXSchrandXx's Minecraft-Linker]]></item>
 	</category>
-	<category name="wcf.page.minecraftUserAddACP">
-		<item name="wcf.page.minecraftUserAddACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
-		<item name="wcf.page.minecraftUserAddACP.back"><![CDATA[Zurück]]></item>
-		<item name="wcf.page.minecraftUserAddACP.change"><![CDATA[Methode ändern]]></item>
-		<item name="wcf.page.minecraftUserAddACP.emptyList"><![CDATA[Da derzeit keine Spieler auf dem Minecraft-Server / den Minecraft-Servern sind, kann die Eingabe via Liste nicht genutzt werden.]]></item>
-		<item name="wcf.page.minecraftUserAddACP.minecraftName"><![CDATA[Name]]></item>
-		<item name="wcf.page.minecraftUserAddACP.minecraftName.description"><![CDATA[Der Name des Spielers.]]></item>
-		<item name="wcf.page.minecraftUserAddACP.minecraftUUID"><![CDATA[UUID]]></item>
-		<item name="wcf.page.minecraftUserAddACP.minecraftUUID.description"><![CDATA[Die UUID des Spielers.]]></item>
-		<item name="wcf.page.minecraftUserAddACP.title"><![CDATA[Anzeigename]]></item>
-		<item name="wcf.page.minecraftUserAddACP.title.description"><![CDATA[Der Titel zur Unterscheidung von Verknüpfungen.]]></item>
-		<item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
-		<item name="wcf.page.minecraftUserAddACP.minecraftUUID.error.notUUID"><![CDATA[{$uuid} ist keine gültige UUID v4.]]></item>
-	</category>
-	<category name="wcf.page.minecraftUserEditACP">
-		<item name="wcf.page.minecraftUserEditACP.pageTitle"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>
-	</category>
-	<category name="wcf.page.userAddSection">
-		<item name="wcf.page.userAddSection.minecraft.add"><![CDATA[Minecraft-Verknüpfung über Liste Hinzufügen]]></item>
-		<item name="wcf.page.userAddSection.minecraft.addText"><![CDATA[Minecraft-Verknüpfung über Text Hinzufügen]]></item>
-		<item name="wcf.page.userAddSection.minecraft.connectedSince"><![CDATA[Verknüpft]]></item>
-		<item name="wcf.page.userAddSection.minecraft.id"><![CDATA[ID]]></item>
-		<item name="wcf.page.userAddSection.minecraft.sectionTitle"><![CDATA[Minecraft-Verknüpfungen]]></item>
-		<item name="wcf.page.userAddSection.minecraft.title"><![CDATA[Titel]]></item>
-		<item name="wcf.page.userAddSection.minecraft.uuid"><![CDATA[Minecraft-UUID]]></item>
-		<item name="wcf.page.userAddSection.minecraft.name"><![CDATA[Minecraft-Name]]></item>
-	</category>
-	<category name="wcf.minecraft">
-		<item name="wcf.minecraft.message"><![CDATA[Dein Bestätigungscode: {$code}]]></item>
-		<item name="wcf.minecraft.hoverMessage"><![CDATA[In die Zwischenablage kopieren.]]></item>
-	</category>
-	<category name="wcf.page.minecraftUserAdd">
-		<item name="wcf.page.minecraftUserAdd.error.maxReached"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Sie haben{else}Du hast{/if} das maximum an Verknüpfungen erreicht.]]></item>
-		<item name="wcf.page.minecraftUserAdd.error.alreadySend"><![CDATA[Ein Bestätigungscode wurde dir schon zugesendet.]]></item>
-		<item name="wcf.page.minecraftUserAdd.error.noUnknownUsers"><![CDATA[Es sind keine nicht verknüpften Benutzer auf dem Minecraft-Server.]]></item>
-		<item name="wcf.page.minecraftUserAdd.error.sendCode"><![CDATA[Der Bestätigungscode konnte nicht gesendet werden.]]></item>
-		<item name="wcf.page.minecraftUserAdd.error.sendCodeDynamic"><![CDATA[Der Bestätigungscode konnte nicht gesendet werden: {$msg}]]></item>
-		<item name="wcf.page.minecraftUserAdd.success"><![CDATA[Der Bestätigungscode wurde {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} erfolgreich zugesendet.]]></item>
-		<item name="wcf.page.minecraftUserAdd.title"><![CDATA[Titel]]></item>
-		<item name="wcf.page.minecraftUserAdd.title.description"><![CDATA[Der Titel zur Unterscheidung von {if LANGUAGE_USE_INFORMAL_VARIANT}Ihren{else}deinen{/if} Verknüpfungen.]]></item>
-		<item name="wcf.page.minecraftUserAdd.uuid"><![CDATA[Minecraft-UUID]]></item>
-		<item name="wcf.page.minecraftUserAdd.uuid.description"><![CDATA[Damit {if LANGUAGE_USE_INFORMAL_VARIANT}Sie{else}du{/if} in der Liste angezeigt {if LANGUAGE_USE_INFORMAL_VARIANT}werden, müssen Sie{else}wirst, musst du{/if} auf dem Minecraft-Server online sein.]]></item>
-	</category>
-	<category name="wcf.page.minecraftUserCheck">
-		<item name="wcf.page.minecraftUserCheck.success"><![CDATA[Die Minecraft-UUID wurde erfolgreich verknüpft.]]></item>
-		<item name="wcf.page.minecraftUserCheck.code"><![CDATA[Bestätigungscode]]></item>
-		<item name="wcf.page.minecraftUserCheck.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
-		<item name="wcf.page.minecraftUserCheck.code.error.wrongSecurityCode"><![CDATA[Falscher Bestätigungscode.]]></item>
-		<item name="wcf.page.minecraftUserCheck.code.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
-		<item name="wcf.page.minecraftUserCheck.resend"><![CDATA[Bestätigungscode erneut Anfordern]]></item>
-		<item name="wcf.page.minecraftUserCheck.resend.success"><![CDATA[Leite weiter zur Spielerauswahl.]]></item>
+	<category name="wcf.form.minecraftUserAdd">
+		<item name="wcf.form.minecraftUserAdd.error.maxReached"><![CDATA[{if LANGUAGE_USE_INFORMAL_VARIANT}Sie haben{else}Du hast{/if} das maximum an Verknüpfungen erreicht.]]></item>
+		<item name="wcf.form.minecraftUserAdd.error.noUnknownUsers"><![CDATA[<p>Es sind keine Verknüpfungsanfragen vorhanden.</p>
+<p>Benutze auf dem Minecraft-Server den Befehl <kbd>/wsclinker</kbd>.</p>]]></item>
+		<item name="wcf.form.minecraftUserAdd.minecraftUserID"><![CDATA[Minecraft-UUID]]></item>
+		<item name="wcf.form.minecraftUserAdd.minecraftUserID.description"><![CDATA[Damit {if LANGUAGE_USE_INFORMAL_VARIANT}Sie{else}du{/if} in der Liste angezeigt {if LANGUAGE_USE_INFORMAL_VARIANT}werden, müssen Sie{else}wirst, musst du{/if} auf dem Minecraft-Server den Befehl <kbd>/wsclinker</kbd> verwenden.]]></item>
+		<item name="wcf.form.minecraftUserAdd.code"><![CDATA[Bestätigungscode]]></item>
+		<item name="wcf.form.minecraftUserAdd.code.description"><![CDATA[Der Bestätigungscode, der {if LANGUAGE_USE_INFORMAL_VARIANT}Ihnen{else}dir{/if} auf dem Minecraft-Server zugesendet wurde.]]></item>
+		<item name="wcf.form.minecraftUserAdd.code.error.wrongSecurityCode"><![CDATA[Falscher Bestätigungscode.]]></item>
+		<item name="wcf.form.minecraftUserAdd.code.error.alreadyUsed"><![CDATA[Minecraft UUID wird schon verwendet.]]></item>
 	</category>
 	<category name="wcf.page.minecraftUserList">
 		<item name="wcf.page.minecraftUserList.add"><![CDATA[Minecraft-Verknüpfung hinzufügen]]></item>
-		<item name="wcf.page.minecraftUserList.table.minecraftUserID"><![CDATA[ID]]></item>
-		<item name="wcf.page.minecraftUserList.table.title"><![CDATA[Titel]]></item>
 		<item name="wcf.page.minecraftUserList.table.minecraftUUID"><![CDATA[UUID]]></item>
 		<item name="wcf.page.minecraftUserList.table.minecraftName"><![CDATA[Name]]></item>
 		<item name="wcf.page.minecraftUserList.table.createdDate"><![CDATA[Verknüpft]]></item>

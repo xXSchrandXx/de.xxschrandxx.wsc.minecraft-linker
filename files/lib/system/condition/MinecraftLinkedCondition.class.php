@@ -6,6 +6,8 @@ use wcf\data\condition\Condition;
 use wcf\data\user\UserList;
 use wcf\data\user\User;
 use wcf\data\DatabaseObjectList;
+use wcf\data\user\minecraft\MinecraftUserList;
+use wcf\data\user\minecraft\UserToMinecraftUserList;
 use wcf\system\WCF;
 
 /**
@@ -15,72 +17,49 @@ use wcf\system\WCF;
  * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
  * @package  WoltLabSuite\Core\System\Condition
  */
-class MinecraftLinkedCondition extends AbstractCondition implements IUserCondition, IObjectListCondition
+class MinecraftLinkedCondition extends AbstractCheckboxCondition implements IUserCondition, IObjectListCondition
 {
     use TObjectListUserCondition;
 
-    protected $minecraftLinked;
+    /**
+     * @inheritDoc
+     */
+    protected $fieldName = 'minecraftLinked';
 
     /**
      * @inheritDoc
      */
-    public function getData()
-    {
-        $data = [];
+    protected $label = 'wcf.user.condition.minecraftLinker.isLinked';
 
-        if ($this->minecraftLinked !== null) {
-            $data['minecraftLinked'] = $this->minecraftLinked;
+    /**
+     * @inheritDoc
+     */
+    protected function getLabel()
+    {
+        return WCF::getLanguage()->get($this->label);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function checkUser(Condition $condition, User $user)
+    {
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$user->getUserID()]);
+        $userToMinecraftUserList->readObjectIDs();
+        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
+
+        if (empty($userToMinecraftUserIDs)) {
+            return false;
         }
 
-        if (!empty($data)) {
-            return $data;
+        $minecraftUserList = new MinecraftUserList();
+        $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
+        if ($minecraftUserList->countObjects() === 0) {
+            return false;
+        } else {
+            return true;
         }
-
-        return null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getHTML()
-    {
-        return <<<HTML
-<dl>
-	<dt>{$this->getLanguage('wcf.user.condition.minecraftLinker.minecraftLinked')}</dt>
-	<dd>
-        <label>
-            <input type="checkbox" name="minecraftLinked" value="1"{$this->checkValue()}>
-            {$this->getLanguage('wcf.user.condition.minecraftLinker.isLinked')}
-        </label>
-	</dd>
-</dl>
-HTML;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function readFormParameters()
-    {
-        if (isset($_POST['minecraftLinked']) && $_POST['minecraftLinked']) {
-            $this->minecraftLinked = 1;
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function reset()
-    {
-        $this->minecraftLinked = null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setData(Condition $condition)
-    {
-        $this->minecraftLinked = $condition->minecraftLinked;
     }
 
     /**
@@ -92,37 +71,16 @@ HTML;
             throw new \InvalidArgumentException("Object list is no instance of '" . UserList::class . "', instance of '" . get_class($objectList) . "' given.");
         }
 
-        if (isset($conditionData['minecraftLinked']) && $conditionData['minecraftLinked']) {
-            $objectList->getConditionBuilder()->add('user_table.minecraftUUIDs > 0');
+        if (isset($conditionData[$this->fieldName]) && $conditionData[$this->fieldName]) {
+            $userToMinecraftUserList = new UserToMinecraftUserList();
+            $userToMinecraftUserList->readObjectIDs();
+            $userToMinecraftUserIDs = $userToMinecraftUserList->readObjectIDs();
+            if (empty($userToMinecraftUserIDs)) {
+                return;
+            }
+            $objectList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
         }
+
         $objectList->readObjects();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function checkUser(Condition $condition, User $user)
-    {
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getLanguage($var)
-    {
-        return WCF::getLanguage()->getDynamicVariable($var);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function checkValue()
-    {
-        if ($this->minecraftLinked) {
-            return ' checked';
-        }
-
-        return '';
     }
 }

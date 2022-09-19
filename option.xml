@@ -9,9 +9,6 @@
 			<category name="minecraft_linker_general">
 				<parent>minecraft_linker</parent>
 			</category>
-			<category name="minecraft_linker_password">
-				<parent>minecraft_linker</parent>
-			</category>
 		</categories>
 		<options>
 			<option name="minecraft_linker_enabled">
@@ -30,11 +27,6 @@
 				<defaultvalue>0</defaultvalue>
 				<suffix>mc_uuids</suffix>
 			</option>
-			<option name="minecraft_name_enabled">
-				<categoryname>minecraft_linker_general</categoryname>
-				<optiontype>boolean</optiontype>
-				<defaultvalue>1</defaultvalue>
-			</option>
 			<option name="minecraft_enable_active_user">
 				<categoryname>minecraft_linker_general</categoryname>
 				<optiontype>boolean</optiontype>
@@ -48,9 +40,4 @@
 			</option>
 		</options>
 	</import>
-	<delete>
-		<option name="minecraft_command_list" />
-		<option name="minecraft_command_sendcode" />
-		<optioncategory name="minecraft_linker_commands" />
-	</delete>
 </data>

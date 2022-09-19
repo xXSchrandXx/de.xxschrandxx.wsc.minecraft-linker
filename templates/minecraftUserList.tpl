@@ -27,34 +27,34 @@
 			<thead>
 				<tr>
 					<th></th>
-					<th>{lang}wcf.page.minecraftUserList.table.minecraftUserID{/lang}</th>
-					<th>{lang}wcf.page.minecraftUserList.table.title{/lang}</th>
-					<th>{lang}wcf.page.minecraftUserList.table.minecraftUUID{/lang}</th>
-					{if MINECRAFT_NAME_ENABLED}
-						<th>{lang}wcf.page.minecraftUserList.table.minecraftName{/lang}</th>
+					<th>{lang}wcf.global.objectID{/lang}</th>
+					{if MINECRAFT_MAX_UUIDS > 1}
+						<th>{lang}wcf.global.title{/lang}</th>
 					{/if}
+					<th>{lang}wcf.page.minecraftUserList.table.minecraftUUID{/lang}</th>
+					<th>{lang}wcf.page.minecraftUserList.table.minecraftName{/lang}</th>
 					<th>{lang}wcf.page.minecraftUserList.table.createdDate{/lang}</th>
 				</tr>
 			</thead>
 			<tbody>
 				{foreach from=$objects item=object}
-					<tr class="jsObjectActionObject" data-object-id="{@$object->minecraftUserID}">
+					<tr class="jsObjectActionObject" data-object-id="{@$object->getObjectID()}">
 						<td class="columnIcon">
 							{if MINECRAFT_MAX_UUIDS > 1}
-								<a href="{link controller='MinecraftUserEdit' id=$object->minecraftUserID}{/link}"
+								<a href="{link controller='MinecraftUserEdit' id=$object->getObjectID()}{/link}"
 									title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
 									<span class="icon icon16 fa-pencil"></span>
 								</a>
 							{/if}
-							{objectAction action="delete" objectTitle=$object->title}
+							{objectAction action="delete" objectTitle=$object->getTitle()}
 						</td>
-						<td class="columnID">{#$object->minecraftUserID}</td>
-						<td class="columnText">{$object->title}</td>
-						<td class="columnText">{$object->minecraftUUID}</td>
-						{if MINECRAFT_NAME_ENABLED}
-							<td class="columnText">{$object->minecraftName}</td>
+						<td class="columnID">{#$object->getObjectID()}</td>
+						{if MINECRAFT_MAX_UUIDS > 1}
+							<td class="columnText">{$object->getTitle()}</td>
 						{/if}
-						<td class="columnDate">{@$object->createdDate|time}</td>
+						<td class="columnText">{$object->getMinecraftUUID()}</td>
+						<td class="columnText">{$object->getMinecraftName()}</td>
+						<td class="columnDate">{@$object->getCreatdDate()|time}</td>
 					</tr>
 				{/foreach}
 			</tbody>
