@@ -14,7 +14,9 @@
 		<item name="wcf.acp.option.minecraft_linker_enabled.description"><![CDATA[<p>Enables/disables Minecraft-Linker.</p>
 <p>Links for plugin configuration:</p>
 <p><kbd>sendCode: {link controller='MinecraftLinkerCode' forceFrontend=true}{/link}</kbd></p>
-<p><kbd>updateNames: {link controller='MinecraftLinkerUpdateName' forceFrontend=true}{/link}</kbd></p>]]></item>
+<p><kbd>updateNames: {link controller='MinecraftLinkerUpdateName' forceFrontend=true}{/link}</kbd></p>
+<p><kbd>getLinked: {link controller='MinecraftLinkerGetLinked' forceFrontend=true}{/link}</kbd></p>
+<p><kbd>getUnlinked: {link controller='MinecraftLinkerGetUnlinked' forceFrontend=true}{/link}</kbd></p>]]></item>
 		<item name="wcf.acp.option.minecraft_linker_identity"><![CDATA[Server]]></item>
 		<item name="wcf.acp.option.minecraft_linker_identity.description"><![CDATA[Enables Minecraft-Linker for selected servers.]]></item>
 		<item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximum number of Minecraft-Links per user]]></item>

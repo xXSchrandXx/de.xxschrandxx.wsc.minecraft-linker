@@ -79,7 +79,7 @@ class MinecraftLinkerUtil extends MinecraftUtil
      * @return MinecraftUserList
      * @throws Exception when no UnknownMinecraftUsers exist
      */
-    public static function getLinkedMinecraftUserS(): MinecraftUserList
+    public static function getLinkedMinecraftUser(): MinecraftUserList
     {
         $userToMinecraftUserList = new UserToMinecraftUserList();
         $userToMinecraftUserList->readObjects();
