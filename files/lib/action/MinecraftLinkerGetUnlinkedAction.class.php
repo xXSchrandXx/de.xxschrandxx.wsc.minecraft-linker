@@ -30,7 +30,7 @@ class MinecraftLinkerGetUnlinkedAction extends AbstractMinecraftGETAction
 
         $uuids = [];
         foreach ($minecraftUsers as $minecraftUser) {
-            array_push($uuids, $minecraftUser->getMinecraftUUID());
+            $uuids[$minecraftUser->getMinecraftUUID()] = $minecraftUser->getCode();
         }
 
         return $this->send('OK', 200, [
