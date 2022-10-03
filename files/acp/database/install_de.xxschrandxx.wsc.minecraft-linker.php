@@ -1,21 +1,13 @@
 <?php
 
-use wcf\system\database\table\column\BlobDatabaseTableColumn;
 use wcf\system\database\table\column\IntDatabaseTableColumn;
 use wcf\system\database\table\column\ObjectIdDatabaseTableColumn;
 use wcf\system\database\table\column\NotNullInt10DatabaseTableColumn;
 use wcf\system\database\table\column\VarcharDatabaseTableColumn;
 use wcf\system\database\table\DatabaseTable;
-use wcf\system\database\table\PartialDatabaseTable;
 use wcf\system\database\table\index\DatabaseTableForeignKey;
 
 return [
-    // wcf1_user_group
-    PartialDatabaseTable::create('wcf1_user_group')
-        ->columns([
-            BlobDatabaseTableColumn::create('minecraftGroupNames'),
-        ]),
-
     // wcf1_user_minecraft
     DatabaseTable::create('wcf1_user_minecraft')
         ->columns([
