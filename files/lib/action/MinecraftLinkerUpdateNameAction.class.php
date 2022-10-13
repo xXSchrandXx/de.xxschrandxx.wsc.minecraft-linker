@@ -26,6 +26,11 @@ class MinecraftLinkerUpdateNameAction extends AbstractMultipleMinecraftLinkerAct
     protected bool $ignoreName = false;
 
     /**
+     * @inheritDoc
+     */
+    protected $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
+
+    /**
      * @inheritdoc
      */
     public function execute(): ?JsonResponse

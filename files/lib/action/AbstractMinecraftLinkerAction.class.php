@@ -3,9 +3,7 @@
 namespace wcf\action;
 
 use Laminas\Diactoros\Response\JsonResponse;
-use wcf\system\exception\IllegalLinkException;
 use wcf\util\MinecraftLinkerUtil;
-use wcf\util\StringUtil;
 
 /**
  * AbstractMinecraftLinker action class
@@ -39,9 +37,6 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
      */
     public function readParameters(): ?JsonResponse
     {
-        // check if minecraftLinker for server enabled
-        $this->availableMinecraftIDs = explode("\n", StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
-
         $result = parent::readParameters();
 
         // check uuid

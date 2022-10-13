@@ -14,6 +14,12 @@ use wcf\util\MinecraftLinkerUtil;
  */
 class MinecraftLinkerGetUnlinkedAction extends AbstractMinecraftGETAction
 {
+    
+    /**
+     * @inheritDoc
+     */
+    protected $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
+
     public function execute(): ?JsonResponse
     {
         parent::execute();

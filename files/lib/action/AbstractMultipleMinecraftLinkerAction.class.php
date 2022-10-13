@@ -33,9 +33,6 @@ abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAc
      */
     public function readParameters(): ?JsonResponse
     {
-        // check if minecraftLinker for server enabled
-        $this->availableMinecraftIDs = explode("\n", StringUtil::unifyNewlines(MINECRAFT_LINKER_IDENTITY));
-
         $result = parent::readParameters();
 
         // check uuids
