@@ -1,4 +1,5 @@
 <?php
+
 define('MINECRAFT_LINKER_ENABLED', true);
 define('MINECRAFT_LINKER_IDENTITY', '');
 define('MINECRAFT_MAX_UUIDS', 0);

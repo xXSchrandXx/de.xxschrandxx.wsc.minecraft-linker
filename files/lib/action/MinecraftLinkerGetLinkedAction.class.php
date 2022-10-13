@@ -15,7 +15,6 @@ use wcf\util\MinecraftLinkerUtil;
  */
 class MinecraftLinkerGetLinkedAction extends AbstractMinecraftGETAction
 {
-
     /**
      * @inheritDoc
      */
