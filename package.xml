@@ -7,7 +7,7 @@
 		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
 		<packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
-		<version>3.0.1</version>
+		<version>3.0.2</version>
 		<date>2022-09-15</date>
 	</packageinformation>
 
@@ -17,7 +17,7 @@
 
 	<requiredpackages>
 		<requiredpackage minversion="5.5.0 RC 1">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="3.0.1 dev 1">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="3.0.2 dev 1">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
