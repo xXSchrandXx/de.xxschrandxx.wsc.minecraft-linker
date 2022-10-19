@@ -35,6 +35,10 @@ abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAc
     {
         $result = parent::readParameters();
 
+        if ($result !== null) {
+            return $result;
+        }
+
         // check uuids
         if (!array_key_exists('uuids', $this->getJSON())) {
             if (ENABLE_DEBUG_MODE) {
