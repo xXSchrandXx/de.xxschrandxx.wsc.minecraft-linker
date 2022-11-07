@@ -29,13 +29,16 @@ class MinecraftLinkerExportGdprActionListener implements IParameterizedEventList
         /** @var \wcf\data\user\minecraft\MinecraftUser[] */
         $minecraftUsers = $minecraftUserList->getObjects();
 
+        $minecraftLinkerData = [];
         foreach ($minecraftUsers as $minecraftUser) {
-            $eventObj->data['de.xxschrandxx.wsc.minecraft-linker'][$minecraftUser->getObjectID()] = [
-                'Title' => $minecraftUser->getTitle(),
-                'UUID' => $minecraftUser->getMinecraftUUID(),
-                'Name' => $minecraftUser->getMinecraftName(),
-                'Created' => $minecraftUser->getCreatdDate()
+            $minecraftLinkerData[] = [
+                'title' => $minecraftUser->getTitle(),
+                'uuid' => $minecraftUser->getMinecraftUUID(),
+                'name' => $minecraftUser->getMinecraftName(),
+                'time' => $minecraftUser->getCreatdDate()
             ];
         }
+
+        $eventObj->data['de.xxschrandxx.wsc.minecraft-linker'] = $minecraftLinkerData;
     }
 }
