@@ -9,5 +9,12 @@
 			<inherit>1</inherit>
 			<listenerclassname>wcf\system\event\listener\MinecraftACPUserEditListener</listenerclassname>
 		</eventlistener>
+		<eventlistener name="userExportGdprMinecraftLinker">
+			<eventclassname>wcf\acp\action\UserExportGdprAction</eventclassname>
+			<eventname>export</eventname>
+			<enviroment>all</enviroment>
+			<inherit>1</inherit>
+			<listenerclassname>wcf\system\event\listener\MinecraftLinkerExportGdprActionListener</listenerclassname>
+		</eventlistener>
 	</import>
 </data>
