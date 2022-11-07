@@ -12,7 +12,7 @@
 		<eventlistener name="userExportGdprMinecraftLinker">
 			<eventclassname>wcf\acp\action\UserExportGdprAction</eventclassname>
 			<eventname>export</eventname>
-			<enviroment>all</enviroment>
+			<environment>all</environment>
 			<inherit>1</inherit>
 			<listenerclassname>wcf\system\event\listener\MinecraftLinkerExportGdprActionListener</listenerclassname>
 		</eventlistener>
