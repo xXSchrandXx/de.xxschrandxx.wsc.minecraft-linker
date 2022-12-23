@@ -22,6 +22,8 @@ class MinecraftLinkerGetLinkedAction extends AbstractMinecraftGETAction
 
     public function execute(): JsonResponse
     {
+        parent::execute();
+
         $minecraftUsers = [];
         try {
             $minecraftUserList = MinecraftLinkerUtil::getLinkedMinecraftUser();

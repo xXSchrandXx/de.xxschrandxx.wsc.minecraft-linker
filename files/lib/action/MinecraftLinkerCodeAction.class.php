@@ -37,6 +37,8 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
      */
     public function execute(): JsonResponse
     {
+        parent::execute();
+
         // check edit
         $minecraftUserList = new MinecraftUserList();
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$this->uuid]);

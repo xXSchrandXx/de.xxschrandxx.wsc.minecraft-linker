@@ -35,6 +35,8 @@ class MinecraftLinkerUpdateNameAction extends AbstractMultipleMinecraftLinkerAct
      */
     public function execute(): JsonResponse
     {
+        parent::execute();
+
         // validate uuids
         $minecraftUserList = new MinecraftUserList();
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID IN (?)', [array_keys($this->uuids)]);

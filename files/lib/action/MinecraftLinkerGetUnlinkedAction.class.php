@@ -21,6 +21,8 @@ class MinecraftLinkerGetUnlinkedAction extends AbstractMinecraftGETAction
 
     public function execute(): JsonResponse
     {
+        parent::execute();
+
         $minecraftUserList = MinecraftLinkerUtil::getUnlinkedMinecraftUser();
         $minecraftUserList->readObjects();
         /** @var \wcf\data\user\minecraft\MinecraftUser[] */
