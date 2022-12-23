@@ -35,10 +35,8 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
     /**
      * @inheritdoc
      */
-    public function execute(): ?JsonResponse
+    public function execute(): JsonResponse
     {
-        parent::execute();
-
         // check edit
         $minecraftUserList = new MinecraftUserList();
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$this->uuid]);
@@ -52,9 +50,9 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
                 $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID = ?', [$minecraftUser->getObjectID()]);
                 if ($userToMinecraftUserList->countObjects() !== 0) {
                     if (ENABLE_DEBUG_MODE) {
-                        return $this->send('OK UUID already linked.', 200, ['code' => '']);
+                        throw $this->exception('OK UUID already linked.', 200, ['code' => '']);
                     } else {
-                        return $this->send('OK', 200, ['code' => '']);
+                        throw $this->exception('OK', 200, ['code' => '']);
                     }
                 } else {
                     return $this->send('OK', 200, ['code' => $minecraftUser->getCode()]);

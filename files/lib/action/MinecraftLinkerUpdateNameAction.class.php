@@ -33,18 +33,16 @@ class MinecraftLinkerUpdateNameAction extends AbstractMultipleMinecraftLinkerAct
     /**
      * @inheritdoc
      */
-    public function execute(): ?JsonResponse
+    public function execute(): JsonResponse
     {
-        parent::execute();
-
         // validate uuids
         $minecraftUserList = new MinecraftUserList();
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID IN (?)', [array_keys($this->uuids)]);
         if ($minecraftUserList->countObjects() === 0) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. Unknown UUIDs', 400);
+                throw $this->exception('Bad Request. Unknown UUIDs', 400);
             } else {
-                return $this->send('Bad Request.', 400);
+                throw $this->exception('Bad Request.', 400);
             }
         }
         $minecraftUserList->readObjects();

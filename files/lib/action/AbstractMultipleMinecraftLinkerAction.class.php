@@ -31,27 +31,23 @@ abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAc
     /**
      * @inheritDoc
      */
-    public function readParameters(): ?JsonResponse
+    public function readParameters()
     {
-        $result = parent::readParameters();
-
-        if ($result !== null) {
-            return $result;
-        }
+        parent::readParameters();
 
         // check uuids
         if (!array_key_exists('uuids', $this->getJSON())) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuids\' not set.', 400);
+                throw $this->exception('Bad Request. \'uuids\' not set.', 400);
             } else {
-                return $this->send('Bad Request.', 400);
+                throw $this->exception('Bad Request.', 400);
             }
         }
         if (!is_array($this->getData('uuids'))) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuids\' no array.', 400);
+                throw $this->exception('Bad Request. \'uuids\' no array.', 400);
             } else {
-                return $this->send('Bad Request.', 400);
+                throw $this->exception('Bad Request.', 400);
             }
         }
         $this->uuids = $this->getJSON()['uuids'];
@@ -63,21 +59,22 @@ abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAc
         }
         if (empty($this->uuids)) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuids\' contains no valid uuid.', 400);
+                throw $this->exception('Bad Request. \'uuids\' contains no valid uuid.', 400);
             } else {
-                return $this->send('Bad Request.', 400);
+                throw $this->exception('Bad Request.', 400);
             }
         }
 
         // check name
         if ($this->ignoreName) {
-            return $result;
+            return;
         }
+
         if (empty(array_values($this->uuids))) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuids\' contains no options.', 400);
+                throw $this->exception('Bad Request. \'uuids\' contains no options.', 400);
             } else {
-                return $this->send('Bad Request.', 400);
+                throw $this->exception('Bad Request.', 400);
             }
         }
         foreach ($this->uuids as $uuid => $options) {
@@ -87,12 +84,10 @@ abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAc
         }
         if (empty($this->uuids)) {
             if (ENABLE_DEBUG_MODE) {
-                return $this->send('Bad Request. \'uuids\' contains no valid names in options.', 400);
+                throw $this->exception('Bad Request. \'uuids\' contains no valid names in options.', 400);
             } else {
-                return $this->send('Bad Request.', 400);
+                throw $this->exception('Bad Request.', 400);
             }
         }
-
-        return $result;
     }
 }

@@ -20,10 +20,8 @@ class MinecraftLinkerGetLinkedAction extends AbstractMinecraftGETAction
      */
     protected $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
 
-    public function execute(): ?JsonResponse
+    public function execute(): JsonResponse
     {
-        parent::execute();
-
         $minecraftUsers = [];
         try {
             $minecraftUserList = MinecraftLinkerUtil::getLinkedMinecraftUser();
@@ -41,7 +39,7 @@ class MinecraftLinkerGetLinkedAction extends AbstractMinecraftGETAction
 
         $uuids = [];
         foreach ($minecraftUsers as $minecraftUser) {
-            array_push($uuids, $minecraftUser->getMinecraftUUID());
+            \array_push($uuids, $minecraftUser->getMinecraftUUID());
         }
 
         return $this->send('OK', 200, [
