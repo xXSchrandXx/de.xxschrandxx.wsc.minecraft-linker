@@ -2,7 +2,6 @@
 
 namespace wcf\action;
 
-use Laminas\Diactoros\Response\JsonResponse;
 use wcf\util\MinecraftLinkerUtil;
 
 /**
@@ -35,7 +34,7 @@ abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
     /**
      * @inheritDoc
      */
-    public function readParameters()
+    public function readParameters(): void
     {
         parent::readParameters();
 

@@ -2,10 +2,7 @@
 
 namespace wcf\action;
 
-use Laminas\Diactoros\Response\JsonResponse;
-use wcf\system\exception\IllegalLinkException;
 use wcf\util\MinecraftLinkerUtil;
-use wcf\util\StringUtil;
 
 /**
  * AbstractMinecraftLinker action class
@@ -31,7 +28,7 @@ abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAc
     /**
      * @inheritDoc
      */
-    public function readParameters()
+    public function readParameters(): void
     {
         parent::readParameters();
 
