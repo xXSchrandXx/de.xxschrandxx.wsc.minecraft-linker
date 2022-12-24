@@ -3,12 +3,12 @@
 	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/5.5/templateListener.xsd">
 	<import>
 		<!-- user -->
-		<templateListener name="minecraftLinkerCopyright">
+		<templatelistener name="minecraftLinkerCopyright">
 			<environment>user</environment>
 			<templatename>pageFooterCopyright</templatename>
 			<eventname>copyright</eventname>
 			<templatecode><![CDATA[{include file='__minecraftLinkerCopyright'}]]></templatecode>
-		</templateListener>
+		</templatelistener>
 		<!-- /user -->
 		<!-- admin -->
 		<templatelistener name="userAddSection">
