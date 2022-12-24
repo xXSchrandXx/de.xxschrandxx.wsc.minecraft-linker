@@ -27,6 +27,7 @@
 
 	<instructions type="update" fromversion="3.0.3">
 		<instruction type="file" />
+		<instruction type="templateListener"/>
 	</instructions>
 
 	<instructions type="install">
