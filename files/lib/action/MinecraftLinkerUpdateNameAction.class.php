@@ -23,28 +23,26 @@ class MinecraftLinkerUpdateNameAction extends AbstractMultipleMinecraftLinkerAct
     /**
      * @inheritDoc
      */
-    protected bool $ignoreName = false;
+    public bool $ignoreName = false;
 
     /**
      * @inheritDoc
      */
-    protected $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
+    public $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
 
     /**
      * @inheritdoc
      */
-    public function execute(): JsonResponse
+    public function execute($parameters): JsonResponse
     {
-        parent::execute();
-
-        // validate uuids
+        // read minecraftUsers
         $minecraftUserList = new MinecraftUserList();
-        $minecraftUserList->getConditionBuilder()->add('minecraftUUID IN (?)', [array_keys($this->uuids)]);
+        $minecraftUserList->getConditionBuilder()->add('minecraftUUID IN (?)', [array_keys($parameters['uuids'])]);
         if ($minecraftUserList->countObjects() === 0) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. Unknown UUIDs', 400);
+                return $this->send('Bad Request. Unknown UUIDs', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                return $this->send('Bad Request.', 400);
             }
         }
         $minecraftUserList->readObjects();
@@ -52,26 +50,26 @@ class MinecraftLinkerUpdateNameAction extends AbstractMultipleMinecraftLinkerAct
         $minecraftUsers = $minecraftUserList->getObjects();
 
         foreach ($minecraftUsers as $minecraftUser) {
-            if (!array_key_exists($minecraftUser->getMinecraftUUID(), $this->uuids)) {
+            if (!array_key_exists($minecraftUser->getMinecraftUUID(), $parameters['uuids'])) {
                 // Would never happen
                 continue;
             }
-            if (empty($this->uuids[$minecraftUser->getMinecraftUUID()])) {
+            if (empty($parameters['uuids'][$minecraftUser->getMinecraftUUID()])) {
                 // Would never happen
                 continue;
             }
-            if (!array_key_exists('name', $this->uuids[$minecraftUser->getMinecraftUUID()])) {
+            if (!array_key_exists('name', $parameters['uuids'][$minecraftUser->getMinecraftUUID()])) {
                 continue;
             }
-            if (empty($this->uuids[$minecraftUser->getMinecraftUUID()]['name'])) {
+            if (empty($parameters['uuids'][$minecraftUser->getMinecraftUUID()]['name'])) {
                 continue;
             }
-            if ($minecraftUser->getMinecraftName() === $this->uuids[$minecraftUser->getMinecraftUUID()]['name']) {
+            if ($minecraftUser->getMinecraftName() === $parameters['uuids'][$minecraftUser->getMinecraftUUID()]['name']) {
                 continue;
             }
             $minecraftUserEditor = new MinecraftUserEditor($minecraftUser);
             $minecraftUserEditor->update([
-                'minecraftName' => $this->uuids[$minecraftUser->getMinecraftUUID()]['name']
+                'minecraftName' => $parameters['uuids'][$minecraftUser->getMinecraftUUID()]['name']
             ]);
         }
 

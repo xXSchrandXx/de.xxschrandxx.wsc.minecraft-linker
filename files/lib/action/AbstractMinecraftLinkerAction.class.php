@@ -2,6 +2,7 @@
 
 namespace wcf\action;
 
+use Laminas\Diactoros\Response\JsonResponse;
 use wcf\util\MinecraftLinkerUtil;
 
 /**
@@ -14,73 +15,67 @@ use wcf\util\MinecraftLinkerUtil;
 abstract class AbstractMinecraftLinkerAction extends AbstractMinecraftAction
 {
     /**
-     * Minecraft uuid of the request
-     * @var string
-     */
-    protected string $uuid;
-
-    /**
      * Weather the request requires a name
      * @var bool
      */
-    protected bool $ignoreName = true;
-
-    /**
-     * Minecraft name of the request
-     * @var string
-     */
-    protected string $name;
+    public bool $ignoreName = true;
 
     /**
      * @inheritDoc
      */
-    public function readParameters(): void
+    public function validateParameters($parameters, &$response): void
     {
-        parent::readParameters();
+        parent::validateParameters($parameters, $response);
+        if ($response instanceof JsonResponse) {
+            return;
+        }
 
         // check uuid
-        if (!array_key_exists('uuid', $this->getJSON())) {
+        if (!array_key_exists('uuid', $parameters)) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuid\' not set.', 400);
+                $response = $this->send('Bad Request. \'uuid\' not set.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        if (!is_string($this->getData('uuid'))) {
+        if (!is_string($parameters['uuid'])) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuid\' no string.', 400);
+                $response = $this->send('Bad Request. \'uuid\' no string.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        if (!MinecraftLinkerUtil::validUUID($this->getData('uuid'))) {
+        if (!MinecraftLinkerUtil::validUUID($parameters['uuid'])) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuid\' is no valid UUID.', 400);
+                $response = $this->send('Bad Request. \'uuid\' is no valid UUID.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        $this->uuid = $this->getJSON()['uuid'];
 
         // check name
         if ($this->ignoreName) {
             return;
         }
 
-        if (!array_key_exists('name', $this->getJSON())) {
+        if (!array_key_exists('name', $parameters)) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'name\' not set.', 400);
+                $response = $this->send('Bad Request. \'name\' not set.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        if (!is_string($this->getData('name'))) {
+        if (!is_string($parameters['name'])) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'name\' no string.', 400);
+                $response = $this->send('Bad Request. \'name\' no string.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        $this->name = $this->getData('name');
     }
 }

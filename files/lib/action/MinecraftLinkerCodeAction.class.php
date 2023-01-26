@@ -25,23 +25,21 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
     /**
      * @inheritDoc
      */
-    protected bool $ignoreName = false;
+    public bool $ignoreName = false;
 
     /**
      * @inheritDoc
      */
-    protected $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
+    public $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
 
     /**
      * @inheritdoc
      */
-    public function execute(): JsonResponse
+    public function execute($parameters): JsonResponse
     {
-        parent::execute();
-
         // check edit
         $minecraftUserList = new MinecraftUserList();
-        $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$this->uuid]);
+        $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$parameters['uuid']]);
         $minecraftUserList->readObjects();
         try {
             /** @var \wcf\data\user\minecraft\MinecraftUser */
@@ -52,9 +50,9 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
                 $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID = ?', [$minecraftUser->getObjectID()]);
                 if ($userToMinecraftUserList->countObjects() !== 0) {
                     if (ENABLE_DEBUG_MODE) {
-                        throw $this->exception('OK UUID already linked.', 200, ['code' => '']);
+                        return $this->send('OK UUID already linked.', 200, ['code' => '']);
                     } else {
-                        throw $this->exception('OK', 200, ['code' => '']);
+                        return $this->send('OK', 200, ['code' => '']);
                     }
                 } else {
                     return $this->send('OK', 200, ['code' => $minecraftUser->getCode()]);
@@ -65,8 +63,8 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
         $code = bin2hex(\random_bytes(4));
         // create databaseobject
         MinecraftUserEditor::create([
-            'minecraftUUID' => $this->uuid,
-            'minecraftName' => $this->name,
+            'minecraftUUID' => $parameters['uuid'],
+            'minecraftName' => $parameters['name'],
             'code' => $code
         ]);
         return $this->send('OK', 200, ['code' => $code]);

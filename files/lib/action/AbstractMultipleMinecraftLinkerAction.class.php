@@ -2,6 +2,7 @@
 
 namespace wcf\action;
 
+use Laminas\Diactoros\Response\JsonResponse;
 use wcf\util\MinecraftLinkerUtil;
 
 /**
@@ -14,52 +15,51 @@ use wcf\util\MinecraftLinkerUtil;
 abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAction
 {
     /**
-     * Minecraft uuids of the request
-     * @var array
-     */
-    protected array $uuids;
-
-    /**
      * Weather the request requires a names
      * @var bool
      */
-    protected bool $ignoreName = true;
+    public bool $ignoreName = true;
 
     /**
      * @inheritDoc
      */
-    public function readParameters(): void
+    public function validateParameters($parameters, &$response): void
     {
-        parent::readParameters();
+        parent::validateParameters($parameters, $response);
+        if ($response instanceof JsonResponse) {
+            return;
+        }
 
         // check uuids
-        if (!array_key_exists('uuids', $this->getJSON())) {
+        if (!array_key_exists('uuids', $parameters)) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuids\' not set.', 400);
+                $response = $this->send('Bad Request. \'uuids\' not set.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        if (!is_array($this->getData('uuids'))) {
+        if (!is_array($parameters['uuids'])) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuids\' no array.', 400);
+                $response = $this->send('Bad Request. \'uuids\' no array.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        $this->uuids = $this->getJSON()['uuids'];
         // validate uuids
-        foreach ($this->uuids as $uuid => $options) {
+        foreach ($parameters['uuids'] as $uuid => $options) {
             if (!MinecraftLinkerUtil::validUUID($uuid)) {
-                unset($this->uuids[$uuid]);
+                unset($parameters['uuids'][$uuid]);
             }
         }
-        if (empty($this->uuids)) {
+        if (empty($parameters['uuids'])) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuids\' contains no valid uuid.', 400);
+                $response = $this->send('Bad Request. \'uuids\' contains no valid uuid.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
 
         // check name
@@ -67,24 +67,26 @@ abstract class AbstractMultipleMinecraftLinkerAction extends AbstractMinecraftAc
             return;
         }
 
-        if (empty(array_values($this->uuids))) {
+        if (empty(array_values($parameters['uuids']))) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuids\' contains no options.', 400);
+                $response = $this->send('Bad Request. \'uuids\' contains no options.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
-        foreach ($this->uuids as $uuid => $options) {
+        foreach ($parameters['uuids'] as $uuid => $options) {
             if (!array_key_exists('name', $options)) {
-                unset($this->uuids[$uuid]);
+                unset($parameters['uuids'][$uuid]);
             }
         }
-        if (empty($this->uuids)) {
+        if (empty($parameters['uuids'])) {
             if (ENABLE_DEBUG_MODE) {
-                throw $this->exception('Bad Request. \'uuids\' contains no valid names in options.', 400);
+                $response = $this->send('Bad Request. \'uuids\' contains no valid names in options.', 400);
             } else {
-                throw $this->exception('Bad Request.', 400);
+                $response = $this->send('Bad Request.', 400);
             }
+            return;
         }
     }
 }

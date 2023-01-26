@@ -17,12 +17,10 @@ class MinecraftLinkerGetUnlinkedAction extends AbstractMinecraftGETAction
     /**
      * @inheritDoc
      */
-    protected $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
+    public $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
 
-    public function execute(): JsonResponse
+    public function execute($parameters): JsonResponse
     {
-        parent::execute();
-
         $minecraftUserList = MinecraftLinkerUtil::getUnlinkedMinecraftUser();
         $minecraftUserList->readObjects();
         /** @var \wcf\data\user\minecraft\MinecraftUser[] */
