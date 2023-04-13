@@ -4,8 +4,7 @@
 	{if MINECRAFT_MAX_UUIDS == 0 || $objects|count < MINECRAFT_MAX_UUIDS}
 		<li>
 			<a href="{link controller='MinecraftUserAdd'}{/link}" class="button">
-				<span class="icon icon16 fa-plus"></span>
-				<span>{lang}wcf.page.minecraftUserList.add{/lang}</span>
+				{icon size=16 name='plus' type='solid'} {lang}wcf.page.minecraftUserList.add{/lang}
 			</a>
 		</li>
 	{/if}
@@ -36,14 +35,13 @@
 					<th>{lang}wcf.page.minecraftUserList.table.createdDate{/lang}</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="jsReloadPageWhenEmpty">
 				{foreach from=$objects item=object}
 					<tr class="jsObjectActionObject" data-object-id="{@$object->getObjectID()}">
 						<td class="columnIcon">
 							{if MINECRAFT_MAX_UUIDS > 1}
-								<a href="{link controller='MinecraftUserEdit' id=$object->getObjectID()}{/link}"
-									title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
-									<span class="icon icon16 fa-pencil"></span>
+								<a href="{link controller='MinecraftUserEdit' id=$object->getObjectID()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
+									{icon size=16 name='pencil' type='solid'}
 								</a>
 							{/if}
 							{objectAction action="delete" objectTitle=$object->getTitle()}
