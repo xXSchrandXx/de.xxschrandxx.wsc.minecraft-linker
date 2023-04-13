@@ -25,9 +25,8 @@
 		<excludedpackage version="5.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
 
-	<instructions type="update" fromversion="3.0.3">
+	<instructions type="update" fromversion="4.0.0">
 		<instruction type="file" />
-		<instruction type="templateListener"/>
 	</instructions>
 
 	<instructions type="install">
