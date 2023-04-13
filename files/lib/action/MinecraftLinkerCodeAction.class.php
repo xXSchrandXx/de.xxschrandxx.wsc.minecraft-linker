@@ -15,6 +15,7 @@ use wcf\data\user\minecraft\UserToMinecraftUserList;
  * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
  * @package  WoltLabSuite\Core\Action
  */
+#[\wcf\http\attribute\DisableXsrfCheck]
 class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
 {
     /**
