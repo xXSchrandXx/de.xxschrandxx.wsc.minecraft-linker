@@ -3,16 +3,14 @@
 	<section class="section">
 		<h2 class="sectionTitle">{lang}wcf.acp.page.userAddSection.minecraft.sectionTitle{/lang}</h2>
 		{if !$userID|empty}
-			<a href="{link controller='MinecraftUserAdd' id=$userID}{/link}" class="button"><span
-					class="icon icon16 fa-plus"></span>
-				<span>{lang}wcf.acp.page.userAddSection.minecraft.add{/lang}</span>
+			<a href="{link controller='MinecraftUserAdd' id=$userID}{/link}" class="button">
+				{icon size=16 name='plus' type='solid'} {lang}wcf.acp.page.userAddSection.minecraft.add{/lang}
 			</a>
 		{/if}
 
 		{if $minecraftUsers|isset && !$minecraftUsers|empty}
 			<div class="tabularBox">
-				<table class="table jsObjectActionContainer"
-					data-object-action-class-name="wcf\data\user\minecraft\MinecraftUserAction">
+				<table class="table jsObjectActionContainer" data-object-action-class-name="wcf\data\user\minecraft\MinecraftUserAction">
 					<thead>
 						<tr>
 							<th></th>
@@ -23,13 +21,12 @@
 							<th>{lang}wcf.acp.page.userAddSection.minecraft.connectedSince{/lang}</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody class="jsReloadPageWhenEmpty">
 						{foreach from=$minecraftUsers item=minecraftUser}
 							<tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->getObjectID()}">
 								<td>
-									<a href="{link controller='MinecraftUserEdit' id=$minecraftUser->getObjectID()}{/link}"
-										title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
-										<span class="icon icon16 fa-pencil"></span>
+									<a href="{link controller='MinecraftUserEdit' id=$minecraftUser->getObjectID()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
+										{icon size=16 name='pencil' type='solid'}
 									</a>
 									{objectAction action="delete" objectTitle=$minecraftUser->getTitle()}
 									{event name='rowButtons'}
