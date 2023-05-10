@@ -9,6 +9,9 @@ use wcf\data\DatabaseObject;
  *
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
+ * 
+ * @property-read int $userID
+ * @property-read int $minecraftUserID
  */
 class UserToMinecraftUser extends DatabaseObject
 {
