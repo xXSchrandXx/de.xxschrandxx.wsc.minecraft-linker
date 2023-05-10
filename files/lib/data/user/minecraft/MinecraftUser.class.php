@@ -3,6 +3,7 @@
 namespace wcf\data\user\minecraft;
 
 use wcf\data\DatabaseObject;
+use wcf\data\ITitledObject;
 
 /**
  * MinecraftUser Data class
@@ -10,7 +11,7 @@ use wcf\data\DatabaseObject;
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
  */
-class MinecraftUser extends DatabaseObject
+class MinecraftUser extends DatabaseObject implements ITitledObject
 {
     /**
      * @inheritDoc
@@ -23,10 +24,9 @@ class MinecraftUser extends DatabaseObject
     protected static $databaseTableIndexName = 'minecraftUserID';
 
      /**
-      * Returns title
-      * @return ?string
+      * @inheritDoc
       */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
