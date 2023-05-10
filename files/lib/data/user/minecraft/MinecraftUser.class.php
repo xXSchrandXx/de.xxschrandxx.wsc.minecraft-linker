@@ -10,6 +10,13 @@ use wcf\data\ITitledObject;
  *
  * @author   xXSchrandXx
  * @package  WoltLabSuite\Core\Data\User\Minecraft
+ * 
+ * @property-read int $minecraftUserID
+ * @property-read string $title
+ * @property-read string $minecraftUUID
+ * @property-read string $minecraftName
+ * @property-read string $code
+ * @property-read int $createdDate
  */
 class MinecraftUser extends DatabaseObject implements ITitledObject
 {
