@@ -49,6 +49,7 @@ class MyEventListenerExample implements IParameterizedEventListener {
 * [xXSchrandXx/de.xxschrandxx.wsc.minecraft-authenticator](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-authenticator)
 * [xXSchrandXx/WSC-Minecraft-Authenticator](https://github.com/xXSchrandXx/WSC-Minecraft-Authenticator)
 * [xXSchrandXx/de.xxschrandxx.wsc.minecraft-profile](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-profile)
+* [xXSchrandXx/WSC-Minecraft-Profile](https://github.com/xXSchrandXx/WSC-Minecraft-Profile)
 ## WoltLab
 * [Plugin-Store/Minecraft-API](https://www.woltlab.com/pluginstore/file/7077-minecraft-api/)
 * [Plugin-Store/Minecraft-Linker](https://www.woltlab.com/pluginstore/file/7093-minecraft-linker/)
