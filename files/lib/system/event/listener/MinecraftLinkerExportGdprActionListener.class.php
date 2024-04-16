@@ -2,15 +2,18 @@
 
 namespace wcf\system\event\listener;
 
+use wcf\acp\action\UserExportGdprAction;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
-use wcf\data\user\UserProfile;
 
 class MinecraftLinkerExportGdprActionListener implements IParameterizedEventListener
 {
-    public function execute(/** @var UserExportGdprAction $eventObj */$eventObj, $className, $eventName, array &$parameters)
+    /**
+     * @inheritDoc
+     * @param UserExportGdprAction $eventObj
+     */
+    public function execute($eventObj, $className, $eventName, array &$parameters)
     {
-        /** @var UserProfile $user */
         $user = $eventObj->user;
 
         $userToMinecraftUserList = new UserToMinecraftUserList();

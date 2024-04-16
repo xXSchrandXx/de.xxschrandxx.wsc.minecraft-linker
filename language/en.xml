@@ -6,6 +6,7 @@
 		<item name="wcf.acp.group.option.admin.minecraftLinker.canManage"><![CDATA[Can manage Minecraft-Linker]]></item>
 		<item name="wcf.acp.group.option.user.minecraftLinker.canManage"><![CDATA[Can use Minecraft-Linker]]></item>
 		<item name="wcf.acp.group.option.user.minecraftLinker.mandatory"><![CDATA[Minecraft-Linker mandatory]]></item>
+		<item name="wcf.acp.group.option.user.minecraftLinker.mandatory.description"><![CDATA[If activated, the user will be disabled if the Minecraft linker shortcut is missing and the <kbd>{'wcf.acp.option.minecraft_enable_disable_user'|language}</kbd> option is active.]]></item>
 	</category>
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.minecraft_linker"><![CDATA[Minecraft-Linker]]></item>
@@ -22,7 +23,12 @@
 		<item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximum number of Minecraft-Links per user]]></item>
 		<item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Links]]></item>
 		<item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Activate user]]></item>
-		<item name="wcf.acp.option.minecraft_enable_active_user.description"><![CDATA[Activates a user when they have added a Minecraft-Link.]]></item>
+		<item name="wcf.acp.option.minecraft_enable_active_user.description"><![CDATA[<p>Activates a user if they have added a Minecraft linker shortcut.</p>
+<p>For this option to work properly, the option <kbd>{'wcf.acp.option.register_activation_method'|language}</kbd> must be set to <kbd>{'wcf.acp.option.register_activation_method.byAdmin'|language}</kbd > or <kbd>{'wcf.acp.option.register_activation_method.byUserAndAdmin'|language}</kbd> must be set.</p>]]></item>
+		<item name="wcf.acp.option.minecraft_enable_disable_user"><![CDATA[Deactivate user]]></item>
+		<item name="wcf.acp.option.minecraft_enable_disable_user.description"><![CDATA[<p>Deactivates a user if they no longer have a Minecraft Linker shortcut.</p>
+<p>Administrators and users with the <kbd>{'wcf.acp.group.option.user.minecraftLinker.mandatory'|language}</kbd> permission will not be deactivated.</p>
+<p>It is recommended to use modify the phrases <kbd>wcf.user.register.needAdminActivation</kbd>, <kbd>wcf.user.register.success.awaitActivation</kbd> and <kbd>wcf.user.registerActivation.success.awaitAdminActivation</kbd>.</p>]]></item>
 	</category>
 	<category name="wcf.acp.form">
 		<item name="wcf.acp.form.minecraftUserAdd.formTitle.add"><![CDATA[Add Minecraft-Link]]></item>

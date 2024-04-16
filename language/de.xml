@@ -6,6 +6,7 @@
 		<item name="wcf.acp.group.option.admin.minecraftLinker.canManage"><![CDATA[Kann Minecraft-Linker verwalten]]></item>
 		<item name="wcf.acp.group.option.user.minecraftLinker.canManage"><![CDATA[Kann Minecraft-Linker verwenden]]></item>
 		<item name="wcf.acp.group.option.user.minecraftLinker.mandatory"><![CDATA[Minecraft-Linker verpflichtend]]></item>
+		<item name="wcf.acp.group.option.user.minecraftLinker.mandatory.description"><![CDATA[Wenn aktiviert, wird der Benutzer bei fehlender Minecraft-Linker Verknüpfung und aktiver <kbd>{'wcf.acp.option.minecraft_enable_disable_user'|language}</kbd> Option deaktiviert.]]></item>
 	</category>
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.minecraft_linker"><![CDATA[Minecraft-Linker]]></item>
@@ -22,7 +23,12 @@
 		<item name="wcf.acp.option.minecraft_max_uuids"><![CDATA[Maximale Anzahl an Minecraft-Verknüpfungen pro Benutzer]]></item>
 		<item name="wcf.acp.option.suffix.mc_uuids"><![CDATA[Verknüpfungen]]></item>
 		<item name="wcf.acp.option.minecraft_enable_active_user"><![CDATA[Benutzer aktivieren]]></item>
-		<item name="wcf.acp.option.minecraft_enable_active_user.description"><![CDATA[Aktiviert einen Benutzer wenn er eine Minecraft-Verknüpfung hinzugefügt hat.]]></item>
+		<item name="wcf.acp.option.minecraft_enable_active_user.description"><![CDATA[<p>Aktiviert einen Benutzer wenn er eine Minecraft-Linker Verknüpfung hinzugefügt hat.</p>
+<p>Damit diese Option richtig funktioniert muss die Option <kbd>{'wcf.acp.option.register_activation_method'|language}</kbd> auf <kbd>{'wcf.acp.option.register_activation_method.byAdmin'|language}</kbd> oder <kbd>{'wcf.acp.option.register_activation_method.byUserAndAdmin'|language}</kbd> gesetzt sein.</p>
+<p>Es ist empfehlenswert die Texte <kbd>wcf.user.register.needAdminActivation</kbd>, <kbd>wcf.user.register.success.awaitActivation</kbd> und <kbd>wcf.user.registerActivation.success.awaitAdminActivation</kbd> anzupassen.</p>]]></item>
+		<item name="wcf.acp.option.minecraft_enable_disable_user"><![CDATA[Benutzer deaktivieren]]></item>
+		<item name="wcf.acp.option.minecraft_enable_disable_user.description"><![CDATA[<p>Deaktiviert einen Benutzer, wenn er keine Minecraft-Linker Verknüpfung mehr vorhanden ist.</p>
+<p>Administratoren, sowie Benutzer mit der Berechtigung <kbd>{'wcf.acp.group.option.user.minecraftLinker.mandatory'|language}</kbd> werden nicht deaktivert.</p>]]></item>
 	</category>
 	<category name="wcf.acp.form">
 		<item name="wcf.acp.form.minecraftUserAdd.formTitle.add"><![CDATA[Minecraft-Verknüpfung Hinzufügen]]></item>

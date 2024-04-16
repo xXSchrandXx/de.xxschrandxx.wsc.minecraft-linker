@@ -8,6 +8,7 @@ use wcf\data\user\minecraft\MinecraftUserAction;
 use wcf\data\user\minecraft\MinecraftUserEditor;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUser;
+use wcf\data\user\minecraft\UserToMinecraftUserAction;
 use wcf\data\user\minecraft\UserToMinecraftUserEditor;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
 use wcf\form\AbstractFormBuilderForm;
@@ -176,10 +177,13 @@ class MinecraftUserAddForm extends AbstractFormBuilderForm
     public function saved()
     {
         if ($this->formAction == 'create') {
-            $userToMinecraftUserEditor = UserToMinecraftUserEditor::create([
-                'userID' => $this->user->getUserID(),
-                'minecraftUserID' => $this->objectAction->getReturnValues()['returnValues']->getObjectID()
-            ]);
+            $data = [
+                ['data'] => [
+                    'userID' => $this->user->getUserID(),
+                    'minecraftUserID' => $this->objectAction->getReturnValues()['returnValues']->getObjectID()
+                ]
+            ];
+            (new UserToMinecraftUserAction([], 'create', $data))->executeAction();
         }
 
         parent::saved();

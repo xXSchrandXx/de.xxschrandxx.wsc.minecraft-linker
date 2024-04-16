@@ -7,7 +7,7 @@
 		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
 		<packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
-		<version>4.0.1</version>
+		<version>4.0.2</version>
 		<date>2022-09-15</date>
 	</packageinformation>
 
@@ -25,10 +25,11 @@
 		<excludedpackage version="5.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
 	</excludedpackages>
 
-	<instructions type="update" fromversion="4.0.0">
-		<instruction type="acpTemplate"/>
+	<instructions type="update" fromversion="4.0.1">
 		<instruction type="file" />
-		<instruction type="template"/>
+		<instruction type="language"/>
+		<instruction type="option"/>
+		<instruction type="userGroupOption"/>
 	</instructions>
 
 	<instructions type="install">

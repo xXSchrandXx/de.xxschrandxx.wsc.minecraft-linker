@@ -26,4 +26,18 @@ class MinecraftUserAction extends AbstractDatabaseObjectAction
      * @inheritDoc
      */
     protected $permissionsDelete = ['user.minecraftLinker.canManage'];
+
+    /**
+     * @inheritDoc
+     */
+    public function delete()
+    {
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$this->getObjectIDs()]);
+        $userToMinecraftUserList->readObjects();
+        $userToMinecraftUsers = $userToMinecraftUserList->getObjects();
+        (new UserToMinecraftUserAction($userToMinecraftUsers, 'delete'))->executeAction();
+
+        return parent::delete();
+    }
 }

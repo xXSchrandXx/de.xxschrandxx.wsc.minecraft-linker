@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="https://www.woltlab.com"
-	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/5.5/userGroupOption.xsd">
+	xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://www.woltlab.com https://www.woltlab.com/XSD/6.0/userGroupOption.xsd">
 	<import>
 		<options>
 			<option name="user.minecraftLinker.canManage">
@@ -12,7 +12,9 @@
 			<option name="user.minecraftLinker.mandatory">
 				<categoryname>user.minecraft</categoryname>
 				<optiontype>boolean</optiontype>
-				<defaultvalue>0</defaultvalue>
+				<userdefaultvalue>1</userdefaultvalue>
+				<admindefaultvalue>-1</admindefaultvalue>
+				<moddefaultvalue>-1</moddefaultvalue>
 				<usersonly>1</usersonly>
 			</option>
 			<option name="admin.minecraftLinker.canManage">
