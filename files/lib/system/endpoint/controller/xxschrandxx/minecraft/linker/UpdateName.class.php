@@ -41,9 +41,9 @@ final class UpdateName extends AbstractMinecraft
         $minecraftUserList->getConditionBuilder()->add('minecraftUUID IN (?)', [array_keys($parameters->uuids)]);
         if ($minecraftUserList->countObjects() === 0) {
             if (ENABLE_DEBUG_MODE) {
-                throw new UserInputException('Bad Request. Unknown uuids', 400);
+                throw new UserInputException('uuids', 'Unknown uuids');
             } else {
-                throw new UserInputException('Bad Request.', 400);
+                throw new UserInputException('uuids');
             }
         }
         $minecraftUserList->readObjects();
