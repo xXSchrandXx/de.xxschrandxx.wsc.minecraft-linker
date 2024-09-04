@@ -1,22 +1,17 @@
 <?php
 
-namespace wcf\action;
+namespace wcf\system\endpoint\controller\xxschrandxx\minecraft\linker;
 
 use BadMethodCallException;
 use Laminas\Diactoros\Response\JsonResponse;
+use Psr\Http\Message\ResponseInterface;
 use wcf\data\user\minecraft\MinecraftUserEditor;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
+use wcf\system\endpoint\GetRequest;
 
-/**
- * MinecraftLinkerCode action class
- *
- * @author   xXSchrandXx
- * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
- * @package  WoltLabSuite\Core\Action
- */
-#[\wcf\http\attribute\DisableXsrfCheck]
-class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
+#[GetRequest('/xxschrandxx/minecraft/{id:\d+}/{uuid:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}}/code')]
+final class GetCode extends AbstractMinecraftLinker
 {
     /**
      * @inheritDoc
@@ -26,21 +21,21 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
     /**
      * @inheritDoc
      */
+    public $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
+
+    /**
+     * @inheritDoc
+     */
     public bool $ignoreName = false;
 
     /**
      * @inheritDoc
      */
-    public $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
-
-    /**
-     * @inheritdoc
-     */
-    public function execute($parameters): JsonResponse
+    public function execute(): ResponseInterface
     {
         // check edit
         $minecraftUserList = new MinecraftUserList();
-        $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$parameters['uuid']]);
+        $minecraftUserList->getConditionBuilder()->add('minecraftUUID = ?', [$this->uuid]);
         $minecraftUserList->readObjects();
         try {
             /** @var \wcf\data\user\minecraft\MinecraftUser */
@@ -51,23 +46,24 @@ class MinecraftLinkerCodeAction extends AbstractMinecraftLinkerAction
                 $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID = ?', [$minecraftUser->getObjectID()]);
                 if ($userToMinecraftUserList->countObjects() !== 0) {
                     if (ENABLE_DEBUG_MODE) {
-                        return $this->send('OK UUID already linked.', 200, ['code' => '']);
+                        return new JsonResponse(['code' => '']);
                     } else {
-                        return $this->send('OK', 200, ['code' => '']);
+                        return new JsonResponse(['code' => '']);
                     }
                 } else {
-                    return $this->send('OK', 200, ['code' => $minecraftUser->getCode()]);
+                    return new JsonResponse(['code' => $minecraftUser->getCode()]);
                 }
             }
         } catch (BadMethodCallException $e) {
+            // should never happen
         }
         $code = bin2hex(\random_bytes(4));
         // create databaseobject
         MinecraftUserEditor::create([
-            'minecraftUUID' => $parameters['uuid'],
-            'minecraftName' => $parameters['name'],
+            'minecraftUUID' => $this->uuid,
+            'minecraftName' => $this->name,
             'code' => $code
         ]);
-        return $this->send('OK', 200, ['code' => $code]);
+        $this->response = new JsonResponse(['code' => $code]);
     }
 }

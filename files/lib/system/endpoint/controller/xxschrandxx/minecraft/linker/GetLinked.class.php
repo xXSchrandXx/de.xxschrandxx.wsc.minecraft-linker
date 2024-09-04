@@ -1,26 +1,31 @@
 <?php
 
-namespace wcf\action;
+namespace wcf\system\endpoint\controller\xxschrandxx\minecraft\linker;
 
 use Exception;
 use Laminas\Diactoros\Response\JsonResponse;
+use Psr\Http\Message\ResponseInterface;
+use wcf\system\endpoint\controller\xxschrandxx\minecraft\AbstractMinecraft;
+use wcf\system\endpoint\GetRequest;
 use wcf\util\MinecraftLinkerUtil;
 
-/**
- * AbstractMinecraftLinker action class
- *
- * @author   xXSchrandXx
- * @license  Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
- * @package  WoltLabSuite\Core\Action
- */
-class MinecraftLinkerGetLinkedAction extends AbstractMinecraftGETAction
+#[GetRequest('/xxschrandxx/minecraft/{id:\d+}/linked')]
+final class getLinked extends AbstractMinecraft
 {
+    /**
+     * @inheritDoc
+     */
+    public $neededModules = ['MINECRAFT_LINKER_ENABLED'];
+
     /**
      * @inheritDoc
      */
     public $availableMinecraftIDs = MINECRAFT_LINKER_IDENTITY;
 
-    public function execute($parameters): JsonResponse
+    /**
+     * @inheritDoc
+     */
+    public function execute(): ResponseInterface
     {
         $minecraftUsers = [];
         try {
@@ -32,9 +37,7 @@ class MinecraftLinkerGetLinkedAction extends AbstractMinecraftGETAction
             // Exception handled with empty check
         }
         if (empty($minecraftUsers)) {
-            return $this->send('OK', 200, [
-                'uuids' => []
-            ]);
+            return new JsonResponse(['uuids' => []]);
         }
 
         $uuids = [];
@@ -42,8 +45,6 @@ class MinecraftLinkerGetLinkedAction extends AbstractMinecraftGETAction
             \array_push($uuids, $minecraftUser->getMinecraftUUID());
         }
 
-        return $this->send('OK', 200, [
-            'uuids' => $uuids
-        ]);
+        return new JsonResponse(['uuids' => $uuids]);
     }
 }
