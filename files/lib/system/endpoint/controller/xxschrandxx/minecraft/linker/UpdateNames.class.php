@@ -6,13 +6,11 @@ use Laminas\Diactoros\Response\EmptyResponse;
 use Psr\Http\Message\ResponseInterface;
 use wcf\data\user\minecraft\MinecraftUserEditor;
 use wcf\data\user\minecraft\MinecraftUserList;
-use wcf\http\Helper;
-use wcf\system\endpoint\controller\xxschrandxx\minecraft\AbstractMinecraft;
 use wcf\system\endpoint\PostRequest;
 use wcf\system\exception\UserInputException;
 
-#[PostRequest('/xxschrandxx/minecraft/{id:\d+}/{uuid:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}}/name')]
-final class UpdateName extends AbstractMinecraft
+#[PostRequest('/xxschrandxx/minecraft/names')]
+final class UpdateNames extends AbstractMultipleMinecraftLinker
 {
     /**
      * @inheritDoc
@@ -32,13 +30,11 @@ final class UpdateName extends AbstractMinecraft
     /**
      * @inheritDoc
      */
-    public function execute(): ResponseInterface
+    public function execute(): void
     {
-        $parameters = Helper::mapApiParameters($this->request, UpdateNameParameters::class);
-
         // read minecraftUsers
         $minecraftUserList = new MinecraftUserList();
-        $minecraftUserList->getConditionBuilder()->add('minecraftUUID IN (?)', [array_keys($parameters->uuids)]);
+        $minecraftUserList->getConditionBuilder()->add('minecraftUUID IN (?)', [array_keys($this->uuids)]);
         if ($minecraftUserList->countObjects() === 0) {
             if (ENABLE_DEBUG_MODE) {
                 throw new UserInputException('uuids', 'Unknown uuids');
@@ -51,40 +47,29 @@ final class UpdateName extends AbstractMinecraft
         $minecraftUsers = $minecraftUserList->getObjects();
 
         foreach ($minecraftUsers as $minecraftUser) {
-            if (!array_key_exists($minecraftUser->getMinecraftUUID(), $parameters->uuids)) {
+            if (!array_key_exists($minecraftUser->getMinecraftUUID(), $this->uuids)) {
                 // Would never happen
                 continue;
             }
-            if (empty($parameters->uuids[$minecraftUser->getMinecraftUUID()])) {
+            if (empty($this->uuids[$minecraftUser->getMinecraftUUID()])) {
                 // Would never happen
                 continue;
             }
-            if (!array_key_exists('name', $parameters->uuids[$minecraftUser->getMinecraftUUID()])) {
+            if (!array_key_exists('name', $this->uuids[$minecraftUser->getMinecraftUUID()])) {
                 continue;
             }
-            if (empty($parameters->uuids[$minecraftUser->getMinecraftUUID()]['name'])) {
+            if (empty($this->uuids[$minecraftUser->getMinecraftUUID()]['name'])) {
                 continue;
             }
-            if ($minecraftUser->getMinecraftName() === $parameters->uuids[$minecraftUser->getMinecraftUUID()]['name']) {
+            if ($minecraftUser->getMinecraftName() === $this->uuids[$minecraftUser->getMinecraftUUID()]['name']) {
                 continue;
             }
             $minecraftUserEditor = new MinecraftUserEditor($minecraftUser);
             $minecraftUserEditor->update([
-                'minecraftName' => $parameters->uuids[$minecraftUser->getMinecraftUUID()]['name']
+                'minecraftName' => $this->uuids[$minecraftUser->getMinecraftUUID()]['name']
             ]);
         }
 
-        return new EmptyResponse(200);
-    }
-}
-
-
-/** @internal */
-class UpdateNameParameters
-{
-    public function __construct(
-        /** @var non-empty-array */
-        public readonly array $uuids
-    ) {
+        $this->response = new EmptyResponse(200);
     }
 }

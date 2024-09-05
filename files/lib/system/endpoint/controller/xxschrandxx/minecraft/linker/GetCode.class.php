@@ -4,13 +4,13 @@ namespace wcf\system\endpoint\controller\xxschrandxx\minecraft\linker;
 
 use BadMethodCallException;
 use Laminas\Diactoros\Response\JsonResponse;
-use Psr\Http\Message\ResponseInterface;
 use wcf\data\user\minecraft\MinecraftUserEditor;
 use wcf\data\user\minecraft\MinecraftUserList;
 use wcf\data\user\minecraft\UserToMinecraftUserList;
 use wcf\system\endpoint\GetRequest;
 
-#[GetRequest('/xxschrandxx/minecraft/{id:\d+}/{uuid:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}}/code')]
+#[\wcf\http\attribute\DisableXsrfCheck]
+#[GetRequest('/xxschrandxx/minecraft/{uuid:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}}/code')]
 final class GetCode extends AbstractMinecraftLinker
 {
     /**
@@ -31,7 +31,7 @@ final class GetCode extends AbstractMinecraftLinker
     /**
      * @inheritDoc
      */
-    public function execute(): ResponseInterface
+    public function execute(): void
     {
         // check edit
         $minecraftUserList = new MinecraftUserList();
@@ -46,13 +46,14 @@ final class GetCode extends AbstractMinecraftLinker
                 $userToMinecraftUserList->getConditionBuilder()->add('minecraftUserID = ?', [$minecraftUser->getObjectID()]);
                 if ($userToMinecraftUserList->countObjects() !== 0) {
                     if (ENABLE_DEBUG_MODE) {
-                        return new JsonResponse(['code' => '']);
+                        $this->response = new JsonResponse(['code' => '']);
                     } else {
-                        return new JsonResponse(['code' => '']);
+                        $this->response = new JsonResponse(['code' => '']);
                     }
                 } else {
-                    return new JsonResponse(['code' => $minecraftUser->getCode()]);
+                    $this->response = new JsonResponse(['code' => $minecraftUser->getCode()]);
                 }
+                return;
             }
         } catch (BadMethodCallException $e) {
             // should never happen

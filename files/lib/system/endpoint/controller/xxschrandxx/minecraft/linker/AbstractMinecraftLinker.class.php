@@ -6,9 +6,7 @@ use wcf\http\Helper;
 use wcf\system\endpoint\controller\xxschrandxx\minecraft\AbstractMinecraft;
 use wcf\system\exception\UserInputException;
 
-/**
- * Path: /xxschrandxx/minecraft/{id:\d+}/{uuid:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}}/{name}
- */
+/** /xxschrandxx/minecraft/{uuid:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}} &{name} */
 abstract class AbstractMinecraftLinker extends AbstractMinecraft
 {
     /**
@@ -32,16 +30,11 @@ abstract class AbstractMinecraftLinker extends AbstractMinecraft
     /**
      * @inheritDoc
      */
-    public function validateVariables(array $variables): void
+    public function validate(): void
     {
-        parent::validateVariables($variables);
+        parent::validate();
 
-        if (!array_key_exists('uuid', $variables))
-            throw new UserInputException('uuid');
-        $this->uuid = $variables['uuid'];
-
-        if ($this->ignoreName)
-            return;
+        $this->uuid = $this->variables['uuid'];
 
         $parameters = Helper::mapApiParameters($this->request, MinecraftLinkerParameters::class);
         if (!isset($parameters->name))

@@ -9,7 +9,7 @@ use wcf\system\endpoint\controller\xxschrandxx\minecraft\AbstractMinecraft;
 use wcf\system\endpoint\GetRequest;
 use wcf\util\MinecraftLinkerUtil;
 
-#[GetRequest('/xxschrandxx/minecraft/{id:\d+}/unlinked')]
+#[GetRequest('/xxschrandxx/minecraft/unlinked')]
 final class GetUnlinked extends AbstractMinecraft
 {
     /**
@@ -25,7 +25,7 @@ final class GetUnlinked extends AbstractMinecraft
     /**
      * @inheritDoc
      */
-    public function execute(): ResponseInterface
+    public function execute(): void
     {
         $minecraftUsers = [];
         try {
@@ -37,7 +37,8 @@ final class GetUnlinked extends AbstractMinecraft
             // Exception handled with empty check
         }
         if (empty($minecraftUsers)) {
-            return new JsonResponse(['uuids' => []]);
+            $this->response =  new JsonResponse(['uuids' => []]);
+            return;
         }
 
         $uuids = [];
@@ -45,6 +46,6 @@ final class GetUnlinked extends AbstractMinecraft
             \array_push($uuids, $minecraftUser->getMinecraftUUID());
         }
 
-        return new JsonResponse(['uuids' => $uuids]);
+        $this->response = new JsonResponse(['uuids' => $uuids]);
     }
 }
