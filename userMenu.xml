@@ -9,7 +9,7 @@
 			<options>minecraft_linker_enabled,minecraft_linker_identity</options>
 		</usermenuitem>
 		<usermenuitem name="wcf.user.menu.minecraftSection.minecraftUserList">
-			<controller><![CDATA[wcf\page\MinecraftUserList]]></controller>
+			<controller><![CDATA[minecraft\page\MinecraftUserList]]></controller>
 			<parent>wcf.user.menu.minecraftSection</parent>
 			<showorder>1</showorder>
 			<permissions>user.minecraftLinker.canManage</permissions>

@@ -4,7 +4,7 @@
 	<import>
 		<page identifier="de.xxschrandxx.wsc.MinecraftUserListPage">
 			<pageType>system</pageType>
-			<controller>wcf\page\MinecraftUserListPage</controller>
+			<controller>minecraft\page\MinecraftUserListPage</controller>
 			<name language="de">Minecraft-Identitäten</name>
 			<name language="en">Minecraft Identities</name>
 			<permissions>user.minecraftLinker.canManage</permissions>
@@ -18,7 +18,7 @@
 		</page>
 		<page identifier="de.xxschrandxx.wsc.MinecraftUserAddForm">
 			<pageType>system</pageType>
-			<controller>wcf\form\MinecraftUserAddForm</controller>
+			<controller>minecraft\form\MinecraftUserAddForm</controller>
 			<name language="de">Minecraft-Identität hinzufügen</name>
 			<name language="en">Add Minecraft Identity</name>
 			<permissions>user.minecraftLinker.canManage</permissions>

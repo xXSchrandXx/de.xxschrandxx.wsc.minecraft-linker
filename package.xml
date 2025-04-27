@@ -7,7 +7,7 @@
 		<packagename language="de"><![CDATA[Minecraft-Linker]]></packagename>
 		<packagedescription><![CDATA[Links users between WSC and Minecraft.]]></packagedescription>
 		<packagedescription language="de"><![CDATA[Verknüpft Benutze zwischen WSC und Minecraft.]]></packagedescription>
-		<version>4.0.2</version>
+		<version>5.0.0</version>
 		<date>2022-09-15</date>
 	</packageinformation>
 
@@ -16,34 +16,28 @@
 	</authorinformation>
 
 	<requiredpackages>
-		<requiredpackage minversion="6.0.0 RC 2">com.woltlab.wcf</requiredpackage>
-		<requiredpackage minversion="4.0.1">de.xxschrarndxx.wsc.minecraft-api</requiredpackage>
+		<requiredpackage minversion="6.1.0 RC 1">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="5.0.0">de.xxschrarndxx.wsc.minecraft</requiredpackage>
 	</requiredpackages>
 
 	<excludedpackages>
 		<excludedpackage version="7.0.0 Alpha 1">com.woltlab.wcf</excludedpackage>
-		<excludedpackage version="5.0.0">de.xxschrarndxx.wsc.minecraft-api</excludedpackage>
+		<excludedpackage version="6.0.0">de.xxschrarndxx.wsc.minecraft</excludedpackage>
 	</excludedpackages>
 
-	<instructions type="update" fromversion="4.0.1">
-		<instruction type="file" />
-		<instruction type="language"/>
-		<instruction type="option"/>
-		<instruction type="userGroupOption"/>
-	</instructions>
-
 	<instructions type="install">
-		<instruction type="acpTemplate"/>
+		<instruction type="acpTemplate" application="minecraft"/>
 		<instruction type="eventListener"/>
-		<instruction type="file"/>
+		<instruction type="file" application="minecraft">files_minecraft.tar</instruction>
+		<instruction type="file" application="wcf">files_wcf.tar</instruction>
 		<instruction type="language"/>
-		<instruction type="template"/>
+		<instruction type="template" application="minecraft"/>
 		<instruction type="objectType"/>
 		<instruction type="option"/>
 		<instruction type="page"/>
 		<instruction type="templateListener"/>
 		<instruction type="userGroupOption"/>
-		<instruction type="database">acp/database/install_de.xxschrandxx.wsc.minecraft-linker.php</instruction>
+		<instruction type="database" application="minecraft">acp/database/install_de.xxschrandxx.wsc.minecraft-linker.php</instruction>
 		<instruction type="userMenu"/>
 	</instructions>
 </package>

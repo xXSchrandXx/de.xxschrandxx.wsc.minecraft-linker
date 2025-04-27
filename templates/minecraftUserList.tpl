@@ -3,7 +3,7 @@
 {capture assign='contentHeaderNavigation'}
 	{if MINECRAFT_MAX_UUIDS == 0 || $objects|count < MINECRAFT_MAX_UUIDS}
 		<li>
-			<a href="{link controller='MinecraftUserAdd'}{/link}" class="button">
+			<a href="{link controller='MinecraftUserAdd' application='minecraft'}{/link}" class="button">
 				{icon size=16 name='plus' type='solid'} {lang}wcf.page.minecraftUserList.add{/lang}
 			</a>
 		</li>
@@ -40,7 +40,7 @@
 					<tr class="jsObjectActionObject" data-object-id="{@$object->getObjectID()}">
 						<td class="columnIcon">
 							{if MINECRAFT_MAX_UUIDS > 1}
-								<a href="{link controller='MinecraftUserEdit' id=$object->getObjectID()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
+								<a href="{link controller='MinecraftUserEdit' application='minecraft' id=$object->getObjectID()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
 									{icon size=16 name='pencil' type='solid'}
 								</a>
 							{/if}

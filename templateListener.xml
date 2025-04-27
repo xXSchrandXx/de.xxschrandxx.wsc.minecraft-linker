@@ -7,7 +7,7 @@
 			<environment>user</environment>
 			<templatename>pageFooterCopyright</templatename>
 			<eventname>copyright</eventname>
-			<templatecode><![CDATA[{include file='__minecraftLinkerCopyright'}]]></templatecode>
+			<templatecode><![CDATA[{include file='__minecraftLinkerCopyright' application='minecraft'}]]></templatecode>
 		</templatelistener>
 		<!-- /user -->
 		<!-- admin -->
@@ -15,7 +15,7 @@
 			<environment>admin</environment>
 			<templatename>userAdd</templatename>
 			<eventname>sections</eventname>
-			<templatecode><![CDATA[{include file='__minecraftUserAddSection'}]]></templatecode>
+			<templatecode><![CDATA[{include file='__minecraftUserAddSection' application='minecraft'}]]></templatecode>
 		</templatelistener>
 		<!-- /admin -->
 	</import>

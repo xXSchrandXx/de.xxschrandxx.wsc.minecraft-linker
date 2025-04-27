@@ -3,7 +3,7 @@
 	<section class="section">
 		<h2 class="sectionTitle">{lang}wcf.acp.page.userAddSection.minecraft.sectionTitle{/lang}</h2>
 		{if !$userID|empty}
-			<a href="{link controller='MinecraftUserAdd' id=$userID}{/link}" class="button">
+			<a href="{link controller='MinecraftUserAdd' id=$userID application='minecraft'}{/link}" class="button">
 				{icon size=16 name='plus' type='solid'} {lang}wcf.acp.page.userAddSection.minecraft.add{/lang}
 			</a>
 		{/if}
@@ -25,7 +25,7 @@
 						{foreach from=$minecraftUsers item=minecraftUser}
 							<tr class="jsObjectActionObject" data-object-id="{@$minecraftUser->getObjectID()}">
 								<td>
-									<a href="{link controller='MinecraftUserEdit' id=$minecraftUser->getObjectID()}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
+									<a href="{link controller='MinecraftUserEdit' id=$minecraftUser->getObjectID() application='minecraft'}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip">
 										{icon size=16 name='pencil' type='solid'}
 									</a>
 									{objectAction action="delete" objectTitle=$minecraftUser->getTitle()}

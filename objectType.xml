@@ -5,25 +5,25 @@
 		<type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.linked</name>
 			<definitionname>com.woltlab.wcf.condition.userGroupAssignment</definitionname>
-			<classname>wcf\system\condition\MinecraftLinkedCondition</classname>
+			<classname>minecraft\system\condition\MinecraftLinkedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
 		<type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.linked</name>
 			<definitionname>com.woltlab.wcf.condition.trophy</definitionname>
-			<classname>wcf\system\condition\MinecraftLinkedCondition</classname>
+			<classname>minecraft\system\condition\MinecraftLinkedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
 		<type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.linked</name>
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
-			<classname>wcf\system\condition\MinecraftLinkedCondition</classname>
+			<classname>minecraft\system\condition\MinecraftLinkedCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
 		<type>
 			<name>de.xxschrandxx.wsc.minecraftLinker.uuid</name>
 			<definitionname>com.woltlab.wcf.condition.userSearch</definitionname>
-			<classname>wcf\system\condition\MinecraftUUIDCondition</classname>
+			<classname>minecraft\system\condition\MinecraftUUIDCondition</classname>
 			<conditiongroup>minecraft</conditiongroup>
 		</type>
 	</import>
