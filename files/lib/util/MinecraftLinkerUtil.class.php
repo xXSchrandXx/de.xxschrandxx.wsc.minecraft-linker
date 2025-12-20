@@ -58,6 +58,25 @@ class MinecraftLinkerUtil extends MinecraftUtil
     }
 
     /**
+     * Returns unread MinecraftUserList with MinecraftUsers from given userID.
+     * @param int $userID
+     * @return MinecraftUserList
+     */
+    public static function getMinecraftUsers(int $userID): MinecraftUserList
+    {
+        $userToMinecraftUserList = new UserToMinecraftUserList();
+        $userToMinecraftUserList->getConditionBuilder()->add('userID = ?', [$userID]);
+        $userToMinecraftUserList->readObjects();
+        $userToMinecraftUserIDs = $userToMinecraftUserList->getObjectIDs();
+
+        $minecraftUserList = new MinecraftUserList();
+        if (!empty($userToMinecraftUserIDs)) {
+            $minecraftUserList->getConditionBuilder()->add('minecraftUserID IN (?)', [$userToMinecraftUserIDs]);
+        }
+        return $minecraftUserList;
+    }
+
+    /**
      * Returns unread MinecraftUserList with unlinked minecraft users
      * @return MinecraftUserList
      */
