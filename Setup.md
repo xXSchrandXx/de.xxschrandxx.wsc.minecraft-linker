@@ -4,19 +4,21 @@
 ## English
 1. Install and configure [Minecraft-API](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-api/blob/main/Setup.md) and all required packages and plugins.
 2. Install [Minecraft-Linker](https://www.woltlab.com/pluginstore/file/7093-minecraft-linker/) via the store code, via the package search or as a file upload.
-3. Configure Minecraft Linker in the ACP under `Configuration > Options > Minecraft > Minecraft Linker`. (A server must be activated in the selection for Minecraft Linker to work.)
-4. Remember the URL for `sendCode`.
-5. Remember the URL for `updateNames`.
-6. Remember the URL for `getLinked`.
-7. Remember the URL for `getUnlinked`.
-8. Install [WSC-Minecraft-Linker](https://github.com/xXSchrandXx/WSC-Minecraft-Linker/blob/main/Setup.md) on your Bukkit, Spigot and/or BungeeCord server.
+3. Configure Minecraft Linker in the ACP under `Configuration > Options > Minecraft > Minecraft-Linker`. (A server must be activated in the selection for Minecraft Linker to work.)
+4. Remember the URL from `sendCode`, `updateNames`, `getLinked` and `getUnlinked` for the step 8.
+5. Download [WSC-Linker](https://www.spigotmc.org/resources/wsc-linker.105307/) and put it in your `plugins` folder.
+6. Restart your server.
+7. Open the `config.yml` in the `wsclinker-{bungee/bukkit}` folder.
+8. Set `sendCode`, `updateNames`, `getLinked` and `getUnlinked` from step 4.
+9. Restart your server.
 
 ## German
-1. Installiere und konfiguriere [Minecraft-API](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-api/blob/main/Setup.md) und alle erforderlichen Pakete und Plugins.
-2. Installiere [Minecraft-Linker](https://www.woltlab.com/pluginstore/file/7093-minecraft-linker/) über den Storecode, über die Paketsuche oder als Dateiupload.
-3. Konfiguriere im ACP unter `Konfiguration > Optionen > Minecraft > Minecraft-Linker` Minecraft-Linker. (Es muss ein Server in der Auswahl aktiviert werden damit Minecraft-Linker funktioniert.)
-4. Merke dir die URL für `sendCode`.
-5. Merke dir die URL für `updateNames`.
-6. Merke dir die URL für `getLinked`.
-7. Merke dir die URL für `getUnlinked`.
-8. Installiere [WSC-Minecraft-Linker](https://github.com/xXSchrandXx/WSC-Minecraft-Linker/blob/main/Setup.md) auf deinem Bukkit-, Spigot und / oder BungeeCord-Server.
+1. Installieren und konfigurieren Sie [Minecraft-API](https://github.com/xXSchrandXx/de.xxschrandxx.wsc.minecraft-api/blob/main/Setup.md) und alle erforderlichen Pakete und Plugins.
+2. Installieren Sie [Minecraft-Linker](https://www.woltlab.com/pluginstore/file/7093-minecraft-linker/) über den Store-Code, über die Paketsuche oder als Datei-Upload.
+3. Konfigurieren Sie Minecraft Linker im ACP unter `Konfiguration > Optionen > Minecraft > Minecraft-Linker`. (Damit Minecraft Linker funktioniert, muss ein Server in der Auswahl aktiviert sein.)
+4. Merken Sie sich die URLs von `sendCode`, `updateNames`, `getLinked` und `getUnlinked` für Schritt 8.
+5. Laden Sie [WSC-Linker](https://www.spigotmc.org/resources/wsc-linker.105307/) herunter und legen Sie es in Ihrem `plugins`-Ordner ab.
+6. Starten Sie Ihren Server neu.
+7. Öffnen Sie die Datei `config.yml` im Ordner `wsclinker-{bungee/bukkit}`.
+8. Legen Sie `sendCode`, `updateNames`, `getLinked` und `getUnlinked` aus Schritt 4 fest.
+9. Starten Sie Ihren Server neu.
